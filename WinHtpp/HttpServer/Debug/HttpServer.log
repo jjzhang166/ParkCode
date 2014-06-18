@@ -1,0 +1,21 @@
+﻿Build started 2011-11-16 12:36:03.
+     1>Project "D:\WinParkUI\WinHtpp\HttpServer\HttpServer.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\HttpServer.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+         All outputs are up-to-date.
+       ManifestResourceCompile:
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+       Manifest:
+         All outputs are up-to-date.
+       FinalizeBuildStatus:
+         Deleting file "Debug\HttpServer.unsuccessfulbuild".
+         Touching "Debug\HttpServer.lastbuildstate".
+     1>Done Building Project "D:\WinParkUI\WinHtpp\HttpServer\HttpServer.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.76

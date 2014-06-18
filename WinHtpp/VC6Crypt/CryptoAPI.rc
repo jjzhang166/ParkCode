@@ -1,0 +1,244 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "1 TYPELIB ""CryptoAPI.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "CryptoAPI Module\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "CryptoAPI\0"
+            VALUE "LegalCopyright", "Copyright 2001\0"
+            VALUE "OriginalFilename", "CryptoAPI.DLL\0"
+            VALUE "ProductName", "CryptoAPI Module\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "OLESelfRegister", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_CRYPTO              REGISTRY DISCARDABLE    "Crypto.rgs"
+IDR_CRYPTOSHELLEXT      REGISTRY DISCARDABLE    "CryptoShellExt.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROJNAME            "CryptoAPI"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_UNKNOWN_ERROR       "An unknown error occurred"
+    IDS_ENCRYPT_MENU_ITEM   "Encrypt"
+    IDS_DECRYPT_MENU_ITEM   "Decrypt"
+    IDS_ENCRYPT_OBJECT_FLYBY_HELP "Encrypt the selected file(s)"
+    IDS_DECRYPT_OBJECT_FLYBY_HELP "Decrypt the selected file(s)"
+    IDS_ENCRYPT_FILE_TO_MENU_ITEM "Encrypt to..."
+    IDS_DECRYPT_FILE_TO_MENU_ITEM "Decrypt to..."
+    IDS_ENCRYPT_FILE_TO_FLYBY 
+                            "Encrypt the selected file(s) to a specified folder"
+    IDS_DECRYPT_FILE_TO_FLYBY 
+                            "Decrypt the selected file(s) to a specified folder"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_HASHCREATE_FAILED 
+                            "An error occurred while attempting to create the hashing object"
+    IDS_ERROR_DECRYPTFILE_READINGFILEVERSION 
+                            "An error occurred while attempting to read the file format version header of the encrypted file. Be sure the file is encrypted and not corrupted"
+    IDS_ERROR_ENCRYPT_WRITEFILEFORMATVERSION 
+                            "An error occurred while attempting to write the file format version header to the encrypted file"
+    IDS_ERROR_INITIALIZATION_FAILED 
+                            "An error occurred while attempting to initialize the cryptography engine"
+    IDS_ERROR_IMPORTPRIVATEKEY_FAILED 
+                            "An error occurred while attempting to import the private key"
+    IDS_ERROR_DECRYPTSTRING_FAILED 
+                            "An error occurred while attempting to decrypt a string"
+    IDS_ERROR_DIGITALSIGNATURE_ENCRYPT_STRING 
+                            "An error occurred while encrypting a string: Attempting to digitally sign the hash object failed"
+    IDS_ERROR_DIGITALSIGNATURE_DECRYPT_STRING 
+                            "An error occurred while decrypting a string: Attempting to digitally sign the hash object failed"
+    IDS_ERROR_UNSUPORTED_INMEMORY_ENCRYPTION_VERSION 
+                            "The following error occurred while attempting to read the encrypted string: The binary format version is not supported or the string is an invalid format"
+    IDS_ERROR_INVALID_ARG   "An invalid argument was supplied to a method in ITSDocCrypto"
+    IDS_ERROR_DIGITALSIGNATURE_NOTAVAILABLE 
+                            "A digital signature is not available"
+    IDS_ERROR_ENCODEDFILE_FILEOPENFAILED 
+                            "An error occurred while attempting to open the file to Base64 encode or decode"
+    IDS_ERROR_ENCODEDFILE_FILEIO 
+                            "A general file I/O error occurred while attempting to read/write encoded/decoded file"
+    IDS_ERROR_INITIALIZE_NTE_BAD_FLAGS 
+                            "NTE_BAD_FLAGS returned while attempting to acquire a context during initialization"
+    IDS_ERROR_INTIALIZE_CREATE_KEY_CONTAINER_FAILED 
+                            "Fatal error - Failed to create a new key container"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_ENCRYPTFILE_FILEOPENFAILED 
+                            "An error occurred while attempting to open the source and/or destination file for encryption"
+    IDS_ERROR_OUTOFMEMORY   "An out-of-memory error occurred"
+    IDS_ERROR_ENCRYPT_READING_SOURCE 
+                            "An error occurred while attempting to read the source file during encryption"
+    IDS_ERROR_ENCRYPT_ENCRYPTION_FAILED 
+                            "An error occurred while encrypting a file"
+    IDS_ERROR_ENCRYPT_WRITETODESTINATION_FAILED 
+                            "An error occurred while attempting to write the encryption to the destination file"
+    IDS_ERROR_ENCRYPT_COPYDESTINATIONTOSOURCE_FAILED 
+                            "An error occurred while attempting to copy the encrypted intermediate file over the source file"
+    IDS_ERROR_ENCRYPT_SIGNHASH_FAILED 
+                            "An error occurred while attempting to sign the hash object after encryption to generate the digital signature"
+    IDS_ERROR_DECRYPTFILE_FILEOPENFAILED 
+                            "An error occurred while attempting to open the source and/or destination file for decryption"
+    IDS_ERROR_DECRYPT_READKEYSIZE_FAILED 
+                            "An error occurred while attempting to read the key size from the source file header during decryption"
+    IDS_ERROR_DECRYPT_READKEY_FAILED 
+                            "An error occurred while attempting to read the private key from the source file header during decryption"
+    IDS_ERROR_DECRYPT_IMPORTPRIVATEKEY_FAILED 
+                            "An error occurred while attempting to import the private key into the CSP"
+    IDS_ERROR_DECRYPT_READING_SOURCE 
+                            "An error occurred while attempting to read the source file during decryption"
+    IDS_ERROR_DECRYPT_DECRYPTION_FAILED 
+                            "An error occurred while decrypting a file"
+    IDS_ERROR_DECRYPT_WRITETODESTINATION_FAILED 
+                            "An error occurred while attempting to write the decrypted data to the destination file"
+    IDS_ERROR_DECRYPT_SIGNHASH_FAILED 
+                            "An error occurred while attempting to sign the hash object after decryption to generate the digital signature"
+    IDS_ERROR_DECRYPT_COPYDESTINATIONTOSOURCE_FAILED 
+                            "An error occurred while attempting to copy the decrypted intermediate file over the source file"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERROR_INITIALIZE_NTE_BAD_KEYSET_PARAM 
+                            "NTE_BAD_KEYSET_PARAM returned while attempting to acquire a context during initialization"
+    IDS_ERROR_INITIALIZATION_NTE_BAD_PROV_TYPE 
+                            "NTE_BAD_PROV_TYPE returned while attempting to acquire a context during initialization"
+    IDS_ERROR_INITIALIZATION_NTE_BAD_SIGNATURE 
+                            "NTE_BAD_SIGNATURE returned while attempting to acquire a context during initialization"
+    IDS_ERROR_INITIALIZATION_NTE_EXISTS 
+                            "NTE_EXISTS returned while attempting to acquire a context during initialization"
+    IDS_ERROR_INITIALIZATION_NTE_KEYSET_ENTRY_BAD 
+                            "NTE_KEYSET_ENTRY_BAD returned while attempting to acquire a context during initialization"
+    IDS_ERROR_INITIALIZATION_NTE_KEYSET_NOT_DEF 
+                            "NTE_KEYSET_NOT_DEF returned while attempting to acquire a context during initialization"
+    IDS_ERROR_INITIALIZATION_NTE_PROV_DLL_NOT_FOUND 
+                            "NTE_PROV_DLL_NOT_FOUND returned while attempting to acquire a context during initialization"
+    IDS_ERROR_INITIALIZATION_NTE_PROV_TYPE_ENTRY_BAD 
+                            "NTE_PROV_TYPE_ENTRY_BAD returned while attempting to acquire a context during initialization"
+    IDS_ERROR_INITIALIZATION_NTE_PROV_TYPE_NO_MATCH 
+                            "NTE_PROV_TYPE_NO_MATCH returned while attempting to acquire a context during initialization"
+    IDS_ERROR_INITIALIZATION_NTE_PROV_TYPE_NOT_DEF 
+                            "NTE_PROV_TYPE_NOT_DEF returned while attempting to acquire a context during initialization"
+    IDS_ERROR_INITIALIZATION_NTE_PROVIDER_DLL_FAIL 
+                            "NTE_PROVIDER_DLL_FAIL returned while attempting to acquire a context during intialization"
+    IDS_ERROR_INITIALIZATION_NTE_SIGNATURE_FILE_BAD 
+                            "NTE_SIGNATURE_FILE_BAD returned while attempting to acquire a context during initialization"
+    IDS_ERROR_INITIALIZATION_CREATE_NEW_CONTAINER_FAILED 
+                            "Failed to create a new key container"
+    IDS_ERROR_INITIALIZATION_CREATE_DIGSIGKEYS 
+                            "An error occurred while attempting to create the key pairs for digital signatures during initialization"
+    IDS_ERROR_INITIALIZATION_CREATE_ENCRYPTIONKEYS 
+                            "An error occurred while attempting to create the key pairs for encryption during initialization"
+    IDS_ERROR_DECODED_FILEIO 
+                            "A general file I/O error occurred while attempting to write the decoded results to the destination file"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "CryptoAPI.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

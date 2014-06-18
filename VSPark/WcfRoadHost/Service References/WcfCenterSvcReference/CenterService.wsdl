@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CenterService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpBinding_ICenterService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsoma:OptimizedMimeSerialization xmlns:wsoma="http://schemas.xmlsoap.org/ws/2004/09/policy/optimizedmimeserialization" />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:9001/WcfCenterService/?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:9001/WcfCenterService/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:9001/WcfCenterService/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.Text" />
+      <xsd:import schemaLocation="http://localhost:9001/WcfCenterService/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import schemaLocation="http://localhost:9001/WcfCenterService/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/WcfCenterService" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICenterService_UploadInOutImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:UploadInOutImage" />
+  </wsdl:message>
+  <wsdl:message name="ICenterService_GetFeeData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeeData" />
+  </wsdl:message>
+  <wsdl:message name="ICenterService_GetFeeData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFeeDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICenterService_UploadRecordData2_InputMessage">
+    <wsdl:part name="parameters" element="tns:UploadRecordData2" />
+  </wsdl:message>
+  <wsdl:message name="ICenterService_UploadRecordData_InputMessage">
+    <wsdl:part name="parameters" element="tns:UploadRecordData" />
+  </wsdl:message>
+  <wsdl:message name="ICenterService_GetData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetData" />
+  </wsdl:message>
+  <wsdl:message name="ICenterService_GetData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICenterService_GetDataUsingDataContract_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
+  </wsdl:message>
+  <wsdl:message name="ICenterService_GetDataUsingDataContract_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ICenterService">
+    <wsdl:operation name="UploadInOutImage">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICenterService/UploadInOutImage" message="tns:ICenterService_UploadInOutImage_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFeeData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICenterService/GetFeeData" message="tns:ICenterService_GetFeeData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICenterService/GetFeeDataResponse" message="tns:ICenterService_GetFeeData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadRecordData2">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICenterService/UploadRecordData2" message="tns:ICenterService_UploadRecordData2_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadRecordData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICenterService/UploadRecordData" message="tns:ICenterService_UploadRecordData_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICenterService/GetData" message="tns:ICenterService_GetData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICenterService/GetDataResponse" message="tns:ICenterService_GetData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContract">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICenterService/GetDataUsingDataContract" message="tns:ICenterService_GetDataUsingDataContract_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICenterService/GetDataUsingDataContractResponse" message="tns:ICenterService_GetDataUsingDataContract_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ICenterService" type="tns:ICenterService">
+    <wsp:PolicyReference URI="#BasicHttpBinding_ICenterService_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UploadInOutImage">
+      <soap:operation soapAction="http://tempuri.org/ICenterService/UploadInOutImage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetFeeData">
+      <soap:operation soapAction="http://tempuri.org/ICenterService/GetFeeData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadRecordData2">
+      <soap:operation soapAction="http://tempuri.org/ICenterService/UploadRecordData2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="UploadRecordData">
+      <soap:operation soapAction="http://tempuri.org/ICenterService/UploadRecordData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetData">
+      <soap:operation soapAction="http://tempuri.org/ICenterService/GetData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataUsingDataContract">
+      <soap:operation soapAction="http://tempuri.org/ICenterService/GetDataUsingDataContract" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CenterService">
+    <wsdl:port name="BasicHttpBinding_ICenterService" binding="tns:BasicHttpBinding_ICenterService">
+      <soap:address location="http://localhost:9001/WcfCenterService/CenterService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

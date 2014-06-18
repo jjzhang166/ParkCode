@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1440</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>停车场管理系统(PMS)</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1440</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuSysMgm">
+    <property name="title">
+     <string>系统管理</string>
+    </property>
+    <widget class="QMenu" name="actVideoService">
+     <property name="title">
+      <string>视频服务</string>
+     </property>
+     <addaction name="actStartVideo"/>
+     <addaction name="actStopVideo"/>
+    </widget>
+    <widget class="QMenu" name="actPlateService">
+     <property name="title">
+      <string>车牌识别服务</string>
+     </property>
+     <addaction name="actStartPlate"/>
+     <addaction name="actStopPlate"/>
+    </widget>
+    <addaction name="actShiftLogout"/>
+    <addaction name="actPwdModification"/>
+    <addaction name="separator"/>
+    <addaction name="actLicense"/>
+    <addaction name="actRightMgm"/>
+    <addaction name="actTariffSetting"/>
+    <addaction name="actSysLog"/>
+    <addaction name="actRemoteMgmt"/>
+    <addaction name="separator"/>
+    <addaction name="actDBMaintenance"/>
+    <addaction name="actConnectDb"/>
+    <addaction name="actIPC"/>
+    <addaction name="separator"/>
+    <addaction name="actVideoService"/>
+    <addaction name="actPlateService"/>
+    <addaction name="separator"/>
+    <addaction name="actSysExit"/>
+    <addaction name="actRestart"/>
+   </widget>
+   <widget class="QMenu" name="menuCardTicketsMgm">
+    <property name="title">
+     <string>卡票管理</string>
+    </property>
+    <addaction name="actMonthlyCard"/>
+    <addaction name="separator"/>
+    <addaction name="actValueCard"/>
+    <addaction name="separator"/>
+    <addaction name="actTimeCard"/>
+    <addaction name="separator"/>
+    <addaction name="actPublishLEDInfo"/>
+   </widget>
+   <widget class="QMenu" name="menuAdvSetting">
+    <property name="title">
+     <string>高级设置</string>
+    </property>
+    <addaction name="actDeviceConfig"/>
+    <addaction name="actSysSetting"/>
+    <addaction name="separator"/>
+    <addaction name="actSyncTime"/>
+    <addaction name="separator"/>
+    <addaction name="actBatchSetCardAccess"/>
+    <addaction name="actTollDiscountTypeSet"/>
+    <addaction name="actBlacklist"/>
+    <addaction name="separator"/>
+    <addaction name="actSerialPort"/>
+    <addaction name="actPlateRecognizationSet"/>
+   </widget>
+   <widget class="QMenu" name="menuQueryReport">
+    <property name="title">
+     <string>查询/报表</string>
+    </property>
+    <addaction name="actAccess2Records"/>
+    <addaction name="actReewalRecords"/>
+    <addaction name="separator"/>
+    <addaction name="actDiscountSummaryReport"/>
+    <addaction name="actPrintDaylyReport"/>
+    <addaction name="actPrintMonthlyReport"/>
+    <addaction name="actPrintYearlyReport"/>
+    <addaction name="actHandheldICProcess"/>
+    <addaction name="separator"/>
+    <addaction name="actStay"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="actDocment"/>
+    <addaction name="separator"/>
+    <addaction name="actAbout"/>
+   </widget>
+   <addaction name="menuSysMgm"/>
+   <addaction name="menuCardTicketsMgm"/>
+   <addaction name="menuAdvSetting"/>
+   <addaction name="menuQueryReport"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QToolBar" name="mainTB">
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="windowTitle">
+    <string>主操作</string>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="separator"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="tbTime">
+   <property name="windowTitle">
+    <string>日期时间</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <action name="actDeviceConfig">
+   <property name="text">
+    <string>设备配置</string>
+   </property>
+  </action>
+  <action name="actSysSetting">
+   <property name="text">
+    <string>系统设置</string>
+   </property>
+  </action>
+  <action name="actBatchSetCardAccess">
+   <property name="text">
+    <string>批量设置卡片进出权</string>
+   </property>
+  </action>
+  <action name="actTollDiscountTypeSet">
+   <property name="text">
+    <string>收费折扣种类设置</string>
+   </property>
+  </action>
+  <action name="actShiftLogout">
+   <property name="text">
+    <string>交接班注销</string>
+   </property>
+   <property name="font">
+    <font/>
+   </property>
+  </action>
+  <action name="actRightMgm">
+   <property name="text">
+    <string>权限管理</string>
+   </property>
+  </action>
+  <action name="actTariffSetting">
+   <property name="text">
+    <string>费率设置</string>
+   </property>
+  </action>
+  <action name="actDBMaintenance">
+   <property name="text">
+    <string>数据库维护</string>
+   </property>
+  </action>
+  <action name="actSysLog">
+   <property name="text">
+    <string>系统日志</string>
+   </property>
+  </action>
+  <action name="actPwdModification">
+   <property name="text">
+    <string>修改密码</string>
+   </property>
+  </action>
+  <action name="actSysExit">
+   <property name="text">
+    <string>退出软件</string>
+   </property>
+  </action>
+  <action name="actMonthlyCard">
+   <property name="text">
+    <string>月租卡管理</string>
+   </property>
+  </action>
+  <action name="actValueCard">
+   <property name="text">
+    <string>储值卡管理</string>
+   </property>
+  </action>
+  <action name="actTimeCard">
+   <property name="text">
+    <string>计时卡管理</string>
+   </property>
+  </action>
+  <action name="actPublishLEDInfo">
+   <property name="text">
+    <string>发布显示屏信息</string>
+   </property>
+  </action>
+  <action name="actAccess2Records">
+   <property name="text">
+    <string>出入记录</string>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actReewalRecords">
+   <property name="text">
+    <string>续费记录</string>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actDiscountSummaryReport">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>折扣汇总报表</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actPrintDaylyReport">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>打印报表</string>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actPrintMonthlyReport">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>打印月报表</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actPrintYearlyReport">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>打印年报表</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actHandheldICProcess">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>手持机IC卡处理</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actAbout">
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
+  <action name="actDocment">
+   <property name="text">
+    <string>帮助文档</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actBlacklist">
+   <property name="text">
+    <string>黑名单录入</string>
+   </property>
+  </action>
+  <action name="actSerialPort">
+   <property name="text">
+    <string>串口设置</string>
+   </property>
+   <property name="iconText">
+    <string>串口设置</string>
+   </property>
+   <property name="toolTip">
+    <string>串口设置 配置与打开</string>
+   </property>
+  </action>
+  <action name="actPlateRecognizationSet">
+   <property name="text">
+    <string>车牌识别设置</string>
+   </property>
+  </action>
+  <action name="actConnectDb">
+   <property name="text">
+    <string>连数据库</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actStartVideoOne">
+   <property name="text">
+    <string>第一路视频</string>
+   </property>
+  </action>
+  <action name="actStartVideoTwo">
+   <property name="text">
+    <string>第二路视频</string>
+   </property>
+  </action>
+  <action name="actStopVideoOne">
+   <property name="text">
+    <string>第一路视频</string>
+   </property>
+  </action>
+  <action name="actStopVideoTwo">
+   <property name="text">
+    <string>第二路视频</string>
+   </property>
+  </action>
+  <action name="actStartPlateOne">
+   <property name="text">
+    <string>第一路车牌</string>
+   </property>
+  </action>
+  <action name="actStartPlateTwo">
+   <property name="text">
+    <string>第二路车牌</string>
+   </property>
+  </action>
+  <action name="actStopPlateOne">
+   <property name="text">
+    <string>第一路车牌</string>
+   </property>
+  </action>
+  <action name="actStopPlateTwo">
+   <property name="text">
+    <string>第二路车牌</string>
+   </property>
+  </action>
+  <action name="actStartVideo">
+   <property name="text">
+    <string> 开启视频服务</string>
+   </property>
+  </action>
+  <action name="actStopVideo">
+   <property name="text">
+    <string> 停止视频服务</string>
+   </property>
+  </action>
+  <action name="actStartPlate">
+   <property name="text">
+    <string> 启动车牌识别</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actStopPlate">
+   <property name="text">
+    <string> 停止车牌识别</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actSyncTime">
+   <property name="text">
+    <string>时间同步</string>
+   </property>
+  </action>
+  <action name="actRestart">
+   <property name="text">
+    <string>重启软件</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actLicense">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>服务器导入授权数据</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actStay">
+   <property name="text">
+    <string>滞留车辆</string>
+   </property>
+  </action>
+  <action name="actRemoteMgmt">
+   <property name="text">
+    <string>远程管理</string>
+   </property>
+  </action>
+  <action name="actIPC">
+   <property name="text">
+    <string>连接网络摄像机</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

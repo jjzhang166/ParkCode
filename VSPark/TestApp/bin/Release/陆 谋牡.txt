@@ -1,0 +1,6 @@
+2.云服务器IP：115.29.149.133
+用户名：LuBianTongServerQTGK
+密码：zxcvbnm<>?":LKJHGFDSA2013*_#
+如果需要输入域，请输入：115.29.149.133
+
+SQLServer用户 sa/ParkDB 密码 qwertyuiop[]\asdfghjkl;'zxcvbnm,./

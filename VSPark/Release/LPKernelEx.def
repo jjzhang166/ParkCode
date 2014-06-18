@@ -1,0 +1,20 @@
+LIBRARY "LPKernelEx.dll"
+EXPORTS
+LPR_FileEx
+LPR_GetImageBuf
+LPR_InitEx
+LPR_RGB888Ex
+LPR_SetImageFormat
+LPR_SetParameters
+LPR_SetPlateType
+LPR_SetSpecialParameters
+LPR_UninitEx
+_LPR_FileEx@24
+_LPR_GetImageBuf@20
+_LPR_InitEx@4
+_LPR_RGB888Ex@28
+_LPR_SetImageFormat@40
+_LPR_SetParameters@80
+_LPR_SetPlateType@40
+_LPR_SetSpecialParameters@24
+_LPR_UninitEx@4

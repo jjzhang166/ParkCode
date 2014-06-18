@@ -1,0 +1,16 @@
+LIBRARY "HttpServerDll"
+
+EXPORTS
+
+GetErrorMessage
+
+StartupHttp
+CleanupHttp
+
+AddListenUrl
+AddDelistenUrl
+
+RetrieveRequest
+ReleaseRequestHandle
+
+SendHttpResponse;

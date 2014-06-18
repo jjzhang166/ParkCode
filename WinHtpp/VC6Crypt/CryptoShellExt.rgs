@@ -1,0 +1,36 @@
+HKCR
+{
+	CryptoAPI.CryptoShellExt.1 = s 'CryptoShellExt Class'
+	{
+		CLSID = s '{70585636-8278-4F00-A184-48E9EF99BC90}'
+	}
+	CryptoAPI.CryptoShellExt = s 'CryptoShellExt Class'
+	{
+		CLSID = s '{70585636-8278-4F00-A184-48E9EF99BC90}'
+		CurVer = s 'CryptoAPI.CryptoShellExt.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {70585636-8278-4F00-A184-48E9EF99BC90} = s 'CryptoShellExt Class'
+		{
+			ProgID = s 'CryptoAPI.CryptoShellExt.1'
+			VersionIndependentProgID = s 'CryptoAPI.CryptoShellExt'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{15EA8944-438E-471E-860D-6743D4383A37}'
+		}
+	}
+	*
+	{
+		ShellEx
+		{
+			ContextMenuHandlers
+			{
+				ForceRemove {70585636-8278-4F00-A184-48E9EF99BC90}
+			}
+		}
+	}
+}

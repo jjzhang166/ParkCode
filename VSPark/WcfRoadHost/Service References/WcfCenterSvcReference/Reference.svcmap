@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="bd557ced-e05a-4edb-86d7-3eab4237779d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:9001/WcfCenterService/?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CenterService.wsdl" MetadataType="Wsdl" ID="2e516e17-f724-4264-9225-0539e7a8f34e" SourceId="1" SourceUrl="http://localhost:9001/WcfCenterService/?wsdl" />
+    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="309a47d6-25ea-4bec-81ad-1b10dc15be16" SourceId="1" SourceUrl="http://localhost:9001/WcfCenterService/?xsd=xsd4" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="bfdc9054-36b9-476a-b131-313bc4809cc9" SourceId="1" SourceUrl="http://localhost:9001/WcfCenterService/?xsd=xsd2" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="d9da9bbd-93a9-43d3-91cf-aa17b2455333" SourceId="1" SourceUrl="http://localhost:9001/WcfCenterService/?xsd=xsd1" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="7e83c990-0e18-4648-98a1-16b66394245c" SourceId="1" SourceUrl="http://localhost:9001/WcfCenterService/?xsd=xsd0" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="88715628-08c2-41d9-9b39-eecd3ad77e51" SourceId="1" SourceUrl="http://localhost:9001/WcfCenterService/?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

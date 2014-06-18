@@ -1,0 +1,105 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: cryptdll - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP2FE.tmp" with contents
+[
+/nologo /G5 /MTd /W3 /Gm /GR /GX /Zi /Oi /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "CRYPTOPP_EXPORTS" /D CRYPTOPP_ENABLE_COMPLIANCE_WITH_FIPS_140_2=1 /D "USE_PRECOMPILED_HEADERS" /Fo"DLL_Debug/" /Fd"DLL_Debug/" /FD /GZ /Zm200 /c 
+"D:\WinParkUI\VC6cryptopp\dll.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP2FE.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP2FF.tmp" with contents
+[
+/nologo /G5 /MTd /W3 /Gm /GR /GX /Zi /Oi /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "CRYPTOPP_EXPORTS" /D CRYPTOPP_ENABLE_COMPLIANCE_WITH_FIPS_140_2=1 /D "USE_PRECOMPILED_HEADERS" /Fp"DLL_Debug/cryptdll.pch" /Yu"pch.h" /Fo"DLL_Debug/" /Fd"DLL_Debug/" /FD /GZ /Zm200 /c 
+"D:\WinParkUI\VC6cryptopp\strciphr.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP2FF.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP300.tmp" with contents
+[
+advapi32.lib /nologo /base:"0x42900000" /dll /incremental:no /pdb:"DLL_Debug/cryptopp.pdb" /debug /machine:I386 /out:"OpenSoucreCrypt/Debug/cryptopp.dll" /implib:"DLL_Debug/cryptopp.lib" /opt:ref 
+.\DLL_Debug\algebra.obj
+.\DLL_Debug\algparam.obj
+.\DLL_Debug\asn.obj
+.\DLL_Debug\authenc.obj
+.\DLL_Debug\basecode.obj
+.\DLL_Debug\cbcmac.obj
+.\DLL_Debug\ccm.obj
+.\DLL_Debug\channels.obj
+.\DLL_Debug\cmac.obj
+.\DLL_Debug\cpu.obj
+.\DLL_Debug\cryptlib.obj
+.\DLL_Debug\des.obj
+.\DLL_Debug\dessp.obj
+.\DLL_Debug\dh.obj
+.\DLL_Debug\dll.obj
+.\DLL_Debug\dsa.obj
+.\DLL_Debug\ec2n.obj
+.\DLL_Debug\eccrypto.obj
+.\DLL_Debug\ecp.obj
+.\DLL_Debug\emsa2.obj
+.\DLL_Debug\eprecomp.obj
+.\DLL_Debug\files.obj
+.\DLL_Debug\filters.obj
+.\DLL_Debug\fips140.obj
+.\DLL_Debug\fipstest.obj
+.\DLL_Debug\gcm.obj
+.\DLL_Debug\gf2n.obj
+.\DLL_Debug\gfpcrypt.obj
+.\DLL_Debug\hex.obj
+.\DLL_Debug\hmac.obj
+.\DLL_Debug\hrtimer.obj
+.\DLL_Debug\integer.obj
+.\DLL_Debug\iterhash.obj
+.\DLL_Debug\misc.obj
+.\DLL_Debug\modes.obj
+.\DLL_Debug\mqueue.obj
+.\DLL_Debug\nbtheory.obj
+.\DLL_Debug\oaep.obj
+.\DLL_Debug\osrng.obj
+.\DLL_Debug\pch.obj
+.\DLL_Debug\pkcspad.obj
+.\DLL_Debug\pssr.obj
+.\DLL_Debug\pubkey.obj
+.\DLL_Debug\queue.obj
+.\DLL_Debug\randpool.obj
+.\DLL_Debug\rdtables.obj
+.\DLL_Debug\rijndael.obj
+.\DLL_Debug\rng.obj
+.\DLL_Debug\rsa.obj
+.\DLL_Debug\rw.obj
+.\DLL_Debug\sha.obj
+.\DLL_Debug\simple.obj
+.\DLL_Debug\skipjack.obj
+.\DLL_Debug\strciphr.obj
+.\DLL_Debug\trdlocal.obj
+.\DLL_Debug\cryptopp.res
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP300.tmp"
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP301.bat" with contents
+[
+@echo off
+CTDebug\cryptest mac_dll .\OpenSoucreCrypt\Debug\cryptopp.dll
+echo mac done > .\DLL_Debug\cryptopp.mac.done
+]
+Creating command line "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP301.bat"
+Compiling...
+dll.cpp
+Compiling...
+strciphr.cpp
+Linking...
+   Creating library DLL_Debug/cryptopp.lib and object DLL_Debug/cryptopp.exp
+<h3>Output Window</h3>
+Performing Custom Build Step on .\OpenSoucreCrypt\Debug\cryptopp.dll
+Placing MAC in file .\OpenSoucreCrypt\Debug\cryptopp.dll, location 1356060.
+
+
+
+<h3>Results</h3>
+cryptopp.dll - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

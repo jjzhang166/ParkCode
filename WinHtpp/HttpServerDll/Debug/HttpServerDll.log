@@ -1,0 +1,39 @@
+﻿Build started 2011-11-16 11:44:03.
+     1>Project "D:\WinParkUI\WinHtpp\HttpServerDll\HttpServerDll.vcxproj" on node 2 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "Debug\HttpServerDll.lastbuildstate".
+       InitializeBuildStatus:
+         Creating "Debug\HttpServerDll.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         F:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _WIN32_WINNT=_WIN32_WINNT_WINXP /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D HTTPSERVERDLL_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Debug\HttpServerDll.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         F:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _WIN32_WINNT=_WIN32_WINNT_WINXP /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D HTTPSERVERDLL_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt dllmain.cpp
+         dllmain.cpp
+         F:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _WIN32_WINNT=_WIN32_WINNT_WINXP /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D HTTPSERVERDLL_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\HttpServerDll.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt HttpServerDll.cpp
+         HttpServerDll.cpp
+       ManifestResourceCompile:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\HttpServerDll.dll.embed.manifest.res" Debug\HttpServerDll_manifest.rc 
+       Link:
+         F:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\WinParkUI\WinHtpp\Debug\HttpServerDll.dll" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /DEF:"DllExport.def" /MANIFEST /ManifestFile:"Debug\HttpServerDll.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\WinParkUI\WinHtpp\Debug\HttpServerDll.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\WinParkUI\WinHtpp\Debug\HttpServerDll.lib" /MACHINE:X86 /DLL Debug\HttpServerDll.dll.embed.manifest.res
+         Debug\dllmain.obj
+         Debug\HttpServerDll.obj
+         Debug\stdafx.obj
+            Creating library D:\WinParkUI\WinHtpp\Debug\HttpServerDll.lib and object D:\WinParkUI\WinHtpp\Debug\HttpServerDll.exp
+       Manifest:
+         Deleting file "Debug\HttpServerDll.dll.embed.manifest".
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\HttpServerDll.dll.embed.manifest" /manifest Debug\HttpServerDll.dll.intermediate.manifest
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\HttpServerDll.dll.embed.manifest.res" Debug\HttpServerDll_manifest.rc 
+       LinkEmbedManifest:
+         F:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\WinParkUI\WinHtpp\Debug\HttpServerDll.dll" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /DEF:"DllExport.def" /MANIFEST /ManifestFile:"Debug\HttpServerDll.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\WinParkUI\WinHtpp\Debug\HttpServerDll.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\WinParkUI\WinHtpp\Debug\HttpServerDll.lib" /MACHINE:X86 /DLL Debug\HttpServerDll.dll.embed.manifest.res
+         Debug\dllmain.obj
+         Debug\HttpServerDll.obj
+         Debug\stdafx.obj
+         HttpServerDll.vcxproj -> D:\WinParkUI\WinHtpp\Debug\HttpServerDll.dll
+       FinalizeBuildStatus:
+         Deleting file "Debug\HttpServerDll.unsuccessfulbuild".
+         Touching "Debug\HttpServerDll.lastbuildstate".
+     1>Done Building Project "D:\WinParkUI\WinHtpp\HttpServerDll\HttpServerDll.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.79

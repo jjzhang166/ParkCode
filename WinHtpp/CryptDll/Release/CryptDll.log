@@ -1,0 +1,27 @@
+﻿Build started 2011-11-16 11:03:32.
+     1>Project "D:\WinParkUI\WinHtpp\CryptDll\CryptDll.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Release\CryptDll.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+         F:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D CRYPTDLL_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\CryptDll.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt CryptDll.cpp
+         CryptDll.cpp
+         All outputs are up-to-date.
+       Link:
+         F:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\WinParkUI\WinHtpp\Release\CryptDll.dll" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /DEF:"CryptDll.def" /MANIFEST /ManifestFile:"Release\CryptDll.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\WinParkUI\WinHtpp\Release\CryptDll.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\WinParkUI\WinHtpp\Release\CryptDll.lib" /MACHINE:X86 /DLL Release\CryptDll.obj
+         Release\dllmain.obj
+         Release\stdafx.obj
+            Creating library D:\WinParkUI\WinHtpp\Release\CryptDll.lib and object D:\WinParkUI\WinHtpp\Release\CryptDll.exp
+         Generating code
+         Finished generating code
+         CryptDll.vcxproj -> D:\WinParkUI\WinHtpp\Release\CryptDll.dll
+       Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"D:\WinParkUI\WinHtpp\Release\CryptDll.dll;#2" /manifest Release\CryptDll.dll.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Release\CryptDll.unsuccessfulbuild".
+         Touching "Release\CryptDll.lastbuildstate".
+     1>Done Building Project "D:\WinParkUI\WinHtpp\CryptDll\CryptDll.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.04

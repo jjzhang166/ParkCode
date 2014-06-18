@@ -1,0 +1,140 @@
+﻿// Created by Microsoft (R) C/C++ Compiler Version 10.00.40219.01 (cdba2f5c).
+//
+// d:\winparkui\winhtpp\cryptcomdll\release\cryptoapi.tlh
+//
+// C++ source equivalent of Win32 type library CryptoAPI.tlb
+// compiler-generated file created 11/17/11 at 16:22:24 - DO NOT EDIT!
+
+#pragma once
+#pragma pack(push, 8)
+
+#include <comdef.h>
+
+namespace CRYPTOAPILib {
+
+//
+// Forward references and typedefs
+//
+
+struct __declspec(uuid("15ea8944-438e-471e-860d-6743d4383a37"))
+/* LIBID */ __CRYPTOAPILib;
+struct /* coclass */ Crypto;
+struct __declspec(uuid("6f7d3059-e96a-48df-b232-1ae444384097"))
+/* dual interface */ ICrypto;
+
+//
+// Smart pointer typedef declarations
+//
+
+_COM_SMARTPTR_TYPEDEF(ICrypto, __uuidof(ICrypto));
+
+//
+// Type library items
+//
+
+struct __declspec(uuid("391b0aa4-1e17-485f-b635-0fe26219e87e"))
+Crypto;
+    // [ default ] interface ICrypto
+
+struct __declspec(uuid("6f7d3059-e96a-48df-b232-1ae444384097"))
+ICrypto : IDispatch
+{
+    //
+    // Property data
+    //
+
+    __declspec(property(get=GetDigitalSignature))
+    _bstr_t DigitalSignature;
+    __declspec(property(get=GetContainerName,put=PutContainerName))
+    _bstr_t ContainerName;
+
+    //
+    // Wrapper methods for error-handling
+    //
+
+    HRESULT EncryptDoc (
+        _bstr_t bstrSrc,
+        const _variant_t & varDestination = vtMissing );
+    HRESULT DecryptDoc (
+        _bstr_t bstrSrc,
+        const _variant_t & varDestination = vtMissing );
+    _bstr_t Base64EncodeString (
+        _bstr_t bstrSrc );
+    _bstr_t Base64DecodeString (
+        _bstr_t bstrSrc );
+    _bstr_t EncryptString (
+        _bstr_t bstrSrc );
+    _bstr_t DecryptString (
+        _bstr_t bstrSrc );
+    _bstr_t GetDigitalSignature ( );
+    long VerifyDigitalSignature (
+        _bstr_t bstrDigitalSig );
+    HRESULT Base64EncodeFile (
+        _bstr_t bstrSrc,
+        const _variant_t & varDestination = vtMissing );
+    HRESULT Base64DecodeFile (
+        _bstr_t bstrSrc,
+        const _variant_t & varDestination = vtMissing );
+    _bstr_t Base64EncodeFileToString (
+        _bstr_t bstrSrc );
+    HRESULT Base64DecodeStringToFile (
+        _bstr_t bstrSrc,
+        _bstr_t bstrDestination );
+    _bstr_t GetContainerName ( );
+    void PutContainerName (
+        _bstr_t pVal );
+
+    //
+    // Raw methods provided by interface
+    //
+
+      virtual HRESULT __stdcall raw_EncryptDoc (
+        /*[in]*/ BSTR bstrSrc,
+        /*[in]*/ VARIANT varDestination = vtMissing ) = 0;
+      virtual HRESULT __stdcall raw_DecryptDoc (
+        /*[in]*/ BSTR bstrSrc,
+        /*[in]*/ VARIANT varDestination = vtMissing ) = 0;
+      virtual HRESULT __stdcall raw_Base64EncodeString (
+        /*[in]*/ BSTR bstrSrc,
+        /*[out,retval]*/ BSTR * pbstrResult ) = 0;
+      virtual HRESULT __stdcall raw_Base64DecodeString (
+        /*[in]*/ BSTR bstrSrc,
+        /*[out,retval]*/ BSTR * pbstrResult ) = 0;
+      virtual HRESULT __stdcall raw_EncryptString (
+        /*[in]*/ BSTR bstrSrc,
+        /*[out,retval]*/ BSTR * pbstrResult ) = 0;
+      virtual HRESULT __stdcall raw_DecryptString (
+        /*[in]*/ BSTR bstrSrc,
+        /*[out,retval]*/ BSTR * pbstrResult ) = 0;
+      virtual HRESULT __stdcall get_DigitalSignature (
+        /*[out,retval]*/ BSTR * pVal ) = 0;
+      virtual HRESULT __stdcall raw_VerifyDigitalSignature (
+        /*[in]*/ BSTR bstrDigitalSig,
+        /*[out,retval]*/ long * pbMatches ) = 0;
+      virtual HRESULT __stdcall raw_Base64EncodeFile (
+        /*[in]*/ BSTR bstrSrc,
+        /*[in]*/ VARIANT varDestination = vtMissing ) = 0;
+      virtual HRESULT __stdcall raw_Base64DecodeFile (
+        /*[in]*/ BSTR bstrSrc,
+        /*[in]*/ VARIANT varDestination = vtMissing ) = 0;
+      virtual HRESULT __stdcall raw_Base64EncodeFileToString (
+        /*[in]*/ BSTR bstrSrc,
+        /*[out,retval]*/ BSTR * pbstrResult ) = 0;
+      virtual HRESULT __stdcall raw_Base64DecodeStringToFile (
+        /*[in]*/ BSTR bstrSrc,
+        /*[in]*/ BSTR bstrDestination ) = 0;
+      virtual HRESULT __stdcall get_ContainerName (
+        /*[out,retval]*/ BSTR * pVal ) = 0;
+      virtual HRESULT __stdcall put_ContainerName (
+        /*[in]*/ BSTR pVal ) = 0;
+};
+
+//
+// Wrapper method implementations
+//
+
+#include "d:\winparkui\winhtpp\cryptcomdll\release\cryptoapi.tli"
+
+} // namespace CRYPTOAPILib
+
+#pragma pack(pop)

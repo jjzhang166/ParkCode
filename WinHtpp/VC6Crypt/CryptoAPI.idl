@@ -1,0 +1,75 @@
+// CryptoAPI.idl : IDL source for CryptoAPI.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (CryptoAPI.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(6F7D3059-E96A-48DF-B232-1AE444384097),
+		dual,
+		helpstring("ICrypto Interface"),
+		pointer_default(unique)
+	]
+	interface ICrypto : IDispatch
+	{
+	[id(1), helpstring("Encrypts the argument source file and writes the encrypted data to the destination")] 
+	HRESULT EncryptDoc([in] BSTR bstrSrc, [in, optional] VARIANT varDestination);
+
+	[id(2), helpstring("Decrypts the argument source file and writes the decrypted data to the destination")] 
+	HRESULT DecryptDoc([in] BSTR bstrSrc, [in, optional] VARIANT varDestination);
+	
+	[id(3), helpstring("Encodes the argument string using a Base64 algorithm")] 
+	HRESULT Base64EncodeString([in] BSTR bstrSrc, [out, retval] BSTR* pbstrResult);
+	
+	[id(4), helpstring("Decodes the argument string that has been Base64 encoded")] 
+	HRESULT Base64DecodeString([in] BSTR bstrSrc, [out, retval] BSTR* pbstrResult);
+	
+	[id(5), helpstring("Encrypts the argument string")] 
+	HRESULT EncryptString([in] BSTR bstrSrc, [out, retval] BSTR* pbstrResult);
+	
+	[id(6), helpstring("Decrypts the argument string")] 
+	HRESULT DecryptString([in] BSTR bstrSrc, [out, retval] BSTR* pbstrResult);
+	
+	[propget, id(7), helpstring("Digital signature of the last encryption/decryption operation")] 
+	HRESULT DigitalSignature([out, retval] BSTR *pVal);
+	
+	[id(8), helpstring("Verifies that the argument digital signature matches the digital signature of the last encrytion/decryption operation")] 
+	HRESULT VerifyDigitalSignature([in] BSTR bstrDigitalSig, [out, retval] BOOL* pbMatches);
+	
+	[id(9), helpstring("Encodes the source file using a Base64 algorithm")] 
+	HRESULT Base64EncodeFile([in] BSTR bstrSrc, [in, optional] VARIANT varDestination);
+	
+	[id(10), helpstring("Decodes the Base64 encoded source file")] 
+	HRESULT Base64DecodeFile([in] BSTR bstrSrc, [in, optional] VARIANT varDestination);
+
+	[id(11), helpstring("Encodes the source file using a Base64 algorithm and returns the result as a string")] 
+	HRESULT Base64EncodeFileToString([in] BSTR bstrSrc, [out, retval] BSTR* pbstrResult);
+
+	[id(12), helpstring("Decodes the source string using a Base64 algorithm and stores the results in the argument file")] 
+	HRESULT Base64DecodeStringToFile([in] BSTR bstrSrc, [in] BSTR bstrDestination);
+		[propget, id(13), helpstring("Specifies the application unique CSP container name")] HRESULT ContainerName([out, retval] BSTR *pVal);
+		[propput, id(13), helpstring("Specifies the application unique CSP container name")] HRESULT ContainerName([in] BSTR newVal);
+	};
+
+[
+	uuid(15EA8944-438E-471E-860D-6743D4383A37),
+	version(1.0),
+	helpstring("CryptoAPI 1.0 Type Library")
+]
+library CRYPTOAPILib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(391B0AA4-1E17-485F-B635-0FE26219E87E),
+		helpstring("Crypto Class")
+	]
+	coclass Crypto
+	{
+		[default] interface ICrypto;
+	};
+};

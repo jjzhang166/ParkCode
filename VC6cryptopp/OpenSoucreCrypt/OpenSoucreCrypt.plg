@@ -1,0 +1,43 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: OpenSoucreCrypt - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPED.tmp" with contents
+[
+/nologo /G5 /MT /W3 /GR /GX /Zi /O1 /Ob2 /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "OPENSOUCRECRYPT_EXPORTS" /D CRYPTOPP_ENABLE_COMPLIANCE_WITH_FIPS_140_2=1 /D "USE_PRECOMPILED_HEADERS" /D "CRYPTOPP_DLL_ONLY" /Fp"Release/OpenSoucreCrypt.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /Zm200 /c 
+"D:\WinParkUI\VC6cryptopp\OpenSoucreCrypt\OpenSoucreCrypt.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPED.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPEE.tmp" with contents
+[
+/nologo /G5 /MT /W3 /GR /GX /Zi /O1 /Ob2 /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "OPENSOUCRECRYPT_EXPORTS" /D CRYPTOPP_ENABLE_COMPLIANCE_WITH_FIPS_140_2=1 /D "USE_PRECOMPILED_HEADERS" /D "CRYPTOPP_DLL_ONLY" /Fp"Release/OpenSoucreCrypt.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /Zm200 /c 
+"D:\WinParkUI\VC6cryptopp\OpenSoucreCrypt\StdAfx.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPEE.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPEF.tmp" with contents
+[
+cryptopp.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /incremental:no /pdb:"Release/OpenSoucreCrypt.pdb" /map:"Release/OpenSoucreCrypt.map" /debug /machine:I386 /out:"Release/OpenSoucreCrypt.dll" /implib:"Release/OpenSoucreCrypt.lib" /libpath:"../DLL_Release" 
+.\Release\OpenSoucreCrypt.obj
+.\Release\StdAfx.obj
+\WinParkUI\VC6cryptopp\DLL_Release\cryptopp.lib
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSPEF.tmp"
+<h3>Output Window</h3>
+Compiling...
+StdAfx.cpp
+Compiling...
+OpenSoucreCrypt.cpp
+Linking...
+   Creating library Release/OpenSoucreCrypt.lib and object Release/OpenSoucreCrypt.exp
+
+
+
+<h3>Results</h3>
+OpenSoucreCrypt.dll - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

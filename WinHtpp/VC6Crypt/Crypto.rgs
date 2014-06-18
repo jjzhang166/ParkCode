@@ -1,0 +1,26 @@
+HKCR
+{
+	CryptoAPI.Crypto.1 = s 'Crypto Class'
+	{
+		CLSID = s '{391B0AA4-1E17-485F-B635-0FE26219E87E}'
+	}
+	CryptoAPI.Crypto = s 'Crypto Class'
+	{
+		CLSID = s '{391B0AA4-1E17-485F-B635-0FE26219E87E}'
+		CurVer = s 'CryptoAPI.Crypto.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {391B0AA4-1E17-485F-B635-0FE26219E87E} = s 'Crypto Class'
+		{
+			ProgID = s 'CryptoAPI.Crypto.1'
+			VersionIndependentProgID = s 'CryptoAPI.Crypto'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{15EA8944-438E-471E-860D-6743D4383A37}'
+		}
+	}
+}

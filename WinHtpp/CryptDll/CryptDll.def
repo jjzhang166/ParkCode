@@ -1,0 +1,11 @@
+LIBRARY "CryptDll"
+
+EXPORTS
+CryptStartup
+CryptCleanup
+
+ExportKey
+ImportKey
+
+EncryptData
+DecryptData;

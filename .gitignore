@@ -1,0 +1,23 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+*.pdb
+*.pch
+*.idb
+*.ilk
+*.exp
+
+# Compiled Dynamic libraries
+*.so
+ParkUI.exe
+NewParkUI.exe
+*.ipch
+ui_*.h
+moc_*.cpp
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la

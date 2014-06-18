@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BlacklistMainWindow</class>
+ <widget class="QMainWindow" name="BlacklistMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>938</width>
+    <height>463</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>938</width>
+    <height>463</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>938</width>
+    <height>463</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>黑名单功能演示</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="lblVideo">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>421</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tableAlert">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>19</y>
+      <width>451</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>车牌号</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>进出时间</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>报警原因</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>File</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>410</y>
+      <width>244</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="btnSingleFile">
+       <property name="text">
+        <string>单个文件识别</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnPreFile">
+       <property name="text">
+        <string>上一文件</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnNextFile">
+       <property name="text">
+        <string>下一文件</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>938</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>系统配置</string>
+    </property>
+    <addaction name="actBlacklist"/>
+    <addaction name="actParameter"/>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <action name="actBlacklist">
+   <property name="text">
+    <string>黑名单</string>
+   </property>
+  </action>
+  <action name="actParameter">
+   <property name="text">
+    <string>参数配置</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

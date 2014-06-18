@@ -1,0 +1,12 @@
+INPUT(
+./debug/main.o
+./debug/mainwindow.o
+./debug/qlistener.o
+./debug/qmytcpserver.o
+./debug/qprocessresponsethread.o
+./debug/qresponseevent.o
+./debug/moc_mainwindow.o
+./debug/moc_qlistener.o
+./debug/moc_qmytcpserver.o
+./debug/moc_qprocessresponsethread.o
+);
