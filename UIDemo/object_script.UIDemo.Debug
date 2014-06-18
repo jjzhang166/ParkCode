@@ -1,0 +1,16 @@
+INPUT(
+./debug/main.o
+./debug/mainwindow.o
+./debug/monitor.o
+./debug/frame.o
+./debug/ommonfunction.o
+./debug/mytask.o
+./debug/logicinterface.o
+./debug/mysqldatabase.o
+./debug/moc_mainwindow.o
+./debug/moc_monitor.o
+./debug/moc_frame.o
+./debug/moc_commonfunction.o
+./debug/moc_mytask.o
+./debug/moc_mysqldatabase.o
+);

@@ -1,0 +1,286 @@
+Fee
+{
+	"ClientID":"-1",
+	"TypeCode":"GetFreeType", //GetFeeRate
+	"UserID":"-1",
+	"Data": 
+	{
+		"ParkID":"5101080001"
+	}
+}
+
+GroupRecord
+{
+	"ClientID":"-1",
+	"TypeCode":"GroupSelect",
+	"UserID":"-1",
+	"Data": 
+	{
+		"UnitID":"562020898"
+	}
+}
+
+DeviceRecord
+
+{
+	"ClientID":"123",
+	"TypeCode":"DeviceRegister",
+	"UserID":"-1",
+	"Data": 
+	{
+		"List":
+			[
+				{	
+					"DeviceID": "12345",
+					"StartTime": "2013-02-22 12:23:45",
+					"EndTime":"2015-02-22 12:23:45",
+					"SN": "123-45-23-4423",
+					"Comments": "备注说明",
+					"UnitID": "999999999",
+					"Operator": "注册者"
+				},
+				{
+					"DeviceID": "12346",
+					"StartTime": "2013-02-22 12:23:45",
+					"EndTime":"2015-02-22 12:23:45",
+					"SN": "123-45-23-4423",
+					"Comments": "备注说明",
+					"UnitID": "999999999",
+					"Operator": "注册者"
+				},
+				{
+					"DeviceID": "12346",
+					"StartTime": "2013-02-22 12:23:45",
+					"EndTime":"2015-02-22 12:23:45",
+					"SN": "123-45-23-4423",
+					"Comments": "备注说明",
+					"UnitID": "999999999",
+					"Operator": "注册者"
+				}
+			]
+	}
+}
+
+{
+	"ClientID":"123",
+	"TypeCode":"DeviceUnregister",
+	"UserID":"-1",
+	"Data": 
+	{
+		"List":
+			[
+				{	
+					"DeviceID": "12345",								
+					"Operator": "注销者"
+				},
+				{
+					"DeviceID": "12346",
+					"Operator": "注册者"
+				},
+				{
+					"DeviceID": "12346",
+					"Operator": "注册者"
+				}
+			]
+	}
+}
+////////////////
+UserRecord
+
+{
+	"ClientID":"123",
+	"TypeCode":"UserSelect",
+	"UserID":"-1",
+	"Data": 
+	{
+		"GroupID":"1"
+	}
+}
+
+{
+	"ClientID":"123",
+	"TypeCode":"UserUpdate",
+	"UserID":"-1",
+	"Data": 
+	{
+		"UserID":"1",
+		"UserName":"张三",
+		"UserPwd":"MTIzdGVzdA==",
+		"PwdMD5":"abe45d28281cfa2a4201c9b90a143095",
+		"UserNewPwd":"MTIzdGVzdA==",
+		"PwdNewMD5":"abe45d28281cfa2a4201c9b90a143095"
+	}
+}
+
+{
+	"ClientID":"123",
+	"TypeCode":"UserLogin",
+	"UserID":"-1",
+	"Data": 
+	{
+		"UserID":"1",
+		"UserName":"Test",
+		"UserPwd":"MTIzdGVzdA==",
+		"PwdMD5":"abe45d28281cfa2a4201c9b90a143095"
+	}
+}
+
+{
+	"ClientID":"123",
+	"TypeCode":"UserLogout",
+	"UserID":"-1",
+	"Data": 
+	{
+		"UserID":"1"
+	}
+}
+
+{
+	"ClientID":"123",
+	"TypeCode":"UserFee",
+	"UserID":"-1",
+	"Data": 
+	{
+		"UserID":"1",
+		"StartTime":"2013-04-02 12:34:34",
+		"EndTime":"2013-04-02 18:34:34"
+	}
+}
+
+{
+	"ClientID":"123456", 
+	"TypeCode":"TabletQueryLocationData",
+	"UserID":"1",
+	"Data":	
+	{
+		"LocationID":"5101070001001006",
+		"EnterStartTime":"2013-01-01 12:00:00",
+		"EnterEndTime":"2015-01-01 12:00:00",
+		"LeaveStartTime":"2013-01-01 12:00:00",
+		"LeaveEndTime":"2015-01-01 12:00:00",
+		"Plate":"川A88888",
+		"Operator":"张三",
+		"Limit":"1",
+		"IncludedImage":"1"
+	}
+}
+
+{
+	"ClientID":"123456", 
+	"TypeCode":"TabletQueryImageData",
+	"UserID":"1",
+	"Data":	
+	{
+		"RecordID":"2"
+	}
+}
+
+{
+	"ClientID":"123",
+	"TypeCode":"TabletQueryReportData",
+	"UserID":"1234",
+	"Data": 
+	{
+		"UnitID":"562020897",
+		"ParkID":"5101070002",
+		"PaymentStartTime":"2013-02-02 12:34:34",
+		"PaymentEndTime":"2013-04-02 18:34:34"
+	}
+}
+
+{
+	"ClientID":"12345", 
+	"TypeCode":"ConfigInfo",
+	"UserID":"1",
+	"Data":	
+	{
+		"DeviceID":"12345"
+	}
+}
+
+{
+	"ClientID":"12345", 
+	"TypeCode":"DataInfo",
+	"UserID":"1",
+	"Data":	
+	{
+		"DataType":"UnitInfo"
+	}
+}
+
+{
+	"ClientID":"12345", 
+	"TypeCode":"TabletVehicleShiftRequest",
+	"UserID":"1",
+	"Data":	
+	{
+		"SrcLocationID":"5101070001001006",
+		"DstLocationID":"5101070001001007"
+	}
+}
+
+{
+	"ClientID":"123",
+	"TypeCode":"TabletUploadInOutRecord",
+	"UserID":"234",
+	"Data": 
+	{
+		"List":
+			[
+				{	
+					"LocationID": "5101070001001007",								
+					"State": "0",
+					"EnterTime": "2013-06-05 10:12:23",
+					"LeaveTime": "2013-06-06 10:12:23",
+					"Prepayment": "12345",
+					"Payment": "12346",
+					"EnterPlate": "川A12345",
+					"LeavePlate": "川A12346",
+					"PrepaymentOperator": "张三",
+					"PaymentOperator": "李四",
+					"EnterImage": "MTIzNDc=",
+					"LeaveImage": "MTIzNDg=",
+					"PrepaymentTime": "2013-06-05 10:12:25",
+					"PaymentTime": "2013-06-05 10:12:28",
+					"PrepaymentUserID": "567",
+					"PaymentUserID": "789"
+				},
+				{	
+					"LocationID": "5101070001001006",								
+					"State": "1",
+					"EnterTime": "2013-06-05 10:12:23",
+					"LeaveTime": "2013-06-06 10:12:23",
+					"Prepayment": "12345",
+					"Payment": "12346",
+					"EnterPlate": "川A12345",
+					"LeavePlate": "川A12346",
+					"PrepaymentOperator": "张三",
+					"PaymentOperator": "李四",
+					"EnterImage": "MTIzNDc=",
+					"LeaveImage": "MTIzNDg=",
+					"PrepaymentTime": "2013-06-05 10:12:25",
+					"PaymentTime": "2013-06-05 10:12:28",
+					"PrepaymentUserID": "567",
+					"PaymentUserID": "789"
+				},
+				{	
+					"LocationID": "5101070001001007",								
+					"State": "2",
+					"EnterTime": "2013-06-05 10:12:23",
+					"LeaveTime": "2013-06-06 10:12:23",
+					"Prepayment": "12345",
+					"Payment": "12346",
+					"EnterPlate": "川A12345",
+					"LeavePlate": "川A12346",
+					"PrepaymentOperator": "张三",
+					"PaymentOperator": "李四",
+					"EnterImage": "MTIzNDc=",
+					"LeaveImage": "MTIzNDg=",
+					"PrepaymentTime": "2013-06-05 10:12:25",
+					"PaymentTime": "2013-06-05 10:12:28",
+					"PrepaymentUserID": "567",
+					"PaymentUserID": "789"
+				}
+			]
+	}
+}

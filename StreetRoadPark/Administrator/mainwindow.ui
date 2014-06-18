@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>750</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1000</width>
+    <height>750</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1000</width>
+    <height>750</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>停车场查询系统</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QTreeWidget" name="treeWidget">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>60</y>
+      <width>271</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::CustomContextMenu</enum>
+    </property>
+    <column>
+     <property name="text">
+      <string>停车场信息</string>
+     </property>
+    </column>
+    <item>
+     <property name="text">
+      <string>中国</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="lblWelcome">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>371</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblTime">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>20</y>
+      <width>231</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>60</y>
+      <width>661</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="ptnMod">
+     <property name="geometry">
+      <rect>
+       <x>225</x>
+       <y>1</y>
+       <width>100</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>mod</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ptnDel">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>1</y>
+       <width>100</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>del</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ptnAdd">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>1</y>
+       <width>100</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>add</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ptnAddNext">
+     <property name="geometry">
+      <rect>
+       <x>436</x>
+       <y>1</y>
+       <width>100</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>addnext</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ptnBatchAdd">
+     <property name="geometry">
+      <rect>
+       <x>119</x>
+       <y>1</y>
+       <width>100</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>batchadd</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ptnBatchAddNext">
+     <property name="geometry">
+      <rect>
+       <x>542</x>
+       <y>1</y>
+       <width>100</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>batchaddnext</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QTableWidget" name="selfTabWidget">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>130</y>
+      <width>620</width>
+      <height>100</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="childrenTabWidget">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>260</y>
+      <width>620</width>
+      <height>190</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="childrenTabWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>480</y>
+      <width>620</width>
+      <height>190</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblChild1">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>240</y>
+      <width>241</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>直接下级信息1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblSelf">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>100</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>相关信息</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblChild2">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>460</y>
+      <width>241</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>直接下级信息2</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>设置</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionChange"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionExit">
+   <property name="text">
+    <string>退出系统</string>
+   </property>
+  </action>
+  <action name="actionChange">
+   <property name="text">
+    <string>切换用户</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

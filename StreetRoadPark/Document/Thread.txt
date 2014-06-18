@@ -1,0 +1,17 @@
+Message Style
+
+connect( QObjectSender, SIGNAL, QObjectReceiver, SLOT )
+
+SerialPort
+UIThread-->SerialPortWriteThread--->COM--->Device // Each Thread--Each COM / One Thread--Multi COM
+
+Device-->COM-->SerialPortReadThread-->SerialPortDataParseThread-->UIThread // Each Thread--Each COM / One Thread--Multi COM
+
+
+Database
+UIThread-->DatabaseWriteThread-->DatabaseServer / StoreProcedure
+
+DatabaseServer-->DatabaseReadThread-->UIThread
+
+Network
+HTTPService Style / WinHTTP Service

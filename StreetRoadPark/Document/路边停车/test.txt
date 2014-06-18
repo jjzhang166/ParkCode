@@ -1,0 +1,119 @@
+{}
+{"client":""}
+{"client":"d"}
+{"client":"d","serial":""}
+{"client":"d","serial":"中文"}
+{"client":"d","serial":"000"}
+{"client":"d","serial": "000","type":""}
+{"client":"d","serial": "000","type":"00"}
+{"client":"d","serial": "000","type":"stay"}
+{"client":"d","serial": "000","type": "stay","content":""}
+{"client":"d","serial": "000","type": "stay","content":{}}
+{"client":"d","serial": "000","type": "stay","content":{"":""}}
+{"client":"d","serial": "000","type": "stay","content":{"":"123"}}
+
+{
+	"client": "cd",
+	"serial": "001",
+	"credit": "",
+	"type": "register",
+	"content":
+	{
+		"device": "cd"
+	}
+}
+
+{
+	"client": "cd",
+	"serial": "002",
+	"credit": "",
+	"type": "credit",
+	"content":
+	{
+		"subtype": "request",
+		"limit": "1000",
+		"encryption": "none"
+	}
+}
+
+{
+	"client": "cd",
+	"serial": "003",
+	"credit": "",
+	"type": "time",
+	"content":
+	{ 
+		"time": "2013-01-03 12:01:22"
+	}
+}
+
+{
+	"client": "cd",
+	"serial": "004",
+	"credit": "",
+	"type": "config",
+	"content":
+	{ 
+		"street": "001"
+	}
+}
+
+{
+	"client": "cd",
+	"serial": "005",
+	"credit": "",
+	"type": "user",
+	"content":
+	{ 
+		"subtype": " area"
+	}
+}
+
+{
+	"client": "cd",
+	"serial": "006",
+	"credit": "",
+	"type": "user",
+	"content":
+	{ 
+		"subtype": " group"
+	}
+}
+
+{
+	"client": "cd",
+	"serial": "007",
+	"credit": "",
+	"type": "user",
+	"content":
+	{ 
+		"subtype": " list",
+		"groups": ["管理员", "收费员" ]
+	}
+}
+
+{
+	"client": "cd",
+	"serial": "009",
+	"credit": "",
+	"type": "user",
+	"content":
+	{ 
+		"subtype": " login ", 
+		"operator": "admin", 
+		"password": "CF3E5468E97BD75AB9C" 
+	}
+}
+
+
+{
+	"client": "cd",
+	"serial": "010",
+	"credit": "",
+	"type": "user",
+	"content":
+	{ 
+		"subtype": " logout ", 
+		"operator": "admin"
+	}
+}

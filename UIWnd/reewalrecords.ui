@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CRenewalRecords</class>
+ <widget class="QFrame" name="CRenewalRecords">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1390</width>
+    <height>818</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>续费纪录</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image:url(D:/WinParkUI/debug/Image/NewIcon/CommonBigBG-normal.jpg);</string>
+  </property>
+  <property name="frameShape">
+   <enum>QFrame::StyledPanel</enum>
+  </property>
+  <property name="frameShadow">
+   <enum>QFrame::Raised</enum>
+  </property>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>60</y>
+     <width>1301</width>
+     <height>731</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+   <widget class="QTableWidget" name="tableRenewalRecord">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1301</width>
+      <height>671</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image:url(none);</string>
+    </property>
+    <column>
+     <property name="text">
+      <string>收费时间</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>收费种类</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>收费金额</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>续费时长(天)</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>车牌</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>姓名</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>地址</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>单位</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>收费人员</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>卡片自编号</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>卡号</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QPushButton" name="btnMinimalize">
+    <property name="geometry">
+     <rect>
+      <x>683</x>
+      <y>700</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image:url(none);</string>
+    </property>
+    <property name="text">
+     <string>关闭</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="lblTitle">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>5</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);
+color: rgb(170, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblClose">
+   <property name="geometry">
+    <rect>
+     <x>1351</x>
+     <y>7</y>
+     <width>30</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

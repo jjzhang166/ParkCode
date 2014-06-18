@@ -1,0 +1,16 @@
+INPUT(
+./release/main.o
+./release/mainwindow.o
+./release/monitor.o
+./release/frame.o
+./release/ommonfunction.o
+./release/mytask.o
+./release/logicinterface.o
+./release/mysqldatabase.o
+./release/moc_mainwindow.o
+./release/moc_monitor.o
+./release/moc_frame.o
+./release/moc_commonfunction.o
+./release/moc_mytask.o
+./release/moc_mysqldatabase.o
+);

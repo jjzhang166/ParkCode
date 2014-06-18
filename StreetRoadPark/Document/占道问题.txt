@@ -1,0 +1,80 @@
+广告机 嵌入式Park
+Qt's cross-platform full framework and tools enables developers to target various desktop, embedded, mobile and real-time operating systems with one code base. 
+
+修改的存储过程
+QueryCommonRecord
+SensorRecord
+
+问题
+在处理进出记录时，报【故障】对不起
+打印机连不上，能否共享
+无线不稳定
+手机有时接收不到传感器数据
+
+
+前端软件可能需要修改的地方：
+1、打印时在每页的开始与结尾处需要加些空白行(现在都是顶格、顶尾打印的)
+
+2、需要把未处理的进出记录从数据库中取出(软件在启动时或认为触发)，可以解决换班没换手机、手机没接收到记录的问题
+
+3、在前端需要加一项设置，同一车位进出的时间间隔小于多少秒(用户根据需要随时调整该间隔值)，表示该记录无效；然后前端在接收到车位的离开记录时需要计算该车的进出时间之差，并与该设置值比较，若差值小于等于设置值的话，前端删掉该车为的进出记录，并向服务器发送{
+"ClientID":"", ClientID
+"TypeCode":"DataInfo",
+“UserID”: “123”
+"Data": 
+{
+“DeleteLocationInterval”:“123” 记录被删除的车位号，通知服务器端删除该进出记录
+}
+}，
+
+解决车辆路过车位，又不停在该车为的问题
+
+4、实现 获取当前时间
+{
+"ClientID":"123", 
+"TypeCode":"DataInfo",
+“UserID”: “123”
+"Data": 
+{
+“DataType”:“DateTime”, 数据类型名
+}
+}
+
+服务器响应
+{
+“ClientID” ： “Device ID”, 设备唯一标识符
+“TypeCode” ：“请求对应的类型码或者组播类型码”
+“StateCode” ： “1”， 成功
+“Data”: 
+{
+"DateTime": "2013-12-02 12:12:12"
+}
+} 
+
+解决车辆不离开车位实现收费的问题。
+
+用户收费确定后，前端向服务器发送{
+"ClientID":"", ClientID
+"TypeCode":"DataInfo",
+“UserID”: “123”
+"Data": 
+{
+“DeleteLocationLeave”:“123” 已收费的车位号，服务器端好实现车辆进入的记录
+}
+}
+
+
+2013-12-05 测试发现问题
+1 在处理进出记录时，遇到报【对不起故障】
+
+2、打印机有时连接不上。
+
+3、WIFI无线不稳定,有时出现丢数据包
+
+4、手机有时接收不到传感器数据，我们的测试程序是可以收到的
+
+////////////
+对从服务器上取得传感器进出记录，也需要判断进出时间差，以便删除不合理的进出记录
+对进出记录按车位号排序，统一车位号的进出记录按进、出排序
+是否需要考虑跨手机处理进出记录？
+是否需要提供手动删除不合理的进出记录？

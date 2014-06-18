@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/Images">
+        <file>Disable.png</file>
+        <file>Enable.png</file>
+    </qresource>
+</RCC>

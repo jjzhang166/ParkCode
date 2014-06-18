@@ -1,0 +1,106 @@
+Select distinct cardno, intime, inshebeiname, invideo1, stoprdid from stoprd where cardkind = '计时卡' and intime is not  null and outtime is null;
+
+
+insert into tmpcardintime( cardno, intime, inshebeiname, invideo1, stoprdid ) 
+Select distinct cardno, intime, inshebeiname, invideo1, stoprdid from stoprd where cardkind = '计时卡' and intime is not  null and outtime is null;
+
+insert into cardstoprdid( cardno, stoprdid ) select distinct cardno, stoprdid from tmpcardintime;
+// REPLACE cardstoprdid( cardno, stoprdid ) select distinct cardno, stoprdid from tmpcardintime;
+
+CREATE TABLE `tmpcardintime` (
+  `idtmpcardintime` int(11) NOT NULL AUTO_INCREMENT,
+  `cardno` varchar(45) NOT NULL,
+  `intime` datetime NOT NULL,
+  `inshebeiname` varchar(30) DEFAULT NULL,
+  `invideo1` longblob,
+  `stoprdid` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`idtmpcardintime`)
+) ENGINE=InnoDB AUTO_INCREMENT=18513 DEFAULT CHARSET=gb2312;
+///////////////////////////////////
+CREATE TABLE `cardstoprdid` (
+  `cardno` varchar(50) NOT NULL,
+  `stoprdid` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`cardno`)
+) ENGINE=InnoDB DEFAULT CHARSET=gb2312;
+////////////////////////////////
+
+-- --------------------------------------------------------------------------------
+-- Routine DDL
+-- Note: comments before and after the routine body will not be stored by the server
+-- --------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `StartTimer`( in bStart bool )
+BEGIN
+/*
+    If bStart = 0 then 
+        BEGIN 
+            Drop table if exists tmpcardintime;
+            Drop event if exists DeleteDataTimer;
+            -- SET GLOBAL EVENT_SCHEDULER = FALSE;
+        END;
+     else 
+        BEGIN
+           CREATE TABLE if not exists tmpcardintime ( 
+            idtmpcardintime int(11) NOT NULL AUTO_INCREMENT,
+            cardno varchar(45) NOT NULL,
+            intime datetime NOT NULL,
+            inshebeiname varchar( 30 ) default null,
+            invideo1 longblob,
+            PRIMARY KEY ( idtmpcardintime) 
+          ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=gb2312;
+        
+        -- SET GLOBAL EVENT_SCHEDULER = TRUE; 
+      END;
+    END IF;    
+    */
+END
+////////////////////////////////
+
+Stoprd Trigegr
+
+-- Trigger DDL Statements
+DELIMITER $$
+
+USE `parkadmin`$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`InsertStoprd`
+AFTER INSERT ON `parkadmin`.`stoprd`
+FOR EACH ROW
+BEGIN
+
+ if ( ( '计时卡' = new.cardkind ) && Exists( Select Table_name from information_schema.tables as a where a.table_name = 'tmpcardintime' and table_schema = 'parkadmin' ) )  then
+    select max( stoprdid ) into @stoprdid from stoprd; -- LAST_INSERT_ID()
+    REPLACE CardStoprdID( cardno, stoprdid ) values( new.cardno, @stoprdid );
+    insert tmpcardintime( cardno, intime, inshebeiname, stoprdid ) values( new.cardno, new.intime, new.inshebeiname, @stoprdid );
+ end if;
+END$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`BeforeUpdateStoprd`
+BEFORE UPDATE ON `parkadmin`.`stoprd`
+FOR EACH ROW
+BEGIN
+ if ( true and new.Transfered = 0 ) then -- 青城山 true else false
+    set new.MayDelete = old.Maydelete + 1;
+ end if;
+END$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`UpdateStoprd`
+AFTER UPDATE ON `parkadmin`.`stoprd`
+FOR EACH ROW
+BEGIN
+ if ( ( '计时卡' = new.cardkind ) && Exists( Select Table_name from information_schema.tables as a where a.table_name = 'tmpcardintime'  and table_schema = 'parkadmin' ) ) then
+  if ( old.invideo1 is null && new.invideo1 is not null ) then
+    update tmpcardintime set invideo1 = new.invideo1 where cardno = old.cardno and intime = old.intime;
+    elseif ( new.MayDelete ) then
+    delete from tmpcardintime where cardno = old.cardno and intime <= old.intime;
+  end if;
+ end if;
+END$$
+
