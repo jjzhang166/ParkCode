@@ -1,0 +1,17 @@
+LIBRARY "TH_PlateID.dll"
+EXPORTS
+?GetHardwareID@@YAXPAD@Z
+TH_CheckMinFreeMemory@@YGHPAHPADPAUTH_PlateIDCfg@@@Z
+?TH_GetPlateLicenseInfo@@YGHPAD0@Z	@1
+TH_GetRelease@@YGPBDXZ
+TH_EvaluateCarColor@28
+TH_GetVersion@0
+TH_InitPlateIDSDK@4
+TH_RecogImage@28
+TH_SetContrast@8
+TH_SetDayNightMode@8
+TH_SetEnabledPlateFormat@8
+TH_SetImageFormat@16
+TH_SetProvinceOrder@8
+TH_SetRecogThreshold@12
+TH_UninitPlateIDSDK@4
