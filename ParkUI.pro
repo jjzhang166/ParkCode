@@ -417,7 +417,6 @@ FORMS    += UIWnd/valuecard.ui \
     Dialog/valuerechargedialog.ui \
     Dialog/ledinfodialog.ui \
     Dialog/syssettingdialog.ui \
-    UIWnd/blacklist.ui \
     Dialog/handicdialog.ui \
     Dialog/parkspacelotdialog.ui \
     Dialog/monthlycarddialog.ui \
@@ -455,7 +454,8 @@ FORMS    += UIWnd/valuecard.ui \
     Dialog/dlgblacklistlocation.ui \
     qserialframe.ui \
     VZPlateDemo/qtransparentframe.ui \
-    Dialog/cdlgmonthquery.ui
+    Dialog/cdlgmonthquery.ui \
+    UIWnd/blacklist.ui
 
 OTHER_FILES += \
     Doc/LedProtocol.doc \
