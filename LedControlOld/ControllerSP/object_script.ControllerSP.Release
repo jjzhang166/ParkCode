@@ -1,0 +1,16 @@
+INPUT(
+./release\qcontrollersp.o
+./release\win_qextserialport.o
+./release\qextserialbase.o
+./release\qextserialport.o
+./release\qthreadsp.o
+./release\qthreadspwriter.o
+./release\qthreadspparser.o
+./release\moc_qcontrollersp.o
+./release\moc_qextserialbase.o
+./release\moc_win_qextserialport.o
+./release\moc_qextserialport.o
+./release\moc_qthreadsp.o
+./release\moc_qthreadspwriter.o
+./release\moc_qthreadspparser.o
+);

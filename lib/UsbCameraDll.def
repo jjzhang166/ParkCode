@@ -1,0 +1,10 @@
+LIBRARY "UsbCameraDll.dll"
+EXPORTS
+GetDeviceList
+GetDeviceList2
+StartUsbCamera
+StopUsbCamera
+_GetDeviceList2@16
+_GetDeviceList@12
+_StartUsbCamera@4
+_StopUsbCamera@4

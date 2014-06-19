@@ -1,0 +1,344 @@
+[Version]
+LayoutFile=LAYOUT.INF, layout1.inf, layout2.inf
+signature="$CHICAGO$"
+Class=Media
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%Philips%
+; _OEM_  Enter name of .cat file from WHQL, containing the digital signature.
+; _OEM_  The catalog file has to be in the same location as the INF file.
+CatalogFile=cap7134.cat
+DriverVer=07/15/2003, 2.3.0.6
+
+[Manufacturer]
+%Philips%=Philips
+
+[DestinationDirs]
+Cap7134.CopyDrivers = 10,system32\drivers
+KSUpdate.Dll = 11
+
+[SourceDisksNames]
+1=%DiskName%,,
+
+[SourceDisksFiles]
+cap7134.sys=1
+34api.dll=1
+34pciurd.dll=1
+34i2curd.dll=1
+34dd.dll=1
+34ds.dll=1
+34dialog.dll=1
+34dlg2.dll=1
+34TvCtrl.dll=1
+34com.dll=1
+Prop7134.dll=1
+cap7134.hlp=1
+
+[Philips]
+%Cap7134.DeviceDescProteus30%=Cap7134.Device,PCI\VEN_1131&DEV_7130
+%Cap7134.DeviceDescUnknown30%=Cap7134.Device,PCI\VEN_1131&DEV_7134
+
+[Cap7134.Device]
+Include=      ks.inf, kscaptur.inf, ksfilter.inf
+Needs=        KS.Registration, KSCAPTUR.Registration
+AddReg=       Cap713x.AddRegProteus, Cap713x.AddReg, Prop7134.AddReg, 34COM.AddReg
+CopyFiles=    Cap7134.CopyDrivers, KSUpdate.Dll
+KnownFiles=   Cap7134.KnownFiles
+
+[Cap7134.Device.NT]
+Include=      ks.inf, kscaptur.inf, ksfilter.inf
+Needs=        KS.Registration, KSCAPTUR.Registration.NT
+AddReg=       Cap713x.AddRegProteus, Cap713x.AddReg
+RegisterDlls= Prop7134.Register, 34COM.Register
+CopyFiles=    Cap7134.CopyDrivers, KSUpdate.Dll
+
+[Cap713x.AddRegProteus]
+HKR, "Decoder", "Tuner Channel",0x00010001,1
+HKR, "Decoder", "CVBS Channel",0x00010001,0
+HKR, "Decoder", "CVBS Channel2",0x00010001,2
+HKR, "Decoder", "SVHS Channel",0x00010001,7
+HKR, "Decoder", "SVHS Channel2",0x00010001,7
+; _OEM_  Insert the appropriate preferred video standard here.
+; _OEM_  If no video standard can be detected (e.g. if no
+; _OEM_  video source is connected), this standard is assumed:
+; _OEM_     KS_AnalogVideo_PAL_B    = 0x00000010
+; _OEM_     KS_AnalogVideo_NTSC_M   = 0x00000001
+; _OEM_     KS_AnalogVideo_NTSC_M_J = 0x00000002
+; _OEM_     see Windows DDK for other video standards
+HKR, "Decoder", "Preferred Video Standard",0x00010001,0x00000010    ; KS_AnalogVideo_PAL_B
+; _OEM_  Insert the default VBI sampling frequency and line length here.
+HKR, "Decoder", "VBI Sampling Frequency",0x00010001,27000000
+HKR, "Decoder", "VBI Pitch",0x00010001,1440
+
+;Common registry entries for SAA7134 and SAA7130
+[Cap713x.AddReg]
+; 34 Proteus Board Settings
+; maps user setting to hardware input (1=SIF, 2=Analog1, 3=Analog2)  
+HKR, "BoardSetting", "Tuner",0x00010001,1
+HKR, "BoardSetting", "Composite1",0x00010001,2
+HKR, "BoardSetting", "SVideo1",0x00010001,2
+HKR, "BoardSetting", "Composite2",0x00010001,3
+HKR, "BoardSetting", "SVideo2",0x00010001,3
+HKR, "BoardSetting", "FM",0x00010001,3
+
+HKR, "", "WorkaroundforStandardChange",0x00010001,0
+
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,Cap7134.sys
+HKR,,PageOutWhenUnopened,3,0
+HKR,,DontSuspendIfStreamsAreRunning,3,00
+HKR, "Parameters", "VideoTunerEnabled",0x00010001,1
+HKR, "Parameters", "SVideoEnabled",0x00010001,1
+HKR, "Parameters", "CompositeEnabled",0x00010001,1
+
+
+;>>> decoder defaults for tuner input
+HKR, "Decoder\SRC0", "Brightness",0x00010001,0x80
+HKR, "Decoder\SRC0", "Contrast",0x00010001,0x44
+HKR, "Decoder\SRC0", "Saturation",0x00010001,0x40
+HKR, "Decoder\SRC0", "HUE",0x00010001,0x00
+HKR, "Decoder\SRC0", "Sharpness",0x00010001,0xfffffffb
+HKR, "Decoder\SRC0", "Source Type",0x00010001,0x02
+HKR, "Decoder\SRC0", "Y-Filter",0x00010001,0x01
+HKR, "Decoder\SRC0", "C-Filter",0x00010001,0x01
+HKR, "Decoder\SRC0", "C-Bypass",0x00010001,0x00
+;>>>  decoder defaults for composite 1 source
+HKR, "Decoder\SRC1", "Brightness",0x00010001,0x80
+HKR, "Decoder\SRC1", "Contrast",0x00010001,0x44
+HKR, "Decoder\SRC1", "Saturation",0x00010001,0x40
+HKR, "Decoder\SRC1", "HUE",0x00010001,0x00
+HKR, "Decoder\SRC1", "Sharpness",0x00010001,0xfffffffb
+HKR, "Decoder\SRC1", "Source Type",0x00010001,0x02
+HKR, "Decoder\SRC1", "Y-Filter",0x00010001,0x01
+HKR, "Decoder\SRC1", "C-Filter",0x00010001,0x01
+HKR, "Decoder\SRC1", "C-Bypass",0x00010001,0x00
+;>>>  decoder defaults for composite 2 source
+HKR, "Decoder\SRC2", "Brightness",0x00010001,0x80
+HKR, "Decoder\SRC2", "Contrast",0x00010001,0x44
+HKR, "Decoder\SRC2", "Saturation",0x00010001,0x40
+HKR, "Decoder\SRC2", "HUE",0x00010001,0x00
+HKR, "Decoder\SRC2", "Sharpness",0x00010001,0xfffffffb
+HKR, "Decoder\SRC2", "Source Type",0x00010001,0x02
+HKR, "Decoder\SRC2", "Y-Filter",0x00010001,0x01
+HKR, "Decoder\SRC2", "C-Filter",0x00010001,0x01
+HKR, "Decoder\SRC2", "C-Bypass",0x00010001,0x00
+;>>>  decoder defaults for SVHS 1 source
+HKR, "Decoder\SRC3", "Brightness",0x00010001,0x80
+HKR, "Decoder\SRC3", "Contrast",0x00010001,0x44
+HKR, "Decoder\SRC3", "Saturation",0x00010001,0x40
+HKR, "Decoder\SRC3", "HUE",0x00010001,0x00
+HKR, "Decoder\SRC3", "Sharpness",0x00010001,0xfffffffb
+HKR, "Decoder\SRC3", "Source Type",0x00010001,0x02
+HKR, "Decoder\SRC3", "Y-Filter",0x00010001,0x00
+HKR, "Decoder\SRC3", "C-Filter",0x00010001,0x00
+HKR, "Decoder\SRC3", "C-Bypass",0x00010001,0x01
+;>>>  decoder defaults for SVHS 2 source
+HKR, "Decoder\SRC4", "Brightness",0x00010001,0x80
+HKR, "Decoder\SRC4", "Contrast",0x00010001,0x44
+HKR, "Decoder\SRC4", "Saturation",0x00010001,0x40
+HKR, "Decoder\SRC4", "HUE",0x00010001,0x00
+HKR, "Decoder\SRC4", "Sharpness",0x00010001,0xfffffffb
+HKR, "Decoder\SRC4", "Source Type",0x00010001,0x02
+HKR, "Decoder\SRC4", "Y-Filter",0x00010001,0x00
+HKR, "Decoder\SRC4", "C-Filter",0x00010001,0x00
+HKR, "Decoder\SRC4", "C-Bypass",0x00010001,0x01
+
+;>>> audio settings for tuner input
+
+; 'CountryCode' reflects the used Country
+; and is used as a table entry to 'DefaultStandard' and 'StandardTable'
+; in order to perform a country dependant audio standard search
+; _OEM_  Enter the appropriate country code here
+HKR, "", "CountryCode",,"49"   ; Germany
+
+; 'XTAL' reflects the used hardware crystal (0=32.11MHz,1=24.567MHz)
+HKR, "Audio", "XTAL",0x00010001,0x00
+
+; 'DetectMode' reflects the used audio detection mode (1=automatic mode,0=manual mode)
+HKR, "Audio", "DetectMode",0x00010001,0x01          ; automatic mode
+
+; 'DefaultStandard'
+; in automatic mode: 'DefaultStandard' is used as a fallback if nothing is detected
+; in manual mode:    'DefaultStandard' is used as standard to be set
+;   2  = B/G   Mono           
+;   3  = D/K   Mono           
+;   4  = M     Mono           
+;   5  = B/G   A2
+;   6  = B/G   Nicam
+;   7  = D/K   A2 Type 1
+;   8  = D/K   A2 Type 2
+;   9  = D/K   A2 Type 3
+;   10 = D/K   Nicam
+;   11 = L/L'  Nicam
+;   12 = L/L'  AM
+;   13 = I     Nicam
+;   14 = I     Mono
+;   15 = M     Korea
+;   16 = M     BTSC
+HKR, "Audio\DefaultStandard", "01",0x00010001,16   ; USA:           M    BTSC
+HKR, "Audio\DefaultStandard", "31",0x00010001,5    ; Netherlands:   B/G  A2
+HKR, "Audio\DefaultStandard", "32",0x00010001,6    ; Belgium:       B/G  Nicam
+HKR, "Audio\DefaultStandard", "33",0x00010001,11   ; France:        L/L' Nicam
+HKR, "Audio\DefaultStandard", "34",0x00010001,5    ; Spain:         B/G  A2
+HKR, "Audio\DefaultStandard", "39",0x00010001,5    ; Italy:         B/G  A2
+HKR, "Audio\DefaultStandard", "41",0x00010001,5    ; Switzerland:   B/G  A2
+HKR, "Audio\DefaultStandard", "44",0x00010001,13   ; Great Britain: I    Nicam
+HKR, "Audio\DefaultStandard", "45",0x00010001,6    ; Denmark        B/G  Nicam
+HKR, "Audio\DefaultStandard", "46",0x00010001,6    ; Sweden:        B/G  Nicam
+HKR, "Audio\DefaultStandard", "47",0x00010001,6    ; Norway:        B/G  Nicam
+HKR, "Audio\DefaultStandard", "49",0x00010001,5    ; Germany:       B/G  A2
+HKR, "Audio\DefaultStandard", "81",0x00010001,16   ; Japan:         M    BTSC
+HKR, "Audio\DefaultStandard", "86",0x00010001,7    ; China:         D/K  A2 Type 1
+HKR, "Audio\DefaultStandard","351",0x00010001,5    ; Azores:        B/G  A2
+HKR, "Audio\DefaultStandard","358",0x00010001,6    ; Finland:       B/G  Nicam
+HKR, "Audio\DefaultStandard","420",0x00010001,10   ; Czech Republic:D/K  Nicam
+
+; 'StandardTable'
+; in automatic mode: StandardTable is used to set the standard groups to be searched
+; bit array:
+;   bit1 = B/G
+;   bit2 = D/K
+;   bit3 = L/L'
+;   bit4 = I
+;   bit5 = M
+HKR, "Audio\StandardTable", "01",0x00010001,0x10   ; USA:           M
+HKR, "Audio\StandardTable", "31",0x00010001,0x01   ; Netherlands:   B/G
+HKR, "Audio\StandardTable", "32",0x00010001,0x01   ; Belgium:       B/G
+HKR, "Audio\StandardTable", "33",0x00010001,0x04   ; France:        L/L'
+HKR, "Audio\StandardTable", "34",0x00010001,0x01   ; Spain:         B/G
+HKR, "Audio\StandardTable", "39",0x00010001,0x01   ; Italy:         B/G
+HKR, "Audio\StandardTable", "41",0x00010001,0x01   ; Switzerland:   B/G
+HKR, "Audio\StandardTable", "44",0x00010001,0x08   ; Great Britain: I
+HKR, "Audio\StandardTable", "45",0x00010001,0x01   ; Denmark        B/G
+HKR, "Audio\StandardTable", "46",0x00010001,0x01   ; Sweden:        B/G
+HKR, "Audio\StandardTable", "47",0x00010001,0x01   ; Norway:        B/G
+HKR, "Audio\StandardTable", "49",0x00010001,0x01   ; Germany:       B/G
+HKR, "Audio\StandardTable", "81",0x00010001,0x10   ; Japan:         M
+HKR, "Audio\StandardTable", "86",0x00010001,0x02   ; China:         D/K
+HKR, "Audio\StandardTable","351",0x00010001,0x01   ; Azores:        B/G
+HKR, "Audio\StandardTable","358",0x00010001,0x01   ; Finland:       B/G
+HKR, "Audio\StandardTable","420",0x00010001,0x02   ; Czech Republic:D/K
+
+[Cap7134.CopyDrivers]
+Cap7134.sys
+
+[Cap7134.KnownFiles]
+Cap7134.sys=safe
+
+[Cap7134.Device.Interfaces]
+AddInterface={65e8773d-8f56-11d0-a3b9-00a0c9223196},"GLOBAL",VideoCapture
+AddInterface={6994AD05-93EF-11D0-A3CC-00A0C9223196},"GLOBAL",VideoCapture
+AddInterface={a799a801-a46d-11d0-a18c-00a02401dcd4},"GLOBAL",VideoCrossbar
+
+[Cap7134.Device.NT.Interfaces]
+AddInterface={65e8773d-8f56-11d0-a3b9-00a0c9223196},%refGlobal%,VideoCapture
+AddInterface={6994AD05-93EF-11D0-A3CC-00A0C9223196},%refGlobal%,VideoCapture
+AddInterface={a799a801-a46d-11d0-a18c-00a02401dcd4},%refGlobal%,VideoCrossbar
+
+[KSUpdate.Dll]
+34api.dll
+34pciurd.dll
+34i2curd.dll
+34dd.dll
+34ds.dll
+34dialog.dll
+34dlg2.dll
+34TvCtrl.dll
+34com.dll
+Prop7134.dll      ; audio property dialog
+cap7134.hlp
+
+[VideoCapture]
+AddReg=VideoCapture.AddReg
+
+[VideoCrossbar]
+AddReg=VideoXBar.AddReg
+
+[VideoCapture.AddReg]
+HKR,,CLSID,,{17CCA71B-ECD7-11D0-B908-00A0C9223196}
+HKR,,FriendlyName,,%Cap7134.Capture%
+; 
+; The following entries are used by the PhilipsTV sample application:
+; _OEM_  Enter the country name
+HKLM,"Software\Philips Semiconductors\SAA7134","Country",,"germany"
+; _OEM_  Enter the tuner type
+HKLM,"Software\Philips Semiconductors\SAA7134","Tuner",,"FM1216ME"
+HKLM,"Software\Philips Semiconductors\SAA7134","TunerSlaveAdress",0x00010001,0xC0
+HKLM,"Software\Philips Semiconductors\SAA7134\PhiViA","UseOverlaySurface",0x00010001,1
+HKLM,"Software\Philips Semiconductors\SAA7134\VidCap","UseOverlaySurface",0x00010001,1
+HKLM,"Software\Philips Semiconductors\SAA7134\VidCap","In_Height_50Hz",0x00010001,288
+HKLM,"Software\Philips Semiconductors\SAA7134\VidCap","In_Height_60Hz",0x00010001,240
+HKLM,"Software\Philips Semiconductors\SAA7134\VidCap","In_StartX_50Hz",0x00010001,10
+HKLM,"Software\Philips Semiconductors\SAA7134\VidCap","In_StartY_50Hz",0x00010001,24
+HKLM,"Software\Philips Semiconductors\SAA7134\VidCap","In_Width_50Hz",0x00010001,702
+HKLM,"Software\Philips Semiconductors\SAA7134\VidCap","In_StartX_60Hz",0x00010001,10
+HKLM,"Software\Philips Semiconductors\SAA7134\VidCap","In_StartY_60Hz",0x00010001,24
+HKLM,"Software\Philips Semiconductors\SAA7134\VidCap","In_Width_60Hz",0x00010001,702
+HKLM,SOFTWARE\Intel\Intercast\TVControl,TVControlDLL,,34TVCtrl.dll
+HKLM,SOFTWARE\Intel\Intercast\Drivers,biBitCount,,16
+HKLM,SOFTWARE\Intel\Intercast\Drivers,biCompression,,BI_RGB
+HKLM,SOFTWARE\Intel\Intercast\Drivers,Capture Description,,%Cap7134.Capture%
+HKCR,Intercast.Display,DisplayBitMask,,f
+; Private Pin Names:
+; MEDIATYPE_Audio:
+HKLM,SYSTEM\CurrentControlSet\Control\MediaCategories\{73647561-0000-0010-8000-00AA00389B71},"Name",0x00000000,"Audio"
+; GUID_VSB_OUT:
+HKLM,SYSTEM\CurrentControlSet\Control\MediaCategories\{F3954424-34F6-11D1-821D-0000F8300212},"Name",0x00000000,"Transport In"
+; MEDIUM_AUDIO_PHILDEC_ANALOGAUDIOIN:
+HKLM,SYSTEM\CurrentControlSet\Control\MediaCategories\{0482DEE1-7817-11cf-8a03-00aa006ecb65},"Name",0x00000000,"Analog Audio In"
+
+[Prop7134.AddReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\RunOnce,"AudioProperties",,"%11%\Regsvr32 /s %11%\Prop7134.dll"
+
+[34COM.AddReg]
+HKLM,Software\Microsoft\Windows\CurrentVersion\RunOnce,"COMInterface",,"%11%\Regsvr32 /s %11%\34com.dll"
+
+[Prop7134.Register]
+11,,Prop7134.dll,1 ;FLG_REGSVR_DLLREGISTER
+
+[34COM.Register]
+11,,34COM.dll,1 ;FLG_REGSVR_DLLREGISTER
+   
+[VideoXBar.AddReg]
+HKR,,CLSID,,{71F96460-78F3-11d0-A18C-00A0C9118956}
+HKR,,FriendlyName,,%Cap7134.Crossbar%
+
+[Cap7134.Device.NT.Services]
+AddService = Cap7134,0x00000002,Cap7134.ServiceInstall
+
+[Cap7134.ServiceInstall]
+DisplayName   = %Cap7134.Capture%
+ServiceType   = %SERVICE_KERNEL_DRIVER%
+StartType     = %SERVICE_DEMAND_START%
+ErrorControl  = %SERVICE_ERROR_NORMAL%
+ServiceBinary = %12%\Cap7134.sys
+
+;---------------------------------------------------------------
+;                S t r i n g s
+;---------------------------------------------------------------
+
+[Strings]
+
+;----------------
+; Non-Localizable
+;----------------
+
+SERVICE_KERNEL_DRIVER=1
+SERVICE_ERROR_NORMAL=1
+SERVICE_AUTO_START=2
+SERVICE_DEMAND_START=3
+
+refGlobal="GLOBAL"
+refWave="WAVE"
+
+;----------------
+; Localizable
+;----------------
+
+Philips=                     "10Moons"
+DiskName=                    "10Moons SDK3000(7130) Install disk"
+Cap7134.DeviceDescProteus30= "SDK3000 video capture"
+Cap7134.DeviceDescUnknown30= "SDK3000 video capture"
+Cap7134.Capture= 	     "SDK3000 video capture"
+Cap7134.Crossbar=            "SDK3000 Crossbar"
+
+

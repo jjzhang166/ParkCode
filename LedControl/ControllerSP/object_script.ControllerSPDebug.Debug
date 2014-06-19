@@ -1,0 +1,16 @@
+INPUT(
+./debug/qcontrollersp.o
+./debug/win_qextserialport.o
+./debug/qextserialbase.o
+./debug/qextserialport.o
+./debug/qthreadsp.o
+./debug/qthreadspwriter.o
+./debug/qthreadspparser.o
+./debug/moc_qcontrollersp.o
+./debug/moc_qextserialbase.o
+./debug/moc_win_qextserialport.o
+./debug/moc_qextserialport.o
+./debug/moc_qthreadsp.o
+./debug/moc_qthreadspwriter.o
+./debug/moc_qthreadspparser.o
+);

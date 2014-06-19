@@ -1,0 +1,12 @@
+INPUT(
+./debug/main.o
+./debug/mainwindow.o
+./debug/qdlgconfig.o
+./debug/qextserialport.o
+./debug/qextserialport_win.o
+./debug/qextserialenumerator_win.o
+./debug/qextserialenumerator.o
+./debug/moc_mainwindow.o
+./debug/moc_qdlgconfig.o
+./debug/qrc_Image.o
+);

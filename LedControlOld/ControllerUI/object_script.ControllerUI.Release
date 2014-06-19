@@ -1,0 +1,12 @@
+INPUT(
+./release/main.o
+./release/mainwindow.o
+./release/qdlgconfig.o
+./release/qextserialport.o
+./release/qextserialport_win.o
+./release/qextserialenumerator_win.o
+./release/qextserialenumerator.o
+./release/moc_mainwindow.o
+./release/moc_qdlgconfig.o
+./release/qrc_Image.o
+);
