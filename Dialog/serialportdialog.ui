@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CSerialPortDialog</class>
+ <widget class="QDialog" name="CSerialPortDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>243</width>
+    <height>253</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>串口配置</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>31</x>
+     <y>21</y>
+     <width>160</width>
+     <height>195</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>COM 端口号：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbxPort">
+        <item>
+         <property name="text">
+          <string>COM1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM5</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM6</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM7</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM8</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM9</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM10</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM11</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM12</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM13</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM14</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM15</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>COM16</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>每秒为数：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbxBaud">
+        <item>
+         <property name="text">
+          <string>50</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>75</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>110</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>134</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>150</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>200</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>300</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>600</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>1200</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>1800</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>2400</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>4800</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>9600</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>14400</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>19200</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>38400</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>56000</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>57600</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>76800</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>115200</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>128000</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>256000</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>数据位：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbxData">
+        <item>
+         <property name="text">
+          <string>5</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>6</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>7</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>8</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>奇偶校验：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbxParity">
+        <item>
+         <property name="text">
+          <string>无</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>奇</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>偶</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>标志</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>空格</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>停止位：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbxStop">
+        <item>
+         <property name="text">
+          <string>1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>1.5</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>2</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>流控制：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbxFlow">
+        <item>
+         <property name="text">
+          <string>无</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>硬件</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Xon / Xoff</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <item>
+       <widget class="QPushButton" name="btnOk">
+        <property name="text">
+         <string>确定</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnCancel">
+        <property name="text">
+         <string>取消</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

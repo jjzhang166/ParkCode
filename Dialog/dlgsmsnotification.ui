@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CDlgSMSNotification</class>
+ <widget class="QDialog" name="CDlgSMSNotification">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>463</width>
+    <height>350</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>短信通知</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(D:/WinParkUI/debug/Image/NewIcon/CommonBG-normal.jpg);</string>
+  </property>
+  <widget class="QPushButton" name="btnCancel">
+   <property name="geometry">
+    <rect>
+     <x>337</x>
+     <y>290</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>关闭</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSave">
+   <property name="geometry">
+    <rect>
+     <x>256</x>
+     <y>290</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>发送</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>61</y>
+     <width>221</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>短信内容（不超过70个字符）</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="edtInfo">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>90</y>
+     <width>361</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTitle">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>5</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);
+color: rgb(85, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblClose">
+   <property name="geometry">
+    <rect>
+     <x>422</x>
+     <y>6</y>
+     <width>30</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

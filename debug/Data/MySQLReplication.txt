@@ -1,0 +1,51 @@
+show master status;
+show slave status;
+
+stop slave;
+reset slave;
+start slave;
+
+parkadmin;pmshistory;pmsparthistory;mysql
+
+// AI 记录不能删完；删完了，重启MySQL后，又从1开始计数
+
+
+CHANGE MASTER TO
+  MASTER_HOST='192.168.1.20',
+  MASTER_USER='replication',
+  MASTER_PASSWORD='replication',
+  MASTER_LOG_FILE='mysql-bin.000061',
+  MASTER_LOG_POS=823202008;
+////////////////////////////////////////////
+
+max_err_count = 100G
+
+Master
+[Log Files]
+log-bin [ mysql-bin ]
+
+binlog-do-db [ pmshistory ]
+binlog-ignore-db [ mysql ]
+sync_binlog=1
+
+innodb_flush_log_at_trx_commit=1
+
+[Relplication]
+server-id[ 100 ]
+
+///////////////////////////////////////////////
+Slave
+
+[Replication]
+Server-id[ 110 ]
+
+// Optional / link replication
+[Log Files]
+log-bin [ mysql-bin ]
+
+binlog-do-db [ pmshistory ]
+binlog-ignore-db [ mysql ]
+sync_binlog=1
+log_slave_updates = 1
+
+innodb_flush_log_at_trx_commit=1

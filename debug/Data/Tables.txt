@@ -1,0 +1,24 @@
+
+/////////////// History
+parkadmin
+parkadmin.cardright;parkadmin.carinfo;parkadmin.monthcard;parkadmin.tmpcard;parkadmin.userinfo;parkadmin.savecard
+
+parkadmin.blacklist;parkadmin.feerate;parkadmin.feerate1;parkadmin.feeratebackup;parkadmin.feerd;parkadmin.garageingarage;parkadmin.license;parkadmin.operator;parkadmin.parkdongleinfo;parkadmin.parkadminset;parkadmin.parkinfo;parkadmin.pmslog;parkadmin.roadconerinfo;parkadmin.stoprd;parkadmin.sysinfo;parkadmin.tmpcardintime;parkadmin.treeview;parkadmin.zkset
+
+//////////////////////////////////////////////////////////// Part History
+parkadmin.cardright;parkadmin.carinfo;parkadmin.monthcard;parkadmin.tmpcard;parkadmin.userinfo;parkadmin.savecard;parkadmin.stoprd;parkadmin.garageingarage
+
+
+parkadmin.blacklist;parkadmin.feerate;parkadmin.feerate1;parkadmin.feeratebackup;parkadmin.feerd;parkadmin.garageingarage;parkadmin.license;parkadmin.operator;parkadmin.parkdongleinfo;parkadmin.parkadminset;parkadmin.parkinfo;parkadmin.pmslog;parkadmin.roadconerinfo;parkadmin.stoprdxtmpid;parkadmin.stoprdtmpid;parkadmin.stoprd9;parkadmin.stoprd8;parkadmin.stoprd7;parkadmin.stoprd6;parkadmin.stoprd5;parkadmin.stoprd4;parkadmin.stoprd3;parkadmin.stoprd2;parkadmin.stoprd1;parkadmin.stoprd0;parkadmin.stoprd;parkadmin.log;parkadmin.zkset;parkadmin.treeview;parkadmin.tmpcardintime;parkadmin.sysinfo
+
+
+pmsparthistory.cardright
+pmsparthistory.carinfo
+pmsparthistory.garageingarage
+pmsparthistory.monthcard
+pmsparthistory.savecard
+pmsparthistory.stoprd
+pmsparthistory.tmpcard
+pmsparthistory.userinfo
+
+

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CDlgAlert</class>
+ <widget class="QDialog" name="CDlgAlert">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>730</width>
+    <height>692</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>报警信息</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(D:/WinParkUI/debug/Image/NewIcon/CommonMiddleBG-normal.jpg);</string>
+  </property>
+  <widget class="QTableWidget" name="tabAlert">
+   <property name="geometry">
+    <rect>
+     <x>41</x>
+     <y>50</y>
+     <width>641</width>
+     <height>361</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>双击【报警原因】单元格，显示图像。</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <column>
+    <property name="text">
+     <string>停车场号</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>车牌/卡号</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>进出时间</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>报警原因</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>AlertString</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QLabel" name="lblClose">
+   <property name="geometry">
+    <rect>
+     <x>689</x>
+     <y>5</y>
+     <width>31</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTitle">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>5</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );
+color: rgb(85, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>41</x>
+     <y>430</y>
+     <width>210</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="title">
+    <string>业主</string>
+   </property>
+   <widget class="QLabel" name="lblOwner">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>191</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(none);
+background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="lineWidth">
+     <number>2</number>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>430</y>
+     <width>210</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="title">
+    <string>车辆</string>
+   </property>
+   <widget class="QLabel" name="lblCar">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>191</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(none);
+background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="lineWidth">
+     <number>2</number>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_3">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>430</y>
+     <width>210</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="title">
+    <string>进出图像</string>
+   </property>
+   <widget class="QLabel" name="lblInOut">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>191</width>
+      <height>191</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(none);
+background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Panel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="lineWidth">
+     <number>2</number>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

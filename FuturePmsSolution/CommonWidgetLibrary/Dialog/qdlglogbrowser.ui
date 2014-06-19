@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QDlgLogBrowser</class>
+ <widget class="QDialog" name="QDlgLogBrowser">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>638</width>
+    <height>445</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>日志浏览</string>
+  </property>
+  <widget class="QSplitter" name="splitter">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>30</y>
+     <width>512</width>
+     <height>192</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <widget class="QTreeWidget" name="treeWidget">
+    <property name="minimumSize">
+     <size>
+      <width>100</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>300</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <column>
+     <property name="text">
+      <string>日志类别</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>日期</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget">
+    <column>
+     <property name="text">
+      <string>日志内容</string>
+     </property>
+    </column>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

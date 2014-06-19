@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CDlgMakeLicense</class>
+ <widget class="QDialog" name="CDlgMakeLicense">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>670</width>
+    <height>540</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>670</width>
+    <height>540</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>670</width>
+    <height>540</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>使用时间授权信息</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(D:/WinParkUI/debug/Image/NewIcon/SysSet.JPG);</string>
+  </property>
+  <widget class="QLabel" name="lblClose">
+   <property name="geometry">
+    <rect>
+     <x>629</x>
+     <y>6</y>
+     <width>30</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnPSN">
+   <property name="geometry">
+    <rect>
+     <x>42</x>
+     <y>461</y>
+     <width>168</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>管理员加密狗不显示。
+一台机既有管理员又有普通加密狗，不能获取该机上的普通加密狗ID。</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="text">
+    <string>获取停车场联机加密狗ID</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSave">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>490</y>
+     <width>168</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="text">
+    <string>保存密文到当前数据库</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnClose">
+   <property name="geometry">
+    <rect>
+     <x>576</x>
+     <y>462</y>
+     <width>42</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="text">
+    <string>关闭</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>45</x>
+     <y>80</y>
+     <width>571</width>
+     <height>371</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+   <column>
+    <property name="text">
+     <string>加密狗ID</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>IP</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>开始日期</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>截止日期</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QLabel" name="lblTitle">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>5</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );
+color: rgb(85, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnData">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>461</y>
+     <width>168</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="text">
+    <string>获取选择停车场已授权数据</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>47</x>
+     <y>52</y>
+     <width>51</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="text">
+    <string>停车场</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbxCode">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>51</y>
+     <width>515</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnAdd">
+   <property name="geometry">
+    <rect>
+     <x>42</x>
+     <y>489</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="text">
+    <string>新增一行</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnDelete">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>489</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="text">
+    <string>删除一行</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnExport">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>489</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="text">
+    <string>导出密文</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnImport">
+   <property name="geometry">
+    <rect>
+     <x>308</x>
+     <y>489</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="text">
+    <string>导入密文</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnBatch">
+   <property name="geometry">
+    <rect>
+     <x>401</x>
+     <y>461</y>
+     <width>168</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="text">
+    <string>添加停车场及其加密狗ID</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

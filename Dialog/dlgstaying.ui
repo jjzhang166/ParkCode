@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CDlgStaying</class>
+ <widget class="QDialog" name="CDlgStaying">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>885</width>
+    <height>587</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>当前滞留车辆信息</string>
+  </property>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>36</y>
+     <width>851</width>
+     <height>541</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>月租卡车辆</string>
+    </attribute>
+    <widget class="QTableWidget" name="tableWidgetMonth">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>821</width>
+       <height>511</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>单击【卡号】单元格，查看对应车辆图片。</string>
+     </property>
+     <column>
+      <property name="text">
+       <string>卡号</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>自编号</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>车主</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>联系电话</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>车牌</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>进入通道</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>进入时间</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>ID</string>
+      </property>
+     </column>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_2">
+    <attribute name="title">
+     <string>计时卡车辆</string>
+    </attribute>
+    <widget class="QTableWidget" name="tableWidgetTime">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>821</width>
+       <height>511</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>单击【卡号】单元格，查看对应车辆图片。</string>
+     </property>
+     <column>
+      <property name="text">
+       <string>卡号</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>自编号</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>车牌</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>进入通道</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>进入时间</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>ID</string>
+      </property>
+     </column>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_3">
+    <attribute name="title">
+     <string>无卡模式车辆</string>
+    </attribute>
+    <widget class="QTableWidget" name="tableWidgetNoCard">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>821</width>
+       <height>511</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>单击【卡号】单元格，查看对应车辆图片。</string>
+     </property>
+     <column>
+      <property name="text">
+       <string>卡号</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>自编号</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>车牌</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>进入通道</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>进入时间</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>ID</string>
+      </property>
+     </column>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>7</y>
+     <width>597</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>排序条件：</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="cbSort">
+      <item>
+       <property name="text">
+        <string>升序排序</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>降序排序</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="chk0">
+      <property name="text">
+       <string>卡号</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="chk1">
+      <property name="text">
+       <string>自编号</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="chk2">
+      <property name="text">
+       <string>车主</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="chk3">
+      <property name="text">
+       <string>联系电话</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="chk4">
+      <property name="text">
+       <string>车牌</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="chk5">
+      <property name="text">
+       <string>进入通道</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="chk6">
+      <property name="text">
+       <string>进入时间</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

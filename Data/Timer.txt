@@ -1,0 +1,7 @@
+Create Event IF NOT EXISTS DeleteDataTimer
+                            ON SCHEDULE EVERY 10 MINUTE 
+                            STARTS NOW( ) 
+                            ON COMPLETION PRESERVE 
+                            ENABLE 
+                            COMMENT 'Delete Stoprd Data' 
+                            DO DELETE FROM Stoprd WHERE MayDelete;

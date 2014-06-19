@@ -1,0 +1,49 @@
+Platform System Framework Patterns Package/Component
+
+
+Eclipse的本身只是一个框架平台，但是众多插件的支持使得Eclipse拥有其他功能相对固定的IDE软
+件很难具有的灵活性。许多软件开发商以Eclipse为框架开发自己的IDE。
+
+Eclipse最初是由IBM公司开发的替代商业软件Visual Age for Java的下一代IDE开发环境，
+2001年11月贡献给开源社区，现在它由非营利软件供应商联盟Eclipse基金会（Eclipse Foundation）管理。
+2003年，Eclipse 3.0选择OSGi服务平台规范为运行时架构。 2007年6月，稳定版3.3发布。
+2008年6月发布代号为Ganymede的3.4版。
+
+Eclipse的基础是富客户机平台（Rich Client Platform, 即RCP）。RCP包括下列组件：
+
+核心平台(启动Eclipse，运行插件）
+OSGi（标准集束框架）
+SWT（可移植构件工具包）
+JFace（文件缓冲，文本处理，文本编辑器）
+Eclipse工作台（即Workbench ，包含视图（views）、编辑器（editors）、视角（perspectives）、
+和向导（wizards））
+Eclipse采用的技术是IBM公司开发的（SWT），这是一种基于Java的窗口组件，类似Java本身提供的AWT
+和Swing窗口组件；不过IBM声称SWT比其他Java窗口组件更有效率。Eclipse的用户界面还使用了GUI中
+间层JFace，从而简化了基于SWT的应用程序的构建。
+
+Eclipse的插件机制是轻型软件组件化架构。在富客户机平台上，Eclipse使用插件来提供所有的附加功能，
+例如支持Java以外的其他语 言。 已有的分离的插件已经能够支持C/C++（CDT）、Perl、Ruby，Python、
+telnet和数据库开发。插件架构能够支持将任意的扩展加入到 现有环境中，例如配置管理，而决不仅仅限
+于支持各种编程语言。
+
+Eclipse的设计思想是：一切皆插件。Eclipse核心很小，其它所有功能都以插件的形式附加于Eclipse核心
+之上。Eclipse基本内核包括：图形API (SWT/Jface)， Java开发环境插件(JDT )，插件开发环境(PDE)等。
+
+Eclipse由各种不同的计划组成。以下列出了部分计划。
+
+Eclipse计划：本身包括Eclipse平台，Eclipse富客户端平台（RCP）和Java开发工具（JDT）。
+Eclipse测试和性能工具平台（TPTP）：提供一个允许软件开发者构建诸如测试调试、概况分析、基准评测等测试和性能工具的平台。
+Eclipse Web工具平台计划 （WTP）：用Java企业版Web应用程序开发工具来扩展Eclipse平台。它由以下部分组成：HTML、JavaScript、CSS、JSP、SQL、XML、DTD、XSD和 WSDL的 源代码编辑器；XSD和WSDL的图形界面编辑器；Java企业版的“项目性质”（project nature）、建构器（builder）和模型（model），与一个Java企业版的导航（navigator）；一个Web服务（Web service）向导和浏览器，还有一个WS-I测试工具；最后是数据库访问查询的工具与模型。
+Eclipse商业智能和报表工具计划（BIRT）：提供Web应用程序（特别是基于Java企业版的）的报表开发工具。
+Eclipse可视化界面编辑器计划（VEP）：一个Eclipse下创建图形用户界面代码生成器的框架。
+Eclipse建模框架（EMF）：依据使用XMI描述的建模规格，生成结构化数据模型的工具和其他应用程序的代码。
+图形化编辑器框架（GEF）：能让开发者采用一个现成的应用程序模型来轻松地创建富图形化编辑器。
+UML2：Eclipse平台下的一个UML 2.0元模型的实现，用以支持建模工具的开发。
+AspectJ：一种针对Java的面向侧面语言扩展。
+Eclipse通讯框架（ECF）：专注于在Eclipse平台上创建通讯应用程序的工作。
+Eclipse数据工具平台计划（DTP）
+Eclipse设备驱动软件开发计划（DSDP）
+C/C++开发工具计划（CDT）：努力为Eclipse平台提供一个全功能C和C++的集成开发环境（IDE），它使用GCC作为编译器。
+Eclipse平台COBOL集成开发环境子计划（COBOL）：将构建一个Eclipse平台上的全功能COBOL集成开发环境。
+并行工具平台（PTP）：将开发一个对并行计算机架构下的一组工具进行集成的平行工具平台，而且这个平台是可移植的，可伸缩的并基于标准的。
+嵌入式富客户端平台（eRCP）：计划将Eclipse富客户端平台扩展到嵌入式设备上。这个平台主要是一个富客户端平台（RCP）组件子集的集合。它能让桌面环境下的应用程序模型能够大致同样地能运用在嵌入式设备上。

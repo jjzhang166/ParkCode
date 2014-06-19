@@ -1,0 +1,12 @@
+INPUT(
+./release\qnetworklibrary.o
+./release\qmytcpserver.o
+./release\qmytcpsocket.o
+./release\qtcpclientsocket.o
+./release\qtcppeersocket.o
+./release\moc_qnetworklibrary.o
+./release\moc_qmytcpserver.o
+./release\moc_qmytcpsocket.o
+./release\moc_qtcpclientsocket.o
+./release\moc_qtcppeersocket.o
+);

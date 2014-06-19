@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CDlgPeripheralStatus</class>
+ <widget class="QDialog" name="CDlgPeripheralStatus">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>463</width>
+    <height>350</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>%1口外设状态</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(D:/WinParkUI/debug/Image/NewIcon/CommonBG-normal.jpg);</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>60</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>票箱地感状态</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="edt1q">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>60</y>
+     <width>161</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="edt2q">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>88</y>
+     <width>161</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>89</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>道闸地感状态</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="edt3q">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>117</y>
+     <width>161</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>118</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>取卡按钮状态</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="edt4q">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>146</y>
+     <width>161</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>147</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>进出道闸状态</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="edt5q">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>175</y>
+     <width>161</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>176</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>发卡机状态</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>205</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>发卡机功能</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>236</y>
+     <width>48</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>声音测试</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn6">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>205</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>发卡</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn7">
+   <property name="geometry">
+    <rect>
+     <x>252</x>
+     <y>205</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>收卡</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn1">
+   <property name="geometry">
+    <rect>
+     <x>337</x>
+     <y>60</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );
+border-color: rgb(255, 0, 127);</string>
+   </property>
+   <property name="text">
+    <string>查询</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnSave">
+   <property name="geometry">
+    <rect>
+     <x>256</x>
+     <y>290</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>保存</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCancel">
+   <property name="geometry">
+    <rect>
+     <x>337</x>
+     <y>290</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>关闭</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn9">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>236</y>
+     <width>242</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>播放测试语音</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn2">
+   <property name="geometry">
+    <rect>
+     <x>337</x>
+     <y>88</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>查询</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn3">
+   <property name="geometry">
+    <rect>
+     <x>337</x>
+     <y>117</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>查询</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn4">
+   <property name="geometry">
+    <rect>
+     <x>337</x>
+     <y>146</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>查询</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn5">
+   <property name="geometry">
+    <rect>
+     <x>337</x>
+     <y>175</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>查询</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn8">
+   <property name="geometry">
+    <rect>
+     <x>337</x>
+     <y>205</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>复位</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>270</y>
+     <width>101</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>无车刷卡有效</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chkValided">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>270</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTitle">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>5</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);
+color: rgb(85, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QFrame" name="frmForbidden">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>290</y>
+     <width>135</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QCheckBox" name="chkForbidden">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>0</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image:url( );</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>1</x>
+      <y>0</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image:url( );</string>
+    </property>
+    <property name="text">
+     <string>入口禁止发卡</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="lblClose">
+   <property name="geometry">
+    <rect>
+     <x>423</x>
+     <y>6</y>
+     <width>30</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

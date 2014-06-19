@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CDlgSerach</class>
+ <widget class="QDialog" name="CDlgSerach">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>730</width>
+    <height>692</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string/>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image:url(D:/WinParkUI/debug/Image/NewIcon/CommonMiddleBG-normal.jpg);</string>
+  </property>
+  <widget class="QLabel" name="lblTitle">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>5</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tabResult">
+   <property name="geometry">
+    <rect>
+     <x>42</x>
+     <y>90</y>
+     <width>641</width>
+     <height>561</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>双击单元格，定位到相应的卡记录。</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+   <column>
+    <property name="text">
+     <string>卡号</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>开始时间</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>截止时间</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>卡状态</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>卡类型</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>卡自编号</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>卡备注</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>制卡人</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>业主</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>性别</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>业主电话</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>车牌</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>车型</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>行驶证号</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QPushButton" name="btnClose">
+   <property name="geometry">
+    <rect>
+     <x>608</x>
+     <y>50</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+   <property name="text">
+    <string>查询</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblClose">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>6</y>
+     <width>30</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="edtOwner">
+   <property name="geometry">
+    <rect>
+     <x>369</x>
+     <y>52</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>327</x>
+     <y>54</y>
+     <width>36</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+   <property name="text">
+    <string>业主：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>174</x>
+     <y>55</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+   <property name="text">
+    <string>卡自编号：</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="edtCardselfno">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>52</y>
+     <width>80</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>44</x>
+     <y>55</y>
+     <width>36</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+   <property name="text">
+    <string>卡号：</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="edtCardno">
+   <property name="geometry">
+    <rect>
+     <x>86</x>
+     <y>52</y>
+     <width>80</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>457</x>
+     <y>55</y>
+     <width>48</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+   <property name="text">
+    <string>车牌号：</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="edtPlate">
+   <property name="geometry">
+    <rect>
+     <x>511</x>
+     <y>52</y>
+     <width>80</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

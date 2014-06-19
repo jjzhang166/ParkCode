@@ -1,0 +1,1206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CSysSettingDialog</class>
+ <widget class="QDialog" name="CSysSettingDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>670</width>
+    <height>540</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>系统设置</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image:url(D:/WinParkUI/debug/Image/NewIcon/SysSet.jpg);</string>
+  </property>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>60</y>
+     <width>580</width>
+     <height>410</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">backgroud-image:url(D:/WinParkUI/debug/Image/NewIcon/SysMiddleSet.JPG);
+background-image:url(D:/WinParkUI/debug/Image/NewIcon/SysMiddleSet.jpg);</string>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tabCommonSetting">
+    <attribute name="title">
+     <string>常用设置</string>
+    </attribute>
+    <widget class="QWidget" name="wgCommon" native="true">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>511</width>
+       <height>361</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image:url(none);</string>
+     </property>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>110</y>
+        <width>161</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>月租卡时间提示</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>146</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="styleSheet">
+           <string notr="true">background-image:url(none);</string>
+          </property>
+          <property name="text">
+           <string>剩余</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spMonthlyDay">
+          <property name="styleSheet">
+           <string notr="true">background-image:url(none);</string>
+          </property>
+          <property name="maximum">
+           <number>999999</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="styleSheet">
+           <string notr="true">background-image:url(none);</string>
+          </property>
+          <property name="text">
+           <string>天时提醒</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>10</y>
+        <width>131</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>工作模式</string>
+      </property>
+      <widget class="QRadioButton" name="rdxWorkMaster">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>89</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <property name="text">
+        <string>主机模式</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="rdxWorkSlave">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>89</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <property name="text">
+        <string>从机模式</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_9">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>110</y>
+        <width>120</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>离开时需要确认放行</string>
+      </property>
+      <widget class="QCheckBox" name="chxLeaveTime">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>100</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <property name="text">
+        <string>计时卡</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chxLeaveMonth">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <property name="text">
+        <string>月租卡</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chxLeaveValue">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>65</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <property name="text">
+        <string>储值卡</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_6">
+      <property name="geometry">
+       <rect>
+        <x>630</x>
+        <y>620</y>
+        <width>120</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>GroupBox</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_7">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>180</y>
+        <width>161</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>储值卡余额提示</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>146</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="styleSheet">
+           <string notr="true">background-image:url(none);</string>
+          </property>
+          <property name="text">
+           <string>剩余</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spValueSurplus">
+          <property name="styleSheet">
+           <string notr="true">background-image:url(none);</string>
+          </property>
+          <property name="maximum">
+           <number>999999</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="styleSheet">
+           <string notr="true">background-image:url(none);</string>
+          </property>
+          <property name="text">
+           <string>元时提醒</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_5">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>10</y>
+        <width>141</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>格式化脱机数据</string>
+      </property>
+      <widget class="QPushButton" name="btnCommonFormat">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>50</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <property name="text">
+        <string>开始格式化</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_10">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>260</y>
+        <width>131</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>强行开闸</string>
+      </property>
+      <widget class="QCheckBox" name="chxForceOpenGate">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>131</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <property name="text">
+        <string>禁止鼠标点击开闸</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>110</y>
+        <width>120</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>进入时需要确认放行</string>
+      </property>
+      <widget class="QCheckBox" name="chxEntranceMonth">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <property name="text">
+        <string>月租卡</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chxEntranceValue">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>64</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <property name="text">
+        <string>储值卡</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chxEntranceTime">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>100</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <property name="text">
+        <string>计时卡</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_8">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>260</y>
+        <width>161</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>月租卡工作模式</string>
+      </property>
+      <widget class="QCheckBox" name="chxMonthlyMode">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>101</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <property name="text">
+        <string>允许多进多出</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>161</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>费用计算设置</string>
+      </property>
+      <widget class="QRadioButton" name="rdxCostSelfDef">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>111</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <property name="text">
+        <string>使用自定义设置</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="rdxCostDll">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>111</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image:url(none);</string>
+       </property>
+       <property name="text">
+        <string>使用外接DLL文件</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_11">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>260</y>
+        <width>120</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>刷卡确认</string>
+      </property>
+      <widget class="QCheckBox" name="chkConfirm">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>91</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>出口刷卡确认</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabUseTimelLimit">
+    <attribute name="title">
+     <string>使用时间限制</string>
+    </attribute>
+    <widget class="QGroupBox" name="gbTimeLimit">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>511</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image:url(none);</string>
+     </property>
+     <property name="title">
+      <string>软件有效期设置</string>
+     </property>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>30</y>
+        <width>471</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>当软件超过此处有效设置的时间后将不能正常使用，若非特殊原请在此处设置较大日期</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::PlainText</enum>
+      </property>
+      <property name="textInteractionFlags">
+       <set>Qt::NoTextInteraction</set>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="dateValid">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>90</y>
+        <width>110</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabVideoModeSetting">
+    <attribute name="title">
+     <string>视频模式设置</string>
+    </attribute>
+    <widget class="QWidget" name="wgVideo" native="true">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>511</width>
+       <height>201</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image:url(none);</string>
+     </property>
+     <widget class="QGroupBox" name="gbVideo">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>131</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>视频数目设置</string>
+      </property>
+      <widget class="QRadioButton" name="rdxVideoWay2">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>89</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>2路</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="rdxVideoWay3">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>70</y>
+         <width>89</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>3路</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="rdxVideoWay4">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>110</y>
+         <width>89</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>4路</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QListWidget" name="lsResolution">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>20</y>
+        <width>201</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectItems</enum>
+      </property>
+      <property name="isWrapping" stdset="0">
+       <bool>false</bool>
+      </property>
+      <property name="layoutMode">
+       <enum>QListView::SinglePass</enum>
+      </property>
+      <property name="spacing">
+       <number>3</number>
+      </property>
+      <property name="viewMode">
+       <enum>QListView::ListMode</enum>
+      </property>
+      <property name="currentRow">
+       <number>0</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>RGB24  320 X 240</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RGB24  640 X 480</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RGB24  720 X 288</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>RGB24  720 X 576</string>
+       </property>
+      </item>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabVechileAutoSetting">
+    <attribute name="title">
+     <string>车牌自动识别设置</string>
+    </attribute>
+    <widget class="QWidget" name="wgVichle" native="true">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>391</width>
+       <height>351</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image:url(none);</string>
+     </property>
+     <widget class="QCheckBox" name="chxStartAuto">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>141</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="text">
+       <string>启动车牌识别功能</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="gbPrecision">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>151</width>
+        <height>291</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>识别精度设置</string>
+      </property>
+      <widget class="QRadioButton" name="rdxPrecision0">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>20</y>
+         <width>95</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>不允许误差</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="rdxPrecision1">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>50</y>
+         <width>95</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>允许误差一位</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="rdxPrecision3">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>110</y>
+         <width>95</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>允许误差三位</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="rdxPrecision2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>80</y>
+         <width>95</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>允许误差二位</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="rdxPrecision6">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>200</y>
+         <width>95</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>允许误差六位</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="rdxPrecision7">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>230</y>
+         <width>95</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>允许误差七位</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="rdxPrecision5">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>170</y>
+         <width>95</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>允许误差五位</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="rdxPrecision4">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>140</y>
+         <width>95</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>允许误差四位</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="rdxPrecision8">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>260</y>
+         <width>95</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>允许误差八位</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_18">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>40</y>
+        <width>161</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>黑名单功能</string>
+      </property>
+      <widget class="QCheckBox" name="chxStartBlacklist">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>111</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>启用黑名单检查</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabSpecitialSetting">
+    <attribute name="title">
+     <string>特殊设置</string>
+    </attribute>
+    <widget class="QWidget" name="wgSpecial" native="true">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>561</width>
+       <height>231</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image:url(none);</string>
+     </property>
+     <widget class="QGroupBox" name="groupBox_14">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>151</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>车位计算</string>
+      </property>
+      <widget class="QCheckBox" name="chxSpaceMonth">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>131</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>月租卡不计入车位</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chxSpaceValue">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>131</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>储值卡不计入车位</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_15">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>151</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>数据同步设置</string>
+      </property>
+      <widget class="QCheckBox" name="chxDataSync">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>30</y>
+         <width>121</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>不同步脱机数据</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_16">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>10</y>
+        <width>371</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>中心控制器刷卡设置</string>
+      </property>
+      <widget class="QCheckBox" name="chxCCLeave">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>151</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>允许代替出场刷卡使用</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="chxCCEnter">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>151</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>允许代替入场刷卡使用</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>20</y>
+         <width>131</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>入口通道控制器地址：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>50</y>
+         <width>131</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>出口通道控制器地址：</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spCCEnterAddr">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>20</y>
+         <width>42</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="value">
+        <number>1</number>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spCCLeaveAddr">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>50</y>
+         <width>42</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="value">
+        <number>1</number>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_17">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>120</y>
+        <width>191</width>
+        <height>80</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image:url(none);</string>
+      </property>
+      <property name="title">
+       <string>储值卡计费</string>
+      </property>
+      <widget class="QCheckBox" name="chxValueCharging">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>171</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>储值卡24小时内不重复使用</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="btnSpecialSave">
+   <property name="geometry">
+    <rect>
+     <x>446</x>
+     <y>480</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+   <property name="text">
+    <string>保存</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCancel">
+   <property name="geometry">
+    <rect>
+     <x>536</x>
+     <y>480</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+   <property name="text">
+    <string>关闭</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTilte">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>5</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );
+color: rgb(85, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblClose">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>6</y>
+     <width>30</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

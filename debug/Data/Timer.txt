@@ -1,0 +1,69 @@
+select * from information_schema.events;
+
+alter event parkadmin.DeleteDataTimer disable;
+alter event pmshistory.SplitDataTimer disable;
+alter event pmshistory.SplitDataXTimer disable;
+alter event pmsparthistory.DeleteDataSplitTimer disable;
+
+//
+// Event SQL dose'nt product binlog
+//
+// Definer  Important
+// 
+alter definer= 'test'@'%' Event parkadmin.SplitDataTimer
+                            ON SCHEDULE EVERY 2 minute ;
+
+//
+// Error handle 
+//
+set  @@global.sql_slave_skip_counter = 999999999;
+select @@global.sql_slave_skip_counter;
+
+
+Create Event IF NOT EXISTS parkadmin.DeleteDataTimer
+                            ON SCHEDULE EVERY 10 MINUTE 
+                            STARTS NOW( ) 
+                            ON COMPLETION PRESERVE 
+                            ENABLE 
+                            COMMENT 'Delete Stoprd Data' 
+                            DO DELETE FROM Stoprd WHERE MayDelete;
+
+Create Event IF NOT EXISTS parkadmin.UploadRecTimer
+                            ON SCHEDULE EVERY 1 DAY 
+                            STARTS TIMESTAMP( STR_TO_DATE( concat( Date_Format( curdate( ), '%Y-%m-%d' ), '02:00:00' ), '%Y-%m-%d %H:%i:%S' ) )
+                            ON COMPLETION PRESERVE 
+                            ENABLE 
+                            COMMENT 'Upload data' 
+                            DO call TimerUploadRec( );
+
+Create Event IF NOT EXISTS pmshistory.SplitDataXTimer
+                            ON SCHEDULE EVERY 2 HOUR 
+                            STARTS NOW( ) 
+                            ON COMPLETION PRESERVE 
+                            ENABLE 
+                            COMMENT 'Split StoprdX Data' 
+                            DO call DeleteDataStopRdX( );
+
+Create Event IF NOT EXISTS pmshistory.SplitDataTimer
+                            ON SCHEDULE EVERY 2 MINUTE 
+                            STARTS NOW( ) 
+                            ON COMPLETION PRESERVE 
+                            ENABLE 
+                            COMMENT 'Split Stoprd Data' 
+                            DO call CallSplitStopRD( );
+
+Create Event IF NOT EXISTS pmsparthistory.DeleteOtherDataTimer
+                            ON SCHEDULE EVERY 5 minute 
+                            STARTS NOW( ) 
+                            ON COMPLETION PRESERVE 
+                            ENABLE 
+                            COMMENT 'Split Stoprd Other Data' 
+                            DO call DeleteOtherData( );
+
+Create Event IF NOT EXISTS pmsparthistory.DeleteDataSplitTimer
+                            ON SCHEDULE EVERY 1 DAY 
+                            STARTS TIMESTAMP( STR_TO_DATE( concat( Date_Format( curdate( ), '%Y-%m-%d' ), '01:00:00' ), '%Y-%m-%d %H:%i:%S' ) )
+                            ON COMPLETION PRESERVE 
+                            ENABLE 
+                            COMMENT 'Delete Stoprd Data Split' 
+                            DO call DeleteDataSplit( );

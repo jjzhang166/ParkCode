@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CDlgSmsPhone</class>
+ <widget class="QDialog" name="CDlgSmsPhone">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>554</width>
+    <height>374</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>业主短信电话</string>
+  </property>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>11</y>
+     <width>521</width>
+     <height>301</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>卡号</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>车牌号</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>业主</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>电话</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>选择</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>330</y>
+     <width>239</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QPushButton" name="btnAllSelect">
+      <property name="text">
+       <string>全选</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnAllUnselect">
+      <property name="text">
+       <string>全取消</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnOK">
+      <property name="text">
+       <string>确定</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

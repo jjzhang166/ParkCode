@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CLedInfoDialog</class>
+ <widget class="QDialog" name="CLedInfoDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>463</width>
+    <height>350</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>发布显示频信息</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(D:/WinParkUI/debug/Image/NewIcon/CommonBG-normal.jpg);</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>61</y>
+     <width>191</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>信息发布目标</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>91</y>
+     <width>84</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>入口票箱显示屏</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>91</y>
+     <width>84</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>出口票箱显示屏</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>121</y>
+     <width>66</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>独立显示屏1</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>189</x>
+     <y>121</y>
+     <width>66</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>独立显示屏2</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chk1">
+   <property name="geometry">
+    <rect>
+     <x>141</x>
+     <y>91</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chk2">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>91</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chk3">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>121</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chk4">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>121</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>154</y>
+     <width>291</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>信息内容（不超过20个字符，空格及标点必须为全角）</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="edtInfo">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>177</y>
+     <width>361</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnClose">
+   <property name="geometry">
+    <rect>
+     <x>337</x>
+     <y>290</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>关闭</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnDownload">
+   <property name="geometry">
+    <rect>
+     <x>256</x>
+     <y>290</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>信息发布</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTitle">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>5</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);
+color: rgb(85, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnDownloadTime">
+   <property name="geometry">
+    <rect>
+     <x>337</x>
+     <y>149</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );</string>
+   </property>
+   <property name="text">
+    <string>下传时间</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblClose">
+   <property name="geometry">
+    <rect>
+     <x>423</x>
+     <y>6</y>
+     <width>30</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

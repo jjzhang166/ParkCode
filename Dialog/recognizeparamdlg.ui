@@ -1,0 +1,4781 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CRecognizeParamDlg</class>
+ <widget class="QDialog" name="CRecognizeParamDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>440</width>
+    <height>630</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>359</width>
+    <height>443</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>视频、车牌识别参数设置</string>
+  </property>
+  <property name="toolTip">
+   <string/>
+  </property>
+  <property name="whatsThis">
+   <string>视频、车牌识别参数已更改。
+请重启软件。</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image:url(D:/WinParkUI/debug/Image/NewIcon/PlateSet.JPG);</string>
+  </property>
+  <widget class="QTabWidget" name="tabParam">
+   <property name="geometry">
+    <rect>
+     <x>46</x>
+     <y>46</y>
+     <width>341</width>
+     <height>521</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tab1">
+    <attribute name="title">
+     <string>第一路视频</string>
+    </attribute>
+    <widget class="QLabel" name="lblParam11">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>13</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>车牌最小宽度</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam13">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>41</y>
+       <width>60</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>省份优先级</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam15">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>69</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>视频定位阀值</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam17">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>97</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>图像定位阀值</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam18">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>97</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>图像识别阀值</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam14">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>41</y>
+       <width>96</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>最多输出车牌个数</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam16">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>69</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>视频识别阀值</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam12">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>13</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>车牌最大宽度</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val11">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>13</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+     <property name="value">
+      <number>80</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val12">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>13</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>9999</number>
+     </property>
+     <property name="value">
+      <number>400</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val16">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>69</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>9</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val18">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>97</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>9</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val17">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>97</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>9</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val15">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>69</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>9</number>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="val13">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>41</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val14">
+     <property name="geometry">
+      <rect>
+       <x>288</x>
+       <y>41</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>6</number>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val19">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>124</y>
+       <width>167</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>视频中每个车牌只输出一次</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val112">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>176</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别双层黄牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val115">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>204</y>
+       <width>119</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别双层军用车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val116">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>232</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别农用车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val113">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>176</y>
+       <width>107</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别个性化车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val110">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>147</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>隔行抽点</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val114">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>204</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别军用车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val111">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>147</y>
+       <width>83</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>输入场图像</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val117">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>232</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>夜间模式</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>255</y>
+       <width>91</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别区域设置：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>左</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>右</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>146</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>上</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>212</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>下</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val118">
+     <property name="geometry">
+      <rect>
+       <x>32</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val119">
+     <property name="geometry">
+      <rect>
+       <x>98</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val120">
+     <property name="geometry">
+      <rect>
+       <x>164</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val121">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_32">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>335</y>
+       <width>60</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>车牌可信度</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_33">
+     <property name="geometry">
+      <rect>
+       <x>146</x>
+       <y>335</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别时间</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_34">
+     <property name="geometry">
+      <rect>
+       <x>127</x>
+       <y>335</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>%</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_35">
+     <property name="geometry">
+      <rect>
+       <x>248</x>
+       <y>335</y>
+       <width>24</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>毫秒</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val125">
+     <property name="geometry">
+      <rect>
+       <x>79</x>
+       <y>335</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val126">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>335</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>500</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_24">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>311</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>侦测延时</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_49">
+     <property name="geometry">
+      <rect>
+       <x>213</x>
+       <y>311</y>
+       <width>30</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>帧/秒</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_48">
+     <property name="geometry">
+      <rect>
+       <x>135</x>
+       <y>311</y>
+       <width>24</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>帧率</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val123">
+     <property name="geometry">
+      <rect>
+       <x>165</x>
+       <y>311</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>30</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_25">
+     <property name="geometry">
+      <rect>
+       <x>117</x>
+       <y>311</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>秒</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val122">
+     <property name="geometry">
+      <rect>
+       <x>69</x>
+       <y>311</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_56">
+     <property name="geometry">
+      <rect>
+       <x>249</x>
+       <y>311</y>
+       <width>36</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>灵敏度</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val124">
+     <property name="geometry">
+      <rect>
+       <x>291</x>
+       <y>311</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>6</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val130">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>575</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_60">
+     <property name="geometry">
+      <rect>
+       <x>146</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>上</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val129">
+     <property name="geometry">
+      <rect>
+       <x>164</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_61">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>左</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val128">
+     <property name="geometry">
+      <rect>
+       <x>98</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>703</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_62">
+     <property name="geometry">
+      <rect>
+       <x>212</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>下</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_63">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>357</y>
+       <width>121</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>移动侦测范围设置：</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val127">
+     <property name="geometry">
+      <rect>
+       <x>32</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_64">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>右</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val131">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>410</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>开启车牌识别</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_21">
+     <property name="geometry">
+      <rect>
+       <x>212</x>
+       <y>410</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>允许误差</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val133">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>410</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>8</number>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val132">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>410</y>
+       <width>83</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>启用黑名单</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_22">
+     <property name="geometry">
+      <rect>
+       <x>309</x>
+       <y>410</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>位</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_85">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>440</y>
+       <width>171</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>同一车进出最小间隔时间(秒)</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val134">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>340</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>左</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val135">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>340</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>右</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val136">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>340</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>上</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val137">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>340</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>下</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val138">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>440</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="value">
+      <number>30</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_89">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>471</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>车牌清除时机</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="val139">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>210</y>
+       <width>69</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>离开票箱</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>开启道闸</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QCheckBox" name="val140">
+     <property name="geometry">
+      <rect>
+       <x>94</x>
+       <y>472</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>离开票箱</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val141">
+     <property name="geometry">
+      <rect>
+       <x>174</x>
+       <y>472</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>开启道闸</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab2">
+    <attribute name="title">
+     <string>第二路视频</string>
+    </attribute>
+    <widget class="QCheckBox" name="val29">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>124</y>
+       <width>167</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>视频中每个车牌只输出一次</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam15_2">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>69</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>视频定位阀值</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val25">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>69</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam16_2">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>69</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>视频识别阀值</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val26">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>69</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="val23">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>41</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam14_2">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>41</y>
+       <width>96</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>最多输出车牌个数</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam13_2">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>41</y>
+       <width>60</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>省份优先级</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val24">
+     <property name="geometry">
+      <rect>
+       <x>288</x>
+       <y>41</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>6</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam17_2">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>97</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>图像定位阀值</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val27">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>97</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam18_2">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>97</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>图像识别阀值</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val28">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>97</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val212">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>176</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别双层黄牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val213">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>176</y>
+       <width>107</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别个性化车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val210">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>147</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>隔行抽点</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val211">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>147</y>
+       <width>83</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>输入场图像</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val214">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>204</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别军用车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val215">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>204</y>
+       <width>119</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别双层军用车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val216">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>232</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别农用车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val217">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>232</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>夜间模式</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>255</y>
+       <width>91</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别区域设置：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>左</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val218">
+     <property name="geometry">
+      <rect>
+       <x>32</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>右</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val219">
+     <property name="geometry">
+      <rect>
+       <x>98</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>146</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>上</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val220">
+     <property name="geometry">
+      <rect>
+       <x>164</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>212</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>下</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val221">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val21">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>13</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+     <property name="value">
+      <number>80</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val22">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>13</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>9999</number>
+     </property>
+     <property name="value">
+      <number>400</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam12_2">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>13</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>车牌最大宽度</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam11_2">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>13</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>车牌最小宽度</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val226">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>335</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>500</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_36">
+     <property name="geometry">
+      <rect>
+       <x>146</x>
+       <y>335</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别时间</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_37">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>335</y>
+       <width>60</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>车牌可信度</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val225">
+     <property name="geometry">
+      <rect>
+       <x>79</x>
+       <y>335</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_38">
+     <property name="geometry">
+      <rect>
+       <x>248</x>
+       <y>335</y>
+       <width>24</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>毫秒</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_39">
+     <property name="geometry">
+      <rect>
+       <x>127</x>
+       <y>335</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>%</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_27">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>311</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>侦测延时</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val223">
+     <property name="geometry">
+      <rect>
+       <x>165</x>
+       <y>311</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>30</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_51">
+     <property name="geometry">
+      <rect>
+       <x>213</x>
+       <y>311</y>
+       <width>30</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>帧/秒</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val224">
+     <property name="geometry">
+      <rect>
+       <x>291</x>
+       <y>311</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>6</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_50">
+     <property name="geometry">
+      <rect>
+       <x>135</x>
+       <y>311</y>
+       <width>24</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>帧率</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val222">
+     <property name="geometry">
+      <rect>
+       <x>69</x>
+       <y>311</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_26">
+     <property name="geometry">
+      <rect>
+       <x>117</x>
+       <y>311</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>秒</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_57">
+     <property name="geometry">
+      <rect>
+       <x>249</x>
+       <y>311</y>
+       <width>36</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>灵敏度</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val228">
+     <property name="geometry">
+      <rect>
+       <x>98</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val230">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val227">
+     <property name="geometry">
+      <rect>
+       <x>32</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_65">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>左</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_66">
+     <property name="geometry">
+      <rect>
+       <x>146</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>上</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_67">
+     <property name="geometry">
+      <rect>
+       <x>212</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>下</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_68">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>357</y>
+       <width>121</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>移动侦测范围设置：</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val229">
+     <property name="geometry">
+      <rect>
+       <x>164</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_69">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>右</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val233">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>410</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>8</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_23">
+     <property name="geometry">
+      <rect>
+       <x>212</x>
+       <y>410</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>允许误差</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val231">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>410</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>开启车牌识别</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val232">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>410</y>
+       <width>83</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>启用黑名单</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_80">
+     <property name="geometry">
+      <rect>
+       <x>309</x>
+       <y>410</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>位</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val237">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>350</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>下</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val234">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>350</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>左</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val235">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>350</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>右</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val236">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>350</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string>background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>上</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val238">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>440</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="value">
+      <number>30</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_86">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>440</y>
+       <width>171</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>同一车进出最小间隔时间(秒)</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_90">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>471</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>车牌清除时机</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="val239">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>220</y>
+       <width>69</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>离开票箱</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>开启道闸</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QCheckBox" name="val241">
+     <property name="geometry">
+      <rect>
+       <x>174</x>
+       <y>472</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>开启道闸</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val240">
+     <property name="geometry">
+      <rect>
+       <x>94</x>
+       <y>472</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>离开票箱</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab3">
+    <attribute name="title">
+     <string>第三路视频</string>
+    </attribute>
+    <widget class="QCheckBox" name="val39">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>124</y>
+       <width>167</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>视频中每个车牌只输出一次</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val31">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>13</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+     <property name="value">
+      <number>80</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam11_3">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>13</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>车牌最小宽度</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val32">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>13</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>9999</number>
+     </property>
+     <property name="value">
+      <number>400</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam12_3">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>13</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>车牌最大宽度</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam13_3">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>41</y>
+       <width>60</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>省份优先级</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="val33">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>41</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam14_3">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>41</y>
+       <width>96</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>最多输出车牌个数</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val34">
+     <property name="geometry">
+      <rect>
+       <x>288</x>
+       <y>41</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>6</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam15_3">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>69</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>视频定位阀值</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val35">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>69</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam16_3">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>69</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>视频识别阀值</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val36">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>69</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam17_3">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>97</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>图像定位阀值</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val37">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>97</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam18_3">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>97</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>图像识别阀值</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val38">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>97</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val312">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>176</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别双层黄牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val313">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>176</y>
+       <width>107</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别个性化车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val310">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>147</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>隔行抽点</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val311">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>147</y>
+       <width>83</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>输入场图像</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val314">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>204</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别军用车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val315">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>204</y>
+       <width>119</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别双层军用车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val316">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>232</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别农用车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val317">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>232</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>夜间模式</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>255</y>
+       <width>91</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别区域设置：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>左</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val318">
+     <property name="geometry">
+      <rect>
+       <x>32</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>右</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val319">
+     <property name="geometry">
+      <rect>
+       <x>98</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>146</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>上</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val320">
+     <property name="geometry">
+      <rect>
+       <x>164</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_15">
+     <property name="geometry">
+      <rect>
+       <x>212</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>下</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val321">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val322">
+     <property name="geometry">
+      <rect>
+       <x>69</x>
+       <y>311</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_28">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>311</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>侦测延时</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_29">
+     <property name="geometry">
+      <rect>
+       <x>117</x>
+       <y>311</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>秒</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val326">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>335</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>500</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_40">
+     <property name="geometry">
+      <rect>
+       <x>146</x>
+       <y>335</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别时间</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_41">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>335</y>
+       <width>60</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>车牌可信度</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val325">
+     <property name="geometry">
+      <rect>
+       <x>79</x>
+       <y>335</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_42">
+     <property name="geometry">
+      <rect>
+       <x>248</x>
+       <y>335</y>
+       <width>24</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>毫秒</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_43">
+     <property name="geometry">
+      <rect>
+       <x>127</x>
+       <y>335</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>%</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_52">
+     <property name="geometry">
+      <rect>
+       <x>135</x>
+       <y>311</y>
+       <width>24</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>帧率</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val323">
+     <property name="geometry">
+      <rect>
+       <x>165</x>
+       <y>311</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>30</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_53">
+     <property name="geometry">
+      <rect>
+       <x>213</x>
+       <y>311</y>
+       <width>30</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>帧/秒</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_58">
+     <property name="geometry">
+      <rect>
+       <x>249</x>
+       <y>311</y>
+       <width>36</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>灵敏度</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val324">
+     <property name="geometry">
+      <rect>
+       <x>291</x>
+       <y>311</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>6</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val328">
+     <property name="geometry">
+      <rect>
+       <x>98</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val330">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val327">
+     <property name="geometry">
+      <rect>
+       <x>32</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_70">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>左</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_71">
+     <property name="geometry">
+      <rect>
+       <x>146</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>上</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_72">
+     <property name="geometry">
+      <rect>
+       <x>212</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>下</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_73">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>357</y>
+       <width>121</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>移动侦测范围设置：</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val329">
+     <property name="geometry">
+      <rect>
+       <x>164</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_74">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>右</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val333">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>410</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>8</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_81">
+     <property name="geometry">
+      <rect>
+       <x>212</x>
+       <y>410</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>允许误差</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val331">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>410</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>开启车牌识别</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val332">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>410</y>
+       <width>83</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>启用黑名单</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_82">
+     <property name="geometry">
+      <rect>
+       <x>309</x>
+       <y>410</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>位</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val337">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>340</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>下</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val334">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>340</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>左</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val335">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>340</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>右</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val336">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>340</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>上</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val338">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>440</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="value">
+      <number>30</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_87">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>440</y>
+       <width>161</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>同一车进出最小间隔时间(秒)</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_91">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>471</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>车牌清除时机</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="val339">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>180</y>
+       <width>69</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>离开票箱</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>开启道闸</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QCheckBox" name="val341">
+     <property name="geometry">
+      <rect>
+       <x>174</x>
+       <y>472</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>开启道闸</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val340">
+     <property name="geometry">
+      <rect>
+       <x>94</x>
+       <y>472</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>离开票箱</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab4">
+    <attribute name="title">
+     <string>第四路视频</string>
+    </attribute>
+    <widget class="QCheckBox" name="val49">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>124</y>
+       <width>167</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>视频中每个车牌只输出一次</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val41">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>13</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+     <property name="value">
+      <number>80</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam11_4">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>13</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>车牌最小宽度</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam12_4">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>13</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>车牌最大宽度</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val42">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>13</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>9999</number>
+     </property>
+     <property name="value">
+      <number>400</number>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="val43">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>41</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam13_4">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>41</y>
+       <width>60</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>省份优先级</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam14_4">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>41</y>
+       <width>96</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>最多输出车牌个数</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val44">
+     <property name="geometry">
+      <rect>
+       <x>288</x>
+       <y>41</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>6</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam15_4">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>69</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>视频定位阀值</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val45">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>69</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam16_4">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>69</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>视频识别阀值</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val46">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>69</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam17_4">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>97</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>图像定位阀值</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val47">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>97</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblParam18_4">
+     <property name="geometry">
+      <rect>
+       <x>182</x>
+       <y>97</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>图像识别阀值</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val48">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>97</y>
+       <width>48</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val412">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>176</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别双层黄牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val413">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>176</y>
+       <width>107</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别个性化车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val410">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>147</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>隔行抽点</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val411">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>147</y>
+       <width>83</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>输入场图像</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val414">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>204</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别军用车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val415">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>204</y>
+       <width>119</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别双层军用车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val416">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>232</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别农用车牌</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val417">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>232</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>夜间模式</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_18">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>右</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_16">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>255</y>
+       <width>91</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别区域设置：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_17">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>左</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val418">
+     <property name="geometry">
+      <rect>
+       <x>32</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val419">
+     <property name="geometry">
+      <rect>
+       <x>98</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_19">
+     <property name="geometry">
+      <rect>
+       <x>146</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>上</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val420">
+     <property name="geometry">
+      <rect>
+       <x>164</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_20">
+     <property name="geometry">
+      <rect>
+       <x>212</x>
+       <y>280</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>下</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val421">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>280</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val422">
+     <property name="geometry">
+      <rect>
+       <x>69</x>
+       <y>311</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_30">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>311</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>侦测延时</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_31">
+     <property name="geometry">
+      <rect>
+       <x>117</x>
+       <y>311</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>秒</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val426">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>335</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>500</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_44">
+     <property name="geometry">
+      <rect>
+       <x>146</x>
+       <y>335</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>识别时间</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_45">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>335</y>
+       <width>60</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>车牌可信度</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val425">
+     <property name="geometry">
+      <rect>
+       <x>79</x>
+       <y>335</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_46">
+     <property name="geometry">
+      <rect>
+       <x>248</x>
+       <y>335</y>
+       <width>24</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>毫秒</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_47">
+     <property name="geometry">
+      <rect>
+       <x>127</x>
+       <y>335</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>%</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_54">
+     <property name="geometry">
+      <rect>
+       <x>135</x>
+       <y>311</y>
+       <width>24</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>帧率</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val423">
+     <property name="geometry">
+      <rect>
+       <x>165</x>
+       <y>311</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>30</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_55">
+     <property name="geometry">
+      <rect>
+       <x>213</x>
+       <y>311</y>
+       <width>30</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>帧/秒</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_59">
+     <property name="geometry">
+      <rect>
+       <x>249</x>
+       <y>311</y>
+       <width>36</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>灵敏度</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val424">
+     <property name="geometry">
+      <rect>
+       <x>291</x>
+       <y>311</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>6</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val428">
+     <property name="geometry">
+      <rect>
+       <x>98</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val430">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val427">
+     <property name="geometry">
+      <rect>
+       <x>32</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_75">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>左</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_76">
+     <property name="geometry">
+      <rect>
+       <x>146</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>上</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_77">
+     <property name="geometry">
+      <rect>
+       <x>212</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>下</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_78">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>357</y>
+       <width>121</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>移动侦测范围设置：</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val429">
+     <property name="geometry">
+      <rect>
+       <x>164</x>
+       <y>382</y>
+       <width>42</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_79">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>382</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>右</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val433">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>410</y>
+       <width>30</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="maximum">
+      <number>8</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_83">
+     <property name="geometry">
+      <rect>
+       <x>212</x>
+       <y>410</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>允许误差</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val431">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>410</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>开启车牌识别</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val432">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>410</y>
+       <width>83</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>启用黑名单</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_84">
+     <property name="geometry">
+      <rect>
+       <x>309</x>
+       <y>410</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>位</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val437">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>350</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>下</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val434">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>350</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>左</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val435">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>350</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>右</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val436">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>350</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>上</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="val438">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>440</y>
+       <width>36</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="value">
+      <number>30</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_88">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>440</y>
+       <width>161</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-image: url(none);</string>
+     </property>
+     <property name="text">
+      <string>同一车进出最小间隔时间(秒)</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_92">
+     <property name="geometry">
+      <rect>
+       <x>12</x>
+       <y>471</y>
+       <width>72</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>车牌清除时机</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="val439">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>220</y>
+       <width>69</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>离开票箱</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>开启道闸</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QCheckBox" name="val441">
+     <property name="geometry">
+      <rect>
+       <x>174</x>
+       <y>472</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>开启道闸</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="val440">
+     <property name="geometry">
+      <rect>
+       <x>94</x>
+       <y>472</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>离开票箱</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>99</x>
+     <y>576</y>
+     <width>239</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_37">
+    <item>
+     <widget class="QPushButton" name="btnDefault">
+      <property name="styleSheet">
+       <string notr="true">background-image: url(none);</string>
+      </property>
+      <property name="text">
+       <string>默认值</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnSave">
+      <property name="styleSheet">
+       <string notr="true">background-image: url(none);</string>
+      </property>
+      <property name="text">
+       <string>保存</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnExit">
+      <property name="styleSheet">
+       <string notr="true">background-image: url(none);</string>
+      </property>
+      <property name="text">
+       <string>关闭</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="lblTitle">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>5</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblClose">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>6</y>
+     <width>30</width>
+     <height>15</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

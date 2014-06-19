@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CDlgGarageInGarage</class>
+ <widget class="QDialog" name="CDlgGarageInGarage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>730</width>
+    <height>692</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>库中库进出记录</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image: url(D:/WinParkUI/debug/Image/NewIcon/CommonMiddleBG-normal.jpg);</string>
+  </property>
+  <widget class="QLabel" name="lblClose">
+   <property name="geometry">
+    <rect>
+     <x>688</x>
+     <y>5</y>
+     <width>31</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblTitle">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>5</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>9</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url( );
+color: rgb(85, 0, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tabRecord">
+   <property name="geometry">
+    <rect>
+     <x>42</x>
+     <y>56</y>
+     <width>641</width>
+     <height>600</height>
+    </rect>
+   </property>
+   <property name="toolTip">
+    <string>单击卡号列显示图像</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(none);</string>
+   </property>
+   <column>
+    <property name="text">
+     <string>卡号</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>通道</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>时间</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>进或出</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>子库级别</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>ID</string>
+    </property>
+   </column>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

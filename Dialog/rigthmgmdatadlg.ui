@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CRigthMgmDataDlg</class>
+ <widget class="QDialog" name="CRigthMgmDataDlg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>435</width>
+    <height>439</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>用户权限管理</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>59</x>
+     <y>160</y>
+     <width>301</width>
+     <height>4</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>27</y>
+     <width>301</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>姓名：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="edtName"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_32">
+        <property name="text">
+         <string>卡号：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="edtCardID"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_10">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>性别：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbxSex">
+        <item>
+         <property name="text">
+          <string>男</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>女</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_10">
+        <property name="text">
+         <string>权限类型：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cbxRType">
+        <item>
+         <property name="text">
+          <string>普通用户</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>超级用户</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_11">
+      <item>
+       <widget class="QLabel" name="label_11">
+        <property name="text">
+         <string>住址：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="edtAddr"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_12">
+      <item>
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>电话：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="edtTel"/>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>400</y>
+     <width>320</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QPushButton" name="btnAllOk">
+      <property name="text">
+       <string>全选中</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnAllCancel">
+      <property name="text">
+       <string>全取消</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnOk">
+      <property name="text">
+       <string>确定</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnCancel">
+      <property name="text">
+       <string>取消</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QCheckBox" name="chxStartVideo">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>199</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_14">
+   <property name="geometry">
+    <rect>
+     <x>164</x>
+     <y>199</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>远程管理：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxStartPlate">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>199</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_15">
+   <property name="geometry">
+    <rect>
+     <x>274</x>
+     <y>199</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>连网络相机：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxConnectDB">
+   <property name="geometry">
+    <rect>
+     <x>128</x>
+     <y>226</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_16">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>226</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>连数据库：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxExit">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>226</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_17">
+   <property name="geometry">
+    <rect>
+     <x>164</x>
+     <y>226</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>退出软件：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxMonthCard">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>226</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>274</x>
+     <y>226</y>
+     <width>48</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>月租卡：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_18">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>253</y>
+     <width>48</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>储值卡：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxValueCard">
+   <property name="geometry">
+    <rect>
+     <x>128</x>
+     <y>253</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxTimeCard">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>253</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_19">
+   <property name="geometry">
+    <rect>
+     <x>164</x>
+     <y>253</y>
+     <width>48</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>计时卡：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_20">
+   <property name="geometry">
+    <rect>
+     <x>274</x>
+     <y>253</y>
+     <width>54</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>LED信息：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxLedInfo">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>253</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxDeviceConfig">
+   <property name="geometry">
+    <rect>
+     <x>128</x>
+     <y>280</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>280</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>设备配置：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxSystemSet">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>280</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_9">
+   <property name="geometry">
+    <rect>
+     <x>164</x>
+     <y>280</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>系统设置：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxCardRight">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>280</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_21">
+   <property name="geometry">
+    <rect>
+     <x>274</x>
+     <y>280</y>
+     <width>48</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>卡权限：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_22">
+   <property name="geometry">
+    <rect>
+     <x>164</x>
+     <y>306</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>串口设置：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxSerialPortSet">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>306</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_23">
+   <property name="geometry">
+    <rect>
+     <x>274</x>
+     <y>306</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>车牌设置：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxPlateSet">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>306</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_24">
+   <property name="geometry">
+    <rect>
+     <x>164</x>
+     <y>330</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>进出记录：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxPassRecord">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>330</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_25">
+   <property name="geometry">
+    <rect>
+     <x>274</x>
+     <y>330</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>续费纪录：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxFeeRecord">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>330</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_26">
+   <property name="geometry">
+    <rect>
+     <x>164</x>
+     <y>371</y>
+     <width>0</width>
+     <height>0</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>折扣报表：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxDiscountReport">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>371</y>
+     <width>0</width>
+     <height>0</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_27">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>350</y>
+     <width>48</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>打印表：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxDailyReport">
+   <property name="geometry">
+    <rect>
+     <x>128</x>
+     <y>350</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_28">
+   <property name="geometry">
+    <rect>
+     <x>164</x>
+     <y>350</y>
+     <width>48</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>滞留车辆：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxMonthlyReport">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>350</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_29">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>370</y>
+     <width>0</width>
+     <height>0</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>年报表：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxYearlyReport">
+   <property name="geometry">
+    <rect>
+     <x>128</x>
+     <y>370</y>
+     <width>0</width>
+     <height>0</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxRMgm">
+   <property name="geometry">
+    <rect>
+     <x>128</x>
+     <y>172</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>274</x>
+     <y>172</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>数据维护：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxRate">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>172</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxData">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>172</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_13">
+   <property name="geometry">
+    <rect>
+     <x>164</x>
+     <y>172</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>费率设置：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>172</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>权限管理：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxSysLog">
+   <property name="geometry">
+    <rect>
+     <x>128</x>
+     <y>199</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>199</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>系统日志：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>306</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>折扣设置：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxDiscountSet">
+   <property name="geometry">
+    <rect>
+     <x>128</x>
+     <y>306</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chxSyncTime">
+   <property name="geometry">
+    <rect>
+     <x>128</x>
+     <y>330</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_30">
+   <property name="geometry">
+    <rect>
+     <x>62</x>
+     <y>330</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>时间同步：</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="chkBlacklist">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>350</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_31">
+   <property name="geometry">
+    <rect>
+     <x>274</x>
+     <y>350</y>
+     <width>48</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>黑名单：</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
