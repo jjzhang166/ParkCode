@@ -454,7 +454,8 @@ FORMS    += UIWnd/newvaluecard.ui \
     Dialog/dlgblacklistlocation.ui \
     VZPlateDemo/qtransparentframe.ui \
     qserialframe.ui \
-    Dialog/cdlgmonthquery.ui
+    Dialog/cdlgmonthquery.ui \
+    UIWnd/blacklist.ui
 
 OTHER_FILES += \
     Doc/LedProtocol.doc \
