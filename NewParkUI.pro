@@ -209,7 +209,8 @@ SOURCES += mainwindow.cpp \
     UploadData/qftpthread.cpp \
     UploadData/qftpevent.cpp \
     UploadData/quploaddataevent.cpp \
-    JbIPC/qjbipc.cpp
+    JbIPC/qjbipc.cpp \
+    Dialog/cdlgbulkcharge.cpp
 
 HEADERS  += Header/valuecard.h \
     Header/tolldiscounttypeset.h \
@@ -382,7 +383,8 @@ HEADERS  += Header/valuecard.h \
     UploadData/quploaddataevent.h \
     UploadData/qftpthread.h \
     UploadData/qftpevent.h \
-    JbIPC/qjbipc.h
+    JbIPC/qjbipc.h \
+    Dialog/cdlgbulkcharge.h
 
 FORMS    += UIWnd/newvaluecard.ui \
     UIWnd/tolldiscounttypeset.ui \
@@ -455,7 +457,8 @@ FORMS    += UIWnd/newvaluecard.ui \
     VZPlateDemo/qtransparentframe.ui \
     qserialframe.ui \
     Dialog/cdlgmonthquery.ui \
-    UIWnd/blacklist.ui
+    UIWnd/blacklist.ui \
+    Dialog/cdlgbulkcharge.ui
 
 OTHER_FILES += \
     Doc/LedProtocol.doc \

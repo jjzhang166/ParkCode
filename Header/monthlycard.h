@@ -50,6 +50,7 @@ private slots:
     void ModifyRecord( );
     void DeleteRecord( );
     void Recharge( );
+    void BulkRecharge( );
     void Serach( );
     void ChangeCard( );
     void Refresh( );

@@ -14,6 +14,7 @@
 #include "Dialog/dlgserach.h"
 #include "Dialog/dlgbulkregister.h"
 #include "Dialog/dlgcardloss.h"
+#include "Dialog/cdlgbulkcharge.h"
 
 CMonthlyCard::CMonthlyCard(QWidget* mainWnd, QWidget *parent) :
     QFrame(parent),
@@ -281,6 +282,23 @@ void CMonthlyCard::DeleteRecord( )
     }
 }
 
+void CMonthlyCard::BulkRecharge( )
+{
+    if ( 0 >= ui->tableMonthly->rowCount( ) ) {
+        CCommonFunction::MsgBox( NULL, CCommonFunction::GetMsgTitle( QMessageBox::Information ),
+                                 QString( "无月租卡，请先注册月租卡！" ), QMessageBox::Information );
+        return;
+    }
+
+    CDlgBulkCharge dlg;
+    int nRet = dlg.exec( );
+    if ( QDialog::Rejected == nRet ) {
+        return;
+    }
+
+    Refresh( );
+}
+
 void CMonthlyCard::Recharge( )
 {
     //feenumb, timelen, feetime, feekind, feeoperator, cardno
@@ -416,6 +434,7 @@ void CMonthlyCard::CreateContextMenu( QTableWidget *parent )
         pMenu->addAction( "编辑", this, SLOT( ModifyRecord( ) ) );
         pMenu->addAction( "删除", this, SLOT( DeleteRecord( ) ) );
         pMenu->addAction( "续费", this, SLOT( Recharge( ) ) );
+        pMenu->addAction( "批量续期", this, SLOT( BulkRecharge( ) ) );
         pMenu->addAction( "查找", this, SLOT( Serach( ) ) );
         //pMenu->addAction( "换卡", this, SLOT( ChangeCard( ) ) );
         pMenu->addAction( "车进场 卡遗失处理", this, SLOT( CardLossProcess( ) ) );

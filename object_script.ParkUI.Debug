@@ -168,6 +168,7 @@ INPUT(
 ./debug\quploaddataevent.o
 ./debug\qftpevent.o
 ./debug\qjbipc.o
+./debug\cdlgbulkcharge.o
 ./debug\moc_valuecard.o
 ./debug\moc_tolldiscounttypeset.o
 ./debug\moc_timecard.o
@@ -311,4 +312,5 @@ INPUT(
 ./debug\moc_quploaddatathread.o
 ./debug\moc_qftpthread.o
 ./debug\moc_qjbipc.o
+./debug\moc_cdlgbulkcharge.o
 );

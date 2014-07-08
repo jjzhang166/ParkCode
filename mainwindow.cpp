@@ -195,7 +195,35 @@ void MainWindow::SyncTime( QStringList& lstData )
     sysTime.wMilliseconds = lstData[ 8 ].toUShort( );
 
     BOOL bRet = SetLocalTime( &sysTime );
+
+    QStringList lstTimeData;
+    lstTimeData << QString( "%1-%2-%3" ).arg( lstData[ 1 ], lstData[ 2 ], lstData[ 3 ] )
+            << QString( "%1:%2:%3" ).arg( lstData[ 5 ], lstData[ 6 ], lstData[ 7 ] );
+    SyncLedTime( lstTimeData );
+
     qDebug( ) << "SyncTime( ) " << ( bRet ? "Success" : "Failed" ) << endl;
+}
+
+void MainWindow::SyncLedTime( QStringList& lstData )
+{
+    CProcessData* pProcessor = CProcessData::GetProcessor( );
+    if ( NULL != pProcessor ) {
+        char cCan = 0;
+        foreach ( const QString& str, lstCanAddr ) {
+            cCan = ( char ) str.toShort( );
+            pProcessor->ProcessUserRequest( CommonDataType::UserPublishLed, cCan, lstData );
+        }
+    }
+}
+
+void MainWindow::GetLocalCanAddr( )
+{
+    QString strWhere = QString( " Where video1ip = '%1' " ).arg( CCommonFunction::GetHostIP( ) );
+    QString strSql = QString( "Select distinct shebeiadr from \
+                              roadconerinfo %1" ).arg(
+                                      strWhere );
+    int nRows = CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstCanAddr );
+    nRows = 0;
 }
 
 void MainWindow::SendTime( )
@@ -737,6 +765,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
     //pCheckThread = &CCheckThread::GetInstance( this );
 
     CCommonFunction::ShowSplashMessage( "ÓÃ»§µÇÂ¼¡£" );
+    GetLocalCanAddr( );
     StartSycnTime( );
     Login( true );
 

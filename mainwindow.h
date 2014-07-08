@@ -71,6 +71,8 @@ public:
     QString GetPictureName( QString strName );
 
 private:
+    void GetLocalCanAddr( );
+    void SyncLedTime( QStringList& lstData );
     void SetMaxMinSize( );
     void ClearAllFiles( );
     void ModiyToobar( );
@@ -138,6 +140,7 @@ private:
     bool bToInternet;
     bool bAlert;
     QSerialFrame frmSerial;
+    QStringList lstCanAddr;
 
 private slots:
 #if false

@@ -88,7 +88,7 @@ color: rgb(170, 0, 0);</string>
      <string>金额按年</string>
     </property>
     <property name="checked">
-     <bool>true</bool>
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QRadioButton" name="rdChx02">
@@ -130,7 +130,7 @@ color: rgb(170, 0, 0);</string>
      <string>金额按收费人员</string>
     </property>
     <property name="checked">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QRadioButton" name="rdChx06">
