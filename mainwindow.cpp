@@ -761,8 +761,10 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
     CreateChildren( );
     CCommonFunction::ShowSplashMessage( "创建子窗体结束。" );
 
+#ifdef START_DONGLE
     //2014 Dongle
-    //pCheckThread = &CCheckThread::GetInstance( this );
+    pCheckThread = &CCheckThread::GetInstance( this );
+#endif
 
     CCommonFunction::ShowSplashMessage( "用户登录。" );
     GetLocalCanAddr( );
@@ -772,9 +774,11 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
     StartupMgmt( );
 
     // License
+#ifdef START_DONGLE
     //2014 Dongle
-    //connect( pCheckThread, SIGNAL( ExpirationSender( QString, bool, bool ) ), this, SLOT( Expiration( QString, bool, bool ) ) );
-    //StartLicense( );
+    connect( pCheckThread, SIGNAL( ExpirationSender( QString, bool, bool ) ), this, SLOT( Expiration( QString, bool, bool ) ) );
+    StartLicense( );
+#endif
 
     CCommonFunction::ShowSplashMessage( "加载图片结束。" );
     IconLoad( *this );
@@ -860,7 +864,9 @@ void MainWindow::ProcessGateCommand( QStringList &lstData )
 
 void MainWindow::ProcessCpuidRequest( QStringList &lstData )
 {
+#ifndef START_DONGLE
     return; //2014 Dongle
+#endif
     if ( 3 > lstData.count( ) ) {
             return;
     }
@@ -905,8 +911,10 @@ bool MainWindow::GenerateLicense( QString &strSpecialUser, QString& strSpecialPw
 
 void MainWindow::StartLicense( )
 {
+#ifndef START_DONGLE
     //2014 Dongle
     return;
+#endif
     CLicense::CreateSingleton( false ).GetDongle( )->SetVerifyDate( true );
     QString strParkID = CCommonFunction::GetParkID( );
     pCheckThread->GetBlob( strParkID );
@@ -1143,6 +1151,18 @@ void MainWindow::CheckCenterContronller( )
     pProcessor->CheckCenterContronller( false, dtCurrent );
 }
 
+void MainWindow::ProcessMonthcardSync( QStringList &lstData )
+{
+    //// Type Data
+    if ( 2 > lstData.size( ) ) {
+        return;
+    }
+
+    QString strWhere = lstData.at( 1 );
+    CLogicInterface::GetInterface( )->GetEntityInfo( CCommonFunction::GetCardEntity( ), strWhere );
+    CLogicInterface::GetInterface( )->GetPlateCardInfo( CCommonFunction::GetPlateCardHash( ), strWhere );
+}
+
 void MainWindow::ProcessDatagram( QStringList &lstData )
 {
     if ( lstData.count( ) <= 1 ) {
@@ -1163,6 +1183,8 @@ void MainWindow::ProcessDatagram( QStringList &lstData )
         ProcessCpuidRequest( lstData );
     } else if ( CommonDataType::DGGateCommand == nType ) {
         ProcessGateCommand( lstData );
+    } else if ( CommonDataType::DGMonthcardSync == nType ) {
+        ProcessMonthcardSync( lstData );
     } else {
         ProcessMonitorMsg( ( CommonDataType::DatagramType ) nType, lstData );
     }

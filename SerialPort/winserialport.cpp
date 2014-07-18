@@ -277,10 +277,14 @@ bool CWinSerialPort::IsOpened(  )
     return pWinSerialPort->isOpen( );
 }
 
-bool CWinSerialPort::OpenPort( )
+bool CWinSerialPort::OpenPort( bool bConnectSlot )
 {
     bool bRet = pWinSerialPort->open( QIODevice::ReadWrite );
-    bRet = connect( pWinSerialPort, SIGNAL( readyRead( ) ), pParent, SLOT( DataMayRead( ) ) );
+
+    if ( bConnectSlot ) {
+        bRet = connect( pWinSerialPort, SIGNAL( readyRead( ) ),
+                        pParent, SLOT( DataMayRead( ) ) );
+    }
 
     return bRet;
 }

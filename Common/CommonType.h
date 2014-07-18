@@ -34,6 +34,7 @@ namespace CommonDataType {
         DGCpuidRequest,
         DGCpuidResponse,
         DGGateCommand,
+        DGMonthcardSync,
         DGTypeCount
     } DatagramType;
 

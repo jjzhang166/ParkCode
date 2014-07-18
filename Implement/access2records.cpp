@@ -245,15 +245,15 @@ void CAccess2Records::GetImage( CommonDataType::BlobType blob, int nRow, bool bE
     pSystemSet->sync( );
     QString strWhere;
 
-    bool bSenseOpenGate = pSystemSet->value( "CommonCfg/SenseOpenGate", false ).toBool( );
-    if ( bSenseOpenGate ) {
-        strWhere = QString( " Where cardno = '%1'" ).arg( ui->tableAccessRecord->item( nRow, 0 )->text( ) );
-    } else {
+    //bool bSenseOpenGate = pSystemSet->value( "CommonCfg/SenseOpenGate", false ).toBool( );
+    //if ( bSenseOpenGate ) {
+    //    strWhere = QString( " Where cardno = '%1'" ).arg( ui->tableAccessRecord->item( nRow, 0 )->text( ) );
+    //} else {
         QString strCardno = ui->tableAccessRecord->item( nRow, ui->tableAccessRecord->columnCount( ) - 1 )->text( );
 
         strWhere = QString( " Where stoprdid = '%1'" ).arg(
                                 strCardno );
-    }
+    //}
 
     QLabel* pLbl = lblScaleImage[ blob ];
 

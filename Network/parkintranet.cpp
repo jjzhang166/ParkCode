@@ -133,7 +133,7 @@ void CNetwork::MultiCastData( const QByteArray& byData )
 void CNetwork::BroadcastDatagram( CommonDataType::DatagramType dgType, QStringList &lstData, QString &strDestIP )
 {
     QByteArray byType;
-    OrgnizeData( dgType, lstData, byType );
+    OrganizeData( dgType, lstData, byType );
 
     if ( 0 == byType.count( ) ) {
         return;
@@ -149,7 +149,7 @@ void CNetwork::BroadcastDatagram( CommonDataType::DatagramType dgType, QStringLi
     }
 }
 
-void CNetwork::OrgnizeData( CommonDataType::DatagramType dgType, QStringList& lstData, QByteArray& byType )
+void CNetwork::OrganizeData( CommonDataType::DatagramType dgType, QStringList& lstData, QByteArray& byType )
 {
     bool bType = ( -1 < dgType && dgType < CommonDataType::DGTypeCount );
     if ( NULL == udpClient || 0 == lstData.count( ) || !bType) {
@@ -192,7 +192,7 @@ bool CNetwork::CheckNetwork( )
 void CNetwork::BroadcastDatagram( CommonDataType::DatagramType dgType, QStringList &lstData )
 {
     QByteArray byType;
-    OrgnizeData( dgType, lstData, byType );
+    OrganizeData( dgType, lstData, byType );
 
     if ( 0 == byType.count( ) ) {
         return;

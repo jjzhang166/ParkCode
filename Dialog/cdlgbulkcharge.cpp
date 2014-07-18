@@ -2,14 +2,16 @@
 #include "ui_cdlgbulkcharge.h"
 #include "Common/logicinterface.h"
 
-CDlgBulkCharge::CDlgBulkCharge(QWidget *parent) :
+CDlgBulkCharge::CDlgBulkCharge(bool bState, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CDlgBulkCharge)
 {
     ui->setupUi(this);
+    bMonthState = bState;
     CCommonFunction::ControlSysMenu( *this );
     GetUnit( );
     InitUI( );
+    setWindowTitle( bState ? "月租卡批量续期" : "月租卡批量进出标志修改" );
 }
 
 CDlgBulkCharge::~CDlgBulkCharge()
@@ -26,6 +28,9 @@ void CDlgBulkCharge::InitUI( )
     dDate = dDate.addMonths( 1 );
     ui->dtEndEnd->setDate( dDate );
     ui->dtNewEnd->setDate( dDate );
+
+    ui->widgetState->setEnabled( bMonthState );
+    ui->widgetDate->setEnabled( !bMonthState );
 }
 
 void CDlgBulkCharge::on_btnCancel_clicked()
@@ -56,7 +61,7 @@ void CDlgBulkCharge::GetUnit( )
 
 void CDlgBulkCharge::on_btnOk_clicked()
 {
-    QString strText = QString( "符合条件的所有月租卡截至日期都将被修改为【%1】" ).arg(
+    QString strText = bMonthState ? "符合条件的所有月租卡进出标志都将被修改。" : QString( "符合条件的所有月租卡截至日期都将被修改为【%1】。" ).arg(
                 ui->dtNewEnd->text( ) );
     if ( QMessageBox::Cancel ==
          CCommonFunction::MsgBox( NULL, "提示", strText, QMessageBox::Question ) ) {
@@ -74,8 +79,11 @@ void CDlgBulkCharge::on_btnOk_clicked()
 bool CDlgBulkCharge::SaveData( )
 {
     QString strSQL = "Update MonthCard set EndTime = '%1 23:59:59' Where %2";
+    QString strSQLState = "Update MonthCard set EnterMustCard = %1, LeaveMustCard = %2, MIMO = %3 Where %4";
     QString strWhere = "";
     bool bRet = false;
+
+    QString strSelect = "select cardno from MonthCard Where %1";
 
     if ( ui->rdbSelfNo->isChecked( ) ) {
         if ( ui->edtSelfStart->text( ).isEmpty( ) ||
@@ -87,6 +95,7 @@ bool CDlgBulkCharge::SaveData( )
         strWhere = QString( "CardSelfNo between '%1' and '%2'" ).arg(
                     ui->edtSelfStart->text( ),
                     ui->edtSelfEnd->text( ) );
+        strSelect = strSelect.arg( strWhere );
     } else if ( ui->rdbEndDate->isChecked( ) ) {
         if ( ui->dtEndStart->date( ) > ui->dtEndEnd->date( ) ) {
             CCommonFunction::MsgBox( NULL, "提示", "请输入正确的截至时间范围。", QMessageBox::Information );
@@ -96,6 +105,7 @@ bool CDlgBulkCharge::SaveData( )
         strWhere = QString( "EndTime between '%1 00:00:00' and '%2 23:59:59'" ).arg(
                     ui->dtEndStart->text( ),
                     ui->dtEndEnd->text( ) );
+        strSelect = strSelect.arg( strWhere );
     } else if ( ui->rdbUnit->isChecked( ) ) {
         if ( !ui->cbxUnit->itemData( ui->cbxUnit->currentIndex( ) ).toBool( ) ) {
             CCommonFunction::MsgBox( NULL, "提示", "无有效单位。", QMessageBox::Information );
@@ -104,9 +114,23 @@ bool CDlgBulkCharge::SaveData( )
 
         strWhere = QString( "CardNo in( Select Distinct CardIndex From UserInfo Where UserCorp = '%1' )" ).arg(
                     ui->cbxUnit->currentText( ) );
+
+        strSelect = QString( "Select Distinct CardIndex From UserInfo Where UserCorp = '%1'" ).arg( ui->cbxUnit->currentText( ) );
     }
 
-    strSQL = strSQL.arg( ui->dtNewEnd->text( ), strWhere );
-    CLogicInterface::GetInterface( )->ExecuteSql( strSQL );
+    if ( bMonthState ) {
+        strSQLState = strSQLState.arg( QString::number( ui->chkEnterMustCard->isChecked( ) ),
+                                       QString::number( ui->chkLeaveMustCard->isChecked( ) ),
+                                       QString::number( ui->chkMIMO->isChecked( ) ), strWhere );
+    } else {
+        strSQL = strSQL.arg( ui->dtNewEnd->text( ), strWhere );
+    }
+
+    CLogicInterface::GetInterface( )->ExecuteSql( bMonthState ? strSQLState : strSQL );
+
+    QStringList lstData;
+    lstData << strSelect;
+    emit BroadcastCardNo( lstData );
+
     return true;
 }

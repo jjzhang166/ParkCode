@@ -11,9 +11,11 @@
 #include "PlateDilivery/cplatediliverythread.h"
 
 #include <QtGui/QApplication>
+#include "readthread.h"
 
 CWriteThread g_serialThread;
 CDbWriteThread g_dbThread;
+CReadThread* g_pReadThread;
 
 CProcessData* CProcessData::pCmdProcessor = NULL;
 QUploadDataThread* CProcessData::pUploadDataThread = NULL;
@@ -30,16 +32,29 @@ bool CProcessData::NetProbe( )
     return bRet;
 }
 
+void CProcessData::HandleReadThreadData( QByteArray byData )
+{
+    ParseData( byData );
+}
+
 CProcessData::CProcessData( CWinSerialPort* pWinPort, MainWindow* pWindow, QObject *parent ) :
     QObject(parent)
 {
+    g_pReadThread = CReadThread::CreateInstance( pWinPort );
+    connect( g_pReadThread, SIGNAL( SerialData( QByteArray ) ),
+             this, SLOT( HandleReadThreadData( QByteArray ) ) );
+
     g_serialThread.SetSerialPort( pWinPort );
     g_serialThread.start( );
     g_serialThread.moveToThread( &g_serialThread );
 
+    GateIfHaveVehicle[ 0 ] = false;
+    GateIfHaveVehicle[ 1 ] = false;
+
     pSettings = CCommonFunction::GetSettings( CommonDataType::CfgSystem );
     bStartupPlateDilivery = pSettings->value( "PlateDilivery/StartupDilivery", false ).toBool( );
     bNocardwork = pSettings->value( "CommonCfg/NoCardWork", false ).toBool( );
+    bNocardworkUnknown = pSettings->value( "CommonCfg/NoCardWorkUnknown", false ).toBool( );
     bBlacklistCheck = pSettings->value( "Blacklist/Start", false ).toBool( );
     bUploadData = pSettings->value( "UploadData/Upload", false ).toBool( );
 
@@ -154,14 +169,21 @@ void CProcessData::SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSq
 {
     CDbEvent* pEvent = new CDbEvent( ( CDbEvent::Type ) event );
     pEvent->SetParameter( strSql, bHistory, bTimerCard, bSelect );
-    QApplication::postEvent(  &g_dbThread, pEvent );
+    QApplication::postEvent( &g_dbThread, pEvent );
 }
 
 void CProcessData::SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory, bool bTimerCard, bool bSelect, CommonDataType::BlobType blob, QByteArray &byData )
 {
     CDbEvent* pEvent = new CDbEvent( ( CDbEvent::Type ) event );
     pEvent->SetParameter( strSql, bHistory, bTimerCard, bSelect, blob, byData );
-    QApplication::postEvent(  &g_dbThread, pEvent );
+    QApplication::postEvent( &g_dbThread, pEvent );
+}
+
+void CProcessData::SendDbWriteMessage( CDbEvent::UserEvent event, QString &strCardno, bool bEnter, int nType, bool bGarage, QByteArray &byData )
+{
+    CDbEvent* pEvent = new CDbEvent( ( CDbEvent::Type ) event );
+    pEvent->SetParameter( bEnter, nType, bGarage, strCardno, byData );
+    QApplication::postEvent( &g_dbThread, pEvent );
 }
 
 short CProcessData::GetCmdDataSize( QByteArray &byCmd )
@@ -478,7 +500,7 @@ bool CProcessData::OpenPort( )
 {
     pSerialPort->SetPortName( );
     pSerialPort->SetQueryMode( QextSerialBase::EventDriven );
-    bool bRet = pSerialPort->OpenPort( );
+    bool bRet = pSerialPort->OpenPort( false );
     pSerialPort->ConfigPort( );
 
     return bRet;
@@ -647,7 +669,7 @@ void CProcessData::LoadEntranceImg( QString &strCardNo, CommonDataType::CaptureI
     QString strFileName = "";
     int nChannel = 0;
     GetCaptureFile( strFileName, strCardNo, nChannel, capType );
-    ControlVehicleImage( strCardNo, false, nChannel );
+    ControlVehicleImage( strCardNo, false, nChannel, 1 );
     LoadCapturedImg( strFileName, nChannel );
 }
 
@@ -1850,6 +1872,13 @@ void CProcessData::ControlGate( bool bEnter, QByteArray &byData, QByteArray &vDa
         }
     }
 
+    //while ( GateIfHaveVehicle[ bEnter ] ) {
+    //    Sleep( 10 );
+    //}
+
+    WaitForSingleObject( g_pReadThread->GetEventObject( bEnter ), 60000 );
+    qDebug( ) << "Wait Event" << endl;
+
     vData.clear( );
     //portCmd.ParseDownCmd( byData, bEnter ? CPortCmd::DownOpenGate : CPortCmd::DownCloseGate, vData );
     portCmd.ParseDownCmd( byData, CPortCmd::DownOpenGate, vData );
@@ -2466,7 +2495,7 @@ bool CProcessData::GateNoCardWork( QByteArray& byData, QString& strPlate,
                 Sleep( 1000 );
             }
 
-            QString strTmpID = lstRow[ 3 ];
+            QString strTmpID = lstRow[ 4 ];
             QDateTime dtEnd = QDateTime::currentDateTime( );
             QDateTime dtStart;// = CCommonFunction::String2DateTime( lstRow[ 5 ] );
             int nMins = 0;// = CCommonFunction::GetDateTimeDiff( false, 60, dtStart, dtEnd );
@@ -2583,16 +2612,17 @@ bool CProcessData::WriteInOutRecord( QByteArray& byData ) // 地感开闸
 
     QString strChannel = hashCanChannel.value( cCan );
 
+    if ( strPlate.isEmpty( ) ) {
+        strPlate = "未知";
+    }
+
     QString strSql = "";
     QString strDateTime = "";
     QDateTime dtCurrent = QDateTime::currentDateTime( );
     CCommonFunction::DateTime2String( dtCurrent, strDateTime );
-    QString strCardNumber = QString::number( dtCurrent.toMSecsSinceEpoch( ) );
+    bool bUnknown = ( "未知" == strPlate );
+    QString strCardNumber = bUnknown ? QString::number( dtCurrent.toMSecsSinceEpoch( ) ) : strPlate;
     QString strCardType = "自由卡";
-
-    if ( strPlate.isEmpty( ) ) {
-        strPlate = "未知";
-    }
 
     bool bGarage = ( 1 < cLevel );
 
@@ -2602,6 +2632,11 @@ bool CProcessData::WriteInOutRecord( QByteArray& byData ) // 地感开闸
         strSql = QString( "Insert Into stoprd ( %1shebeiname, %2time, cardno, carcp%3, cardkind ) Values (  \
                           '%4', '%5', '%6', '%7', '%8' ) " );
         strSql = strSql.arg( strIn, strIn, strOut, strChannel, strDateTime, strCardNumber, strPlate, strCardType );
+
+        if ( !bEnter && !bUnknown ) {
+            strSql = QString( "update stoprd set outshebeiname = '%1', outtime = '%2', carcpout = '%3' where  stoprdid in ( select stoprdid from cardstoprdid where cardno = '%4' )" ).arg(
+                        strChannel, strDateTime, strPlate, strCardNumber );
+        }
 
         //SpaceChange( bEnter, cCan );
     } else { //库中库
@@ -2620,7 +2655,7 @@ bool CProcessData::WriteInOutRecord( QByteArray& byData ) // 地感开闸
         }
 
         SpaceChange( bEnter, cCan );
-        BroadcastRecord( strCardNumber, dtCurrent, 10, strPlate, strCardType, strChannel, cCan );
+        BroadcastRecord( strCardNumber, dtCurrent, bUnknown ? 10 : 11, strPlate, strCardType, strChannel, cCan );
     }
 
     if ( !strSql.isEmpty( ) ) {
@@ -2635,10 +2670,12 @@ bool CProcessData::WriteInOutRecord( QByteArray& byData ) // 地感开闸
         }
 
         QString strHex( byImage.toHex( ) );
-        strSql = "Select InsertFreeCardData( '%1', '%2', '%3', '%4', '%5', %6, %7, '%8', %9 )";
+        strSql = "Select InsertFreeCardData( '%1', '%2', '%3', '%4', %5, %6, '%7', %8, %9, '%10' )";
         strSql = strSql.arg( strCardNumber, strDateTime, strChannel,
-                             strPlate, strHex,
-                             QString::number( cLevel ), QString::number( bEnter ), strCardType, QString::number( nFee ) );
+                             strPlate, QString::number( cLevel ),
+                             QString::number( bEnter ), strCardType,
+                             QString::number( nFee ), QString::number( bNocardworkUnknown ) );
+        strSql = strSql.arg( strHex );
 
         //CLogicInterface::GetInterface( )->ExecuteSql( strSql );
         SendDbWriteMessage( CDbEvent::SQLInternal, strSql, CCommonFunction::GetHistoryDb( ), false, true );
@@ -2715,10 +2752,13 @@ void CProcessData::WriteInOutRecord( bool bEnter, QString& strCardNumber, QStrin
     bool bMonthCard = ( CardMonthly == cardKind );
     bool bMonthMultipleCard = bMonthCard && MonthCardWorkMode( strCardNumber );
     QString strMonthMultipleCardNo = "%1(%2)";
+    int nType = 1;
+
     if ( bMonthMultipleCard ) {
         // 多进多出 自编卡号
         //strMonthMultipleCardNo = strMonthMultipleCardNo.arg( strCardNumber, QString::number( dtCurrent.toMSecsSinceEpoch( ) ) );
         strMonthMultipleCardNo = strCardNumber;
+        nType = 0;
     }
 
     if ( 1 != cLevel ) {  
@@ -2732,7 +2772,8 @@ void CProcessData::WriteInOutRecord( bool bEnter, QString& strCardNumber, QStrin
         } else {
             SendDbWriteMessage( CDbEvent::SQLInternal, strSql, CCommonFunction::GetHistoryDb( ), false, false );
         }
-        ControlVehicleImage( strCardNumber, true, nChannel, cLevel, bMonthMultipleCard,
+
+        ControlVehicleImage( strCardNumber, true, nChannel, nType, cLevel, bMonthMultipleCard,
                              bMonthCard, strMonthMultipleCardNo, true );
         DeleteCapturedFile( strCardNumber, nChannel,bEnter,  dtCurrent, strPlate );
         return;
@@ -2941,11 +2982,11 @@ void CProcessData::WriteInOutRecord( bool bEnter, QString& strCardNumber, QStrin
     QByteArray byImageData;
 
     if ( bMonthMultipleCard ) {
-        byImageData = ControlVehicleImage( strCardNumber, true, nChannel, cLevel, bMonthMultipleCard,
+        byImageData = ControlVehicleImage( strCardNumber, true, nChannel, nType, cLevel, bMonthMultipleCard,
                              bMonthMultipleCard, strMonthMultipleCardNo );
         //ControlVehicleImage( strCardNumber, true, nChannel );
     } else {
-        byImageData = ControlVehicleImage( strCardNumber, true, nChannel );
+        byImageData = ControlVehicleImage( strCardNumber, true, nChannel, nType );
     }
 
     UploadData( strPlate, strCardNumber, bEnter, strDateTime, byImageData );
@@ -3005,7 +3046,7 @@ void CProcessData::CaptureManualGateImage( char cCan, QString &strWhere )
                                                    ( CommonDataType::BlobType ) ( CommonDataType::BlobManualGate1 + nChannel ), strWhere );
 }
 
-QByteArray CProcessData::ControlVehicleImage( QString &strCardNo, bool bSave2Db, int nChannel,
+QByteArray CProcessData::ControlVehicleImage( QString &strCardNo, bool bSave2Db, int nChannel, int nType,
                                         char cLevel, bool bFreeCard, bool bMonth, QString strMonth, bool bGarage )
 {
     QByteArray byData;
@@ -3069,8 +3110,13 @@ QByteArray CProcessData::ControlVehicleImage( QString &strCardNo, bool bSave2Db,
         ParkCardType cardKind = CardNone;
         QStringList lstRows;
         GetCardType2( strCardNo, lstRows, cardKind );
-        SendDbWriteMessage( CDbEvent::ImgExternal, strWhere, CCommonFunction::GetHistoryDb( ),
-                            bEnter && ( CardTime == cardKind ), false, blob, byData );
+
+        if ( bGarage ) {
+            SendDbWriteMessage( CDbEvent::ImgExternal, strWhere, CCommonFunction::GetHistoryDb( ),
+                                bEnter && ( CardTime == cardKind ), false, blob, byData );
+        } else {
+            SendDbWriteMessage( CDbEvent::ImgExternal, strCardNo, bEnter, nType, bGarage, byData );
+        }
     } else {
         CLogicInterface::GetInterface( )->OperateBlob( strPath, bSave2Db, blob, strWhere );
     }
@@ -3119,7 +3165,7 @@ bool CProcessData::ProcessTimeCard( QByteArray& byData, QByteArray& vData, QStri
         bool bBuffer = GetTimeCardBuffer( );
         QString strBufferTable = bBuffer ? "tmpcardintime" : "stoprd";
         QStringList lstInOut;
-        QString strSql = QString( "select cardno, intime, inshebeiname %1 from %2" ).arg( bBuffer ? ",idtmpcardintime" : "", strBufferTable );
+        QString strSql = QString( "select cardno, intime, inshebeiname %1 from %2" ).arg( bBuffer ? ",stoprdid" : "", strBufferTable );
         //QString strWhere = QString( " Where cardno = '%1' And intime in \
         //                            ( Select intime From ( Select Max( intime ) As intime \
         //                                                   From %2 \
@@ -3613,16 +3659,16 @@ void CProcessData::ProcessCmd( QByteArray &byData, CPortCmd::PortUpCmd cmdType )
         ;//BallotButton( byData, vData, false );
         break;
     case CPortCmd::UpInGateSenseVehcleEnter :// 道闸地感车辆进入
-        //GateSense( byData, vData, bEnter, false );
+        GateSense( byData, vData, bEnter, false );
         break;
     case CPortCmd::UpInGateSenseVehcleLeave :
-        //GateSense( byData, vData, bEnter, true );
+        GateSense( byData, vData, bEnter, false );
         break;
     case CPortCmd::UpOutGateSenseVehcleEnter :// 道闸地感车辆进入
-        //GateSense( byData, vData, bEnter, false );
+        GateSense( byData, vData, bEnter, true );
         break;
     case CPortCmd::UpOutGateSenseVehcleLeave :
-        //GateSense( byData, vData, bEnter, true );
+        GateSense( byData, vData, bEnter, true );
         break;
     case CPortCmd::UpQuerySenseCar : // 票箱地感状态
         emit OnResponseUserRequest( byData, 1 );
@@ -3723,6 +3769,9 @@ void CProcessData::BallotSense( QByteArray &byData, QByteArray &vData, bool bEnt
 
 void CProcessData::GateSense( QByteArray &byData, QByteArray &vData, bool bEnterGate, bool bLeavePark )
 {
+    //GateIfHaveVehicle[ !bLeavePark ] = bEnterGate;
+    //emit VehicleGateInOut( bEnterGate, bLeavePark );
+    return;
     portCmd.ParseDownCmd( byData, bEnterGate ? CPortCmd::DownOpenGate : CPortCmd::DownCloseGate, vData );
     WriteData( byData );
 

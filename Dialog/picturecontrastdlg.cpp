@@ -648,6 +648,7 @@ void CPictureContrastDlg::LoadMyImage( CommonDataType::BlobType blob, QString& s
     if ( strWhere.isEmpty( ) ) {
         QString strChannel = ui->edtEnterChannel->text( );
         QString strTime = ui->edtEnterTime->text( );
+        /*
         if ( CommonDataType::BlobTimeInImg == blob ) {
             if ( bBuffer ) {
                 strWhere = QString( " Where idtmpcardintime = %1" ).arg( strCardNo );
@@ -657,10 +658,13 @@ void CPictureContrastDlg::LoadMyImage( CommonDataType::BlobType blob, QString& s
         } else {
             strWhere = QString( " Where cardno = '%1' and inshebeiname = '%2' and intime = '%3'" ).arg(
                                         strCardNo, strChannel, strTime );
-        }
+        }*/
+        strWhere = QString( " Where stoprdid = ( select stoprdid from cardstoprdid where cardno = '%1' )" ).arg(
+                    strCardNo );
     }
 
     if ( bAuto ) {
+        strWhere = QString( " where stoprdid = '%1'" ).arg( strCardNo );
         CCommonFunction::LoadFourImages( blob, strWhere, *pLbl, bHistory );
     } else {
         LoadRemoteImg( blob, strWhere, bHistory, pLbl );

@@ -15,6 +15,7 @@
 #include "Dialog/dlgbulkregister.h"
 #include "Dialog/dlgcardloss.h"
 #include "Dialog/cdlgbulkcharge.h"
+#include "Network/parkintranet.h"
 
 CMonthlyCard::CMonthlyCard(QWidget* mainWnd, QWidget *parent) :
     QFrame(parent),
@@ -106,9 +107,23 @@ void CMonthlyCard::GetDataFromDb( )
     }
 }
 
+void CMonthlyCard::BroadcastMonthcardData( QStringList &lstWhere )
+{
+    if ( 0 == lstWhere.size( ) ) {
+        return;
+    }
+
+    QString strWhere = QString( "and cardno in(%1)" ).arg( lstWhere.join( "," ) );
+    lstWhere.clear( );
+    lstWhere << strWhere;
+    CNetwork::Singleton( ).BroadcastDatagram( CommonDataType::DGMonthcardSync, lstWhere );
+}
+
 void CMonthlyCard::OpenDialog( bool bNew )
 {
     CMonthlyCardDialog dlg( bNew, pParent->GetUserName( ), ui->tableMonthly, this );
+    connect( &dlg, SIGNAL( BroadcastCardNo( QStringList& ) ),
+             this, SLOT( BroadcastMonthcardData( QStringList& ) ) );
     dlg.InitDlg( );
     pParent->SetCardControl( dlg.GetCardNumCtrl( ) );
     dlg.exec( );
@@ -272,6 +287,10 @@ void CMonthlyCard::DeleteRecord( )
         QString strWhere = QString( " Where cardno = '%1'" ).arg( pItem->text( ) );
         QStringList lstRows;
 
+        lstRows << "'" + pItem->text( ) +"'";
+        BroadcastMonthcardData( lstRows );
+        lstRows.clear( );
+
         QString strCotent = QString( "删除月租卡 卡号　：%1" ).arg( pItem->text( ) );
         WriteCardLog( strCotent );
 
@@ -282,7 +301,7 @@ void CMonthlyCard::DeleteRecord( )
     }
 }
 
-void CMonthlyCard::BulkRecharge( )
+void CMonthlyCard::MonthBulkProcess( bool bState )
 {
     if ( 0 >= ui->tableMonthly->rowCount( ) ) {
         CCommonFunction::MsgBox( NULL, CCommonFunction::GetMsgTitle( QMessageBox::Information ),
@@ -290,13 +309,27 @@ void CMonthlyCard::BulkRecharge( )
         return;
     }
 
-    CDlgBulkCharge dlg;
+    CDlgBulkCharge dlg( bState );
+    connect( &dlg, SIGNAL( BroadcastCardNo( QStringList& ) ),
+                 this, SLOT( BroadcastMonthcardData( QStringList& ) ) );
+
     int nRet = dlg.exec( );
     if ( QDialog::Rejected == nRet ) {
         return;
     }
 
     Refresh( );
+
+}
+
+void CMonthlyCard::BulkDate( )
+{
+    MonthBulkProcess( false );
+}
+
+void CMonthlyCard::BulkState( )
+{
+    MonthBulkProcess( true );
 }
 
 void CMonthlyCard::Recharge( )
@@ -322,6 +355,11 @@ void CMonthlyCard::Recharge( )
     int nRet = dlg.exec( );
     if ( QDialog::Accepted == nRet ) {
         QStringList lstRows;
+
+        lstRows << "'" + ui->lblCardNo->text( ) + "'";
+        BroadcastMonthcardData( lstRows );
+        lstRows.clear( );
+
         dlg.GetValue( lstRows );
         lstRows << pParent->GetUserName( )
                 << ui->lblCardNo->text( );
@@ -404,6 +442,8 @@ void CMonthlyCard::WriteCardLog(QString strCotent)
 void CMonthlyCard::AddBulkRecord( )
 {
     CDlgBulkRegister dlg( CommonDataType::MonthlyCard, ui->tableMonthly, pParent->GetUserName( ) );
+    connect( &dlg, SIGNAL( BroadcastCardNo( QStringList& ) ),
+             this, SLOT( BroadcastMonthcardData( QStringList& ) ) );
     QString strPath;
     CCommonFunction::GetPath( strPath, CommonDataType::PathUIImage );
     strPath += "NewIcon/CommonMiddleBG-normal.jpg";
@@ -434,7 +474,8 @@ void CMonthlyCard::CreateContextMenu( QTableWidget *parent )
         pMenu->addAction( "编辑", this, SLOT( ModifyRecord( ) ) );
         pMenu->addAction( "删除", this, SLOT( DeleteRecord( ) ) );
         pMenu->addAction( "续费", this, SLOT( Recharge( ) ) );
-        pMenu->addAction( "批量续期", this, SLOT( BulkRecharge( ) ) );
+        pMenu->addAction( "批量续期", this, SLOT( BulkDate( ) ) );
+        pMenu->addAction( "批量进出标志修改", this, SLOT( BulkState( ) ) );
         pMenu->addAction( "查找", this, SLOT( Serach( ) ) );
         //pMenu->addAction( "换卡", this, SLOT( ChangeCard( ) ) );
         pMenu->addAction( "车进场 卡遗失处理", this, SLOT( CardLossProcess( ) ) );

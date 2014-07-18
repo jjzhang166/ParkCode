@@ -94,8 +94,8 @@ void CDlgStaying::GetTimeData( QString &strOrder )
 void CDlgStaying::GetNocardData( QString &strOrder )
 {
     QStringList lstRows;
-    QString strSql = "SELECT cardno, '', cardno, inshebeiname, intime, stoprdid\
-            FROM tmpcardintime where type = 1 " + strOrder;
+    QString strSql = "SELECT cardno, '', IF ( 2 = type, 'δ֪', cardno ), inshebeiname, intime, stoprdid\
+            FROM tmpcardintime where type in( 1, 2 ) " + strOrder;
 
     lstRows.clear( );
     int nRows = CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstRows, bHistory );

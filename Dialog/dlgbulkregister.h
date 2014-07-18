@@ -46,6 +46,9 @@ private:
     void GetSelfNumber( QString& strNumber );
     void AddCbxValue( QComboBox* pCbx );
 
+signals:
+    void BroadcastCardNo( QStringList& lstCardNo );
+
 private slots:
     void on_edtCardID_textChanged(const QString &arg1);
 

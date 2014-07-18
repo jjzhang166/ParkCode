@@ -399,12 +399,12 @@ void CReporter::GetSQL( QString &strSql, CommonDataType::ReportType rType, QDate
                                    when '湘' then '湖南省' \
                                    when '皖' then '安徽省' \
                                    when '鲁' then '山东省' \
-                                   when '新' then '新疆维吾尔族自治区' \
+                                   when '新' then '新疆自治区' \
                                    when '苏' then '江苏省' \
                                    when '浙' then '浙江省' \
                                    when '赣' then '江西省' \
                                    when '鄂' then '湖北省' \
-                                   when '桂' then '广西壮族自治区' \
+                                   when '桂' then '广西自治区' \
                                    when '甘' then '甘肃省' \
                                    when '晋' then '山西省' \
                                    when '蒙' then '内蒙古自治区' \
@@ -415,17 +415,18 @@ void CReporter::GetSQL( QString &strSql, CommonDataType::ReportType rType, QDate
                                    when '粤' then '广东省' \
                                    when '青' then '青海省' \
                                    when '藏' then '西藏自治区' \
-                                   when '宁' then '宁夏回族自治区' \
+                                   when '宁' then '宁夏自治区' \
                                    when '琼' then '海南省' \
                                    else '未知' end  as 车辆所属辖区, \
-                                   IFNULL( feekind, '未离开' ) as 车型, \
+                                   IFNULL( feekind, '小型车' ) as 车型, \
                                    count( carcp ) as 车辆数 \
                                    from stoprd \
                                    where intime between '"
                                    + strStart +
                                    "' and '"
                                    + strEnd +
-                                   "' and cardkind = '计时卡' and feekind is not null group by substring( carcp, 1, 1 ) with rollup";
+                                   //"' and cardkind = '计时卡' and feekind is not null group by substring( carcp, 1, 1 ) with rollup";
+                                   "' group by substring( carcp, 1, 1 ) with rollup";
         break;
 
     case CommonDataType::ReportInProvince :
@@ -445,22 +446,22 @@ void CReporter::GetSQL( QString &strSql, CommonDataType::ReportType rType, QDate
                                    when 'R' then '南充市' \
                                    when 'S' then '达州市' \
                                    when 'T' then '雅安市' \
-                                   when 'U' then '阿坝藏族羌族自治州' \
-                                   when 'V' then '甘孜藏族自治州' \
-                                   when 'W' then '凉山彝族自治州' \
+                                   when 'U' then '阿坝州' \
+                                   when 'V' then '甘孜州' \
+                                   when 'W' then '凉山州' \
                                    when 'X' then '广安市' \
                                    when 'Y' then '巴中市' \
                                    when 'Z' then '眉山市' \
                                    else '未知' end  as 车辆所属辖区,  \
-                                   IFNULL( feekind, '未离开' ) as 车型, \
+                                   IFNULL( feekind, '小型车' ) as 车型, \
                                    count( carcp ) as 车辆数 \
                                    from stoprd \
                                    where intime between '"
                                    + strStart +
                                    "' and '"
                                    + strEnd +
-                                   "' and cardkind = '计时卡' and feekind is not null and substring( carcp, 1, 1 ) = '川' \
-                                   group by substring( carcp, 2, 1 ) with rollup";
+                                   //"' and cardkind = '计时卡' and feekind is not null and substring( carcp, 1, 1 ) = '川'
+                                   "' and substring( carcp, 1, 1 ) = '川' group by substring( carcp, 2, 1 ) with rollup";
         break;
 
     case CommonDataType::ReportMonth :
@@ -854,6 +855,7 @@ void CReporter::GetHtml( CommonDataType::ReportType rType, QString& strTitle, QS
 
            if ( nRow + 1 == nRows ) {
                lstTmp[ 0 ] = "全部总计";
+               lstTmp[ 1 ] = "";
            }
        } else if ( CommonDataType::ReportMonth == rType ) {
            lstTmp << lstData[ nField ]

@@ -113,6 +113,7 @@ private:
     void CreateChildTime( quint64 nTime, CommonDataType::ChildWndType childType );
     void ProcessCpuidRequest( QStringList& lstData );
     void ProcessGateCommand( QStringList& lstData );
+    void ProcessMonthcardSync( QStringList& lstData );
     CMySqlDatabase* pMysqlDb;
     QLineEdit* edtCardNumner;
     CCheckThread* pCheckThread;

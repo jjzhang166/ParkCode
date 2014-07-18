@@ -43,6 +43,9 @@ private:
 private:
 
 
+signals:
+    void BroadcastCardNo( QStringList& lstCardNo );
+
 private slots:
     void on_edtNumber_textChanged(QString strText );
     void on_btnSave_clicked( );

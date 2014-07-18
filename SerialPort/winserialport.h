@@ -13,7 +13,7 @@ public:
     virtual ~CWinSerialPort();
 
     void ConfigPort( );
-    bool OpenPort( );
+    bool OpenPort( bool bConnectSlot );
     void SetPortName( );
     void SetQueryMode( QextSerialBase::QueryMode mode );
     void ClosePort( );

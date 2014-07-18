@@ -48,7 +48,15 @@ void CDbWriteThread::ExcuteSQL( CLogicInterface& intf, bool bSQL, CDbEvent::Writ
             intf.ExecuteSql( paramter.strSql );
         }
     } else {
-        intf.OperateBlob( paramter.byData, true, paramter.blob, paramter.strSql );
+        if ( paramter.bGarage ) {
+            intf.OperateBlob( paramter.byData, true, paramter.blob, paramter.strSql );
+        } else {
+            QStringList lstRow;
+            paramter.strSql = QString( "Select InsertInOutImage( %1, %2, '%3', '%4' )" ).arg(
+                        QString::number( paramter.bEnter ), QString::number( paramter.nType ),
+                        paramter.strCardNo, paramter.byData.toHex( ) );
+            intf.ExecuteSql( paramter.strSql, lstRow );
+        }
     }
 }
 
@@ -79,9 +87,9 @@ void CDbWriteThread::PostWriteImage( QEvent* e )
 
     CDbEvent* pDbEvent = new CDbEvent( e->type( ) );
 
-    pDbEvent->SetParameter( parameter.strSql, parameter.bDbHistory,
-                            parameter.bTimeCard, parameter.bSelect,
-                            parameter.blob, parameter.byData );
+    pDbEvent->SetParameter( parameter.strSql, parameter.bDbHistory, parameter.bTimeCard,
+                            parameter.bEnter, parameter.strCardNo, parameter.bGarage, parameter.nType,
+                            parameter.bSelect, parameter.blob, parameter.byData );
     qApp->postEvent( GetWriteImageThread( ), pDbEvent );
 }
 

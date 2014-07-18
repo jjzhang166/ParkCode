@@ -67,6 +67,7 @@ void MainWindow::ReadFile( )
     ui->edtLedCan->setText( pSystemCfg->value( "CommonCfg/IndependentLedCan").toString( ) );
     ui->chkOpenGate->setChecked( pSystemCfg->value( "CommonCfg/SenseOpenGate", false ).toBool( ) );
     ui->chkNoCard->setChecked( pSystemCfg->value( "CommonCfg/NoCardWork", false ).toBool( ) );
+    ui->chkNoCardUnknown->setChecked( pSystemCfg->value( "CommonCfg/NoCardWorkUnknown", false ).toBool( ) );
     ui->chkCapture->setChecked( pSystemCfg->value( "CommonCfg/SenseGetImg", true ).toBool( ) );
     ui->edtParkID->setText( pSystemCfg->value( "CommonCfg/ParkID", "5101070001" ).toString( ) );
     ui->chkBlacklist->setChecked( pSystemCfg->value( "Blacklist/Start", false ).toBool( ) );
@@ -160,6 +161,7 @@ void MainWindow::WriteFile( )
     pSystemCfg->setValue( "CommonCfg/IndependentLedCan", ui->edtLedCan->text( ) );
     pSystemCfg->setValue( "CommonCfg/SenseOpenGate", ui->chkOpenGate->isChecked( ) );
     pSystemCfg->setValue( "CommonCfg/NoCardWork", ui->chkNoCard->isChecked( ) );
+    pSystemCfg->setValue( "CommonCfg/NoCardWorkUnknown", ui->chkNoCardUnknown->isChecked( ) );
     pSystemCfg->setValue( "CommonCfg/SenseGetImg", ui->chkCapture->isChecked( ) );
     pSystemCfg->setValue( "CommonCfg/ParkID", ui->edtParkID->text( ) );
     pSystemCfg->setValue( "CommonCfg/BroadCastData", ui->chkBroadcastData->isChecked( ) );

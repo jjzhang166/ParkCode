@@ -42,19 +42,19 @@ void QSerialFrame::GetCmd( ECmd eType, QByteArray &byCmd, char cCan, int nCardId
     byCmd.clear( );
 
     switch ( eType ) {
-    case CmdCarInEnter :
-    case CmdCarOutEnter :
+    case CmdCarLeave :
+    case CmdCarEnter :
     {
-        char aCmdEnter[ ] = { 0xAA, 0x04, 0x00, 0x54, 0x42, cCan, ( char ) eType, 0x00, 0x55 };
+        char aCmdEnter[ ] = { 0xAA, 0x04, 0x00, 0x54, 0x42, cCan, ( char ) ( eType - CmdCarLeave ), 0x00, 0x55 };
         byCmd.append( aCmdEnter, sizeof ( aCmdEnter ) );
     }
         break;
 
-    case CmdCarInLeave :
-    case CmdCarOutLeave :
+    case CmdCarGateLeave :
+    case CmdCarGateEnter :
     {
-        char aCmdLeave[ ] = { 0xAA, 0x04, 0x00, 0x54, 0x42, cCan, ( char ) ( eType - CmdCarOutLeave ), 0x00, 0x55 };
-        byCmd.append( aCmdLeave, sizeof ( aCmdLeave ) );
+        char aCmdGateSense[ ] = { 0xAA, 0x04, 0x00, 0x54, 0x46, cCan, ( char ) ( eType - CmdCarGateLeave ), 0x00, 0x55 };
+        byCmd.append( aCmdGateSense, sizeof ( aCmdGateSense ) );
     }
         break;
 
@@ -97,7 +97,7 @@ void QSerialFrame::on_btnTimer_clicked()
         pThread->ClearCmd( );
 
         if ( ui->chkEnterSense0->isChecked( ) ) {
-            GetCmd( CmdCarInEnter, byCmd, ui->spEnterCan->value( ) );
+            GetCmd( CmdCarEnter, byCmd, ui->spEnterCan->value( ) );
             pThread->AddCmd( byCmd );
         }
 
@@ -107,12 +107,22 @@ void QSerialFrame::on_btnTimer_clicked()
         }
 
         if ( ui->chkEnterSense1->isChecked( ) ) {
-            GetCmd( CmdCarOutEnter, byCmd, ui->spEnterCan->value( ) );
+            GetCmd( CmdCarLeave, byCmd, ui->spEnterCan->value( ) );
+            pThread->AddCmd( byCmd );
+        }
+
+        if ( ui->chkEnterSense2->isChecked( ) ) {
+            GetCmd( CmdCarGateEnter, byCmd, ui->spEnterCan->value( ) );
+            pThread->AddCmd( byCmd );
+        }
+
+        if ( ui->chkEnterSense3->isChecked( ) ) {
+            GetCmd( CmdCarGateLeave, byCmd, ui->spEnterCan->value( ) );
             pThread->AddCmd( byCmd );
         }
 
         if ( ui->chkLeaveSense0->isChecked( ) ) {
-            GetCmd( CmdCarInLeave, byCmd, ui->spLeaveCan->value( ) );
+            GetCmd( CmdCarEnter, byCmd, ui->spLeaveCan->value( ) );
             pThread->AddCmd( byCmd );
         }
 
@@ -122,7 +132,17 @@ void QSerialFrame::on_btnTimer_clicked()
         }
 
         if ( ui->chkLeaveSense1->isChecked( ) ) {
-            GetCmd( CmdCarOutLeave, byCmd, ui->spLeaveCan->value( ) );
+            GetCmd( CmdCarLeave, byCmd, ui->spLeaveCan->value( ) );
+            pThread->AddCmd( byCmd );
+        }
+
+        if ( ui->chkLeaveSense2->isChecked( ) ) {
+            GetCmd( CmdCarGateEnter, byCmd, ui->spLeaveCan->value( ) );
+            pThread->AddCmd( byCmd );
+        }
+
+        if ( ui->chkLeaveSense3->isChecked( ) ) {
+            GetCmd( CmdCarGateLeave, byCmd, ui->spLeaveCan->value( ) );
             pThread->AddCmd( byCmd );
         }
 
@@ -143,7 +163,7 @@ void QSerialFrame::SendCmd( QObject *pObj )
 
     switch ( pBtn->statusTip( ).toShort( ) ) {
     case 0 :
-        GetCmd( CmdCarInEnter, byCmd, ui->spEnterCan->value( ) );
+        GetCmd( CmdCarEnter, byCmd, ui->spEnterCan->value( ) );
         break;
 
     case 1 :
@@ -151,11 +171,11 @@ void QSerialFrame::SendCmd( QObject *pObj )
         break;
 
     case 2 :
-        GetCmd( CmdCarOutEnter, byCmd, ui->spEnterCan->value( ) );
+        GetCmd( CmdCarLeave, byCmd, ui->spEnterCan->value( ) );
         break;
 
     case 3 :
-        GetCmd( CmdCarInLeave, byCmd, ui->spLeaveCan->value( ) );
+        GetCmd( CmdCarEnter, byCmd, ui->spLeaveCan->value( ) );
         break;
 
     case 4 :
@@ -163,7 +183,23 @@ void QSerialFrame::SendCmd( QObject *pObj )
         break;
 
     case 5 :
-        GetCmd( CmdCarOutLeave, byCmd, ui->spLeaveCan->value( ) );
+        GetCmd( CmdCarLeave, byCmd, ui->spLeaveCan->value( ) );
+        break;
+
+    case 6 :
+        GetCmd( CmdCarGateEnter, byCmd, ui->spEnterCan->value( ) );
+        break;
+
+    case 7 :
+        GetCmd( CmdCarGateLeave, byCmd, ui->spEnterCan->value( ) );
+        break;
+
+    case 8 :
+        GetCmd( CmdCarGateEnter, byCmd, ui->spLeaveCan->value( ) );
+        break;
+
+    case 9 :
+        GetCmd( CmdCarGateLeave, byCmd, ui->spLeaveCan->value( ) );
         break;
     }
 
@@ -196,6 +232,26 @@ void QSerialFrame::on_btn4_clicked()
 }
 
 void QSerialFrame::on_btn5_clicked()
+{
+    SendCmd( sender( ) );
+}
+
+void QSerialFrame::on_btn6_clicked()
+{
+    SendCmd( sender( ) );
+}
+
+void QSerialFrame::on_btn7_clicked()
+{
+    SendCmd( sender( ) );
+}
+
+void QSerialFrame::on_btn8_clicked()
+{
+    SendCmd( sender( ) );
+}
+
+void QSerialFrame::on_btn9_clicked()
 {
     SendCmd( sender( ) );
 }

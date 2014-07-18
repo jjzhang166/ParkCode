@@ -12,13 +12,16 @@ class CDlgBulkCharge : public QDialog
     Q_OBJECT
     
 public:
-    explicit CDlgBulkCharge(QWidget *parent = 0);
+    explicit CDlgBulkCharge( bool bState, QWidget *parent = 0 );
     ~CDlgBulkCharge();
 
 private:
     bool SaveData( );
     void GetUnit( );
     void InitUI( );
+
+signals:
+    void BroadcastCardNo( QStringList& lstCardNo );
     
 private slots:
     void on_btnCancel_clicked();
@@ -27,6 +30,7 @@ private slots:
 
 private:
     Ui::CDlgBulkCharge *ui;
+    bool bMonthState;
 };
 
 #endif // CDLGBULKCHARGE_H

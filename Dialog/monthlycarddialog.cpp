@@ -51,6 +51,10 @@ void CMonthlyCardDialog::SaveValue( )
     QString strTrue = "1";
     QString strFalse = "0";
 
+    lstRows << "'" + ClearZero( ui->edtNumber ) + "'";
+    emit BroadcastCardNo( lstRows );
+    lstRows.clear( );
+
     lstRows << ClearZero( ui->edtNumber )
             << ui->cbxCardType->currentText( )
             //<< ( m_bNew ? ui->dtStart->text( ) : ui->lblStart->text( ) )

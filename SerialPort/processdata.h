@@ -58,6 +58,7 @@ public:
 
     void SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory, bool bTimerCard, bool bSelect );
     void SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory, bool bTimerCard, bool bSelect, CommonDataType::BlobType blob, QByteArray &byData );
+    void SendDbWriteMessage( CDbEvent::UserEvent event, QString &strCardno, bool bEnter, int nType, bool bGarage, QByteArray &byData );
 
     bool WriteData( QByteArray& byData );
 
@@ -140,7 +141,9 @@ private:
     QString GetFeeStd( QString& strCardNo );
 
     void QueryGateControllerState( char cAddr );
-    QByteArray ControlVehicleImage( QString& strCardNo, bool bSave2Db, int nChannel, char cLevel = 1, bool bFreeCard = false, bool bMonth = false, QString strMonth = QString( ), bool bGarage = false );
+    QByteArray ControlVehicleImage( QString& strCardNo, bool bSave2Db, int nChannel, int nType,
+                                    char cLevel = 1, bool bFreeCard = false, bool bMonth = false,
+                                    QString strMonth = QString( ), bool bGarage = false );
 
     void CarInsideOutsideHash( QString& strInside, QString& strCardNo, bool bGet );
 
@@ -224,6 +227,7 @@ private:
     bool bCardCapture[ 4 ];
     bool bSendOnlyOnce;
     bool bNocardwork;
+    bool bNocardworkUnknown;
     QString strVideoChannelName[ 4 ];
     //int nDiffInterval[ 2 ];
     bool bSingleChannel;
@@ -243,13 +247,16 @@ private:
     bool bStartupPlateDilivery;
     bool bBlacklistCheck;
     static QUploadDataThread* pUploadDataThread;
+    bool GateIfHaveVehicle[ 2 ];
 
 signals:
     void OnResponseUserRequest( QByteArray& byData, int nMinor );
     void PlateDelivery( int nChannel, QStringList lstData, QString strPlate );
+    void VehicleGateInOut( bool bEnterGate, bool bLeavePark );
 
 public slots:
     void HandleSendFileCount( quint32 nCount );
+    void HandleReadThreadData( QByteArray byData );
 
 private slots:
     void PlateCardComfirmPass( QString strCardNo, char cCan, QString strPlate );

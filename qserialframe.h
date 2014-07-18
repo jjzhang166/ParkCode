@@ -20,10 +20,10 @@ public:
 
 private:
     typedef enum __ECmd {
-        CmdCarOutEnter = 0,
-        CmdCarInEnter,
-        CmdCarOutLeave,
-        CmdCarInLeave,
+        CmdCarLeave = 0,
+        CmdCarEnter,
+        CmdCarGateLeave,
+        CmdCarGateEnter,
         CmdCarCard
     } ECmd;
 
@@ -50,6 +50,14 @@ private slots:
     void on_btn3_clicked();
 
     void on_btn5_clicked();
+
+    void on_btn6_clicked();
+
+    void on_btn7_clicked();
+
+    void on_btn8_clicked();
+
+    void on_btn9_clicked();
 
 private:
     Ui::QSerialFrame *ui;

@@ -2451,7 +2451,7 @@ void CMonitor::on_tabRecord_cellDoubleClicked(int row, int column)
         QString strField[ ] = { "a.endtime, b.username, a.cardcomment, ", "a.cardfee, b.username, a.cardcomment,d.feefactnum,", "d.feefactnum," };
         QString strTable = "";
         bool bEnter = ( pWG->item( row, 5 )->text( ) == "1" );
-        int nType = pWG->item( row, 6 )->text( ).toInt( );
+        int nType = pWG->item( row, 6 )->text( ).toInt( ); // 0M 1S 2T 10F
         QString strDateTime = pWG->item( row, 7 )->text( ) + " " + pWG->item( row, 1 )->text( );
         CCommonFunction::GetTableName( ( CommonDataType::CardType ) nType, strTable );
 
@@ -2463,12 +2463,9 @@ void CMonitor::on_tabRecord_cellDoubleClicked(int row, int column)
 
 
         QString strSql;
-        bool bFreeCard = ( 10 == nType  );
-        QString strWhere = QString( " Where cardno = '%1' and %2 = '%3' and %4 = '%5'" ).arg(
+        bool bFreeCard = ( 10 == nType || 11 == nType  );
+        QString strWhere = QString( " Where stoprdid = ( select stoprdid from stoprd Where cardno = '%1' and %2 = '%3' and %4 = '%5' )" ).arg(
                                     strCardNo, strChannelField, strChannel, strTimeField, strDateTime );
-
-        //QString strWhere = QString( " Where stoprdid = ( select stoprdid from cardstoprdid where cardno = '%1' )" ).arg(
-        //                            strCardNo );
 
         CLogicInterface logInterf;
         CMySqlDatabase& mySql = logInterf.GetMysqlDb( );

@@ -24,8 +24,8 @@ CDeviceConfig::CDeviceConfig(QWidget* mainWnd, QWidget *parent) :
     pMenu = NULL;
 
     pSetting = CCommonFunction::GetSettings( CommonDataType::CfgSystem );
-    bNocardMode = pSetting->value( "CommonCfg/SenseOpenGate", false ).toBool( ) &&
-            pSetting->value( "CommonCfg/NoCardWork", false ).toBool( );
+    bNocardMode = pSetting->value( "CommonCfg/SenseOpenGate", false ).toBool( );// &&
+            //pSetting->value( "CommonCfg/NoCardWork", false ).toBool( );
 
     pSetting = CCommonFunction::GetSettings( CommonDataType::CfgDevice );
     //ReadFile( );

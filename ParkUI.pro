@@ -39,7 +39,7 @@ LIBS += ./lib/libDs40xxSDK.a
 LIBS += ./HKIPC/lib/libHCNetSDK.a
 LIBS += ./JWSIPC/lib/libtmControlClient.a
 
-DEFINES += PARK_UI RAW_API COMMON_DB _WIN32_WINNT=0x0501
+DEFINES += PARK_UI RAW_API COMMON_DB _WIN32_WINNT=0x0501 START_DONGLE
 
 SOURCES += mainwindow.cpp \
     main.cpp \
@@ -210,7 +210,8 @@ SOURCES += mainwindow.cpp \
     UploadData/quploaddataevent.cpp \
     UploadData/qftpevent.cpp \
     JbIPC/qjbipc.cpp \
-    Dialog/cdlgbulkcharge.cpp
+    Dialog/cdlgbulkcharge.cpp \
+    SerialPort/readthread.cpp
 
 HEADERS  += Header/valuecard.h \
     Header/tolldiscounttypeset.h \
@@ -385,7 +386,8 @@ HEADERS  += Header/valuecard.h \
     UploadData/qftpthreadevent.h \
     UploadData/qftpevent.h \
     JbIPC/qjbipc.h \
-    Dialog/cdlgbulkcharge.h
+    Dialog/cdlgbulkcharge.h \
+    SerialPort/readthread.h
 
 FORMS    += UIWnd/valuecard.ui \
     UIWnd/tolldiscounttypeset.ui \

@@ -87,7 +87,7 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>480</y>
+      <y>483</y>
       <width>231</width>
       <height>75</height>
      </rect>
@@ -645,7 +645,7 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>390</y>
+      <y>393</y>
       <width>231</width>
       <height>80</height>
      </rect>
@@ -706,7 +706,7 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>240</y>
+      <y>243</y>
       <width>231</width>
       <height>141</height>
      </rect>
@@ -853,7 +853,7 @@
       <x>290</x>
       <y>10</y>
       <width>231</width>
-      <height>211</height>
+      <height>231</height>
      </rect>
     </property>
     <property name="title">
@@ -903,7 +903,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>62</y>
+       <y>85</y>
        <width>211</width>
        <height>16</height>
       </rect>
@@ -916,7 +916,7 @@
      <property name="geometry">
       <rect>
        <x>180</x>
-       <y>80</y>
+       <y>102</y>
        <width>24</width>
        <height>20</height>
       </rect>
@@ -929,7 +929,7 @@
      <property name="geometry">
       <rect>
        <x>12</x>
-       <y>80</y>
+       <y>103</y>
        <width>111</width>
        <height>20</height>
       </rect>
@@ -942,7 +942,7 @@
      <property name="geometry">
       <rect>
        <x>132</x>
-       <y>80</y>
+       <y>103</y>
        <width>42</width>
        <height>20</height>
       </rect>
@@ -961,7 +961,7 @@
      <property name="geometry">
       <rect>
        <x>11</x>
-       <y>105</y>
+       <y>128</y>
        <width>54</width>
        <height>12</height>
       </rect>
@@ -974,7 +974,7 @@
      <property name="geometry">
       <rect>
        <x>76</x>
-       <y>102</y>
+       <y>125</y>
        <width>141</width>
        <height>20</height>
       </rect>
@@ -984,7 +984,7 @@
      <property name="geometry">
       <rect>
        <x>13</x>
-       <y>123</y>
+       <y>146</y>
        <width>141</width>
        <height>16</height>
       </rect>
@@ -1002,6 +1002,9 @@
        <height>16</height>
       </rect>
      </property>
+     <property name="toolTip">
+      <string>与【压地感开闸】实现无卡收费</string>
+     </property>
      <property name="text">
       <string>无卡工作模式 非月租车收费</string>
      </property>
@@ -1010,7 +1013,7 @@
      <property name="geometry">
       <rect>
        <x>13</x>
-       <y>140</y>
+       <y>163</y>
        <width>151</width>
        <height>16</height>
       </rect>
@@ -1023,7 +1026,7 @@
      <property name="geometry">
       <rect>
        <x>13</x>
-       <y>160</y>
+       <y>183</y>
        <width>151</width>
        <height>16</height>
       </rect>
@@ -1036,13 +1039,29 @@
      <property name="geometry">
       <rect>
        <x>13</x>
-       <y>180</y>
+       <y>203</y>
        <width>151</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
       <string>启用窗口模拟程序</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="chkNoCardUnknown">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>66</y>
+       <width>211</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>与【无卡收费】组合实现记录【未知车牌】滞留车辆</string>
+     </property>
+     <property name="text">
+      <string>无卡工作模式写未知车牌</string>
      </property>
     </widget>
    </widget>

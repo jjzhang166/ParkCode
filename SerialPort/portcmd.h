@@ -56,7 +56,7 @@ public:
         UpQueryButtonClose,
         UpQueryGateCar,
         UpQueryGateNoCar,
-        UpQueryControler,
+        UpQueryControler
     } PortUpCmd;
 
     typedef enum __LedInfo {
@@ -88,7 +88,7 @@ public:
         LedTimeCardPass,
         LedExitConfirm,
         LedCardNoRight,
-        LedParksFull,
+        LedParksFull
     } LedInfo;
 
     typedef enum __AudioAddress {

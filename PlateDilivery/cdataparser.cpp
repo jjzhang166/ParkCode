@@ -285,7 +285,7 @@ void CDataParser::ControlSerialPort( CWinSerialPort* pSerial, bool bOpen )
 
         pSerial->SetPortName( );
         pSerial->SetQueryMode( QextSerialBase::EventDriven );
-        pSerial->OpenPort( );
+        pSerial->OpenPort( true );
         pSerial->ConfigPort( );
     } else if ( pSerial->IsOpened( ) ) {
         pSerial->ClosePort( );

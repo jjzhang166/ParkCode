@@ -38,14 +38,19 @@ void CLoginDialog::SetIsLicense( bool bLicenseValue )
 
 bool CLoginDialog::GetIsLicense( )
 {
+#ifndef START_DONGLE
     return false;//2014 Dongle
+#endif
     return bLicense;
+
 }
 
 void CLoginDialog::HideLicenseButton( bool bServer )
 {
+#ifndef START_DONGLE
     //2014 Dongle
     return;
+#endif
     ui->btnImport->setVisible( bServer );
 }
 

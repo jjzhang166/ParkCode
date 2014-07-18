@@ -39,6 +39,7 @@ private:
     void FillPlateCtrl( );
     void ClearText( int nStart );
     void SaveCarInfo( );
+    void MonthBulkProcess( bool bState );
 
 private slots:
     void on_lblClose_linkActivated(QString);
@@ -50,7 +51,8 @@ private slots:
     void ModifyRecord( );
     void DeleteRecord( );
     void Recharge( );
-    void BulkRecharge( );
+    void BulkDate( );
+    void BulkState( );
     void Serach( );
     void ChangeCard( );
     void Refresh( );
@@ -58,6 +60,7 @@ private slots:
     void Download2CC( );
     void CardLossProcess( );
     void PositionRow( QString strCardID );
+    void BroadcastMonthcardData( QStringList& lstWhere );
 
 private:
 #if defined( NewUI )

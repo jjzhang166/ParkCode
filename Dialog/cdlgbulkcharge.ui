@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>314</width>
-    <height>195</height>
+    <height>211</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>314</width>
-    <height>195</height>
+    <height>211</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>314</width>
-    <height>195</height>
+    <height>211</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -172,7 +172,7 @@
    <property name="geometry">
     <rect>
      <x>77</x>
-     <y>165</y>
+     <y>180</y>
      <width>158</width>
      <height>25</height>
     </rect>
@@ -194,27 +194,80 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="widgetDate" native="true">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>125</y>
-     <width>176</width>
-     <height>22</height>
+     <y>122</y>
+     <width>191</width>
+     <height>25</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_5">
-    <item>
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>新的截至日期</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QDateEdit" name="dtNewEnd"/>
-    </item>
-   </layout>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>176</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>新的截至日期</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDateEdit" name="dtNewEnd"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWidget" name="widgetState" native="true">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>153</y>
+     <width>291</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>299</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QCheckBox" name="chkEnterMustCard">
+       <property name="text">
+        <string>入场必须刷卡</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="chkLeaveMustCard">
+       <property name="text">
+        <string>出场必须刷卡</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="chkMIMO">
+       <property name="text">
+        <string>允许多进多出</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
  </widget>
  <resources/>

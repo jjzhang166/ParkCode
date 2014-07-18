@@ -391,6 +391,7 @@ void CDlgBulkRegister::SaveMonthData( QStringList &lstDuplication, QStringList& 
     QDateTimeEdit* pDT = NULL;
     QString strText = "";
     QStringList lstExist;
+    QStringList lstCardNo;
 
     for ( int nRow = 0; nRow < nRows; nRow++ ) {
         lstSql.clear( );
@@ -409,6 +410,7 @@ void CDlgBulkRegister::SaveMonthData( QStringList &lstDuplication, QStringList& 
         }
 
         tabWidget->insertRow( 0 );
+        lstCardNo << "'" + strText + "'";
 
         for ( int nCol = 0; nCol < ui->tabRecord->columnCount( ); nCol++ ) {
             switch ( nCol ) {
@@ -450,6 +452,8 @@ void CDlgBulkRegister::SaveMonthData( QStringList &lstDuplication, QStringList& 
 
         lstTotalSql << ( "(" + lstSql.join( "," ) + " )" );
     }
+
+    emit BroadcastCardNo( lstCardNo );
 }
 
 void CDlgBulkRegister::SaveValueData( QStringList &lstDuplication, QStringList& lstTotalSql )
@@ -463,6 +467,7 @@ void CDlgBulkRegister::SaveValueData( QStringList &lstDuplication, QStringList& 
     QComboBox* pCB = NULL;
     QString strText = "";
     QStringList lstExist;
+    QStringList lstCardNo;
 
     for ( int nRow = 0; nRow < nRows; nRow++ ) {
         lstSql.clear( );
@@ -481,6 +486,7 @@ void CDlgBulkRegister::SaveValueData( QStringList &lstDuplication, QStringList& 
         }
 
         tabWidget->insertRow( 0 );
+        lstCardNo << "'" + strText + "'";
 
         for ( int nCol = 0; nCol < ui->tabRecord->columnCount( ); nCol++ ) {
             switch ( nCol ) {
@@ -514,6 +520,8 @@ void CDlgBulkRegister::SaveValueData( QStringList &lstDuplication, QStringList& 
 
         lstTotalSql << ( "(" + lstSql.join( "," ) + " )" );
     }
+
+    emit BroadcastCardNo( lstCardNo );
 }
 
 void CDlgBulkRegister::SaveTimeData( QStringList &lstDuplication, QStringList& lstTotalSql )

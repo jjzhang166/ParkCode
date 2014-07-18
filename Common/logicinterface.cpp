@@ -81,7 +81,7 @@ int CLogicInterface::DbDeleteRd( int nIndex, QString& strDate )
                           OR ( Date( OutTime ) < '%2' ) " ).arg( strDate, strDate );
         strDelete = "Delete From stoprd where stoprdid in ( %1 )";
         strDeleteGarage = "Delete From GarageInGarage Where CardID IN ( Select Distinct Cardno From stoprd where stoprdid In( %1 ) ) and DateTime < '%2'";
-        strTmpDelete = "Delete From tmpcardintime where type = 1 and stoprdid in( %1 ) and intime < '%2'";
+        strTmpDelete = "Delete From tmpcardintime where type in( 1, 2 ) and stoprdid in( %1 ) and intime < '%2'";
         break;
 
         case 3 :
@@ -1556,8 +1556,8 @@ void CLogicInterface::OperateBlob( QByteArray &byData, bool bSave2Db, CommonData
 
 void CLogicInterface::GetBlobSql( QString &strSql, bool bSave2Db, CommonDataType::BlobType type, QString& strWhere )
 {
-    QString strVideoSql = bSave2Db ? QString( "Update IGNORE stoprd Set %1 = ? %2" ) :
-                          QString( "Select %1 From stoprd %2" );
+    QString strVideoSql = bSave2Db ? QString( "Update IGNORE tabinoutimage Set %1 = ? %2" ) :
+                          QString( "Select %1 From tabinoutimage %2" );
     QString strOwnerSql = bSave2Db ? QString( "Update IGNORE userinfo Set userpic = ? %1" ) :
                           QString( "Select userpic From userinfo %1" );
     QString strCarSql = bSave2Db ? QString( "Update IGNORE carinfo Set carpic = ? %1" ) :
@@ -1566,7 +1566,7 @@ void CLogicInterface::GetBlobSql( QString &strSql, bool bSave2Db, CommonDataType
     QString strGarageSql = bSave2Db ? QString( "Update IGNORE garageingarage Set Image = ? %1" ) :
                         QString( "Select Image From garageingarage %1" );
 
-    QString strTimeInImg = "Select invideo1 from tmpcardIntime %1";
+    //QString strTimeInImg = "Select invideo1 from tmpcardIntime %1";
 
     switch ( type ) {
     case CommonDataType::BlobVehicleIn1 :
@@ -1626,7 +1626,8 @@ void CLogicInterface::GetBlobSql( QString &strSql, bool bSave2Db, CommonDataType
         break;
 
    case CommonDataType::BlobTimeInImg :
-        strSql = strTimeInImg.arg( strWhere );
+        //strSql = strTimeInImg.arg( strWhere );
+        strSql = strVideoSql.arg( "invideo1", strWhere );
         break;
 
     case CommonDataType::BlobGarageImg :

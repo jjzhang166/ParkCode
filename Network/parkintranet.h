@@ -27,7 +27,7 @@ private:
     void ProcessData( QByteArray& byData );
     void GetTargetHostIP( );
     void MultiCastData( const QByteArray& byData );
-    void OrgnizeData( CommonDataType::DatagramType dgType, QStringList& lstData, QByteArray& byType );
+    void OrganizeData( CommonDataType::DatagramType dgType, QStringList& lstData, QByteArray& byType );
     bool CheckNetwork( );
 
 signals:
