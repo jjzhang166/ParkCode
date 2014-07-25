@@ -7,24 +7,34 @@
 #include <QPrinter>
 #include <QDateTime>
 #include <QProcess>
+#include "qreportthread.h"
 
 class CReporter : public QObject
 {
     Q_OBJECT
 public:
-    explicit CReporter(QObject *parent = 0);
+    explicit CReporter( QObject *parent = 0);
 
 public:
     void Print( CommonDataType::ReportType rType, QWebView& wvReport );
     void BuildHtmlDoc( QDateTime& dtStart, QDateTime& dtEnd, CommonDataType::ReportType rType, QWebView& wvReport );
+
+    void Print( CommonDataType::ReportType rType );
+    void BuildHtmlDoc( QDateTime& dtStart, QDateTime& dtEnd, CommonDataType::ReportType rType );
+
     void SetWhere( QStringList& lstWhere );
     void SetPersonTime( bool bPerson );
+    void SetWebView( QWebView* pView );
 
 private:
+    void PostReportEvent( const QString& strXml, QMyReportEvent::MyReportEvent eEvent );
+
     void GetHtml( CommonDataType::ReportType rType, QString& strTitle, QString& strFooter, QString& strTableBody, QStringList& lstData );
     void RowData( int nSum[ ], QStringList& lstReslut, QStringList& lstData,
                   int nField, QString& strTotal1, QString& strTotal2, int nStartIndex, int nCols );
-    inline void GetSumData( int nSum[ ], int nCounter, QString& strFooter );
+    void RowData( QStringList& lstReslut, QStringList& lstData,
+                  int nField, int nStartIndex, int nCols );
+    inline void GetSumData( QString& strFooter, QStringList& lstData, int nSkip );
     inline void GetRowHtml( QString& strRow, QStringList& lstData );
     inline void GetSQL( QString& strSql, CommonDataType::ReportType rType, QDateTime& dtStart, QDateTime& dtEnd );
     void PrintPdf( QString& strFile );
@@ -37,10 +47,15 @@ private:
     QString strAdobeExe;
     QStringList lstWheres;
     bool bPersonTime;
+    QReportThread* pReportThread;
+    QWebView* pReportView;
+    QString strPronvice;
+    QDateTime dtStartTime;
+    QDateTime dtEndTime;
 signals:
 
 public slots:
-
+    void HandleReportData( int nType, QStringList lstData );
 };
 
 #endif // REPORTER_H

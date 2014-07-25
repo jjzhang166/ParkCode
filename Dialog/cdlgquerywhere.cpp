@@ -27,11 +27,14 @@ void CDlgQueryWhere::GetWhere( QStringList &lstWhere )
     QString strPlate = ui->edtPlate->text( );
 
     if( ui->rb1->isChecked( ) ) {
-        lstWhere << "" << "";
+        //lstWhere << "" << "";
+        lstWhere << "0" << "" << "";;
     } else if ( ui->rb2->isChecked( ) ) {
-        lstWhere << QString( "and a.cardno = '%1'" ).arg( strCard ) << QString( "cardno='%1' and" ).arg( strCard );
+        //lstWhere << QString( "and a.cardno = '%1'" ).arg( strCard ) << QString( "cardno='%1' and" ).arg( strCard );
+        lstWhere << "1" << strCard << "";
     } else if ( ui->rb3->isChecked( ) ) {
-        lstWhere << QString( "and b.carcp = '%1'" ).arg( strPlate ) << QString( "cardno in ( select cardindex from carinfo where carcp = '%1' ) and" ).arg( strPlate );
+        //lstWhere << QString( "and b.carcp = '%1'" ).arg( strPlate ) << QString( "cardno in ( select cardindex from carinfo where carcp = '%1' ) and" ).arg( strPlate );
+        lstWhere << "2" << strCard << strPlate;
     }
 }
 

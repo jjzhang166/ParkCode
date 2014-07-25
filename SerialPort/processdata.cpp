@@ -2669,7 +2669,7 @@ bool CProcessData::WriteInOutRecord( QByteArray& byData ) // µØ¸Ð¿ªÕ¢
           file.close( );
         }
 
-        QString strHex( byImage.toHex( ) );
+        QString strHex( byImage.toBase64( ) );
         strSql = "Select InsertFreeCardData( '%1', '%2', '%3', '%4', %5, %6, '%7', %8, %9, '%10' )";
         strSql = strSql.arg( strCardNumber, strDateTime, strChannel,
                              strPlate, QString::number( cLevel ),

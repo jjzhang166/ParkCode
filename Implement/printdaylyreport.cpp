@@ -9,6 +9,7 @@ CPrintDaylyReport::CPrintDaylyReport(QWidget* mainWnd, QWidget *parent) :
     ui(new Ui::CPrintDaylyReport)
 {
     ui->setupUi(this);
+    reporter.SetWebView( ui->wvReport );
     pParent = dynamic_cast< MainWindow* > ( mainWnd );
     CCommonFunction::ConnectCloseButton( ui->lblClose );
 
@@ -150,12 +151,14 @@ void CPrintDaylyReport::on_btnGenerate_clicked()
     QDateTime dtEnd = ui->dReportEndDate->dateTime( );
     //QTime time = ui->dReportEndDate->maximumTime( );
     //dtEnd.setTime( time );
-    reporter.BuildHtmlDoc( dtStart, dtEnd, ( CommonDataType::ReportType ) nReportType, *ui->wvReport );
+    //reporter.BuildHtmlDoc( dtStart, dtEnd, ( CommonDataType::ReportType ) nReportType, *ui->wvReport );
+    reporter.BuildHtmlDoc( dtStart, dtEnd, ( CommonDataType::ReportType ) nReportType );
 }
 
 void CPrintDaylyReport::on_btnPrint_clicked()
 {
-    reporter.Print( ( CommonDataType::ReportType ) nReportType, *ui->wvReport );
+    //reporter.Print( ( CommonDataType::ReportType ) nReportType, *ui->wvReport );
+    reporter.Print( ( CommonDataType::ReportType ) nReportType );
 }
 
 void CPrintDaylyReport::on_btnClose_clicked()
@@ -167,3 +170,4 @@ void CPrintDaylyReport::on_lblClose_linkActivated(QString)
 {
     close( );
 }
+

@@ -753,6 +753,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags) :
     ControlDatabase( true );
     CNetwork::Singleton( this );
     ControlSerial( true );
+    //QReportThread::CreateReportThread( );
     //GetCardEntityInfo( );
     setWindowFlags( Qt::FramelessWindowHint );
 

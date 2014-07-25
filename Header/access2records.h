@@ -6,6 +6,7 @@
 #include <QResizeEvent>
 #include "mainwindow.h"
 #include <QGroupBox>
+#include "Report/qreportthread.h"
 
 namespace Ui {
     class
@@ -33,7 +34,9 @@ protected:
     void ControlDataGrid( );
 
 private:
+    void QueryData( QString& strWhere );
     void FillTable( QString& strWhere );
+    void FillTable( QStringList& lstData );
     void GetImage( CommonDataType::BlobType blob, int nRow, bool bEnter );
     void InitQuery( );
     void GetWhere( QString& strWhere );
@@ -51,6 +54,7 @@ private:
     QGroupBox* gbImage[  8 ];
     QLabel* lblScaleImage[ 8 ];
     QComboBox* cbxQuery[ 9 ];
+    QReportThread* pReportThread;
 
 private slots:
     void on_tableAccessRecord_cellDoubleClicked(int row, int column );
@@ -61,6 +65,7 @@ private slots:
     void on_btnQuery_clicked();
     void on_btnSerach_clicked();
     void on_lineEdit_textChanged(const QString &arg1);
+    void HandleExecuteSQLData( int nType, QStringList lstData );
 };
 
 #endif // ACCESS2RECORDS_H

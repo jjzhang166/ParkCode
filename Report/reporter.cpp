@@ -10,7 +10,152 @@
 CReporter::CReporter(QObject *parent) :
     QObject(parent)
 {
+    QSettings* pSysSet = CCommonFunction::GetSettings( CommonDataType::CfgSystem );
+    strPronvice = pSysSet->value( "CommonCfg/PronviceID", '川' ).toString( );
     bPersonTime = false;
+    pReportThread = QReportThread::CreateReportThread( );
+    connect( pReportThread, SIGNAL( ReportData( int, QStringList ) ),
+             this, SLOT( HandleReportData( int, QStringList ) ) );
+}
+
+void CReporter::SetWebView( QWebView *pView )
+{
+    pReportView = pView;
+}
+
+void CReporter::HandleReportData( int nType, QStringList lstData )
+{
+    CommonDataType::ReportType rType = ( CommonDataType::ReportType ) ( nType - QEvent::User );
+    QString strStart;
+    QString strEnd;
+    CCommonFunction::DateTime2String( dtStartTime, strStart );
+    CCommonFunction::DateTime2String( dtEndTime, strEnd );
+    QDateTime dtTimeEnd = dtEndTime;
+
+    QDate dStart = dtStartTime.date( );
+    QDate dEnd = dtEndTime.date( );
+
+
+    CCommonFunction::Date2String( dStart, strStart );
+    CCommonFunction::Date2String( dEnd, strEnd );
+
+    QString strTitle;
+    QString strFooter;
+    QString strTableBody;
+    GetHtml( rType, strTitle, strFooter, strTableBody, lstData );
+
+    QString strTitleDate;
+    GetTitle( rType, dtStartTime, dtTimeEnd, strTitleDate );
+
+
+    QString strHtml = QString( "<HTML>\
+                                <BODY>\
+                                    <H3 ALIGN = \"CENTER\">报表日期：%1</H1>\
+                                    <br><br>\
+                                    <TABLE ALIGN = \"CENTER\" BORDER = \"1\" frame=\"box\" rules=\"all\"CELLPADDING = \"2\">\
+                                        %2\
+                                        %3\
+                                    </TABLE>\
+                                </BODY>\
+                                </HTML>" ).arg( strTitleDate, strTitle, strTableBody );
+
+    pReportView->setHtml( strHtml );
+}
+
+void CReporter::Print( CommonDataType::ReportType rType )
+{
+    if ( !GetAdboeExePath( strAdobeExe ) ) {
+        return;
+    }
+
+    KillAdobeProcess( strAdobeExe );
+
+    printer.setPageSize( QPrinter::A4 );
+    printer.setOutputFormat( QPrinter::PdfFormat );
+
+    QString strFile;
+    CCommonFunction::GetPath( strFile, CommonDataType::PathSnapshot );
+    strFile += "reporter.pdf";
+    if ( QFile::exists( strFile ) ) {
+        QFile::remove( strFile );
+        Sleep( 1000 );
+    }
+
+    printer.setOutputFileName( strFile );
+    pReportView->print( &printer );
+
+    //Call Adobe Reader print pdf
+    PrintPdf( strFile );
+}
+
+void CReporter::BuildHtmlDoc( QDateTime& dtStart, QDateTime& dtEnd, CommonDataType::ReportType rType )
+{
+    dtStartTime = dtStart;
+    dtEndTime = dtEnd;
+
+    QString strXml;
+    QString strDateFormat = "yyyy-MM-dd";
+    QString strDateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+
+    switch ( rType ) {
+    case CommonDataType::ReportYearly :
+        strXml = QString( "<Data><StartDate>%1</StartDate><EndDate>%2</EndDate></Data>" ).arg(
+                    dtStart.date( ).toString( strDateFormat ), dtEnd.date().toString( strDateFormat ) );
+        break;
+
+    case CommonDataType::ReportMonthly :
+        strXml = QString( "<Data><StartDate>%1</StartDate><EndDate>%2</EndDate></Data>" ).arg(
+                    dtStart.date( ).toString( strDateFormat ), dtEnd.date().toString( strDateFormat ) );
+        break;
+
+    case CommonDataType::ReportDaily :
+        strXml = QString( "<Data><StartDate>%1</StartDate><EndDate>%2</EndDate></Data>" ).arg(
+                    dtStart.date( ).toString( strDateFormat ), dtEnd.date().toString( strDateFormat ) );
+        break;
+
+    case CommonDataType::ReportPerson :
+        strXml = QString( "<Data><StartDate>%1</StartDate><EndDate>%2</EndDate></Data>" ).arg(
+                    dtStart.toString( strDateTimeFormat  ), dtEnd.toString( strDateTimeFormat ) );
+        break;
+
+    case CommonDataType::ReportTimeCardDetail :
+        strXml = QString( "<Data><StartDate>%1</StartDate><EndDate>%2</EndDate></Data>" ).arg(
+                    dtStart.toString( strDateTimeFormat ), dtEnd.toString( strDateTimeFormat ) );
+        break;
+
+    case CommonDataType::ReportChannel :
+        strXml = QString( "<Data><StartDate>%1</StartDate><EndDate>%2</EndDate></Data>" ).arg(
+                    dtStart.toString( strDateTimeFormat ), dtEnd.toString( strDateTimeFormat ) );
+        break;
+
+    case CommonDataType::ReportProvince :
+        strXml = QString( "<Data><StartDate>%1</StartDate><EndDate>%2</EndDate></Data>" ).arg(
+                    dtStart.toString( strDateTimeFormat ), dtEnd.toString( strDateTimeFormat ) );
+        break;
+
+    case CommonDataType::ReportInProvince :
+        strXml = QString( "<Data><StartDate>%1</StartDate><EndDate>%2</EndDate><Province>%3</Province></Data>" ).arg(
+                    dtStart.toString( strDateTimeFormat ), dtEnd.toString( strDateTimeFormat ),
+                    strPronvice );
+        break;
+
+    case CommonDataType::ReportMonth :
+        strXml = QString( "<Data><DateFlag>%1</DateFlag><StartDate>%2</StartDate><EndDate>%3</EndDate></Data>" ).arg(
+                    lstWheres.at( 0 ), lstWheres.at( 1 ), lstWheres.at( 2 ) );
+        break;
+
+    case CommonDataType::ReportMonthInOut :
+        strXml = QString( "<Data><StartDate>%1</StartDate><EndDate>%2</EndDate><QueryFlag>%3</QueryFlag><CardNo>%4</CardNo><Plate>%5</Plate></Data>" ).arg(
+                    dtStart.toString( strDateTimeFormat ), dtEnd.toString( strDateTimeFormat ), lstWheres.at( 0 ), lstWheres.at( 1 ), lstWheres.at( 2 ) );
+        break;
+    }
+
+    PostReportEvent( strXml, ( QMyReportEvent::MyReportEvent ) ( rType + QEvent::User ) );
+}
+
+void CReporter::PostReportEvent( const QString &strXml, QMyReportEvent::MyReportEvent eEvent )
+{
+    pReportThread->PostReportEvent( strXml, eEvent );
 }
 
 void CReporter::SetWhere( QStringList &lstWhere )
@@ -516,7 +661,7 @@ void CReporter::GetSQL( QString &strSql, CommonDataType::ReportType rType, QDate
         break;
     }
 
-#ifdef QT_NO_DEBUG
+//#ifdef QT_NO_DEBUG
     QFile file( "d:/sql.txt" );
     if ( !file.exists( ) || !file.open( QIODevice::WriteOnly ) ) {
         return;
@@ -527,7 +672,7 @@ void CReporter::GetSQL( QString &strSql, CommonDataType::ReportType rType, QDate
     stream << strSql;
     stream.flush( );
     file.close( );
-#endif
+//#endif
 
 }
 
@@ -683,55 +828,108 @@ void CReporter::GetHtml( CommonDataType::ReportType rType, QString& strTitle, QS
 {
    QString strRow;
    int nCols = 0;
+   int nSkip = 0;
+   bool bPlate = false;
 
    switch ( rType ) {
    case CommonDataType::ReportYearly :
-       strTitle = "<tr><th rowspan=\"2\">年</th><th rowspan=\"2\">月</th>\
-                   <th colspan=\"2\">月租卡</th><th colspan=\"2\">计时卡</th><th colspan=\"2\">储值卡</th><th colspan=\"2\">\
-                   合计</th></tr>\
+       strTitle = "<tr><th rowspan=\"2\">年</th>\
+                   <th colspan=\"2\">月租卡</th>\
+                   <th colspan=\"2\">储值卡</th>\
+                   <th colspan=\"2\">计时卡</th>\
+                   <th colspan=\"2\">无卡工作</th>\
+                   <th>自由卡</th>\
+                   <th colspan=\"2\">合计</th></tr>\
                    <tr>\
                    <td >车辆数</td>\
                    <td >续费</td>\
                    <td >车辆数</td>\
+                   <td>充值</td>\
+                   <td >车辆数</td>\
                    <td >收费</td>\
                    <td >车辆数</td>\
+                   <td >收费</td>\
+                   <td >车辆数</td>\
+                   <td>车辆数</td>\
+                   <td>收费</td>\
+                   </tr>";
+       strFooter = " <tr><td>合计</td> \
+                   <td>%1</td><td>%2</td><td>%3</td> \
+                   <td>%4</td><td>%5</td><td>%6</td> \
+                   <td>%7</td><td>%8</td><td>%9</td> \
+                   <td>%10</td><td>%11</td></tr>";
+       nSkip = 1;
+       nCols = 12;
+       break;
+
+   case CommonDataType::ReportMonthly :
+       strTitle = "<tr><th rowspan=\"2\">年</th>\
+                   <th rowspan=\"2\">月</th>\
+                   <th colspan=\"2\">月租卡</th>\
+                   <th colspan=\"2\">储值卡</th>\
+                   <th colspan=\"2\">计时卡</th>\
+                   <th colspan=\"2\">无卡工作</th>\
+                   <th>自由卡</th>\
+                   <th colspan=\"2\">合计</th></tr>\
+                   <tr>\
+                   <td >车辆数</td>\
+                   <td >续费</td>\
+                   <td >车辆数</td>\
                    <td>充值</td>\
+                   <td >车辆数</td>\
+                   <td >收费</td>\
+                   <td>车辆数</td>\
+                   <td>收费</td>\
+                   <td>车辆数</td>\
                    <td>车辆数</td>\
                    <td>收费</td>\
                    </tr>";
        strFooter = " <tr><td colspan=\"2\">合计</td> \
                    <td>%1</td><td>%2</td><td>%3</td> \
                    <td>%4</td><td>%5</td><td>%6</td> \
-                   <td>%7</td><td>%8</td></tr>";
-       nCols = 8;
+                   <td>%7</td><td>%8</td><td>%9</td>\
+                   <td>%10</td><td>%11</td></tr>";
+       nSkip = 2;
+       nCols = 13;
        break;
 
-   case CommonDataType::ReportMonthly :
    case CommonDataType::ReportDaily :
-       strTitle = "<tr><th rowspan=\"2\">年</th><th rowspan=\"2\">月</th><th rowspan=\"2\" >日</th>\
-                   <th colspan=\"2\">月租卡</th><th colspan=\"2\">计时卡</th><th colspan=\"2\">储值卡</th><th colspan=\"2\">\
-                   合计</th></tr>\
+       strTitle = "<tr><th rowspan=\"2\">年</th>\
+                  <th rowspan=\"2\">月</th>\
+                   <th rowspan=\"2\" >日</th>\
+                   <th colspan=\"2\">月租卡</th>\
+                   <th colspan=\"2\">储值卡</th>\
+                   <th colspan=\"2\">计时卡</th>\
+                   <th colspan=\"2\">无卡工作</th>\
+                   <th>自由卡</th>\
+                   <th colspan=\"2\">合计</th></tr>\
                    <tr>\
                    <td >车辆数</td>\
                    <td >续费</td>\
                    <td >车辆数</td>\
+                   <td>充值</td>\
+                   <td >车辆数</td>\
                    <td >收费</td>\
                    <td >车辆数</td>\
-                   <td>充值</td>\
+                   <td>收费</td>\
+                   <td>车辆数</td>\
                    <td>车辆数</td>\
                    <td>收费</td>\
                    </tr>";
        strFooter = " <tr><td colspan=\"3\">合计</td> \
                    <td>%1</td><td>%2</td><td>%3</td> \
                    <td>%4</td><td>%5</td><td>%6</td> \
-                   <td>%7</td><td>%8</td></tr>";
-       nCols = 9;
+                   <td>%7</td><td>%8</td><td>%9</td>\
+                   <td>%10</td><td>%11</td></tr>";
+       nSkip = 3;
+       nCols = 14;
        break;
 
    case CommonDataType::ReportPerson :
        strTitle = "<tr><th>收费员</th><th>金额</th><tr>";
        strFooter = "<tr><th>合计</th><th>%1</th><tr>";
        nCols = 2;
+       nSkip = 1;
        break;
 
    case CommonDataType::ReportChannel :
@@ -744,16 +942,19 @@ void CReporter::GetHtml( CommonDataType::ReportType rType, QString& strTitle, QS
    case CommonDataType::ReportTimeCardDetail :
        strTitle = "<tr><th>日期</th><th>收费员</th><th>费率类型</th><th>优惠类型</th>\
                         <th>应收总额</th><th>实收总额</th><th>收费差额</th><tr>";
-       //strFooter = "<tr><th>%1</th><th>%2</th><th>%3</th><th>%4</th><tr>";
-       strFooter = "";
+       strFooter = "<tr><td colspan=\"4\">合计</td><th>%1</th><th>%2</th><th>%3</th><tr>";
        nCols = 7;
+       nSkip = 4;
        break;
 
   case CommonDataType::ReportProvince :
   case CommonDataType::ReportInProvince :
        strTitle = "<tr><th>车辆所属辖区</th><th>车型</th><th>车辆数</th></tr>";
-       strFooter = "";
+       strFooter = " <tr><td colspan=\"2\">合计</td> \
+                   <td>%1</td></tr>";
        nCols = 3;
+       bPlate = true;
+       nSkip = 2;
        break;
   case CommonDataType::ReportMonth :
        strTitle = "<tr><th>卡号</th><th>自编号</th>\
@@ -784,131 +985,35 @@ void CReporter::GetHtml( CommonDataType::ReportType rType, QString& strTitle, QS
    }
 
    int nRows = lstData.count( ) / nCols;
-   int nTotal1 = 0;
-   int nTotal2 = 0;
-
    QStringList lstTmp;
-
-   QString strTotal1;
-   QString strTotal2;
-   int nSum[ 8 ] = { 0 };
 
    for ( int nRow = 0; nRow < nRows; nRow++ ) {
        int nField = nRow * nCols;
-       lstTmp.clear( );
-       strTotal1.clear( );
-       strTotal2.clear( );
-       nTotal1 = 0;
-       nTotal2 = 0;
-
-       if ( CommonDataType::ReportYearly == rType ) {
-           nTotal1 = lstData[ nField + 2 ].toInt( ) + lstData[ nField + 4 ].toInt( ) + lstData[ nField + 6 ].toInt( );
-           if ( 0 != nTotal1 ) {
-               strTotal1 = QString::number( nTotal1 );
-           }
-
-           nTotal2 = lstData[ nField + 3 ].toInt( ) +lstData[ nField + 5 ].toInt( ) + lstData[ nField + 7 ].toInt( );
-           if ( 0 != nTotal2) {
-               strTotal2 = QString::number( nTotal2 );
-           }
-
-           lstTmp << lstData[ nField ]
-                  << lstData[ nField + 1 ];
-           RowData( nSum, lstTmp, lstData, nField, strTotal1, strTotal2, 2, nCols );
-       } else if ( CommonDataType::ReportMonthly == rType || CommonDataType::ReportDaily == rType ) {
-           nTotal1 = lstData[ nField + 3 ].toInt( ) +lstData[ nField + 5 ].toInt( ) + lstData[ nField + 7 ].toInt( );
-           if ( 0 != nTotal1 ) {
-               strTotal1 = QString::number( nTotal1 );
-           }
-
-           nTotal2 = lstData[ nField + 4 ].toInt( ) +lstData[ nField + 6 ].toInt( ) + lstData[ nField + 8 ].toInt( );
-           if ( 0 != nTotal2 ) {
-               strTotal2 = QString::number( nTotal2 );
-           }
-
-           lstTmp << lstData[ nField ]
-                  << lstData[ nField + 1 ]
-                  << lstData[ nField + 2 ];
-           RowData( nSum, lstTmp, lstData, nField, strTotal1, strTotal2, 3, nCols );
-       } else if ( CommonDataType::ReportPerson == rType ) {
-           lstTmp << lstData[ nField ]
-                  << lstData[ nField + 1 ];
-           nSum[ 0 ] += lstData[ nField + 1 ].toInt( );
-       } else if ( CommonDataType::ReportChannel == rType ) {
-           lstTmp << lstData[ nField ]
-                  << lstData[ nField + 1 ]
-                  << lstData[ nField + 2 ]
-                  << lstData[ nField + 3 ];
-       } else if ( CommonDataType::ReportTimeCardDetail == rType ) {
-           lstTmp << lstData[ nField ]
-                  << lstData[ nField + 1 ]
-                  << lstData[ nField + 2 ]
-                  << lstData[ nField + 3 ]
-                  << lstData[ nField + 4 ]
-                  << lstData[ nField + 5 ]
-                  << lstData[ nField + 6 ];
-       } else if ( CommonDataType::ReportProvince == rType ||
-                      CommonDataType::ReportInProvince == rType ) {
-           lstTmp << lstData[ nField ]
-                       << lstData[ nField + 1 ]
-                       << lstData[ nField + 2 ];
-
-           if ( nRow + 1 == nRows ) {
-               lstTmp[ 0 ] = "全部总计";
-               lstTmp[ 1 ] = "";
-           }
-       } else if ( CommonDataType::ReportMonth == rType ) {
-           lstTmp << lstData[ nField ]
-                   << lstData[ nField + 1 ]
-                   << lstData[ nField + 2 ]
-                   << lstData[ nField + 3 ]
-                   << lstData[ nField + 4 ]
-                   << lstData[ nField + 5 ]
-                   << lstData[ nField + 6 ]
-                   << lstData[ nField + 7 ]
-                   << lstData[ nField + 8 ]
-                   << lstData[ nField + 9 ]
-                   << lstData[ nField + 10 ]
-                   << lstData[ nField + 11 ]
-                   << lstData[ nField + 12 ];
-       } else if ( CommonDataType::ReportMonthInOut == rType ) {
-           lstTmp << lstData[ nField ]
-                   << lstData[ nField + 1 ]
-                   << lstData[ nField + 2 ]
-                   << lstData[ nField + 3 ]
-                   << lstData[ nField + 4 ]
-                   << lstData[ nField + 5 ];
+       lstTmp = lstData.mid( nField, nCols );
+       if ( lstTmp.at( 0 ).isEmpty( ) ||
+            ( bPlate && nRow == nRows- 1 ) ) {
+           GetSumData( strFooter, lstTmp, nSkip );
+           strRow = strFooter;
+       } else {
+           GetRowHtml( strRow, lstTmp );
        }
 
-       GetRowHtml( strRow, lstTmp );
        strTableBody += strRow;
-   }
-
-   switch ( rType ) {
-   case CommonDataType::ReportYearly :
-   case CommonDataType::ReportMonthly :
-   case CommonDataType::ReportDaily :
-       GetSumData( nSum, 8, strFooter );
-       break;
-
-   case CommonDataType::ReportPerson :
-       GetSumData( nSum, 1, strFooter );
-       break;
-
-   case CommonDataType::ReportChannel :
-   case CommonDataType::ReportTimeCardDetail :
-   case CommonDataType::ReportInProvince :
-   case CommonDataType::ReportProvince :
-   case CommonDataType::ReportMonth  :
-   case CommonDataType::ReportMonthInOut :
-       break;
-   }
+   }  
 }
 
-void CReporter::GetSumData( int nSum[], int nCounter, QString &strFooter )
+void CReporter::GetSumData( QString &strFooter,QStringList& lstData, int nSkip )
 {
-    for ( int nIndex = 0; nIndex < nCounter; nIndex++ ) {
-        strFooter = strFooter.arg( 0 == nSum[ nIndex ] ? "" : QString::number( nSum[ nIndex ] ) );
+    for ( int nIndex = nSkip; nIndex < lstData.size( ); nIndex++ ) {
+        strFooter = strFooter.arg( lstData.at( nIndex ) );
+    }
+}
+
+void CReporter::RowData( QStringList& lstReslut, QStringList& lstData,
+                         int nField, int nStartIndex, int nCols )
+{
+    for ( int nIndex = nStartIndex; nIndex < nCols; nIndex++ ) {
+        lstReslut << lstData[ nField + nIndex ];
     }
 }
 

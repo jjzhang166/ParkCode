@@ -72,6 +72,14 @@ CAccess2Records::CAccess2Records(QWidget* mainWnd, QWidget *parent) :
     InitQuery( );
 
     ui->lineEdit->setVisible( false );
+    pReportThread = QReportThread::CreateReportThread( );
+    connect( pReportThread, SIGNAL( ExecuteSQLData( int,QStringList ) ),
+             this, SLOT( HandleExecuteSQLData( int, QStringList ) ) );
+}
+
+void CAccess2Records::HandleExecuteSQLData( int nType, QStringList lstData )
+{
+    FillTable( lstData );
 }
 
 void CAccess2Records::HideCtrl( bool bVisible )
@@ -98,6 +106,106 @@ void CAccess2Records::ControlDataGrid( )
 void CAccess2Records::closeEvent( QCloseEvent *event )
 {
     pParent->ControlChild( event, this );
+}
+
+void CAccess2Records::QueryData(QString &strWhere)
+{
+    QString strSql = QString( "select a.cardno, a.cardkind, a.feenum, a.feefactnum, a.feezkyy, a.cardselfno, \
+            a.inshebeiname, a.intime, a.outshebeiname, a.outtime, a.carkind, a.carcp, a.carcpout, a.stoprdid from stoprd a %1" ).arg( strWhere );
+
+    strSql += " order by a.cardno, a.cardselfno, a.intime";
+    pReportThread->PostReportEvent( strSql, QMyReportEvent::ExecuteSQL );
+}
+
+void CAccess2Records::FillTable( QStringList& lstData )
+{
+    CCommonFunction::FreeAllRows( ui->tableAccessRecord );
+    int nCols = 14;
+    int nRows = lstData.size( ) / nCols;
+
+    ui->tableAccessRecord->setRowCount( nRows );
+
+    QStringList lstMonthID;
+    QStringList lstSaveID;
+    QStringList lstTimeID;
+    QString strID;
+    QMultiHash<  QString,QTableWidgetItem* > hashItem;
+
+    for ( int nRow = 0; nRow < nRows; nRow++ ) {
+        for ( int nCol = 0; nCol < nCols; nCol++ ) {
+            QString& strValue = lstData[ nRow * nCols + nCol ];
+            QTableWidgetItem* pItem = new QTableWidgetItem( strValue );
+            ui->tableAccessRecord->setItem( nRow, nCol, pItem );
+            pItem->setFlags( Qt::ItemIsEnabled | Qt::ItemIsSelectable );
+
+            switch ( nCol ) {
+            case 0 :
+                strID = strValue;
+                break;
+
+            case 1 :
+                if ( "月租卡" == strValue ) {
+                    if ( strID.contains( "(" ) )  {
+                        strID = strID.left( strID.indexOf( "(" ) );
+                    }
+
+                    if ( !lstMonthID.contains("'" + strID + "'" ) ) {
+                        lstMonthID << "'" + strID + "'";
+                    }
+                } else if ( "储值卡" == strValue ) {
+                    if ( !lstSaveID.contains( "'" + strID + "'" ) ) {
+                        lstSaveID << "'" + strID + "'";
+                    }
+                } else if ( "计时卡" == strValue ) {
+                    if ( !lstTimeID.contains( "'" + strID + "'" ) ) {
+                        lstTimeID << "'" + strID + "'";
+                    }
+                }
+                break;
+
+            case 5 :
+                hashItem.insertMulti( strID, pItem );
+                break;
+            }
+        }
+    }
+
+    if ( 0 < nRows ) {
+        ui->btnSerach->setEnabled( true );
+        QString strSql = "";
+
+        if ( lstMonthID.count( ) > 0 ) {
+            strSql = "Select cardno,cardselfno from monthcard where cardno in(" + lstMonthID.join( "," ) + ") ";
+        }
+
+        if ( lstSaveID.count( ) > 0 ) {
+            if ( !strSql.isEmpty( ) ) {
+                strSql += " union ";
+            }
+
+            strSql += "Select cardno,cardselfno from savecard where cardno in(" + lstSaveID.join( "," ) + ") ";
+        }
+
+        if ( lstTimeID.count( ) > 0 ) {
+            if ( !strSql.isEmpty( ) ) {
+                strSql += " union ";
+            }
+
+            strSql += "Select cardno,cardselfno from tmpcard where cardno in(" + lstTimeID.join( "," ) + ") ";
+        }
+
+        lstData.clear( );
+        nRows = CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstData );
+
+        for ( int nRow = 0; nRow < nRows; nRow++ ) {
+            QString& strValue = lstData[ nRow * 2 + 0 ];
+            QList< QTableWidgetItem* > lstItem = hashItem.values( strValue );
+
+            foreach ( QTableWidgetItem* item,  lstItem ) {
+                 item->setText( lstData[ nRow * 2 + 1 ] );
+            }
+        }
+    }
 }
 
 void CAccess2Records::FillTable( QString& strWhere )
@@ -331,7 +439,8 @@ void CAccess2Records::on_btnQuery_clicked()
         return;
     }
 
-    FillTable( strWhere );
+    //FillTable( strWhere );
+    QueryData( strWhere );
 }
 
 void CAccess2Records::InitQuery( )

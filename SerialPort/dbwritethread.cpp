@@ -2,6 +2,11 @@
 #include <QApplication>
 
 CDbWriteThread* CDbWriteThread::pWriteImage = NULL;
+//由分发线程根据消息类型实现操作分流，从而实现异步串行化处理
+//A-->B-->C-->D-->E 操作步骤首先到分发线程，由他决定操作
+//是在分发线程完成还是在自身类的子线程内完成
+// DispatcherThread( A C E ) Post( B D ) to SubThread
+//可以实现B(D)操作依赖A(C)操作的结果，这样的串行化
 
 CDbWriteThread::CDbWriteThread(bool bImage, QObject *parent) :
     QThread(parent)
@@ -54,7 +59,7 @@ void CDbWriteThread::ExcuteSQL( CLogicInterface& intf, bool bSQL, CDbEvent::Writ
             QStringList lstRow;
             paramter.strSql = QString( "Select InsertInOutImage( %1, %2, '%3', '%4' )" ).arg(
                         QString::number( paramter.bEnter ), QString::number( paramter.nType ),
-                        paramter.strCardNo, paramter.byData.toHex( ) );
+                        paramter.strCardNo, paramter.byData.toBase64( ) );
             intf.ExecuteSql( paramter.strSql, lstRow );
         }
     }
