@@ -212,7 +212,8 @@ SOURCES += mainwindow.cpp \
     JbIPC/qjbipc.cpp \
     Dialog/cdlgbulkcharge.cpp \
     SerialPort/readthread.cpp \
-    Report/qreportthread.cpp
+    Report/qreportthread.cpp \
+    Report/qreportevent.cpp
 
 HEADERS  += Header/valuecard.h \
     Header/tolldiscounttypeset.h \
@@ -389,7 +390,8 @@ HEADERS  += Header/valuecard.h \
     JbIPC/qjbipc.h \
     Dialog/cdlgbulkcharge.h \
     SerialPort/readthread.h \
-    Report/qreportthread.h
+    Report/qreportthread.h \
+    Report/qreportevent.h
 
 FORMS    += UIWnd/valuecard.ui \
     UIWnd/tolldiscounttypeset.ui \

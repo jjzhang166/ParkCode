@@ -868,6 +868,9 @@
        <height>16</height>
       </rect>
      </property>
+     <property name="toolTip">
+      <string>无车牌识别，需要关闭车牌别选项［车牌自动识别］</string>
+     </property>
      <property name="text">
       <string>压地感开闸</string>
      </property>

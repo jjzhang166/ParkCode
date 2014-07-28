@@ -1866,11 +1866,12 @@ void CProcessData::ControlGate( bool bOpen, char cCan ) // Manual
 
 void CProcessData::ControlGate( bool bEnter, QByteArray &byData, QByteArray &vData, ParkCardType& cardKind ) // Auto
 {
+    /*
     if ( !NoCardWork( ) ) {
         if ( IfSenseOpenGate( ) ) {
             return;
         }
-    }
+    }*/
 
     //while ( GateIfHaveVehicle[ bEnter ] ) {
     //    Sleep( 10 );
@@ -1888,6 +1889,12 @@ void CProcessData::ControlGate( bool bEnter, QByteArray &byData, QByteArray &vDa
     int nChannel = GetChannelByCan( byData[ 5 ] );
     if ( bPlateClear[ nChannel ][ 1 ] ) {
         pMainWindow->SetBallotSense( false, nChannel, byData );
+    }
+
+    if ( !NoCardWork( ) ) {
+        if ( IfSenseOpenGate( ) ) {
+            return;
+        }
     }
     //////////////////////////////////////////////////////////////////////////
 
@@ -2433,8 +2440,12 @@ bool CProcessData::GateNoCardWork( QByteArray& byData, QString& strPlate,
                                    QString& strType, QString& strChannel, int& nFee )
 {
     bool bRet = MonthNoCardWorkMode( );
+    bool bEnter = ( 0 != ( cCan % 2 ) );
+    QByteArray vData;
+    ParkCardType cardType = CardNone;
 
     if ( !bRet ) { // 纯地感开闸，不收费
+        ControlGate( bEnter, byData, vData, cardType );
         return true;
     }
 
@@ -2450,10 +2461,7 @@ bool CProcessData::GateNoCardWork( QByteArray& byData, QString& strPlate,
     lstRow = lstRow.at( 0 ).split( "," );
     const QString& strCardType= lstRow.at( 0 );
 
-    QByteArray vData;
     strType = "无卡工作";
-    bool bEnter = true;
-    ParkCardType cardType = CardNone;
     int nChannel = GetChannelByCan( byData[ 5 ] );
 
     if ( "month" == strCardType ) {

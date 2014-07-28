@@ -1,5 +1,6 @@
 ﻿#include "QhkIPCThread.h"
 #include <QApplication>
+#include <QFile>
 
 //DDOS / Distributed Denial of Service
 // Flood SYN ACK UPD TCP Connection Script ICMP PING
@@ -287,6 +288,12 @@ void QHkIPCThread::CaptureDeviceImage( QString& strIP, QString& strFileName, HWN
     char* pFile = byData.data( );
 
     if ( -1 == lUserID ) {
+        if ( !QFile::exists( strFileName ) ) {
+            QFile file( strFileName );
+            if ( file.open( QIODevice::ReadWrite ) ) {
+                file.close( );
+            }
+        }
         return;
     }
 

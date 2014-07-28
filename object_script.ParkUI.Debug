@@ -170,6 +170,8 @@ INPUT(
 ./debug\qjbipc.o
 ./debug\cdlgbulkcharge.o
 ./debug\readthread.o
+./debug\qreportthread.o
+./debug\qreportevent.o
 ./debug\moc_valuecard.o
 ./debug\moc_tolldiscounttypeset.o
 ./debug\moc_timecard.o
@@ -315,4 +317,5 @@ INPUT(
 ./debug\moc_qjbipc.o
 ./debug\moc_cdlgbulkcharge.o
 ./debug\moc_readthread.o
+./debug\moc_qreportthread.o
 );
