@@ -61,6 +61,7 @@ public:
     void SendDbWriteMessage( CDbEvent::UserEvent event, QString &strCardno, bool bEnter, int nType, bool bGarage, QByteArray &byData );
 
     bool WriteData( QByteArray& byData );
+    void ManualFee( QStringList& lstParams, int nType, char cCan );
 
 private:
     bool NetProbe( );
@@ -119,6 +120,8 @@ private:
     void WriteInOutRecord( bool bEnter, QString& strCardNumber, QString& strTable,
                            QString& strCardType, QString strPlate, char cCan, ParkCardType& cardKind, int nAmount = 0 );
     bool WriteInOutRecord( QByteArray& byData );
+    void ManualNoCardWork( QStringList &lstParams, char cCan );
+    void ManualTimeCardWork( QStringList &lstParams, int nAmount, char cCan );
     bool GateNoCardWork( QByteArray& byData, QString& strPlate,
                          char cCan, QString& strCardno, QString& strType, QString& strChannel, int& nFee );
     inline void GetChannelName( bool bEnter, char cCan, QString& strChannel );

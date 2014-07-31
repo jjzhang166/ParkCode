@@ -118,15 +118,20 @@ void CReadThread::ParseData( QByteArray& byData )
 void CReadThread::GateSense( bool bEnterGate, bool bLeavePark )
 {
     //GateIfHaveVehicle[ !bLeavePark ] = bEnterGate;
+    return;//注释掉，开启防跟车功能
+    //CProcessData::ControlGate{
+    //取消在CProcessData::ControlGate中的注释，开启防跟车的功能
+    // WaitForSingleObject( g_pReadThread->GetEventObject( bEnter ), 60000 );
+    //}
 
     HANDLE hEvent = hInOutEvent [ !bLeavePark ];
     if ( bEnterGate ) {
         ResetEvent( hEvent ); //无信号
+        qDebug( ) << Q_FUNC_INFO << "ResetEvent Object" << endl;
     } else {
         SetEvent( hEvent ); //有信号
+        qDebug( ) << Q_FUNC_INFO << "SetEvent Object" << endl;
     }
-
-    qDebug( ) << "Event Object" << endl;
 }
 
 HANDLE CReadThread::GetEventObject( bool bEnter )

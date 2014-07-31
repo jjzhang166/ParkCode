@@ -3,7 +3,9 @@
 
 #include <QDialog>
 #include <QTableWidget>
+#include <QMenu>
 #include "../Header/printyearlyreport.h"
+#include "../Report/qreportthread.h"
 
 namespace Ui {
 class CDlgStaying;
@@ -46,9 +48,27 @@ private slots:
     void on_chk0_toggled(bool checked);
 
     void on_tableWidgetNoCard_cellClicked(int row, int column);
+    void BulkMonthInRecordProcess( );
+    void BulkTimeInRecordProcess( );
+    void BulkNoCardInRecordProcess( );
+    void ManualTimeFeeProcess( );
+    void ManualNoCardFeeProcess( );
+    void HandleRefreshData( int nType );
+
+    void on_tableWidgetMonth_customContextMenuRequested(const QPoint &pos);
+
+    void on_tableWidgetTime_customContextMenuRequested(const QPoint &pos);
+
+    void on_tableWidgetNoCard_customContextMenuRequested(const QPoint &pos);
 
 private:
-    void GetData( );
+    void BulkInRecordProcess( QTableWidget* pTabWidget, int nType );
+    void ManualFeeProcess( QTableWidget* pTabWidget, int nType );
+
+    void GetSpParams( QString& strCardNo, QString& strStoprdid, QTableWidget* pTabWidget );
+    void CreateContextMenu( );
+    void DisplayMenu( QTableWidget* pTabWidget, QMenu* pMenu, const QPoint& pos );
+    void GetData( int nType /*0 all 1 2 3*/);
     void FillTable( QStringList& lstData, QTableWidget* pTable, int nRows );
     void DisplayPic( QTableWidget* pWidget, int nRow, int nCol );
     void SetFrameVisble( bool bVisible );
@@ -68,6 +88,10 @@ private:
     bool bHistory;
     bool bChkCliked[ 7 ];
     QSettings* pSystem;
+    QMenu* pMenuMonth;
+    QMenu* pMenuTime;
+    QMenu* pMenuNoCard;
+    QReportThread* pReportThread;
 };
 
 #endif // DLGSTAYING_H

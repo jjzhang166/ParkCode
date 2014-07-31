@@ -40,6 +40,7 @@ void QReportThread::customEvent(QEvent *e)
     QMyReportEvent::MyReportEvent eEvent = ( QMyReportEvent::MyReportEvent ) e->type( );
     const QString strXml = pEvent->GetXmlParams( );
     QString strSQL;
+    bool bResult = pEvent->GetResultset( );
 
     if ( QMyReportEvent::ExecuteSQL == eEvent ) {
         strSQL = strXml;
@@ -48,7 +49,7 @@ void QReportThread::customEvent(QEvent *e)
                     QString::number( eEvent - QEvent::User ), strXml );
     }
 
-    ProcessEvent( eEvent, strSQL );
+    ProcessEvent( eEvent, strSQL, bResult );
 }
 
 void QReportThread::PostEvent( QMyReportEvent* pEvent )
@@ -56,10 +57,16 @@ void QReportThread::PostEvent( QMyReportEvent* pEvent )
     qApp->postEvent( this, pEvent );
 }
 
-void QReportThread::ProcessEvent( int nType, QString& strSQL )
+void QReportThread::ProcessEvent( int nType, QString& strSQL, bool bResult )
 {
    QStringList lstRows;
-   interfaceNormal.ExecuteSql( strSQL, lstRows );
+   if ( bResult ) {
+       interfaceNormal.ExecuteSql( strSQL, lstRows );
+   } else {
+       interfaceNormal.ExecuteSql( strSQL );
+       emit RefresehData( nType );
+       return;
+   }
 
    if ( QMyReportEvent::ExecuteSQL == nType ) {
         emit ExecuteSQLData( nType, lstRows );
@@ -68,9 +75,10 @@ void QReportThread::ProcessEvent( int nType, QString& strSQL )
    }
 }
 
-void QReportThread::PostReportEvent(const QString &strXmlParams, QMyReportEvent::MyReportEvent eEvent )
+void QReportThread::PostReportEvent(const QString &strXmlParams, QMyReportEvent::MyReportEvent eEvent, bool bResult )
 {
     QMyReportEvent* pEvent = QMyReportEvent::CreateInstance( eEvent );
     pEvent->SetXmlParams( strXmlParams );
+    pEvent->SetResultset( bResult );
     PostEvent( pEvent );
 }

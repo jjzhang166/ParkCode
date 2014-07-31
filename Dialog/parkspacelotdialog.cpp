@@ -73,6 +73,21 @@ void CParkSpaceLotDialog::GetCanAddress( QStringList& lstCan )
     }
 }
 
+void CParkSpaceLotDialog::GetCanAddress(char &cCan, QString &strChannel)
+{
+
+    int nRows = ui->tableWidget->rowCount( );
+
+    for ( int nIndex = 0; nIndex < nRows; nIndex++ ) {
+        if ( Qt::Checked == ui->tableWidget->item( nIndex, 0 )->checkState( ) ) {
+            QStringList lstData =ui->tableWidget->item( nIndex, 0 )->text( ).split( "=" );
+            cCan = lstData.at( 1 ).toShort( );
+            strChannel = lstData.at( 0 );
+            break;
+        }
+    }
+}
+
 void CParkSpaceLotDialog::InitDlg( bool bChannel, QStringList& lstRows, bool bEneter, QStringList& lstCan )
 {
     int nIndex = 0;

@@ -304,6 +304,16 @@ void QHkIPCThread::CaptureDeviceImage( QString& strIP, QString& strFileName, HWN
     sJpgData.wPicQuality = 0;
 
     bRet = NET_DVR_CaptureJPEGPicture( lUserID, 1, &sJpgData, pFile );
+
+    if ( !bRet ) {
+        if ( !QFile::exists( strFileName ) ) {
+            QFile file( strFileName );
+            if ( file.open( QIODevice::ReadWrite ) ) {
+                file.close( );
+            }
+        }
+        return;
+    }
 }
 
 void QHkIPCThread::GetErrorMessage( )

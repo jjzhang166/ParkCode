@@ -19,6 +19,7 @@ public:
     void GetParkName( QString& strName );
     void GetCanAddress( QVector< char >& vecCan );
     void GetCanAddress( QStringList& lstCan );
+    void GetCanAddress( char& cCan, QString& strChannel );
 
 private:
     Ui::CParkSpaceLotDialog *ui;

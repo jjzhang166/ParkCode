@@ -67,7 +67,7 @@ void CDbWriteThread::ExcuteSQL( CLogicInterface& intf, bool bSQL, CDbEvent::Writ
 
 void CDbWriteThread::WriteData( CDbEvent::WriteParameter &paramter, bool bSQL )
 {
-    qDebug( ) << Q_FUNC_INFO << paramter.strSql << endl;
+    //qDebug( ) << Q_FUNC_INFO << paramter.strSql << endl;
     if ( !paramter.bDbHistory || paramter.bTimeCard ) {
         ExcuteSQL( interfaceNormal, bSQL, paramter );
     }

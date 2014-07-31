@@ -12,7 +12,9 @@ class QReportThread : public QThread
     Q_OBJECT
 public:
     static QReportThread* CreateReportThread( );
-    void PostReportEvent( const QString& strXmlParams, QMyReportEvent::MyReportEvent eEvent );
+    void PostReportEvent( const QString& strXmlParams,
+                          QMyReportEvent::MyReportEvent eEvent,
+                          bool bResult = true );
 
 protected:
     void run( );
@@ -22,7 +24,7 @@ private:
     explicit QReportThread(QObject *parent = 0);
     bool ConnectDb( );
     inline void PostEvent( QMyReportEvent* pEvent );
-    void ProcessEvent( int nType, QString& strSQL );
+    void ProcessEvent( int nType, QString& strSQL, bool bResult );
 
 private:
     CLogicInterface interfaceNormal;
@@ -31,6 +33,7 @@ private:
     
 signals:
     void ReportData( int nType, QStringList lstData );
+    void RefresehData( int nType );
     void ExecuteSQLData( int nType, QStringList lstData );
     
 public slots:

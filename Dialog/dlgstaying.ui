@@ -22,6 +22,9 @@
      <height>541</height>
     </rect>
    </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::DefaultContextMenu</enum>
+   </property>
    <property name="currentIndex">
     <number>0</number>
    </property>
@@ -38,8 +41,14 @@
        <height>511</height>
       </rect>
      </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
      <property name="toolTip">
       <string>单击【卡号】单元格，查看对应车辆图片。</string>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
      </property>
      <column>
       <property name="text">
@@ -96,8 +105,14 @@
        <height>511</height>
       </rect>
      </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
      <property name="toolTip">
       <string>单击【卡号】单元格，查看对应车辆图片。</string>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
      </property>
      <column>
       <property name="text">
@@ -144,8 +159,14 @@
        <height>511</height>
       </rect>
      </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
      <property name="toolTip">
       <string>单击【卡号】单元格，查看对应车辆图片。</string>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
      </property>
      <column>
       <property name="text">

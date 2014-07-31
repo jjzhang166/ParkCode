@@ -26,11 +26,15 @@ public:
     void SetXmlParams( const QString& strXml );
     const QString& GetXmlParams( );
 
+    void SetResultset( const bool bResult );
+    bool GetResultset( );
+
 private:
     QMyReportEvent( Type eEvent );
 
 private:
     QString strXmlValue;
+    bool bResutset;
 };
 
 #endif // QREPORTEVENT_H

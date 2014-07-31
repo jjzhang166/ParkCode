@@ -1,12 +1,15 @@
 #include "dlgstaying.h"
 #include "ui_dlgstaying.h"
 #include "Common/logicinterface.h"
+#include "../Dialog/parkspacelotdialog.h"
+#include "../SerialPort/processdata.h"
 
 CDlgStaying::CDlgStaying(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CDlgStaying)
 {
     ui->setupUi(this);
+    CreateContextMenu( );
     CCommonFunction::SetWindowIcon( this );
     bHistory = CCommonFunction::GetSettings( CommonDataType::CfgSystem )->value( "CommonCfg/HistoryDb", false ).toBool( );
 
@@ -14,7 +17,7 @@ CDlgStaying::CDlgStaying(QWidget *parent) :
 
     SetChkClikedArray( false );
 
-    GetData( );
+    GetData( 0 );
     pFrmDisplayPic =  new CPrintYearlyReport( NULL, this );
     SetFrameVisble( false );
 
@@ -32,6 +35,152 @@ CDlgStaying::CDlgStaying(QWidget *parent) :
 
     bool bNocard = pSystem->value( "CommonCfg/NoCardWork", false ).toBool( );
     ui->tab_3->setVisible( bNocard );
+    pReportThread = QReportThread::CreateReportThread( );
+    connect( pReportThread, SIGNAL( RefresehData( int ) ),
+             this, SLOT( HandleRefreshData( int ) ) );
+}
+
+void CDlgStaying::HandleRefreshData(int nType)
+{
+    GetData( ui->tabWidget->currentIndex( ) + 1 );
+}
+
+void CDlgStaying::DisplayMenu( QTableWidget* pTabWidget, QMenu *pMenu, const QPoint &pos )
+{
+    if ( 0 == pTabWidget->rowCount( ) ) {
+        return;
+    }
+
+    //绝对坐标是屏幕坐标(0,0)--(Rx, Ry)
+    //每个控件都有自己的坐标左上角(0,0)--右下角(width, height)
+    //QPoint	mapFrom ( QWidget * parent, const QPoint & pos ) const
+    //QPoint	mapFromGlobal ( const QPoint & pos ) const
+    //QPoint	mapFromParent ( const QPoint & pos ) const
+    //QPoint	mapTo ( QWidget * parent, const QPoint & pos ) const
+    //QPoint	mapToGlobal ( const QPoint & pos ) const
+    //QPoint	mapToParent ( const QPoint & pos ) const
+    QPoint point = pTabWidget->mapToGlobal( QPoint( 0, 0 ) );
+    int nHH = pTabWidget->horizontalHeader( )->height( );
+    int nVW = pTabWidget->verticalHeader( )->width( );
+    point = pTabWidget->mapToGlobal( pos );
+    point += QPoint( nVW, nHH );
+    pMenu->exec( point );
+}
+
+void CDlgStaying::CreateContextMenu( )
+{
+    pMenuMonth = new QMenu( ui->tableWidgetMonth );
+    pMenuMonth->addAction( "批量进入记录处理", this, SLOT( BulkMonthInRecordProcess( ) ) );
+
+    pMenuTime = new QMenu( ui->tableWidgetTime );
+    pMenuTime->addAction( "批量进入记录处理", this, SLOT( BulkTimeInRecordProcess( ) ) );
+    pMenuTime->addAction( "手动收费处理", this, SLOT( ManualTimeFeeProcess( ) ) );
+
+    pMenuNoCard = new QMenu( ui->tableWidgetNoCard );
+    pMenuNoCard->addAction( "批量进入记录处理", this, SLOT( BulkNoCardInRecordProcess( ) ) );
+    pMenuNoCard->addAction( "手动收费处理", this, SLOT( ManualNoCardFeeProcess( ) ) );
+}
+void CDlgStaying::BulkMonthInRecordProcess( )
+{
+    QTableWidget* pTabWidget = ( QTableWidget* ) pMenuMonth->parent( );
+    BulkInRecordProcess( pTabWidget, 0 );
+}
+
+void CDlgStaying::BulkTimeInRecordProcess( )
+{
+    QTableWidget* pTabWidget = ( QTableWidget* ) pMenuTime->parent( );
+    BulkInRecordProcess( pTabWidget, 1 );
+}
+
+void CDlgStaying::BulkNoCardInRecordProcess( )
+{
+    QTableWidget* pTabWidget = ( QTableWidget* ) pMenuNoCard->parent( );
+    BulkInRecordProcess( pTabWidget, 2 );
+}
+
+void CDlgStaying::ManualTimeFeeProcess( )
+{
+    QTableWidget* pTabWidget = ( QTableWidget* ) pMenuTime->parent( );
+    ManualFeeProcess( pTabWidget, 1 );
+}
+
+void CDlgStaying::ManualNoCardFeeProcess( )
+{
+    QTableWidget* pTabWidget = ( QTableWidget* ) pMenuNoCard->parent( );
+    ManualFeeProcess( pTabWidget, 2 );
+}
+
+void CDlgStaying::BulkInRecordProcess( QTableWidget* pTabWidget, int nType )
+{
+    if ( QMessageBox::Ok != CCommonFunction::MsgBox( NULL, "提示", "确定要批量处理选中的进入记录吗？", QMessageBox::Question ) ) {
+        return;
+    }
+
+    QString strCardNo;
+    QString strStoprdid;
+
+    GetSpParams( strCardNo, strStoprdid, pTabWidget );
+    QString strXml = QString( "<Data><User/><CardNo>%1</CardNo><Stoprdid>%2</Stoprdid></Data>" ).arg( strCardNo, strStoprdid );
+    QString strSQL = QString( "CALL BulkStayingProcess( %1, \"%2\" )" ).arg( QString::number( nType ),
+                                                                 strXml );
+    pReportThread->PostReportEvent( strSQL, QMyReportEvent::ExecuteSQL, false );
+}
+
+void CDlgStaying::ManualFeeProcess( QTableWidget* pTabWidget, int nType )
+{
+    QStringList lstCan;
+    CParkSpaceLotDialog dlg;
+    QString strSql = QString ( "Select distinct shebeiname, shebeiadr From roadconerinfo \
+                               where video1ip ='%1' and shebeiadr % 2 = 0" ).arg(
+                                       CCommonFunction::GetHostIP( ) );
+    QStringList lstRows;
+    CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstRows );
+    dlg.InitDlg( true, lstRows, false, lstCan );
+    dlg.setWindowTitle( dlg.windowTitle( ) + QString( "——开闸" ) );
+    if ( CParkSpaceLotDialog::Rejected == dlg.exec( ) ) {
+        return;
+    }
+
+    QString strCahnnel;
+    char cCan = 0;
+    dlg.GetCanAddress( cCan, strCahnnel );
+    if ( 0 == cCan ) {
+        return;
+    }
+
+    // 卡号 车牌号 In通道 进入时间 记录ID Out通道 lstParams
+    QStringList lstParams;
+    int nIndex = pTabWidget->currentRow( );
+    lstParams << pTabWidget->item( nIndex, 0 )->text( )
+              << pTabWidget->item( nIndex, 2 )->text( )
+              << pTabWidget->item( nIndex, 3 )->text( )
+              << pTabWidget->item( nIndex, 4 )->text( )
+              << pTabWidget->item( nIndex, pTabWidget->columnCount( ) - 1 )->text( )
+              << strCahnnel;
+
+    CProcessData::GetProcessor( )->ManualFee( lstParams, nType, cCan );
+
+    GetData( nType + 1 );
+}
+
+void CDlgStaying::GetSpParams( QString& strCardNo, QString& strStoprdid, QTableWidget* pTabWidget )
+{
+    int nColCount = pTabWidget->columnCount( );
+    QModelIndexList selRopws = pTabWidget->selectionModel( )->selectedRows( );
+    QTableWidgetItem* pItem = NULL;
+    QStringList lstCardNo;
+    QStringList lstStoprdid;
+
+    foreach( const QModelIndex& index, selRopws ) {
+        pItem = pTabWidget->item( index.row( ), 0 );
+        lstCardNo << QString( "'%1'" ).arg( pItem->text( ) );
+
+        pItem = pTabWidget->item( index.row( ), nColCount - 1 );
+        lstStoprdid << pItem->text( );
+    }
+
+    strCardNo = lstCardNo.join( "," );
+    strStoprdid = lstStoprdid.join( "," );
 }
 
 void CDlgStaying::SetFrameVisble( bool bVisible )
@@ -71,6 +220,7 @@ void CDlgStaying::GetMonthData( QString &strOrder )
 
     QStringList lstRows;
     int nRows = CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstRows, bHistory );
+    CCommonFunction::FreeAllRows( ui->tableWidgetMonth );
     if ( 0 < nRows ) {
        FillTable( lstRows, ui->tableWidgetMonth, nRows );
     }
@@ -86,6 +236,7 @@ void CDlgStaying::GetTimeData( QString &strOrder )
 
     lstRows.clear( );
     int nRows = CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstRows, bHistory );
+    CCommonFunction::FreeAllRows( ui->tableWidgetTime );
     if ( 0 < nRows ) {
       FillTable( lstRows, ui->tableWidgetTime, nRows );
     }
@@ -99,12 +250,13 @@ void CDlgStaying::GetNocardData( QString &strOrder )
 
     lstRows.clear( );
     int nRows = CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstRows, bHistory );
+    CCommonFunction::FreeAllRows( ui->tableWidgetNoCard );
     if ( 0 < nRows ) {
       FillTable( lstRows, ui->tableWidgetNoCard, nRows );
     }
 }
 
-void CDlgStaying::GetData( )
+void CDlgStaying::GetData( int nType /*0 all 1 2 3*/ )
 {
     int nIndex = ui->tableWidgetMonth->columnCount( ) - 1;
     QHeaderView* pView = ui->tableWidgetMonth->horizontalHeader( );
@@ -124,14 +276,33 @@ void CDlgStaying::GetData( )
         pBtn->setChecked( true );
     }
 
-    GetOrderByClause( strOrder, nChk, nCb, 0 );
-    GetMonthData( strOrder );
+    switch ( nType ) {
+    case 0 :
+        GetOrderByClause( strOrder, nChk, nCb, 0 );
+        GetMonthData( strOrder );
 
-    GetOrderByClause( strOrder, nChk, nCb, 1 );
-    GetTimeData( strOrder );
+        GetOrderByClause( strOrder, nChk, nCb, 1 );
+        GetTimeData( strOrder );
 
-    GetOrderByClause( strOrder, nChk, nCb, 2 );
-    GetNocardData( strOrder );
+        GetOrderByClause( strOrder, nChk, nCb, 2 );
+        GetNocardData( strOrder );
+        break;
+
+    case 1 :
+        GetOrderByClause( strOrder, nChk, nCb, 0 );
+        GetMonthData( strOrder );
+        break;
+
+    case 2 :
+        GetOrderByClause( strOrder, nChk, nCb, 1 );
+        GetTimeData( strOrder );
+        break;
+
+    case 3 :
+        GetOrderByClause( strOrder, nChk, nCb, 2 );
+        GetNocardData( strOrder );
+        break;
+    }
 }
 
 void CDlgStaying::FillTable( QStringList &lstData, QTableWidget *pTable, int nRows )
@@ -379,4 +550,19 @@ void CDlgStaying::on_chk0_toggled(bool checked)
 void CDlgStaying::on_tableWidgetNoCard_cellClicked(int row, int column)
 {
     DisplayPic( ( QTableWidget* ) sender( ), row, column );
+}
+
+void CDlgStaying::on_tableWidgetMonth_customContextMenuRequested(const QPoint &pos)
+{
+    DisplayMenu( ui->tableWidgetMonth, pMenuMonth, pos );
+}
+
+void CDlgStaying::on_tableWidgetTime_customContextMenuRequested(const QPoint &pos)
+{
+    DisplayMenu( ui->tableWidgetTime, pMenuTime, pos );
+}
+
+void CDlgStaying::on_tableWidgetNoCard_customContextMenuRequested(const QPoint &pos)
+{
+    DisplayMenu( ui->tableWidgetNoCard, pMenuNoCard, pos );
 }
