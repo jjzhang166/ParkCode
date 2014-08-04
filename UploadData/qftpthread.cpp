@@ -2,11 +2,47 @@
 
 // u:demo p:demo@demo
 QFtpThread* QFtpThread::pThreadInstance = NULL;
-
+// Ftp数据传输格式 文本 二进制
+// 连接 控制连接(客户--连接-->服务器)
+// 数据连接( Port Mode, Client<--connect--Server; Passive Mode Client--connect-->Server)
 QFtpThread::QFtpThread(QObject *parent) :
     QThread(parent )
 {
     pNetworkAccessManager = NULL;
+    hInternet = NULL;
+    hFtpConnect = NULL;
+}
+
+void QFtpThread::MyInternetStatusCallback( HINTERNET hInternet,
+                                           DWORD_PTR dwContext,
+                                           DWORD dwInternetStatus,
+                                           LPVOID lpvStatusInformation,
+                                           DWORD dwStatusInformationLength )
+{
+
+}
+
+void QFtpThread::ConnectFtp( )
+{
+    if ( NULL == hInternet ) {
+        hInternet = InternetOpen( L"FtpThread", INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, INTERNET_FLAG_ASYNC );
+    }
+
+    if ( NULL == hFtpConnect ) {
+        hFtpConnect = InternetConnect( hInternet,
+                                       L"115.29.149.133",
+                                       INTERNET_DEFAULT_FTP_PORT,
+                                       L"Ftp",
+                                       L"[Guid(\"269C795D-337F-485A-954A-186CBDEB0C66\")]",
+                                       INTERNET_SERVICE_FTP,
+                                       INTERNET_FLAG_PASSIVE,
+                                       NULL );
+        //Sleep( 5000 );
+
+        if ( NULL != hFtpConnect ) {
+            InternetSetStatusCallback ( hFtpConnect, MyInternetStatusCallback );
+        }
+    }
 }
 
 bool QFtpThread::ThreadInitialize( )
@@ -29,6 +65,8 @@ bool QFtpThread::ThreadInitialize( )
     pNetworkAccessManager = new QNetworkAccessManager( this );
     connect( pNetworkAccessManager, SIGNAL( finished( QNetworkReply* ) ),
              this, SLOT( HandleNamFinished( QNetworkReply* ) ) );
+
+    ConnectFtp( );
 
     return bRet;
 }
@@ -181,6 +219,12 @@ void QFtpThread::ProcessUploadFileEvent( QFtpEvent* pEvent )
 
     QString strLog = "Upload " + strPath +" started at";
     EmitLog( strLog );
+
+    WCHAR* pPath = ( WCHAR* ) strPath.utf16( );
+
+    ConnectFtp( );
+    FtpPutFile( hFtpConnect, L"D:\\MainBG.jpg", pPath, INTERNET_FLAG_TRANSFER_BINARY, NULL );
+    return;
 
     QNetworkReply* pReply = pNetworkAccessManager->put( request, byFileData );
     //pReply->setProperty( "FtpData",  pFileData );

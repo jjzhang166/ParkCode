@@ -65,7 +65,7 @@ private slots:
     void on_btnQuery_clicked();
     void on_btnSerach_clicked();
     void on_lineEdit_textChanged(const QString &arg1);
-    void HandleExecuteSQLData( int nType, QStringList lstData );
+    void HandleExecuteSQLData( int nType, QStringList lstData, int );
 };
 
 #endif // ACCESS2RECORDS_H

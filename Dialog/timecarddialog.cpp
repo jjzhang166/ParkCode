@@ -61,12 +61,14 @@ void CTimeCardDialog::SaveValue( )
                                                       CommonDataType::UpdateData, strWhere );
 
     //carcp, carmodel, carhaoma, cardindex
+    /*
     lstRows.clear( );
     lstRows << "δ֪"
             << "δ֪"
             << "δ֪"
             << ClearZero( ui->edtCardNumber ); // Trigger
     CLogicInterface::GetInterface( )->OperateCarInfo( lstRows, CommonDataType::InsertData, strWhere );
+    */
 }
 
 void CTimeCardDialog::FillTable( bool bNew )

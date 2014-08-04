@@ -30,6 +30,7 @@ private:
     static CDbWriteThread* pWriteImage;
 
 signals:
+    void RefreshUI( QString strRdid );
 
 public slots:
 

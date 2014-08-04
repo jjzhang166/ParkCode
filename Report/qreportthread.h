@@ -34,7 +34,7 @@ private:
 signals:
     void ReportData( int nType, QStringList lstData );
     void RefresehData( int nType );
-    void ExecuteSQLData( int nType, QStringList lstData );
+    void ExecuteSQLData( int nType, QStringList lstData, int nRows );
     
 public slots:
     

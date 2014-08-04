@@ -6,6 +6,7 @@
 #include <QMenu>
 #include "../Header/printyearlyreport.h"
 #include "../Report/qreportthread.h"
+#include "../SerialPort/processdata.h"
 
 namespace Ui {
 class CDlgStaying;
@@ -54,6 +55,8 @@ private slots:
     void ManualTimeFeeProcess( );
     void ManualNoCardFeeProcess( );
     void HandleRefreshData( int nType );
+    void HandleRefreshUI( QString strRdid );
+    void HandleExecuteSQLData( int nType, QStringList lstData, int nRows );
 
     void on_tableWidgetMonth_customContextMenuRequested(const QPoint &pos);
 
@@ -61,14 +64,21 @@ private slots:
 
     void on_tableWidgetNoCard_customContextMenuRequested(const QPoint &pos);
 
+    void on_btnRange_clicked();
+
+    void on_btnPrePage_clicked();
+
+    void on_btnNextPage_clicked();
+
 private:
+    void ConnectDb( );
     void BulkInRecordProcess( QTableWidget* pTabWidget, int nType );
     void ManualFeeProcess( QTableWidget* pTabWidget, int nType );
 
     void GetSpParams( QString& strCardNo, QString& strStoprdid, QTableWidget* pTabWidget );
     void CreateContextMenu( );
     void DisplayMenu( QTableWidget* pTabWidget, QMenu* pMenu, const QPoint& pos );
-    void GetData( int nType /*0 all 1 2 3*/);
+    void GetData( int nType /*0 all 1 2 3*/, QString& strLimit );
     void FillTable( QStringList& lstData, QTableWidget* pTable, int nRows );
     void DisplayPic( QTableWidget* pWidget, int nRow, int nCol );
     void SetFrameVisble( bool bVisible );
@@ -76,9 +86,10 @@ private:
     void GetOrderByClause( QString& strOrder, int nChk, int nCb, int nCardType/*0 1 2*/ );
     void SortData( int nChk, int nCb, bool bCb = false );
     int GetChkIndex( );
-    void GetMonthData( QString& strOrder );
-    void GetTimeData( QString& strOrder );
-    void GetNocardData( QString& strOrder );
+    inline void QueryData( QString& strSql, QMyReportEvent::MyReportEvent eEvent );
+    void GetMonthData( QString& strOrder, QString& strLimit );
+    void GetTimeData( QString& strOrder, QString& strLimit );
+    void GetNocardData( QString& strOrder, QString& strLimit );
     bool GetClicked( int nChk );
     void SetChkClikedArray( bool bInit );
     
@@ -92,6 +103,9 @@ private:
     QMenu* pMenuTime;
     QMenu* pMenuNoCard;
     QReportThread* pReportThread;
+    CProcessData* pProcessData;
+    CLogicInterface dbInterface;
+    int nPage;
 };
 
 #endif // DLGSTAYING_H

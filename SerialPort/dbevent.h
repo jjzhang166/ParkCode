@@ -37,8 +37,16 @@ public:
     void SetParameter( bool bEnter, int nType, bool bGarage, QString& strCardNo, QByteArray& byData );
     WriteParameter& GetParameter( );
 
+    void SetRefreshUI( bool bRefresh );
+    bool GetRefreshUI( );
+
+    void SetStoprdid( QString& strRdid );
+    QString& GetStoprdid( );
+
 private:
     WriteParameter evtParamter;
+    bool bRefreshUI;
+    QString strStoprdid;
 };
 
 #endif // DBEVENT_H

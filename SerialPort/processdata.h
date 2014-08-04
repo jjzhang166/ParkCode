@@ -56,7 +56,7 @@ public:
     void ParkspaceFull( bool bFull, QString& strInfo, char cCan );
     void CaptureManualGateImage( char cCan, QString& strWhere );
 
-    void SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory, bool bTimerCard, bool bSelect );
+    void SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory, bool bTimerCard, bool bSelect, bool bRefreshUI = false, QString strRdid = "" );
     void SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory, bool bTimerCard, bool bSelect, CommonDataType::BlobType blob, QByteArray &byData );
     void SendDbWriteMessage( CDbEvent::UserEvent event, QString &strCardno, bool bEnter, int nType, bool bGarage, QByteArray &byData );
 
@@ -120,7 +120,7 @@ private:
     void WriteInOutRecord( bool bEnter, QString& strCardNumber, QString& strTable,
                            QString& strCardType, QString strPlate, char cCan, ParkCardType& cardKind, int nAmount = 0 );
     bool WriteInOutRecord( QByteArray& byData );
-    void ManualNoCardWork( QStringList &lstParams, char cCan );
+    void ManualNoCardWork( QStringList &lstParams, int nAmount, char cCan );
     void ManualTimeCardWork( QStringList &lstParams, int nAmount, char cCan );
     bool GateNoCardWork( QByteArray& byData, QString& strPlate,
                          char cCan, QString& strCardno, QString& strType, QString& strChannel, int& nFee );
@@ -253,11 +253,13 @@ private:
     bool GateIfHaveVehicle[ 2 ];
 
 signals:
+    void RefreshUI( QString strRdid );
     void OnResponseUserRequest( QByteArray& byData, int nMinor );
     void PlateDelivery( int nChannel, QStringList lstData, QString strPlate );
     void VehicleGateInOut( bool bEnterGate, bool bLeavePark );
 
 public slots:
+    void HandleRefreshUI( QString strRdid );
     void HandleSendFileCount( quint32 nCount );
     void HandleReadThreadData( QByteArray byData );
 

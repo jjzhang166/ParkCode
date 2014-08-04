@@ -129,4 +129,8 @@ void CDbWriteThread::customEvent( QEvent *e )
         }
         break;
     }
+
+    if ( pEvent->GetRefreshUI( ) ) {
+        emit RefreshUI( pEvent->GetStoprdid( ) );
+    }
 }

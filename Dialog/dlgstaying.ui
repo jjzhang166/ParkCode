@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>885</width>
-    <height>587</height>
+    <height>599</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>36</y>
+     <y>56</y>
      <width>851</width>
      <height>541</height>
     </rect>
@@ -38,7 +38,7 @@
        <x>10</x>
        <y>10</y>
        <width>821</width>
-       <height>511</height>
+       <height>491</height>
       </rect>
      </property>
      <property name="contextMenuPolicy">
@@ -102,7 +102,7 @@
        <x>10</x>
        <y>10</y>
        <width>821</width>
-       <height>511</height>
+       <height>491</height>
       </rect>
      </property>
      <property name="contextMenuPolicy">
@@ -156,7 +156,7 @@
        <x>10</x>
        <y>10</y>
        <width>821</width>
-       <height>511</height>
+       <height>491</height>
       </rect>
      </property>
      <property name="contextMenuPolicy">
@@ -281,6 +281,77 @@
      <widget class="QRadioButton" name="chk6">
       <property name="text">
        <string>进入时间</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>30</y>
+     <width>591</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>获取记录从</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="sbStart">
+      <property name="minimum">
+       <number>1</number>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>条开始取</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="sbEnd">
+      <property name="minimum">
+       <number>100</number>
+      </property>
+      <property name="maximum">
+       <number>999999</number>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>条</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnRange">
+      <property name="text">
+       <string>获取指定范围记录</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnPrePage">
+      <property name="text">
+       <string>上一页</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnNextPage">
+      <property name="text">
+       <string>下一页</string>
       </property>
      </widget>
     </item>

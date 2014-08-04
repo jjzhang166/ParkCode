@@ -50,7 +50,7 @@ QUploadDataThread* QUploadDataThread::CreateInstance( QObject *pParent )
 
 void QUploadDataThread::PostUploadDataEvent( QStringList &lstRecordParams, QByteArray &byImage )
 {
-    QUploadDataEvent* pEvent = QUploadDataEvent::CreateEvent( QUploadDataEvent::InOutRecord );
+    QUploadDataEvent* pEvent = QUploadDataEvent::CreateUploadDataEvent( QUploadDataEvent::InOutRecord );
 
     pEvent->SetRecordParams( lstRecordParams, byImage );
     PostEvent( pEvent );

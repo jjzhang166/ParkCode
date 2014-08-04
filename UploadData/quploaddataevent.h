@@ -12,7 +12,7 @@ public:
         InOutRecord = User
     } UploadDataEvent;
 
-    static QUploadDataEvent* CreateEvent( UploadDataEvent eEvent );
+    static QUploadDataEvent* CreateUploadDataEvent( UploadDataEvent eEvent );
 
     void SetRecordParams( QStringList& lstParam, QByteArray& byImage );
     QStringList& GetRecordParams( );

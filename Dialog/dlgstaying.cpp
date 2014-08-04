@@ -2,13 +2,13 @@
 #include "ui_dlgstaying.h"
 #include "Common/logicinterface.h"
 #include "../Dialog/parkspacelotdialog.h"
-#include "../SerialPort/processdata.h"
 
 CDlgStaying::CDlgStaying(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CDlgStaying)
 {
     ui->setupUi(this);
+    ConnectDb( );
     CreateContextMenu( );
     CCommonFunction::SetWindowIcon( this );
     bHistory = CCommonFunction::GetSettings( CommonDataType::CfgSystem )->value( "CommonCfg/HistoryDb", false ).toBool( );
@@ -17,7 +17,7 @@ CDlgStaying::CDlgStaying(QWidget *parent) :
 
     SetChkClikedArray( false );
 
-    GetData( 0 );
+    pReportThread = QReportThread::CreateReportThread( );
     pFrmDisplayPic =  new CPrintYearlyReport( NULL, this );
     SetFrameVisble( false );
 
@@ -35,14 +35,53 @@ CDlgStaying::CDlgStaying(QWidget *parent) :
 
     bool bNocard = pSystem->value( "CommonCfg/NoCardWork", false ).toBool( );
     ui->tab_3->setVisible( bNocard );
-    pReportThread = QReportThread::CreateReportThread( );
     connect( pReportThread, SIGNAL( RefresehData( int ) ),
              this, SLOT( HandleRefreshData( int ) ) );
+    connect( pReportThread, SIGNAL(ExecuteSQLData(int,QStringList,int)),
+             this, SLOT(HandleExecuteSQLData(int,QStringList,int)));
+
+    pProcessData = CProcessData::GetProcessor( );
+    connect( pProcessData, SIGNAL( RefreshUI( QString ) ),
+             this, SLOT( HandleRefreshUI( QString ) ) );
+
+    nPage = 0;
+    QString strLimit = " Limit 0, 100";
+    GetData( 0, strLimit );
+}
+
+void CDlgStaying::ConnectDb( )
+{
+    QStringList lstParams;
+    CCommonFunction::ConnectMySql( lstParams, false );
+    dbInterface.GetMysqlDb( ).DbConnect( lstParams[ 0 ], lstParams[ 1 ], lstParams[ 2 ],
+                                                     lstParams[ 3 ], lstParams[ 4 ].toUInt( ) );
+}
+
+void CDlgStaying::HandleRefreshUI( QString strRdid )
+{
+    //GetData( ui->tabWidget->currentIndex( ) + 1 );
+    QTableWidget* pWidget = NULL;
+    switch( ui->tabWidget->currentIndex( ) ) {
+    case 0 :
+        pWidget = ui->tableWidgetMonth;
+        break;
+
+    case 1 :
+        pWidget = ui->tableWidgetTime;
+        break;
+
+    case 2 :
+        pWidget = ui->tableWidgetNoCard;
+        break;
+    }
+
+    pWidget->removeRow( pWidget->currentRow( ) );
 }
 
 void CDlgStaying::HandleRefreshData(int nType)
 {
-    GetData( ui->tabWidget->currentIndex( ) + 1 );
+    QString strLimit = " Limit 0, 100";
+    GetData( ui->tabWidget->currentIndex( ) + 1, strLimit );
 }
 
 void CDlgStaying::DisplayMenu( QTableWidget* pTabWidget, QMenu *pMenu, const QPoint &pos )
@@ -134,7 +173,7 @@ void CDlgStaying::ManualFeeProcess( QTableWidget* pTabWidget, int nType )
                                where video1ip ='%1' and shebeiadr % 2 = 0" ).arg(
                                        CCommonFunction::GetHostIP( ) );
     QStringList lstRows;
-    CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstRows );
+    dbInterface.ExecuteSql( strSql, lstRows );
     dlg.InitDlg( true, lstRows, false, lstCan );
     dlg.setWindowTitle( dlg.windowTitle( ) + QString( "——开闸" ) );
     if ( CParkSpaceLotDialog::Rejected == dlg.exec( ) ) {
@@ -158,9 +197,9 @@ void CDlgStaying::ManualFeeProcess( QTableWidget* pTabWidget, int nType )
               << pTabWidget->item( nIndex, pTabWidget->columnCount( ) - 1 )->text( )
               << strCahnnel;
 
-    CProcessData::GetProcessor( )->ManualFee( lstParams, nType, cCan );
+    pProcessData->ManualFee( lstParams, nType, cCan );
 
-    GetData( nType + 1 );
+    //GetData( nType + 1 );
 }
 
 void CDlgStaying::GetSpParams( QString& strCardNo, QString& strStoprdid, QTableWidget* pTabWidget )
@@ -210,23 +249,54 @@ CDlgStaying::~CDlgStaying()
     delete ui;
 }
 
-void CDlgStaying::GetMonthData( QString &strOrder )
+void CDlgStaying::HandleExecuteSQLData(int nType, QStringList lstData, int nRows)
+{
+    QTableWidget* pWidget = NULL;
+    switch ( nType ) {
+    case QMyReportEvent::StayingMonth :
+        pWidget = ui->tableWidgetMonth;
+        break;
+
+    case QMyReportEvent::StayingTime :
+        pWidget = ui->tableWidgetTime;
+        break;
+
+    case QMyReportEvent::StayingNoCard :
+        pWidget = ui->tableWidgetNoCard;
+        break;
+    }
+
+    if ( NULL == pWidget ) {
+        return;
+    }
+
+    CCommonFunction::FreeAllRows( pWidget );
+    if ( 0 < nRows ) {
+       FillTable( lstData, pWidget, nRows );
+    }
+}
+
+void CDlgStaying::GetMonthData( QString &strOrder, QString& strLimit )
 {
     QString strSql = "SELECT d.cardno,d.cardselfno, b.username, b.userphone, c.carcp, a.inshebeiname, a.intime, a.stoprdid \
             FROM stoprd a, userinfo b, carinfo c, monthcard d \
             where a.stoprdid = ( select stoprdid from cardstoprdid c \
                                  where d.cardno = c.cardno and d.Inside = 1 ) and a.outtime is null \
                 and d.cardno = b.cardindex and d.cardno = c.cardindex " + strOrder;
+    strSql += strLimit;
+
+    QueryData( strSql, QMyReportEvent::StayingMonth );
+    return;
 
     QStringList lstRows;
-    int nRows = CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstRows, bHistory );
+    int nRows = dbInterface.ExecuteSql( strSql, lstRows, bHistory );
     CCommonFunction::FreeAllRows( ui->tableWidgetMonth );
     if ( 0 < nRows ) {
        FillTable( lstRows, ui->tableWidgetMonth, nRows );
     }
 }
 
-void CDlgStaying::GetTimeData( QString &strOrder )
+void CDlgStaying::GetTimeData( QString &strOrder, QString& strLimit )
 {
     QStringList lstRows;
     QString strSql = "SELECT b.cardno,b.cardselfno, a.carcp, a.inshebeiname, a.intime, a.stoprdid\
@@ -234,29 +304,40 @@ void CDlgStaying::GetTimeData( QString &strOrder )
             where a.stoprdid = ( select stoprdid from cardstoprdid c \
                                  where b.cardno = c.cardno and b.Inside = 1 ) and a.outtime is null" + strOrder;
 
+    QueryData( strSql, QMyReportEvent::StayingTime );
+    return;
+
     lstRows.clear( );
-    int nRows = CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstRows, bHistory );
+    int nRows = dbInterface.ExecuteSql( strSql, lstRows, bHistory );
     CCommonFunction::FreeAllRows( ui->tableWidgetTime );
     if ( 0 < nRows ) {
       FillTable( lstRows, ui->tableWidgetTime, nRows );
     }
 }
 
-void CDlgStaying::GetNocardData( QString &strOrder )
+void CDlgStaying::QueryData( QString& strSql, QMyReportEvent::MyReportEvent eEvent )
+{
+    pReportThread->PostReportEvent( strSql, eEvent );
+}
+
+void CDlgStaying::GetNocardData( QString &strOrder, QString& strLimit )
 {
     QStringList lstRows;
     QString strSql = "SELECT cardno, '', IF ( 2 = type, '未知', cardno ), inshebeiname, intime, stoprdid\
-            FROM tmpcardintime where type in( 1, 2 ) " + strOrder;
+            FROM tmpcardintime where type in( 1, 2 ) " + strOrder + strLimit;
+
+    QueryData( strSql, QMyReportEvent::StayingNoCard );
+    return;
 
     lstRows.clear( );
-    int nRows = CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstRows, bHistory );
+    int nRows = dbInterface.ExecuteSql( strSql, lstRows, bHistory );
     CCommonFunction::FreeAllRows( ui->tableWidgetNoCard );
     if ( 0 < nRows ) {
       FillTable( lstRows, ui->tableWidgetNoCard, nRows );
     }
 }
 
-void CDlgStaying::GetData( int nType /*0 all 1 2 3*/ )
+void CDlgStaying::GetData( int nType /*0 all 1 2 3*/, QString& strLimit  )
 {
     int nIndex = ui->tableWidgetMonth->columnCount( ) - 1;
     QHeaderView* pView = ui->tableWidgetMonth->horizontalHeader( );
@@ -279,28 +360,28 @@ void CDlgStaying::GetData( int nType /*0 all 1 2 3*/ )
     switch ( nType ) {
     case 0 :
         GetOrderByClause( strOrder, nChk, nCb, 0 );
-        GetMonthData( strOrder );
+        GetMonthData( strOrder, strLimit );
 
         GetOrderByClause( strOrder, nChk, nCb, 1 );
-        GetTimeData( strOrder );
+        GetTimeData( strOrder, strLimit );
 
         GetOrderByClause( strOrder, nChk, nCb, 2 );
-        GetNocardData( strOrder );
+        GetNocardData( strOrder, strLimit );
         break;
 
     case 1 :
         GetOrderByClause( strOrder, nChk, nCb, 0 );
-        GetMonthData( strOrder );
+        GetMonthData( strOrder, strLimit );
         break;
 
     case 2 :
         GetOrderByClause( strOrder, nChk, nCb, 1 );
-        GetTimeData( strOrder );
+        GetTimeData( strOrder, strLimit );
         break;
 
     case 3 :
         GetOrderByClause( strOrder, nChk, nCb, 2 );
-        GetNocardData( strOrder );
+        GetNocardData( strOrder, strLimit );
         break;
     }
 }
@@ -336,7 +417,7 @@ void CDlgStaying::DisplayPic( QTableWidget* pWidget, int nRow, int nCol )
                     pWidget->item( nRow, pWidget->columnCount( ) - 1 )->text( ) );
         CCommonFunction::GetPath( strFile, CommonDataType::PathSnapshot );
         strFile += "Staying.jpg";
-        CLogicInterface::GetInterface( )->OperateBlob( strFile, false,
+        dbInterface.OperateBlob( strFile, false,
                                                        bNocard ? CommonDataType::BlobTimeInImg : CommonDataType::BlobVehicleIn1, strWhere, bHistory );
 
         bExist = QFile::exists( strFile );
@@ -377,32 +458,40 @@ void CDlgStaying::SortData( int nChk, int nCb, bool bCb )
         return;
     }
 
+    if ( ui->sbStart->value( )> ui->sbEnd->value( ) ) {
+        CCommonFunction::MsgBox( NULL, "提示", "记录范围不正确", QMessageBox::Information );
+        return;
+    }
+
+    QString strLimit = QString( " Limit %1, %2" ).arg(  QString::number( ui->sbStart->value( ) - 1 ),
+                                                        QString::number( ui->sbEnd->value( ) ) );
+
     QString strOrder;
     GetOrderByClause( strOrder, nChk, nCb, ui->tabWidget->currentIndex( ) );
 
-    GetMonthData( strOrder );
+    GetMonthData( strOrder, strLimit );
 
     if ( 2 != nChk && 3 != nChk ) {
-        GetTimeData( strOrder );
+        GetTimeData( strOrder, strLimit );
     }
 
     if ( 1 != nChk && 2 != nChk && 3 != nChk && 4 != nChk) {
-        GetNocardData( strOrder );
+        GetNocardData( strOrder, strLimit );
     }
 
     return;
 
     switch ( ui->tabWidget->currentIndex( ) ) {
     case 0 :
-        GetMonthData( strOrder );
+        GetMonthData( strOrder, strLimit );
         break;
 
     case 1 :
-        GetTimeData( strOrder );
+        GetTimeData( strOrder, strLimit );
         break;
 
     case 2 :
-        GetNocardData( strOrder );
+        GetNocardData( strOrder, strLimit );
         break;
     }
 }
@@ -565,4 +654,46 @@ void CDlgStaying::on_tableWidgetTime_customContextMenuRequested(const QPoint &po
 void CDlgStaying::on_tableWidgetNoCard_customContextMenuRequested(const QPoint &pos)
 {
     DisplayMenu( ui->tableWidgetNoCard, pMenuNoCard, pos );
+}
+
+void CDlgStaying::on_btnRange_clicked()
+{
+    if ( ui->sbStart->value( ) > ui->sbEnd->value( ) ) {
+        CCommonFunction::MsgBox( NULL, "提示", "记录范围不正确", QMessageBox::Information );
+        return;
+    }
+
+    QString strLimit = QString( " Limit %1, %2" ).arg(  QString::number( ui->sbStart->value( ) - 1 ),
+                                                        QString::number( ui->sbEnd->value( ) ) );
+
+    GetData( ui->tabWidget->currentIndex( ) + 1, strLimit );
+}
+
+void CDlgStaying::on_btnPrePage_clicked()
+{
+    if ( 0 == nPage ) {
+        return;
+    }
+
+    int nStart = ( nPage - 1 ) * 100;
+    if ( 0 < nStart ) {
+        nStart-= 1;
+    }
+
+    QString strLimit = QString( " Limit %1, %2" ).arg( QString::number( nStart ), QString::number( 100 ) );
+    GetData( ui->tabWidget->currentIndex( ) + 1, strLimit );
+    nPage--;
+}
+
+void CDlgStaying::on_btnNextPage_clicked()
+{
+    nPage++;
+    int nStart = nPage* 100;
+    if ( 0 < nStart ) {
+        nStart-= 1;
+    }
+
+    QString strLimit = QString( " Limit %1, %2" ).arg( QString::number( nStart ), QString::number( 100 ) );
+
+    GetData( ui->tabWidget->currentIndex( ) + 1, strLimit );
 }

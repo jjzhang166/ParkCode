@@ -61,6 +61,8 @@ CProcessData::CProcessData( CWinSerialPort* pWinPort, MainWindow* pWindow, QObje
     if ( !GetDirectDb( ) ) {
         g_dbThread.start( );
         g_dbThread.moveToThread( &g_dbThread );
+        connect( &g_dbThread, SIGNAL( RefreshUI( QString ) ),
+                 this, SLOT( HandleRefreshUI( QString ) ) );
     }
 
     CreateBufferTable( );
@@ -165,14 +167,18 @@ bool CProcessData::GetTimeCardBuffer( )
     return pSettings->value( "CommonCfg/TimeCardBuffer", false ).toBool( );
 }
 
-void CProcessData::SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory, bool bTimerCard, bool bSelect )
+void CProcessData::SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory,
+                                       bool bTimerCard, bool bSelect, bool bRefreshUI, QString strRdid )
 {
     CDbEvent* pEvent = new CDbEvent( ( CDbEvent::Type ) event );
     pEvent->SetParameter( strSql, bHistory, bTimerCard, bSelect );
+    pEvent->SetRefreshUI( bRefreshUI );
+    pEvent->SetStoprdid( strRdid );
     QApplication::postEvent( &g_dbThread, pEvent );
 }
 
-void CProcessData::SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory, bool bTimerCard, bool bSelect, CommonDataType::BlobType blob, QByteArray &byData )
+void CProcessData::SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory, bool bTimerCard, bool bSelect,
+                                       CommonDataType::BlobType blob, QByteArray &byData )
 {
     CDbEvent* pEvent = new CDbEvent( ( CDbEvent::Type ) event );
     pEvent->SetParameter( strSql, bHistory, bTimerCard, bSelect, blob, byData );
@@ -2935,7 +2941,7 @@ void CProcessData::WriteInOutRecord( bool bEnter, QString& strCardNumber, QStrin
                         Set outshebeiname = '%1', outtime = '%2', carcpout = '%3', \
                         cardkind = '%4', feefactnum = %5, feenum = %6, \
                         feetime = '%7', feeoperator = '%8', \
-                        feekind = '%9', feezkyy = '%10'  where stoprdid = \
+                        feekind = '%9', feezkyy = '%10', MayDelete = -1  where stoprdid = \
                         ( select stoprdid from CardStoprdID where cardno = '%11' )" );
             } else {
             strSql = QString( "Update IGNORE stoprd Set outshebeiname = '%1', outtime = '%2', carcpout = '%3', cardkind = '%4', feefactnum = %5, \
@@ -3132,11 +3138,17 @@ QByteArray CProcessData::ControlVehicleImage( QString &strCardNo, bool bSave2Db,
     return byData;
 }
 
-void CProcessData::ManualNoCardWork( QStringList &lstParams, char cCan )
+void CProcessData::HandleRefreshUI( QString strRdid )
+{
+    emit RefreshUI( strRdid );
+}
+
+void CProcessData::ManualNoCardWork( QStringList &lstParams, int nAmount, char cCan )
 {
 
     bool bEnter = false;
     // 卡号 车牌号 In通道 进入时间 记录ID Out通道 lstParams
+    QString strCardNo = lstParams.at( 0 );
     QString strPlate = lstParams.at( 1 );
     QString strOutChannel = lstParams.at( 5 );
 
@@ -3148,21 +3160,10 @@ void CProcessData::ManualNoCardWork( QStringList &lstParams, char cCan )
     QDateTime dtCurrent = QDateTime::currentDateTime( );
     CCommonFunction::DateTime2String( dtCurrent, strDateTime );
     bool bUnknown = ( "未知" == strPlate );
-    QString strCardNumber = bUnknown ? QString::number( dtCurrent.toMSecsSinceEpoch( ) ) : strPlate;
+    QString strCardNumber = strCardNo;
     QString strCardType = "无卡工作";
 
-    QString strIn = bEnter ? "in" : "out";
-    QString strOut = bEnter ? "": "out";
-    strSql = QString( "Insert Into stoprd ( %1shebeiname, %2time, cardno, carcp%3, cardkind ) Values (  \
-                      '%4', '%5', '%6', '%7', '%8' ) " );
-    strSql = strSql.arg( strIn, strIn, strOut, strOutChannel, strDateTime, strCardNumber, strPlate, strCardType );
-
-    if ( !bUnknown ) {
-        strSql = QString( "update stoprd set outshebeiname = '%1', outtime = '%2', carcpout = '%3' where  stoprdid in ( select stoprdid from cardstoprdid where cardno = '%4' )" ).arg(
-                    strOutChannel, strDateTime, strPlate, strCardNumber );
-    }
-
-    int nFee = 0;
+    int nFee = nAmount;
 
     SpaceChange( bEnter, cCan );
     BroadcastRecord( strCardNumber, dtCurrent, bUnknown ? 10 : 11, strPlate, strCardType, strOutChannel, cCan );
@@ -3186,7 +3187,7 @@ void CProcessData::ManualNoCardWork( QStringList &lstParams, char cCan )
     strSql = strSql.arg( strHex );
 
     //CLogicInterface::GetInterface( )->ExecuteSql( strSql );
-    SendDbWriteMessage( CDbEvent::SQLInternal, strSql, CCommonFunction::GetHistoryDb( ), false, true );
+    SendDbWriteMessage( CDbEvent::SQLInternal, strSql, CCommonFunction::GetHistoryDb( ), false, true, true );
     /////////////////////////////
     //CLogicInterface::GetInterface( )->ExecuteSql( strSql );
     //CaptureImage( strCardNumber, nChannel, CommonDataType::CaptureJPG );
@@ -3237,7 +3238,7 @@ void CProcessData::ManualTimeCardWork( QStringList &lstParams, int nAmount, char
                                               QString::number( nRealAmount ), strDateTime, pMainWindow->GetUserName( ) );
             strSql = strSql.arg( pFeeDlg->GetFeeRateType( ),
                                               pFeeDlg->GetDiscountType( ), strCardNo );
-    SendDbWriteMessage( CDbEvent::SQLExternal, strSql, false, true, false );
+    SendDbWriteMessage( CDbEvent::SQLExternal, strSql, false, true, false, true );
 
     QString strTable = "tmpcard";
     CarInsideOutside( bEnter, strTable, strCardNo, cCan );
@@ -3371,7 +3372,7 @@ void CProcessData::ManualFee( QStringList &lstParams, int nType, char cCan )
         ManualTimeCardWork( lstParams, nAmount, cCan );
     } else {
         WriteFeeData( strType, strCardNo, nAmount, strDateTime );
-        ManualNoCardWork( lstParams, cCan );
+        ManualNoCardWork( lstParams, nAmount, cCan );
     }
 }
 

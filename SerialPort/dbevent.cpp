@@ -12,6 +12,26 @@ void CDbEvent::SetParameter( QString &strSql, bool bHistory, bool bTimeCard, boo
     evtParamter.bSelect = bSelect;
 }
 
+void CDbEvent::SetRefreshUI( bool bRefresh )
+{
+   bRefreshUI = bRefresh;
+}
+
+bool CDbEvent::GetRefreshUI( )
+{
+   return bRefreshUI;
+}
+
+void CDbEvent::SetStoprdid( QString& strRdid )
+{
+    strStoprdid = strRdid;
+}
+
+QString& CDbEvent::GetStoprdid( )
+{
+    return strStoprdid;
+}
+
 void CDbEvent::SetParameter( QString& strSql, bool bHistory, bool bTimerCard, bool bSelect, CommonDataType::BlobType blob, QByteArray& byData )
 {
     evtParamter.strSql = strSql;

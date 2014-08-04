@@ -233,17 +233,12 @@
      </property>
      <item>
       <property name="text">
-       <string>海康DS-2CD864F-E</string>
+       <string>海康DS-2CD系列</string>
       </property>
      </item>
      <item>
       <property name="text">
        <string>捷威思NV-C130BE</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>安普JB-IP7108</string>
       </property>
      </item>
     </widget>

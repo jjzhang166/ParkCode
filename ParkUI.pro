@@ -38,6 +38,7 @@ LIBS += ./lib/libLPKernelEx.a
 LIBS += ./lib/libDs40xxSDK.a
 LIBS += ./HKIPC/lib/libHCNetSDK.a
 LIBS += ./JWSIPC/lib/libtmControlClient.a
+LIBS += ./lib/libwininet.a
 
 DEFINES += PARK_UI RAW_API COMMON_DB _WIN32_WINNT=0x0501 START_DONGLE
 

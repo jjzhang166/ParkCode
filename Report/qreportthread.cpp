@@ -42,7 +42,10 @@ void QReportThread::customEvent(QEvent *e)
     QString strSQL;
     bool bResult = pEvent->GetResultset( );
 
-    if ( QMyReportEvent::ExecuteSQL == eEvent ) {
+    if ( QMyReportEvent::ExecuteSQL == eEvent ||
+         QMyReportEvent::StayingMonth == eEvent ||
+         QMyReportEvent::StayingTime == eEvent ||
+         QMyReportEvent::StayingNoCard == eEvent ) {
         strSQL = strXml;
     } else {
         strSQL = strSpSql.arg(
@@ -60,16 +63,20 @@ void QReportThread::PostEvent( QMyReportEvent* pEvent )
 void QReportThread::ProcessEvent( int nType, QString& strSQL, bool bResult )
 {
    QStringList lstRows;
+   int nRows = 0;
    if ( bResult ) {
-       interfaceNormal.ExecuteSql( strSQL, lstRows );
+       nRows = interfaceNormal.ExecuteSql( strSQL, lstRows );
    } else {
        interfaceNormal.ExecuteSql( strSQL );
        emit RefresehData( nType );
        return;
    }
 
-   if ( QMyReportEvent::ExecuteSQL == nType ) {
-        emit ExecuteSQLData( nType, lstRows );
+   if ( QMyReportEvent::ExecuteSQL == nType ||
+        QMyReportEvent::StayingMonth == nType ||
+        QMyReportEvent::StayingTime == nType ||
+        QMyReportEvent::StayingNoCard == nType ) {
+        emit ExecuteSQLData( nType, lstRows, nRows );
    } else {
         emit ReportData( nType, lstRows );
    }

@@ -4,7 +4,7 @@ QUploadDataEvent::QUploadDataEvent( Type eEvent ) : QEvent( eEvent )
 {
 }
 
-QUploadDataEvent* QUploadDataEvent::CreateEvent( UploadDataEvent eEvent )
+QUploadDataEvent* QUploadDataEvent::CreateUploadDataEvent( UploadDataEvent eEvent )
 {
     return new QUploadDataEvent( ( Type ) eEvent );
 }

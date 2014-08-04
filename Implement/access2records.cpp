@@ -73,11 +73,11 @@ CAccess2Records::CAccess2Records(QWidget* mainWnd, QWidget *parent) :
 
     ui->lineEdit->setVisible( false );
     pReportThread = QReportThread::CreateReportThread( );
-    connect( pReportThread, SIGNAL( ExecuteSQLData( int,QStringList ) ),
-             this, SLOT( HandleExecuteSQLData( int, QStringList ) ) );
+    connect( pReportThread, SIGNAL( ExecuteSQLData( int,QStringList, int ) ),
+             this, SLOT( HandleExecuteSQLData( int, QStringList, int ) ) );
 }
 
-void CAccess2Records::HandleExecuteSQLData( int nType, QStringList lstData )
+void CAccess2Records::HandleExecuteSQLData( int nType, QStringList lstData, int )
 {
     FillTable( lstData );
 }

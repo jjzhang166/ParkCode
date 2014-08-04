@@ -4,6 +4,7 @@
 #include <QThread>
 #include <QtNetwork>
 #include "qftpevent.h"
+#include <wininet.h>
 
 class QFtpThread : public QThread
 {
@@ -33,6 +34,16 @@ private:
     inline void PostEvent( QFtpEvent *pEvent );
     void EmitLog( QString& strLog );
 
+    void ConnectFtp( );
+
+    static void CALLBACK MyInternetStatusCallback(
+              HINTERNET hInternet,
+              DWORD_PTR dwContext,
+              DWORD dwInternetStatus,
+              LPVOID lpvStatusInformation,
+              DWORD dwStatusInformationLength
+          );
+
 private:
     static QFtpThread* pThreadInstance;
     QNetworkAccessManager* pNetworkAccessManager;
@@ -41,6 +52,8 @@ private:
     QString strFtpUser;
     QString strFtpPwd;
     QString strFtpBasePath;
+    HINTERNET hInternet;
+    HINTERNET hFtpConnect;
 
 signals:
 

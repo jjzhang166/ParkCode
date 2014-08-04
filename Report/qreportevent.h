@@ -18,7 +18,10 @@ public:
       ProvinceReport,
       MonthCardInfo,
       MonthCardTimes,
-      ExecuteSQL
+      ExecuteSQL,
+      StayingMonth,
+      StayingTime,
+      StayingNoCard
     } MyReportEvent;
 
     static QMyReportEvent* CreateInstance( MyReportEvent eEvent );
