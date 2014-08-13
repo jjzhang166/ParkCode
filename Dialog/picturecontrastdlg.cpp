@@ -129,6 +129,12 @@ QString CPictureContrastDlg::GetDiscountType( )
     return strType;
 }
 
+void CPictureContrastDlg::SetNoEnterTime(bool bUnknown, int nMinFee )
+{
+    bNoEnterTime = bUnknown;
+    nMinFee4NoEnterTime = nMinFee;
+}
+
 void CPictureContrastDlg::onLinkActivated( QString link )
 {
     static CPrintMonthlyReport check( NULL );
@@ -205,8 +211,13 @@ void CPictureContrastDlg::Write2UI( QStringList &lstRows, bool bEnter, bool bAut
         //ui->edtAmount->setText( lstRows[ 8 ] );
         strTabName = lstRows[ 9 ];
         strParkName = lstRows[ 10 ];
-        dtStart = CCommonFunction::String2DateTime( lstRows[ 11 ] );
         dtEnd = CCommonFunction::String2DateTime( lstRows[ 12 ] );
+        if ( lstRows[ 11 ].isEmpty( ) ) {
+            dtStart = dtEnd;
+        } else {
+            dtStart = CCommonFunction::String2DateTime( lstRows[ 11 ] );
+        }
+
         strPlates[ 0 ] = lstRows[ 13 ];
         if ( !bEnter ) {
             strPlates[ 1 ] = strPlates[ 0 ];
@@ -427,6 +438,10 @@ void CPictureContrastDlg::FillDiscount( )
 
 void CPictureContrastDlg::CbxIndexChanged( int )
 {
+    if ( !isVisible( ) ) {
+        return;
+    }
+
     QString strRbx = ui->cbxDiscount->statusTip( );
     quint32 nRbx = strRbx.toUInt( );
 
@@ -473,8 +488,13 @@ void CPictureContrastDlg::Calculate(QRadioButton &rbtn)
     QString strType = rbtn.text( );
     QStringList lstText;
     strType = CCommonFunction::GetFeeStd( strType );
-    nAmount = CCommonFunction::CalculateFee( *CCommonFunction::GetSettings( CommonDataType::CfgTariff ),
+
+    if ( bNoEnterTime ) {
+        nAmount = nMinFee4NoEnterTime;
+    } else {
+        nAmount = CCommonFunction::CalculateFee( *CCommonFunction::GetSettings( CommonDataType::CfgTariff ),
                                              strParkID, strType, dtStart, dtEnd, lstText );
+    }
 
     if ( 0 != nAmount ) {
         nFeeNum = nAmount;

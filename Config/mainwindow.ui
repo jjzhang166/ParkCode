@@ -241,6 +241,11 @@
        <string>捷威思NV-C130BE</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>VZ一体机</string>
+      </property>
+     </item>
     </widget>
     <widget class="QComboBox" name="cbxCapture">
      <property name="geometry">

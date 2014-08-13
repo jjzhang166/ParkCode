@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->cbxIPC->setItemData( 0, "HK" );
     ui->cbxIPC->setItemData( 1, "JWS" );
-    ui->cbxIPC->setItemData( 2, "JBNV" );
+    ui->cbxIPC->setItemData( 2, "VZAllInOne" );
 
     ui->cbxCapture->setItemData( 0, "HK" );
     ui->cbxCapture->setItemData( 1, "TM" );
@@ -129,7 +129,7 @@ void MainWindow::ReadFile( )
             ui->cbxIPC->setCurrentIndex( 0 );
         } else if ( strType == "JWS" ) {
             ui->cbxIPC->setCurrentIndex( 1 );
-        } else if ( strType == "JBNV" ) {
+        } else if ( strType == "VZALLINONE" ) {
             ui->cbxIPC->setCurrentIndex( 2 );
         }
     } else {

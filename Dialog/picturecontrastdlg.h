@@ -25,6 +25,7 @@ public:
     void SetParams( QByteArray &byData, QByteArray &vData, int nMin, int nHour, int nAmount, bool bEnter );
     QString GetFeeRateType( );
     QString GetDiscountType( );
+    void SetNoEnterTime( bool bUnknown, int nMiNFee = 0 );
 
 public:
     void InitDlg( QStringList& lstRows, QPixmap& bmpEnter, QPixmap& bmpLeave, QByteArray& byData, bool bBuffer);
@@ -99,6 +100,8 @@ private:
 
     QString strFeeRateType;
     CLogicInterface* pDbInterface;
+    bool bNoEnterTime;
+    int nMinFee4NoEnterTime;
 };
 
 #endif // PICTURECONTRASTDLG_H

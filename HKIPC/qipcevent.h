@@ -53,6 +53,8 @@ public:
             HWND hPlayWnd;
             char cIP[ IPC_IP_LEN + 1 ];
             bool bMainStream;
+            int nChannel;
+            bool bChannel;
         } EventStartRealPlay;
 
         struct __EventStopRealPlay {

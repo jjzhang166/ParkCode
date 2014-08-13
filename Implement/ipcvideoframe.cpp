@@ -22,6 +22,12 @@ CIPCVideoFrame::CIPCVideoFrame(bool bIPC, QWidget *parent) :
             pVideoThread = QHkIPCThread::GetInstance( );
         } else if ( QString( "JWS" ) == strType.toUpper( ) ) {
             pVideoThread = QJwsIPCThread::GetInstance( );
+        } else if ( QString( "VZALLINONE" ) == strType.toUpper( ) ) {
+            pVideoThread = QVzAllInOne::GetInstance( );
+            connect( pVideoThread, SIGNAL( UIPlateResult( QString, int, bool,
+                                                         bool, int, int, int,
+                                                         QString, QByteArray, QRect, QRect ) ),
+                                           this, SLOT( HandleUIPlateResult( QString,int,bool,bool,int,int,int,QString,QByteArray,QRect,QRect)));
         } else if ( QString( "JBNV" ) == strType.toUpper( ) ) {
             pVideoThread = QJBIPC::GetInstance( );
         } else {
@@ -43,6 +49,11 @@ CIPCVideoFrame::CIPCVideoFrame(bool bIPC, QWidget *parent) :
     flags &= ( ~Qt::WindowMaximizeButtonHint );
     setWindowFlags( flags );
     InitializeIPC( );
+}
+
+void CIPCVideoFrame::HandleUIPlateResult(QString strPlate, int nChannel, bool bSuccess, bool bVideo, int nWidth, int nHeight, int nConfidence, QString strDirection, QByteArray byData, QRect rectPlate, QRect rectVideo)
+{
+    emit UIPlateResult( strPlate, nChannel, bSuccess, bVideo, nWidth, nHeight, nConfidence, strDirection, byData, rectPlate, rectVideo);
 }
 
 CIPCVideoFrame::~CIPCVideoFrame()
@@ -176,9 +187,9 @@ void CIPCVideoFrame::LocalIPCLogin( )
     LogIPC( true, true );
 }
 
-void CIPCVideoFrame::LocalIPCStartVideo( QString &strIP, HWND hPlayWnd )
+void CIPCVideoFrame::LocalIPCStartVideo( QString &strIP, HWND hPlayWnd, int nChannel )
 {
-    StartPlayIPC( strIP, hPlayWnd );
+    StartPlayIPC( strIP, hPlayWnd, nChannel, true );
 }
 
 void CIPCVideoFrame::LocalIPCStopVideo( HWND hPlayWnd )
@@ -368,7 +379,7 @@ void CIPCVideoFrame::LogoutIPC( const QString &strIP )
      pVideoThread->PostIPCLogoutEvent( uParam );
 }
 
-void CIPCVideoFrame::StartPlayIPC( const QString &strIP, HWND hPlayWnd )
+void CIPCVideoFrame::StartPlayIPC( const QString& strIP, HWND hPlayWnd, int nChannel, bool bChannel )
 {
     if ( NULL == pVideoThread ) {
         return;
@@ -385,6 +396,8 @@ void CIPCVideoFrame::StartPlayIPC( const QString &strIP, HWND hPlayWnd )
 
      strcpy( uParam.EventStartRealPlay.cIP, pIP );
      uParam.EventStartRealPlay.hPlayWnd = hPlayWnd;
+     uParam.EventStartRealPlay.nChannel = nChannel;
+     uParam.EventStartRealPlay.bChannel = bChannel;
      bool bMainStream = pSettings->value( "IPC/MainStream", true ).toBool( );
      uParam.EventStartRealPlay.bMainStream = bMainStream;
 

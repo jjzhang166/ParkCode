@@ -56,7 +56,9 @@ public:
     void ParkspaceFull( bool bFull, QString& strInfo, char cCan );
     void CaptureManualGateImage( char cCan, QString& strWhere );
 
-    void SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory, bool bTimerCard, bool bSelect, bool bRefreshUI = false, QString strRdid = "" );
+    void SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory, bool bTimerCard, bool bSelect, int nInsert, QStringList& lstBroadcastData, QString& strCardNumber, bool bRefreshUI = false, QString strRdid = "" );
+    void SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory, bool bTimerCard, bool bSelect, bool bGarage, bool bRefreshUI = false, QString strRdid = "" );
+    void SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory, bool bTimerCard, bool bSelect, int nInsert, QStringList& lstBroadcastData, CommonDataType::BlobType blob, QByteArray &byData );
     void SendDbWriteMessage( CDbEvent::UserEvent event, QString &strSql, bool bHistory, bool bTimerCard, bool bSelect, CommonDataType::BlobType blob, QByteArray &byData );
     void SendDbWriteMessage( CDbEvent::UserEvent event, QString &strCardno, bool bEnter, int nType, bool bGarage, QByteArray &byData );
 
@@ -120,7 +122,8 @@ private:
     void WriteInOutRecord( bool bEnter, QString& strCardNumber, QString& strTable,
                            QString& strCardType, QString strPlate, char cCan, ParkCardType& cardKind, int nAmount = 0 );
     bool WriteInOutRecord( QByteArray& byData );
-    void ManualNoCardWork( QStringList &lstParams, int nAmount, char cCan );
+    void GetFreeCardSql( QStringList& lstParams, QString& strSql );
+    void ManualNoCardWork( QStringList &lstParams, int nAmount, char cCan, QStringList& lstSqlParam );
     void ManualTimeCardWork( QStringList &lstParams, int nAmount, char cCan );
     bool GateNoCardWork( QByteArray& byData, QString& strPlate,
                          char cCan, QString& strCardno, QString& strType, QString& strChannel, int& nFee );
@@ -183,7 +186,8 @@ private:
     void SpaceChange( bool bEnter, char cCan );
     void GetCan2Channel( QString& strWhere );
     void BroadcastRecord( QString& strCardNumber, QDateTime& dtCurrent, int nCardTypeID,
-                                        QString strPlate, QString& strCardType, QString& strChannel, char cCan );
+                                        QString strPlate, QString& strCardType,
+                          QString& strChannel, char cCan, QString& strStoprdid );
 
     bool ExcludeRemoteCardDuplication( quint32 nCardID, ParkCardType& cardKind );
     void ClearListContent( int nChannel );
@@ -262,6 +266,7 @@ public slots:
     void HandleRefreshUI( QString strRdid );
     void HandleSendFileCount( quint32 nCount );
     void HandleReadThreadData( QByteArray byData );
+    void HandleBroadData( QStringList lstData );
 
 private slots:
     void PlateCardComfirmPass( QString strCardNo, char cCan, QString strPlate );

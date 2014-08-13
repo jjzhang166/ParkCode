@@ -11,7 +11,7 @@ CReporter::CReporter(QObject *parent) :
     QObject(parent)
 {
     QSettings* pSysSet = CCommonFunction::GetSettings( CommonDataType::CfgSystem );
-    strPronvice = pSysSet->value( "CommonCfg/PronviceID", '´¨' ).toString( );
+    strPronvice = pSysSet->value( "CommonCfg/ProvinceID", "´¨" ).toString( );
     bPersonTime = false;
     pReportThread = QReportThread::CreateReportThread( );
     connect( pReportThread, SIGNAL( ReportData( int, QStringList ) ),

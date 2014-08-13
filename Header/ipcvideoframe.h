@@ -7,6 +7,7 @@
 #include "./HKIPC/qhkipcthread.h"
 #include "./JWSIPC/qjwsipcthread.h"
 #include "./JbIPC/qjbipc.h"
+#include "./AllInOne/qvzallinone.h"
 
 namespace Ui {
 class CIPCVideoFrame;
@@ -19,7 +20,7 @@ class CIPCVideoFrame : public QFrame
 public:
     explicit CIPCVideoFrame( bool bIPC, QWidget *parent = 0);
     ~CIPCVideoFrame();
-    void LocalIPCStartVideo( QString& strIP, HWND hPlayWnd );
+    void LocalIPCStartVideo( QString& strIP, HWND hPlayWnd, int nChannel );
     void LocalIPCStopVideo( HWND hPlayWnd );
     void LocalIPCLogout( );
     void LocalIPCLogin( );
@@ -44,9 +45,15 @@ private slots:
     void on_btnCloseAll_clicked();
 
     void HandleNotifyMessage( QString strMsg );
+    void HandleUIPlateResult( QString strPlate, int nChannel, bool bSuccess,
+                              bool bVideo, int nWidth, int nHeight, int nConfidence,
+                              QString strDirection, QByteArray byData, QRect rectPlate, QRect rectVideo );
 
 signals:
     void NotifyMessage( QString strMsg );
+    void UIPlateResult( QString strPlate, int nChannel, bool bSuccess,
+                              bool bVideo, int nWidth, int nHeight, int nConfidence,
+                              QString strDirection, QByteArray byData, QRect rectPlate, QRect rectVideo );
 
 private:
     typedef QMultiHash< QString, QString > QHostIPCHash;
@@ -58,7 +65,7 @@ private:
     void LoginIPC( const QString& strIP );
     void LogoutIPC( const QString& strIP );
 
-   void StartPlayIPC( const QString& strIP, HWND hPlayWnd );
+   void StartPlayIPC( const QString& strIP, HWND hPlayWnd, int nChannel = 1, bool bChannel = false );
     void StopPlayIPC( HWND hPlayWnd );
 
     void GetHostIPC( );

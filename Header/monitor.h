@@ -151,6 +151,7 @@ private:
     QLabel* lblVideoWnd[ VIDEO_USEDWAY ];
     QLabel* lblLicense[ VIDEO_USEDWAY ][ 8 ];
     QHash< QString, int > plateResult[ 4 ][ 8 ];
+    int nCanAddressWinIndex[ VIDEO_USEDWAY ];
 
     bool bPlateStart[ VIDEO_USEDWAY ];
     bool bBallotSense[ ENCODECHANNEL ];

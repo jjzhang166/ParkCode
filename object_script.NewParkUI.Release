@@ -172,6 +172,7 @@ INPUT(
 ./release\readthread.o
 ./release\qreportthread.o
 ./release\qreportevent.o
+./release\qvzallinone.o
 ./release\moc_valuecard.o
 ./release\moc_tolldiscounttypeset.o
 ./release\moc_timecard.o
@@ -318,4 +319,5 @@ INPUT(
 ./release\moc_cdlgbulkcharge.o
 ./release\moc_readthread.o
 ./release\moc_qreportthread.o
+./release\moc_qvzallinone.o
 );

@@ -31,6 +31,7 @@ private:
 
 signals:
     void RefreshUI( QString strRdid );
+    void BroadData( QStringList lstData );
 
 public slots:
 

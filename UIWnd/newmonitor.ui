@@ -1126,7 +1126,7 @@ background-color: rgb(255, 255, 255);</string>
     <enum>Qt::CustomDashLine</enum>
    </property>
    <attribute name="horizontalHeaderVisible">
-    <bool>false</bool>
+    <bool>true</bool>
    </attribute>
    <attribute name="horizontalHeaderDefaultSectionSize">
     <number>100</number>
@@ -1237,6 +1237,11 @@ background-color: rgb(255, 255, 255);</string>
    <column>
     <property name="text">
      <string>TargetIP</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Stoprdid</string>
     </property>
    </column>
   </widget>

@@ -1104,6 +1104,11 @@ background-color: rgb(255, 255, 255);</string>
      <string>TargetIP</string>
     </property>
    </column>
+   <column>
+    <property name="text">
+     <string>Stoprdid</string>
+    </property>
+   </column>
   </widget>
   <widget class="QPushButton" name="btnSysMan">
    <property name="geometry">

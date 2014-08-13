@@ -474,6 +474,8 @@ CMonitor::CMonitor(QWidget* mainWnd, QWidget *parent) :
     ipcVideoFrame = new CIPCVideoFrame( bNetworkCamera );
     connect( ipcVideoFrame, SIGNAL( NotifyMessage( QString ) ),
              this, SLOT( HandleIPCMsg( QString ) ) );
+    connect( ipcVideoFrame, SIGNAL(UIPlateResult(QString,int,bool,bool,int,int,int,QString,QByteArray,QRect,QRect)),
+             this, SLOT(HandleUIPlateResult(QString,int,bool,bool,int,int,int,QString,QByteArray,QRect,QRect)));
 }
 
 void CMonitor::HandleIPCMsg( QString strMsg )
@@ -588,6 +590,7 @@ void CMonitor::InitVideoPlateUI( )
             QString strCan = pSystem->value( strKey, "0" ).toString( );
 
             lblVideoWnd[ nIndex ]->setToolTip( strCan );
+            nCanAddressWinIndex[ nIndex ] = strCan.toInt( );
             if ( "0" != strCan && bNetworkCamera ) {
                 QString strSQL = QString( "Select video2ip from roadconerinfo where \
                                           shebeiadr = %1 and video1ip = '%2'" ).arg(
@@ -746,7 +749,7 @@ void CMonitor::DisplayAlert( QStringList &lstData )
 void CMonitor::FillDataGrid( QStringList &lstData )
 {
     int nField = 1;
-    int nCols = 12;
+    int nCols = 13;
     int nRows = lstData.count( ) / nCols;
     if ( 0 >= nRows ) {
         return;
@@ -1037,6 +1040,7 @@ void CMonitor::ControlDataGrid( QTableWidget& tw )
     pHeader->hideSection( 8 );
     pHeader->hideSection( 9 );
     pHeader->hideSection( 10 );
+    pHeader->hideSection( 11 );
 }
 
 void CALLBACK PrcPicMessage( long lnCardID, long pBuf, long lnWidth, long lnHeight )
@@ -1549,7 +1553,8 @@ void CMonitor::IPCVideo( bool bPlayVideo )
 {
     HWND hPlayWnd;
     QString strIP;
-
+    int nCanAddr;
+//nUsedWay决定了使用的视频窗口数
     for ( int nIndex = 0; nIndex < nUsedWay; nIndex++ ) {
         //PlayVideo( nIndex, lblVideoWnd[ nIndex ] );
         hPlayWnd = lblVideoWnd[ nIndex ]->winId( );
@@ -1557,11 +1562,17 @@ void CMonitor::IPCVideo( bool bPlayVideo )
 
         if ( strIP.isEmpty( ) || "0" == strIP || "127.0.0.1" == strIP ) {
             LoadVideoWndBg( nIndex );
+            //跳过该路视频，若后面还有车牌识别，需要建立虚拟口子，IPC不设置或设为0或127.0.0.1
             continue;
         }
 
         if ( bPlayVideo ) {
-            ipcVideoFrame->LocalIPCStartVideo( strIP, hPlayWnd );
+            nCanAddr = nCanAddressWinIndex[ nIndex ];
+            if ( 0 != nCanAddr ) {
+                nCanAddr--;
+            }
+
+            ipcVideoFrame->LocalIPCStartVideo( strIP, hPlayWnd, nIndex + 1 );//( nCanAddr % 4 ) + 1 );
         } else {
             ipcVideoFrame->LocalIPCStopVideo( hPlayWnd );
         }
@@ -2464,14 +2475,16 @@ void CMonitor::on_tabRecord_cellDoubleClicked(int row, int column)
 
         QString strSql;
         bool bFreeCard = ( 10 == nType || 11 == nType  );
-        QString strWhere = QString( " Where stoprdid = ( select stoprdid from stoprd Where cardno = '%1' and %2 = '%3' and %4 = '%5' )" ).arg(
-                                    strCardNo, strChannelField, strChannel, strTimeField, strDateTime );
+        //QString strWhere = QString( " Where stoprdid = ( select stoprdid from stoprd Where cardno = '%1' and %2 = '%3' and %4 = '%5' )" ).arg(
+        //                            strCardNo, strChannelField, strChannel, strTimeField, strDateTime );
 
         CLogicInterface logInterf;
         CMySqlDatabase& mySql = logInterf.GetMysqlDb( );
         QStringList lstParams;
         CCommonFunction::ConnectMySql( lstParams );
         lstParams[ 0 ] = pWG->item( row, 10 )->text( ); //IP
+        QString strStoprdid = pWG->item( row, 11 )->text( );
+        QString strWhere = QString( " Where stoprdid = %1" ).arg( strStoprdid );
         bool bRet = mySql.DbConnect( lstParams[ 0 ], lstParams[ 1 ], lstParams[ 2 ], lstParams[ 3 ], lstParams[ 4 ].toUInt( ) );
         if ( !bRet ) {
             return;
@@ -2482,10 +2495,9 @@ void CMonitor::on_tabRecord_cellDoubleClicked(int row, int column)
                       d.inshebeiname, d.intime, d.outshebeiname, d.outtime, d.cardkind, d.carcp, d.carcpout, d.feekind \
                       from %3 a \
                       %4 \
-                      inner join stoprd d on a.cardno = d.cardno and %5 = '%6' and %7 = '%8'" ).arg(
+                      inner join stoprd d on a.cardno = d.cardno and d.stoprdid = %5" ).arg(
                       strField[ nType ], ui->tabRecord->item( row, 0 )->text( ), strTable, strUser,
-                      strChannelField, strChannel,
-                      strTimeField, strDateTime );
+                      strStoprdid );
         } else if ( bFreeCard ) {
             strSql = "Select cardkind from stoprd " + strWhere;
             logInterf.ExecuteSql( strSql, lstData );
@@ -2500,10 +2512,9 @@ void CMonitor::on_tabRecord_cellDoubleClicked(int row, int column)
                 from %2 a \
                 %3 \
                 inner join carinfo c on a.cardno = c.cardindex \
-                inner join stoprd d on d.cardno = '%4' and %5 = '%6' and %7 = '%8'" ).arg(
+                inner join stoprd d on d.cardno = '%4' and d.stoprdid = %5" ).arg(
                 strField[ nType ], strTable, strUser, strCardNo,
-                strChannelField, strChannel,
-                strTimeField, strDateTime );
+                strStoprdid );
             } else {
                 strSql = QString( "Select cardno, cardselfno, feefactnum, '%1', '', inshebeiname, intime,outshebeiname,\
                                   outtime,cardkind, carcp, carcpout, feekind from stoprd " ).arg( ui->tabRecord->item( row, 0 )->text( ) );
@@ -2516,10 +2527,9 @@ void CMonitor::on_tabRecord_cellDoubleClicked(int row, int column)
                           from %2 a \
                           %3 \
                           inner join carinfo c on a.cardno = c.cardindex \
-                          inner join stoprd d on a.cardno = d.cardno and %4 = '%5' and %6 = '%7'" ).arg(
+                          inner join stoprd d on a.cardno = d.cardno and d.stoprdid = %4" ).arg(
                           strField[ nType ], strTable, strUser,
-                          strChannelField, strChannel,
-                          strTimeField, strDateTime );
+                          strStoprdid );
         }
         qDebug( ) << strSql << endl;
 
@@ -2548,6 +2558,7 @@ void CMonitor::on_tabRecord_cellDoubleClicked(int row, int column)
 
 void CMonitor::on_pushButton_clicked()
 {
+    /*
     QFile file( qApp->applicationDirPath( ) + "/logo.jpg" );
     bool bRet = file.open( QIODevice::ReadOnly );
     qDebug( ) << file.errorString( ) << " : " << file.fileName( ) << endl;
@@ -2605,7 +2616,7 @@ void CMonitor::on_pushButton_clicked()
             Sleep( 60000 * 3 );
         }
     }
-
+*/
 }
 
 #include "../Network/http.h"

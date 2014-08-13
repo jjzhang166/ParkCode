@@ -50,7 +50,20 @@ void CDbWriteThread::ExcuteSQL( CLogicInterface& intf, bool bSQL, CDbEvent::Writ
             QStringList lstRow;
             intf.ExecuteSql( paramter.strSql, lstRow );
         } else {
-            intf.ExecuteSql( paramter.strSql );
+            if ( paramter.bGarage ) {
+                intf.ExecuteSql( paramter.strSql );
+            } else {
+                QString strSQL = QString( "Call ReturnStoprdid( %1, \"%2\", \"%3\" )" ).arg( QString::number( paramter.nInsert ),
+                                                                                       paramter.strCardNo,
+                                                                                       paramter.strSql );
+                QStringList lstRow;
+                intf.ExecuteSql( strSQL, lstRow );
+
+                if ( 0 < lstRow.size( ) ) {
+                    paramter.lstBroadcastData << lstRow.at( 0 );
+                    emit BroadData( paramter.lstBroadcastData );
+                }
+            }
         }
     } else {
         if ( paramter.bGarage ) {
