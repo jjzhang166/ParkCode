@@ -53,7 +53,7 @@ private:
     QLabel* lblImage[ 8 ];
     QGroupBox* gbImage[  8 ];
     QLabel* lblScaleImage[ 8 ];
-    QComboBox* cbxQuery[ 9 ];
+    QComboBox* cbxQuery[ 6 ];
     QReportThread* pReportThread;
 
 private slots:
@@ -66,6 +66,8 @@ private slots:
     void on_btnSerach_clicked();
     void on_lineEdit_textChanged(const QString &arg1);
     void HandleExecuteSQLData( int nType, QStringList lstData, int );
+    void on_chkStart_toggled(bool checked);
+    void on_chkEnd_toggled(bool checked);
 };
 
 #endif // ACCESS2RECORDS_H

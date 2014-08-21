@@ -215,7 +215,8 @@ SOURCES += mainwindow.cpp \
     SerialPort/readthread.cpp \
     Report/qreportthread.cpp \
     Report/qreportevent.cpp \
-    AllInOne/qvzallinone.cpp
+    AllInOne/qvzallinone.cpp \
+    AllInOne/qdhallinone.cpp
 
 HEADERS  += Header/valuecard.h \
     Header/tolldiscounttypeset.h \
@@ -393,7 +394,8 @@ HEADERS  += Header/valuecard.h \
     SerialPort/readthread.h \
     Report/qreportthread.h \
     Report/qreportevent.h \
-    AllInOne/qvzallinone.h
+    AllInOne/qvzallinone.h \
+    AllInOne/qdhallinone.h
 
 FORMS    += UIWnd/newvaluecard.ui \
     UIWnd/tolldiscounttypeset.ui \

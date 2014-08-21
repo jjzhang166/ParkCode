@@ -126,7 +126,7 @@ private:
     void ManualNoCardWork( QStringList &lstParams, int nAmount, char cCan, QStringList& lstSqlParam );
     void ManualTimeCardWork( QStringList &lstParams, int nAmount, char cCan );
     bool GateNoCardWork( QByteArray& byData, QString& strPlate,
-                         char cCan, QString& strCardno, QString& strType, QString& strChannel, int& nFee );
+                         char cCan, QString& strCardno, QString& strType, QString& strChannel, int& nFee, bool& bMonth );
     inline void GetChannelName( bool bEnter, char cCan, QString& strChannel );
     void GetHourMin( int nMins, int& nHour, int& nMin );
     void WriteFeeData( QString& strCardType, QString& strCardNo, int nAmount, QString& strDateTime );

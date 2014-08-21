@@ -288,6 +288,7 @@ void CMonthlyCardDialog::on_btnExit_clicked( )
 
 QString CMonthlyCardDialog::ClearZero( QLineEdit *pEdit )
 {
+    //return pEdit->text( );
     return QString::number( pEdit->text( ).toUInt( ) );
 }
 

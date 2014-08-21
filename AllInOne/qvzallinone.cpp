@@ -189,6 +189,7 @@ int QVzAllInOne::MyVZLPRC_PLATE_INFO_CALLBACK(VzLPRClientHandle handle, void *pU
                                                const VZ_LPRC_IMAGE_INFO *pImgFull,
                                                const VZ_LPRC_IMAGE_INFO *pImgPlateClip )
 {
+    return 0;
     QVzAllInOne* pThread = ( QVzAllInOne* ) pUserData;
     pThread->EmitPlate( handle,
                         pResult, uNumPlates,

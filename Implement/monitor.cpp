@@ -700,7 +700,7 @@ void CMonitor::InitStatistics(  )
         strTmp = strSql.arg( strField[ nIndex ], strDate + strTime1, strDate + strTime2, strField[ nIndex ],
                              CCommonFunction::GetHostIP( ),
                              ( ( ( 0 == nIndex ) || ( 3 == nIndex ) ) ? "!" : "" ),
-                             ( ( 1 >= nIndex ) ? "" : "and cardkind = '计时卡'" ) );
+                             ( ( 1 >= nIndex ) ? "" : "and cardkind in( '计时卡', '无卡工作' )" ) );
         nRows = CLogicInterface::GetInterface( )->ExecuteSql( strTmp, lstData );
         if ( 0 < nRows ) {
             UpdateStatistics( lstData[ 0 ].toInt( ), nIndex, true );

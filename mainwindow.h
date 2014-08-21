@@ -61,6 +61,7 @@ public:
     void GetInOutPixmap(QPixmap &bmpEnter, QPixmap &bmpLeave);
     void UpdateStatistics( int nNumber, int nIndex );
     void EmployeeCard( QString& strCardno );
+    bool IsEmployeeCard( QString& strCardno );
     QString GetCurrentUserID( );
 
     void SetBallotSense( bool bSense, int nChannel, QByteArray& byData );

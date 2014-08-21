@@ -151,6 +151,11 @@ void CLoginDialog::ResponseButton( int nAccept )
     //::ClipCursor( NULL );
 }
 
+bool CLoginDialog::IsEmployeeCard( QString &strCardNo )
+{
+    return lstEmployeeID.contains( strCardNo );
+}
+
 void CLoginDialog::InitDlg( QStringList &strUsers )
 {
     // append(), operator+=() and operator<<()
@@ -173,6 +178,8 @@ void CLoginDialog::InitDlg( QStringList &strUsers )
         ui->cbxUserName->addItem( strUser, strPwd ); // itemData( )
         ui->cbxUserName->setItemData( nItem, strID, Qt::StatusTipRole );
         ui->cbxUserName->setItemData( nItem++, strEmployeeID, Qt::WhatsThisRole );
+
+        lstEmployeeID << strEmployeeID;
     }
 }
 

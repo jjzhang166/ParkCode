@@ -1,0 +1,333 @@
+-- Trigger DDL Statements
+DELIMITER $$
+
+USE `parkadmin`$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`InsertStoprd`
+AFTER INSERT ON `parkadmin`.`stoprd`
+FOR EACH ROW
+BEGIN
+ if '计时卡' = new.cardkind then
+    insert tmpcardintime( cardno, intime ) values( new.cardno, new.intime );
+ end if;
+END$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`UpdateStoprd`
+AFTER UPDATE ON `parkadmin`.`stoprd`
+FOR EACH ROW
+BEGIN
+ if '计时卡' = new.cardkind then
+  if ( old.invideo1 is null && new.invideo1 is not null ) then
+    update tmpcardintime set invideo1 = new.invideo1 where cardno = old.cardno and intime = old.intime;
+  elseif ( old.outtime is null &&  new.outtime is not null ) then
+    delete from tmpcardintime where cardno = old.cardno and intime = old.intime;
+  end if;
+ end if;
+END$$
+
+
+
+-- Trigger DDL Statements
+DELIMITER $$
+
+USE `parkadmin`$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`monthcard_ai`
+AFTER INSERT ON `parkadmin`.`monthcard`
+FOR EACH ROW
+BEGIN
+DECLARE a,b INT;
+DECLARE ai char(30);
+DECLARE cur_1 CURSOR FOR SELECT shebeiid FROM roadconerinfo;
+DECLARE cur_2 CURSOR FOR SELECT shebeiname FROM roadconerinfo;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET b = 1;
+OPEN cur_1;
+OPEN cur_2;
+set b = 0;
+while b<>1 do
+FETCH cur_1 INTO a;
+FETCH cur_2 INTO ai;
+if b<>1 then
+insert into cardright(cardno,roadconind,shebeiname) values(NEW.cardno,a,ai);
+end if;
+END while;
+CLOSE cur_1;
+CLOSE cur_2;
+insert into userinfo(cardindex) values(NEW.cardno);
+insert into carinfo(cardindex) values(NEW.cardno); 
+END$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`monthcard_au`
+AFTER UPDATE ON `parkadmin`.`monthcard`
+FOR EACH ROW
+BEGIN
+if new.cardno<>old.cardno then
+update userinfo set userinfo.cardindex=new.cardno where userinfo.cardindex=old.cardno;
+update carinfo set carinfo.cardindex=new.cardno where carinfo.cardindex=old.cardno;
+update cardright set cardright.cardno=new.cardno where cardright.cardno=old.cardno;
+update feerd set feerd.cardno=new.cardno where feerd.cardno=old.cardno;
+update stoprd set stoprd.cardno=new.cardno where stoprd.cardno=old.cardno;
+end if;
+END$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`monthcard_ad`
+AFTER DELETE ON `parkadmin`.`monthcard`
+FOR EACH ROW
+BEGIN
+delete from userinfo where userinfo.cardindex=OLD.cardno;
+delete from carinfo where carinfo.cardindex=OLD.cardno;
+delete from cardright where cardright.cardno=OLD.cardno;
+delete from stoprd where stoprd.cardno=OLD.cardno and stoprd.outtime is NULL; 
+END$$
+
+
+//////////////////////////////////////////////////////////////////
+-- Trigger DDL Statements
+DELIMITER $$
+
+USE `parkadmin`$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`parkinfo_ai`
+AFTER INSERT ON `parkadmin`.`parkinfo`
+FOR EACH ROW
+BEGIN
+ 
+    update feeratebackup set RParkid=New.parkindex;
+    insert into feerate(RParkid,RFeeModel,RTimeIndex,RSmTime,RBmTime,RMoney,RMoneyDw,RIncTime) select * from feeratebackup;
+    insert into feerate1(RParkid,RFeeModel) values(New.parkindex,0);
+    insert into feerate1(RParkid,RFeeModel) values(New.parkindex,1);
+    insert into feerate1(RParkid,RFeeModel) values(New.parkindex,2);
+    insert into feerate1(RParkid,RFeeModel) values(New.parkindex,3);
+    insert into feerate1(RParkid,RFeeModel) values(New.parkindex,4);
+    insert into feerate1(RParkid,RFeeModel) values(New.parkindex,5);
+    insert into feerate1(RParkid,RFeeModel) values(New.parkindex,6);
+    insert into feerate1(RParkid,RFeeModel) values(New.parkindex,7);
+END$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`parkinfo_au`
+AFTER UPDATE ON `parkadmin`.`parkinfo`
+FOR EACH ROW
+BEGIN
+if new.parkname<>old.parkname then 
+update treeview set treeview.shebeiname=new.parkname where treeview.shebeiid=old.shebeiid;
+end if;
+END$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`parkinfo_ad`
+AFTER DELETE ON `parkadmin`.`parkinfo`
+FOR EACH ROW
+BEGIN
+    delete from feerate where RParkid=Old.parkindex;
+    delete from feerate1 where RParkid=Old.parkindex;
+END$$
+
+
+//////////////////////////////////////////////////////////////////////////////////
+-- Trigger DDL Statements
+DELIMITER $$
+
+USE `parkadmin`$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`roadconerinfo_au`
+AFTER UPDATE ON `parkadmin`.`roadconerinfo`
+FOR EACH ROW
+BEGIN
+if new.shebeiname<>old.shebeiname then 
+update cardright set  cardright.shebeiname=new.shebeiname where cardright.roadconind=old.shebeiid;
+update treeview set treeview.shebeiname=new.shebeiname where treeview.shebeiid=old.shebeiid;
+end if;
+END$$
+
+////////////////////////////////////////////////////////////////
+
+-- Trigger DDL Statements
+DELIMITER $$
+
+USE `parkadmin`$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`savecard_ai`
+AFTER INSERT ON `parkadmin`.`savecard`
+FOR EACH ROW
+BEGIN
+DECLARE a,b INT;
+DECLARE ai char(30);
+DECLARE cur_1 CURSOR FOR SELECT shebeiid FROM roadconerinfo;
+DECLARE cur_2 CURSOR FOR SELECT shebeiname FROM roadconerinfo;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET b = 1;
+OPEN cur_1;
+OPEN cur_2;
+set b = 0;
+while b<>1 do
+FETCH cur_1 INTO a;
+FETCH cur_2 INTO ai;
+if b<>1 then
+insert into cardright(cardno,roadconind,shebeiname) values(NEW.cardno,a,ai);
+end if;
+END while;
+CLOSE cur_1;
+CLOSE cur_2;
+insert into userinfo(cardindex) values(NEW.cardno);
+insert into carinfo(cardindex) values(NEW.cardno); 
+END$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`savecard_au`
+AFTER UPDATE ON `parkadmin`.`savecard`
+FOR EACH ROW
+BEGIN
+if new.cardno<>old.cardno then
+update userinfo set userinfo.cardindex=new.cardno where userinfo.cardindex=old.cardno;
+update carinfo set carinfo.cardindex=new.cardno where carinfo.cardindex=old.cardno;
+update cardright set cardright.cardno=new.cardno where cardright.cardno=old.cardno;
+update feerd set feerd.cardno=new.cardno where feerd.cardno=old.cardno;
+update stoprd set stoprd.cardno=new.cardno where stoprd.cardno=old.cardno;
+end if;
+END$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`savecard_ad`
+AFTER DELETE ON `parkadmin`.`savecard`
+FOR EACH ROW
+BEGIN
+delete from userinfo where userinfo.cardindex=OLD.cardno;
+delete from carinfo where carinfo.cardindex=OLD.cardno;
+delete from cardright where cardright.cardno=OLD.cardno;
+delete from stoprd where stoprd.cardno=OLD.cardno and stoprd.outtime is NULL;  
+END$$
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+-- Trigger DDL Statements
+DELIMITER $$
+
+USE `parkadmin`$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`tmpcard_ai`
+AFTER INSERT ON `parkadmin`.`tmpcard`
+FOR EACH ROW
+BEGIN
+DECLARE a,b INT;
+DECLARE ai char(30);
+DECLARE cur_1 CURSOR FOR SELECT shebeiid FROM roadconerinfo;
+DECLARE cur_2 CURSOR FOR SELECT shebeiname FROM roadconerinfo;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET b = 1;
+OPEN cur_1;
+OPEN cur_2;
+set b = 0;
+while b<>1 do
+FETCH cur_1 INTO a;
+FETCH cur_2 INTO ai;
+if b<>1 then
+insert into cardright(cardno,roadconind,shebeiname) values(NEW.cardno,a,ai);
+end if;
+END while;
+CLOSE cur_1;
+CLOSE cur_2;
+END$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`tmpcard_au`
+AFTER UPDATE ON `parkadmin`.`tmpcard`
+FOR EACH ROW
+BEGIN
+if new.cardno<>old.cardno then
+update cardright set cardright.cardno=new.cardno where cardright.cardno=old.cardno;
+update stoprd set stoprd.cardno=new.cardno where stoprd.cardno=old.cardno;
+end if;
+END$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`tmpcard_ad`
+AFTER DELETE ON `parkadmin`.`tmpcard`
+FOR EACH ROW
+BEGIN
+delete from cardright where cardright.cardno=OLD.cardno;
+delete from stoprd where stoprd.cardno=OLD.cardno and stoprd.outtime is NULL;  
+END$$
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+ -- Trigger DDL Statements
+DELIMITER $$
+
+USE `parkadmin`$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`treeview_ai`
+AFTER INSERT ON `parkadmin`.`treeview`
+FOR EACH ROW
+BEGIN
+DECLARE a,b INT;
+DECLARE ai char(50);
+DECLARE cur_1 CURSOR FOR SELECT cardno FROM monthcard;
+DECLARE cur_2 CURSOR FOR SELECT cardno FROM savecard;
+DECLARE cur_3 CURSOR FOR SELECT cardno FROM tmpcard;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET b = 1;
+OPEN cur_1;
+OPEN cur_2;
+OPEN cur_3;
+set b = 0;
+if NEW.shebeikind = 'kzq'   then
+FETCH cur_1 INTO ai;
+while b<>1 do
+insert into cardright(cardno,roadconind,shebeiname) values(ai,new.shebeiid,shebeiname);
+FETCH cur_1 INTO ai;
+END while; 
+set b = 0;
+FETCH cur_2 INTO ai;
+while b<>1 do
+insert into cardright(cardno,roadconind,shebeiname) values(ai,new.shebeiid,shebeiname);
+FETCH cur_2 INTO ai;
+END while; 
+set b = 0;
+FETCH cur_3 INTO ai;
+while b<>1 do
+insert into cardright(cardno,roadconind,shebeiname) values(ai,new.shebeiid,shebeiname);
+FETCH cur_3 INTO ai;
+END while;
+insert into roadconerinfo(shebeiid) values(NEW.shebeiid);
+end if;
+if NEW.shebeikind= 'tcc'  then
+insert into parkinfo(shebeiid) values(NEW.shebeiid);
+end if;
+END$$
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `parkadmin`.`treeview_ad`
+AFTER DELETE ON `parkadmin`.`treeview`
+FOR EACH ROW
+BEGIN
+delete from roadconerinfo where roadconerinfo.shebeiid=old.shebeiid;
+delete from parkinfo where parkinfo.shebeiid=old.shebeiid;
+delete from cardright where cardright.roadconind=old.shebeiid;
+END$$

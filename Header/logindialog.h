@@ -33,6 +33,7 @@ public:
     void HideLicenseButton( bool bServer );
 
     bool AutoLogin( );
+    bool IsEmployeeCard( QString& strCardNo );
 
 protected:
     void closeEvent ( QCloseEvent * event );
@@ -51,6 +52,7 @@ private:
     QString strImagePath;
     QString strCurrentID;
     bool bLicense;
+    QStringList lstEmployeeID;
 
 private slots:
     void on_cbxUserName_currentIndexChanged(int index);

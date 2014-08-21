@@ -46,15 +46,12 @@ CAccess2Records::CAccess2Records(QWidget* mainWnd, QWidget *parent) :
     gbImage[ 6 ] = ui->gb6;
     gbImage[ 7 ] = ui->gb7;
 
-    cbxQuery[ 0 ] = ui->cb0;
-    cbxQuery[ 1 ] = ui->cb1;
-    cbxQuery[ 2 ] = ui->cb2;
-    cbxQuery[ 3 ] = ui->cb3;
-    cbxQuery[ 4 ] = ui->cb4;
-    cbxQuery[ 5 ] = ui->cb5;
-    cbxQuery[ 6 ] = ui->cb6;
-    cbxQuery[ 7 ] = ui->cb7;
-    cbxQuery[ 8 ] = ui->cb8;
+    cbxQuery[ 0 ] = ui->cbCardNo;
+    cbxQuery[ 1 ] = ui->cb2;
+    cbxQuery[ 2 ] = ui->cbInChannel;
+    cbxQuery[ 3 ] = ui->cbOutChannel;
+    cbxQuery[ 4 ] = ui->cbInPlate;
+    cbxQuery[ 5 ] = ui->cbOutPlate;
 
     QRect rect;
     rect.setX( 10 );
@@ -406,22 +403,60 @@ void CAccess2Records::on_tableAccessRecord_cellDoubleClicked(int row, int column
 
 void CAccess2Records::GetWhere( QString &strWhere )
 {
-    QString strText = "";
     strWhere = "";
 
-    for ( uint nSection = 0; nSection < sizeof ( cbxQuery ) / sizeof ( QComboBox* ); nSection++ ) {
-        strText = cbxQuery[ nSection ]->currentText( );
+    if ( ui->chkStart->isChecked( ) ) {
+        strWhere = ui->dtStart0->statusTip( ).arg( ui->dtStart0->text( ),
+                                                   ui->dtStart1->text( ) );
+    }
 
-        if ( strText.isEmpty( ) || "无" == strText ) {
-            continue;
+    if ( ui->chkEnd->isChecked( ) ) {
+        if ( !strWhere.isEmpty( ) ) {
+            strWhere += " AND ";
         }
 
-        strText = cbxQuery[ nSection ]->statusTip( ).arg( strText );
-        if ( strWhere.isEmpty( ) ) {
-            strWhere = strText;
-        } else {
-            strWhere += " And " + strText;
+        strWhere += ui->dtEnd0->statusTip( ).arg( ui->dtEnd0->text( ),
+                                                   ui->dtEnd1->text( ) );
+    }
+
+    if ( 0 != ui->cbInChannel->currentIndex( ) ) {
+        if ( !strWhere.isEmpty( ) ) {
+            strWhere += " AND ";
         }
+
+        strWhere += ui->cbInChannel->statusTip( ).arg( ui->cbInChannel->currentText( ) );
+    }
+
+    if ( 0 != ui->cbOutChannel->currentIndex( ) ) {
+        if ( !strWhere.isEmpty( ) ) {
+            strWhere += " AND ";
+        }
+
+        strWhere += ui->cbOutChannel->statusTip( ).arg( ui->cbOutChannel->currentText( ) );
+    }
+
+    if ( !ui->cbCardNo->currentText( ).isEmpty( ) ) {
+        if ( !strWhere.isEmpty( ) ) {
+            strWhere += " AND ";
+        }
+
+        strWhere += ui->cbCardNo->statusTip( ).arg( ui->cbCardNo->currentText( ) );
+    }
+
+    if ( !ui->cbInPlate->currentText( ).isEmpty( ) ) {
+        if ( !strWhere.isEmpty( ) ) {
+            strWhere += " AND ";
+        }
+
+        strWhere += ui->cbInPlate->statusTip( ).arg( ui->cbInPlate->currentText( ) );
+    }
+
+    if ( !ui->cbOutPlate->currentText( ).isEmpty( ) ) {
+        if ( !strWhere.isEmpty( ) ) {
+            strWhere += " AND ";
+        }
+
+        strWhere += ui->cbOutPlate->statusTip( ).arg( ui->cbOutPlate->currentText( ) );
     }
 
     if ( !strWhere.isEmpty( ) ) {
@@ -447,9 +482,35 @@ void CAccess2Records::InitQuery( )
 {
     ui->label_2->setVisible( false );
     ui->cb1->setVisible( false );
+
+    QDateTime dt = QDateTime::currentDateTime( );
+    dt.setTime( QTime( 0, 0, 0 ));
+    ui->dtStart0->setDateTime( dt );
+    ui->dtEnd0->setDateTime( ui->dtStart0->dateTime( ) );
+
+    dt.setTime( QTime( 23, 59, 59 ) );
+    ui->dtStart1->setDateTime( dt );
+    ui->dtEnd1->setDateTime( ui->dtStart1->dateTime( ) );
+
+    ui->cbInChannel->addItem( "全部" );
+    ui->cbOutChannel->addItem( "全部" );
+    QString strSql = QString( "Select shebeiadr, shebeiname from roadconerinfo" );
+    QStringList lstRows;
+    int nRows = CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstRows );
+
+    for ( int nRow = 0; nRow < nRows; nRow++ ) {
+        QString& strText = lstRows[ nRow * 2 + 1 ];
+        if ( 0 == ( lstRows[ nRow * 2 + 0 ].toInt( ) % 2 ) ) {
+            ui->cbOutChannel->addItem( strText );
+        } else {
+            ui->cbInChannel->addItem( strText );
+        }
+    }
+
     //ui->label_3->setVisible( false );
     //ui->cb2->setVisible( false );
     return;
+    /*
     QDateTime dtCurrent = QDateTime::currentDateTime( );
     dtCurrent = dtCurrent.addMonths( -1 );
     QString strDateTime;
@@ -522,6 +583,7 @@ void CAccess2Records::InitQuery( )
             lstTmp = lstValues.at( nSection ).split( strSeperator );
             cbxQuery[ nSection ]->addItems( lstTmp );
         }
+        */
 }
 
 bool CAccess2Records::Search( QComboBox *pCB, int nRow, int nCol )
@@ -529,7 +591,7 @@ bool CAccess2Records::Search( QComboBox *pCB, int nRow, int nCol )
     bool bRet = true;
     QString strText = pCB->currentText( );
 
-    if ( !strText.isEmpty( ) && "无"  != strText ) {
+    if ( !strText.isEmpty( ) && "全部"  != strText ) {
         QString strRaw = ui->tableAccessRecord->item( nRow, nCol )->text( );
         bRet = strRaw.contains( strText );
     }
@@ -561,19 +623,16 @@ void CAccess2Records::on_btnSerach_clicked()
                 break;
 
             case 2 :
-            case 3 :
-            case 6 :
-                nTmp = nSection + 3;
+                nTmp = nSection + 4;
                 break;
 
-            case 5 :
-                nTmp = nSection + 2;
+            case 3 :
+                nTmp = nSection + 5;
                 break;
 
             case 4 :
-            case 7 :
-            case 8 :
-                nTmp = nSection + 4;
+            case 5 :
+                nTmp = nSection + 7;
                 break;
             }
 
@@ -592,6 +651,17 @@ void CAccess2Records::on_btnSerach_clicked()
 
 void CAccess2Records::on_lineEdit_textChanged(const QString &arg1)
 {
-    ui->cb0->clear( );
-    ui->cb0->addItem( arg1 );
+
+}
+
+void CAccess2Records::on_chkStart_toggled(bool checked)
+{
+    ui->dtStart0->setEnabled( checked );
+    ui->dtStart1->setEnabled( checked );
+}
+
+void CAccess2Records::on_chkEnd_toggled(bool checked)
+{
+    ui->dtEnd0->setEnabled( checked );
+    ui->dtEnd1->setEnabled( checked );
 }

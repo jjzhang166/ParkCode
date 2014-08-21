@@ -1,0 +1,2 @@
+CommonCfg/DirectDb 使用后台线程写出记录
+CommonCfg/TimeCardBuffer 计时卡使用缓冲表

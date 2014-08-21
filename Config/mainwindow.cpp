@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->cbxIPC->setItemData( 0, "HK" );
     ui->cbxIPC->setItemData( 1, "JWS" );
     ui->cbxIPC->setItemData( 2, "VZAllInOne" );
+    ui->cbxIPC->setItemData( 3, "DHAllInOne" );
 
     ui->cbxCapture->setItemData( 0, "HK" );
     ui->cbxCapture->setItemData( 1, "TM" );
@@ -131,6 +132,8 @@ void MainWindow::ReadFile( )
             ui->cbxIPC->setCurrentIndex( 1 );
         } else if ( strType == "VZALLINONE" ) {
             ui->cbxIPC->setCurrentIndex( 2 );
+        } else if ( strType == "DHALLINONE" ) {
+            ui->cbxIPC->setCurrentIndex( 3 );
         }
     } else {
         ui->rdbAnlog->setChecked( true );

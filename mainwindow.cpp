@@ -1058,6 +1058,15 @@ void MainWindow::EmployeeCard( QString &strCardno )
     pDlgLogin->EmployeeCard( strCardno );
 }
 
+bool MainWindow::IsEmployeeCard( QString &strCardno )
+{
+    if ( NULL == pDlgLogin ) {
+        return false;
+    }
+
+    return pDlgLogin->IsEmployeeCard( strCardno );
+}
+
 void MainWindow::CreateChildren( )
 {
      pChildMap = new Ui::childMap( );

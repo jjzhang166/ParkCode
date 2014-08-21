@@ -246,6 +246,11 @@
        <string>VZ一体机</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>DH一体机</string>
+      </property>
+     </item>
     </widget>
     <widget class="QComboBox" name="cbxCapture">
      <property name="geometry">

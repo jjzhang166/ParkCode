@@ -38,9 +38,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>40</y>
+      <y>60</y>
       <width>1221</width>
-      <height>201</height>
+      <height>250</height>
      </rect>
     </property>
     <property name="toolTip">
@@ -131,9 +131,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>250</y>
+      <y>318</y>
       <width>1221</width>
-      <height>321</height>
+      <height>271</height>
      </rect>
     </property>
     <property name="maximumSize">
@@ -173,7 +173,7 @@
          <x>10</x>
          <y>20</y>
          <width>251</width>
-         <height>251</height>
+         <height>211</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -217,7 +217,7 @@
          <x>10</x>
          <y>20</y>
          <width>251</width>
-         <height>251</height>
+         <height>211</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -261,7 +261,7 @@
          <x>10</x>
          <y>20</y>
          <width>251</width>
-         <height>251</height>
+         <height>211</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -305,7 +305,7 @@
          <x>10</x>
          <y>20</y>
          <width>251</width>
-         <height>251</height>
+         <height>211</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -351,7 +351,7 @@
          <x>10</x>
          <y>20</y>
          <width>251</width>
-         <height>251</height>
+         <height>211</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -392,7 +392,7 @@
          <x>10</x>
          <y>20</y>
          <width>251</width>
-         <height>251</height>
+         <height>211</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -433,7 +433,7 @@
          <x>10</x>
          <y>20</y>
          <width>251</width>
-         <height>251</height>
+         <height>211</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -543,7 +543,7 @@
          <x>10</x>
          <y>20</y>
          <width>251</width>
-         <height>251</height>
+         <height>211</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -572,7 +572,7 @@
     <property name="geometry">
      <rect>
       <x>520</x>
-      <y>585</y>
+      <y>590</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -589,8 +589,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1201</width>
-      <height>31</height>
+      <width>1231</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -599,16 +599,48 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
+    <widget class="QPushButton" name="btnSerach">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>1150</x>
+       <y>30</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>查找</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnQuery">
+     <property name="geometry">
+      <rect>
+       <x>1069</x>
+       <y>30</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>全【无】查询所有记录。</string>
+     </property>
+     <property name="text">
+      <string>查询</string>
+     </property>
+    </widget>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>7</y>
-       <width>1166</width>
-       <height>25</height>
+       <x>11</x>
+       <y>8</y>
+       <width>751</width>
+       <height>22</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
@@ -620,7 +652,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="cb0">
+       <widget class="QComboBox" name="cbCardNo">
         <property name="statusTip">
          <string>cardno like '%%1%'</string>
         </property>
@@ -660,9 +692,9 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="cb3">
+       <widget class="QComboBox" name="cbInChannel">
         <property name="statusTip">
-         <string>inshebeiname like '%%1%'</string>
+         <string>inshebeiname = '%1'</string>
         </property>
         <property name="editable">
          <bool>true</bool>
@@ -680,49 +712,9 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="cb4">
+       <widget class="QComboBox" name="cbOutChannel">
         <property name="statusTip">
-         <string>outshebeiname like '%%1%'</string>
-        </property>
-        <property name="editable">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_9">
-        <property name="text">
-         <string>进入时间</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="cb5">
-        <property name="statusTip">
-         <string>intime like '%%1%'</string>
-        </property>
-        <property name="editable">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_10">
-        <property name="text">
-         <string>离开时间</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="cb6">
-        <property name="statusTip">
-         <string>outtime like '%%1%'</string>
+         <string>outshebeiname = '%1'</string>
         </property>
         <property name="editable">
          <bool>true</bool>
@@ -740,7 +732,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="cb7">
+       <widget class="QComboBox" name="cbInPlate">
         <property name="statusTip">
          <string>carcp like '%%1%'</string>
         </property>
@@ -760,7 +752,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="cb8">
+       <widget class="QComboBox" name="cbOutPlate">
         <property name="statusTip">
          <string>carcpout like '%%1%'</string>
         </property>
@@ -769,25 +761,113 @@
         </property>
        </widget>
       </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>33</y>
+       <width>830</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
-       <widget class="QPushButton" name="btnQuery">
-        <property name="toolTip">
-         <string>全【无】查询所有记录。</string>
-        </property>
-        <property name="text">
-         <string>查询</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QCheckBox" name="chkStart">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>进入时间从</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateTimeEdit" name="dtStart0">
+          <property name="statusTip">
+           <string>intime between '%1' and '%2'</string>
+          </property>
+          <property name="displayFormat">
+           <string>yyyy-MM-dd HH:mm:ss</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>到</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateTimeEdit" name="dtStart1">
+          <property name="displayFormat">
+           <string>yyyy-MM-dd HH:mm:ss</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="btnSerach">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>查找</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QCheckBox" name="chkEnd">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>离开时间从</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateTimeEdit" name="dtEnd0">
+          <property name="statusTip">
+           <string>outtime between '%1' and '%2'</string>
+          </property>
+          <property name="displayFormat">
+           <string>yyyy-MM-dd HH:mm:ss</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>到</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateTimeEdit" name="dtEnd1">
+          <property name="displayFormat">
+           <string>yyyy-MM-dd HH:mm:ss</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
