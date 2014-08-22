@@ -40,6 +40,8 @@ private:
     void ClearText( int nStart );
     void SaveCarInfo( );
     void MonthBulkProcess( bool bState );
+    void GetFilePath( QString& strFile );
+    void UpdateImage( QString& strFile, bool bUser );
 
 private slots:
     void on_lblClose_linkActivated(QString);
@@ -82,6 +84,8 @@ private slots:
     void textChanged ( QString text );
 
     void on_btnSaveRight_clicked();
+    void on_btnLoadUserImg_clicked();
+    void on_btnLoadCarImg_clicked();
 };
 
 #endif // MONTHLYCARD_H

@@ -16,6 +16,7 @@
 #include "Dialog/dlgcardloss.h"
 #include "Dialog/cdlgbulkcharge.h"
 #include "Network/parkintranet.h"
+#include <QFileDialog>
 
 CMonthlyCard::CMonthlyCard(QWidget* mainWnd, QWidget *parent) :
     QFrame(parent),
@@ -671,4 +672,58 @@ void CMonthlyCard::on_btnSaveRight_clicked()
     CCommonFunction::UpateCardRight( lstRows, ui->tableEntranceRight );
     CLogicInterface::GetInterface( )->OperateInOutRight( lstRows, CommonDataType::UpdateData, strWhere );
     CCommonFunction::OperationSuccess( );
+}
+
+void CMonthlyCard::GetFilePath( QString &strFile )
+{
+    QStringList lstFile = QFileDialog::getOpenFileNames( this, "", QDir::currentPath( ), "图片文件 (*.jpeg *.jpg)" );
+    if ( 0 == lstFile.size( ) ) {
+        return;
+    }
+
+    if ( QMessageBox::Ok != CCommonFunction::MsgBox( NULL, "提示", "确定要导入此图片吗？", QMessageBox::Question ) ) {
+        return;
+    }
+
+    strFile = lstFile.at( 0 );
+}
+
+void CMonthlyCard::UpdateImage(QString &strFile, bool bUser )
+{
+    if ( strFile.isEmpty( ) || !QFile::exists( strFile ) ) {
+        return;
+    }
+
+    QString strID = "";
+    if ( bUser ) {
+        strID = ui->lblUserID->text( );
+    } else if ( 0 != lstCarID.size( ) ) {
+        strID = lstCarID[ 0 ];
+    }
+
+    if ( strID.isEmpty( ) ) {
+        return;
+    }
+
+    QString strWhere = QString( " where %1 = %2" ).arg( bUser ? "Userid" : "carid", strID );
+    CLogicInterface::GetInterface( )->OperateBlob( strFile, true,
+                                                   bUser ? CommonDataType::BlobOwner : CommonDataType::BlobVehicle,
+                                                   strWhere, false );
+
+    QPixmap pixMap( strFile );
+    bUser ? ui->lblOwner->setPixmap( pixMap ) : ui->lblCar->setPixmap( pixMap );
+}
+
+void CMonthlyCard::on_btnLoadUserImg_clicked()
+{
+    QString strFile = "";
+    GetFilePath( strFile );
+    UpdateImage( strFile, true );
+}
+
+void CMonthlyCard::on_btnLoadCarImg_clicked()
+{
+    QString strFile = "";
+    GetFilePath( strFile );
+    UpdateImage( strFile, false );
 }
