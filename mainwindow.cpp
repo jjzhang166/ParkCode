@@ -2155,7 +2155,7 @@ void MainWindow::on_actLicense_triggered()
 
 void MainWindow::on_actStay_triggered()
 {
-        CDlgStaying dlg;
+        CDlgStaying dlg( this );
         dlg.exec( );
 }
 

@@ -9,6 +9,7 @@
 #include <QResizeEvent>
 #include "Common/CommonType.h"
 #include "Common/logicinterface.h"
+#include "../Header/printMonthlyReport.h"
 
 namespace Ui {
     class CPictureContrastDlg;
@@ -26,6 +27,8 @@ public:
     QString GetFeeRateType( );
     QString GetDiscountType( );
     void SetNoEnterTime( bool bUnknown, int nMiNFee = 0 );
+    QString GetCardNo( );
+    QString GetPlate( );
 
 public:
     void InitDlg( QStringList& lstRows, QPixmap& bmpEnter, QPixmap& bmpLeave, QByteArray& byData, bool bBuffer);
@@ -49,6 +52,7 @@ signals:
     void SendTimeCardInfo( QByteArray &byData, QByteArray &vData, int nMin, int nHour, int nAmount, bool bEnter );
 
 private:
+    void ShowVerifyPlate( int nChannel );
     void ConnectRadioBtn( );
     void Calculate( QRadioButton& rbtn );
     void SwitchImage( QPushButton *pBtn, bool bDown );
@@ -71,6 +75,8 @@ private slots:
     void CbxIndexChanged( int nIndex );
     void onLinkActivated( QString link );
     void PlateCheck( QString strChar, int nChannel, int nIndex );
+    void HandleManualRecogonization( int nChannel, QString strPlate );
+    void HandleEnterPlate( QStringList lstParams );
 
 private:
     Ui::CPictureContrastDlg *ui;
@@ -90,6 +96,7 @@ private:
     int nCardType;
     QString strParkID;
     CPictureContrastDlg* pFeeDlg;
+    CPrintMonthlyReport *pPrintMonthlyReport;
 
     QByteArray byData1;
     QByteArray vData1;
@@ -101,6 +108,7 @@ private:
     QString strFeeRateType;
     CLogicInterface* pDbInterface;
     bool bNoEnterTime;
+    bool bRawNoEnterTime;
     int nMinFee4NoEnterTime;
 };
 

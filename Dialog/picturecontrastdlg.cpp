@@ -4,6 +4,7 @@
 #include <SerialPort/processdata.h>
 #include "Common/logicinterface.h"
 #include "Header/printmonthlyreport.h"
+#include "dlgstaying.h"
 
 void CPictureContrastDlg::keyPressEvent( QKeyEvent *event )
 {
@@ -47,6 +48,65 @@ void CPictureContrastDlg::keyPressEvent( QKeyEvent *event )
     }
 }
 
+QString CPictureContrastDlg::GetCardNo( )
+{
+    return ui->edtCardID->text( );
+}
+
+QString CPictureContrastDlg::GetPlate( )
+{
+    return ui->edtVechilePlate->text( );
+}
+
+void CPictureContrastDlg::HandleManualRecogonization( int nChannel, QString strPlate )
+{
+    int nIndex = 0;
+    foreach ( const QChar& c, strPlate ) {
+        QString strCPlate( c );
+        if ( 8 <= nIndex ) {
+            break;
+        }
+
+        lblLicense[ nChannel ][ nIndex++ ]->setText( strCPlate );
+    }
+
+    if ( 1 == nChannel ) {
+        QString strSQL = QString( "Select cardno, intime, inshebeiname from tmpcardintime where cardno = '%1'" ).arg( strPlate );
+        QStringList lstRows;
+        int nRows = CLogicInterface::GetInterface( )->ExecuteSql( strSQL, lstRows );
+
+        if ( 0 < nRows ) {
+            bNoEnterTime = false;
+            bRawNoEnterTime = false;
+            ui->edtCardID->setText( lstRows.at( 0 ) );
+            ui->edtEnterTime->setText( lstRows.at( 1 ) );
+            ui->edtVechilePlate->setText( strPlate );
+            ui->edtEnterChannel->setText( lstRows.at( 2 ) );
+
+            dtStart = CCommonFunction::String2DateTime( lstRows[ 1 ] );
+
+            quint64 nMinute = ( dtEnd.toMSecsSinceEpoch( ) - dtStart.toMSecsSinceEpoch( ) ) / ( 1000 * 60 );
+            nHour = nMinute / 60;
+            nMin = nMinute - nHour * 60;
+
+            ui->edtStayTime->setText( QString::number( nHour ) + "时" + QString::number( nMin ) + "分" );
+
+            QString strName = "rdx%1";
+            QString strTmp;
+            QRadioButton* pRdx = NULL;
+
+            for ( int nIndex = 1; nIndex <= 8; nIndex++ ) {
+                strTmp = strName.arg( nIndex );
+                pRdx = findChild< QRadioButton* >( strTmp );
+                if ( pRdx->isChecked( ) ) {
+                    CaculateAndPlay( *pRdx, true );
+                    break;
+                }
+            }
+        }
+    }
+}
+
 CPictureContrastDlg::CPictureContrastDlg( QWidget *parent ) :
     QDialog(parent),
     ui(new Ui::CPictureContrastDlg)
@@ -58,9 +118,17 @@ CPictureContrastDlg::CPictureContrastDlg( QWidget *parent ) :
     nAmount = 0;
     nFeeNum = 0;
     nStandardFee = 0;
+    bNoEnterTime = false;
+    bRawNoEnterTime = false;
 
     strButtonStyle = "background-image:url(%1NewIcon/%2-%3.JPG);\nborder-style: outset; ";
     CCommonFunction::GetPath( strImagePath, CommonDataType::PathUIImage );
+
+    pPrintMonthlyReport = new CPrintMonthlyReport( NULL, false );
+    QString strStyle = QString( "background-image:url(%1NewIcon/VerifyPlate.JPG)" ).arg( strImagePath );
+    pPrintMonthlyReport->setStyleSheet( strStyle );
+    connect( pPrintMonthlyReport, SIGNAL( ManualRecogonization( int, QString ) ),
+             this, SLOT( HandleManualRecogonization( int, QString ) ) );
 
     QString strTmp = strButtonStyle.arg( strImagePath, ui->btnVerifyIn->objectName( ), "normal" );
     ui->btnVerifyIn->setStyleSheet( strTmp );
@@ -132,6 +200,7 @@ QString CPictureContrastDlg::GetDiscountType( )
 void CPictureContrastDlg::SetNoEnterTime(bool bUnknown, int nMinFee )
 {
     bNoEnterTime = bUnknown;
+    bRawNoEnterTime = bUnknown;
     nMinFee4NoEnterTime = nMinFee;
 }
 
@@ -551,6 +620,11 @@ void CPictureContrastDlg::RbtnClicked( )
 {
     QRadioButton* pBtn = dynamic_cast< QRadioButton* > ( sender( ) );
     if ( NULL != pBtn ) {
+
+        if ( bRawNoEnterTime ) {
+            bNoEnterTime = ( pBtn == ui->rdx6 ) ? false : true;
+        }
+
         AnalogClicked( pBtn );
     }
 }
@@ -601,6 +675,59 @@ void CPictureContrastDlg::SwitchImage( QPushButton *pBtn, bool bDown )
     pBtn->setStyleSheet( strStyle );
 }
 
+void CPictureContrastDlg::HandleEnterPlate( QStringList lstParams )
+{
+    if ( 4 > lstParams.size( ) ) {
+        return;
+    }
+
+    ui->edtCardID->setText( lstParams.at( 0 ) );
+    QString strPlate = lstParams.at( 1 );
+    ui->edtVechilePlate->setText( strPlate );
+    ui->edtEnterChannel->setText( lstParams.at( 2 ) );
+    ui->edtEnterTime->setText( lstParams.at( 3 ) );
+
+    dtStart = CCommonFunction::String2DateTime( lstParams[ 3 ] );
+
+    quint64 nMinute = ( dtEnd.toMSecsSinceEpoch( ) - dtStart.toMSecsSinceEpoch( ) ) / ( 1000 * 60 );
+    nHour = nMinute / 60;
+    nMin = nMinute - nHour * 60;
+
+    ui->edtStayTime->setText( QString::number( nHour ) + "时" + QString::number( nMin ) + "分" );
+
+    if ( "未知" != strPlate ) {
+        int nIndex = 0;
+        foreach ( const QChar& c, strPlate ) {
+            QString strCPlate( c );
+            if ( 8 <= nIndex ) {
+                break;
+            }
+
+            lblLicense[ 0 ][ nIndex++ ]->setText( strCPlate );
+        }
+
+        HandleManualRecogonization( 1, ui->edtVechilePlate->text( ) );
+    }
+}
+
+void CPictureContrastDlg::ShowVerifyPlate( int nChannel )
+{
+    if ( 0 == nChannel ) {
+        CDlgStaying dlg;
+        dlg.DisableControl( );
+        connect( &dlg, SIGNAL( EnterPlate( QStringList ) ),
+                 this, SLOT( HandleEnterPlate( QStringList ) ) );
+        dlg.exec( );
+        return;
+    }
+
+    pPrintMonthlyReport->setParent( this );
+    int nIndex = 0;
+    pPrintMonthlyReport->move( 0, height( ) - pPrintMonthlyReport->height( ) );
+    pPrintMonthlyReport->SetChannelIndex( nChannel, nIndex );
+    pPrintMonthlyReport->show( );
+}
+
 void CPictureContrastDlg::OnClickedDlgPopup( )
 {
     QPushButton* pBtn = qobject_cast< QPushButton* >( sender( ) );
@@ -621,9 +748,9 @@ void CPictureContrastDlg::OnClickedDlgPopup( )
         LoadMyImage( CommonDataType::BlobVehicleIn4, strCardNo, bHistory );
         LoadMyImage( CommonDataType::BlobVehicleOut4, strCardNo, bHistory );
     } else if ( strName == ui->btnVerifyIn->objectName( ) ) {
-
+        ShowVerifyPlate( 0 );
     } else if ( strName == ui->btnVerifyOut->objectName( ) ) {
-
+        ShowVerifyPlate( 1 );
     }
 }
 

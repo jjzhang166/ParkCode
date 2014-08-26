@@ -1,7 +1,7 @@
 #include "Header/printmonthlyreport.h"
 #include "ui_printmonthlyreport.h"
 
-CPrintMonthlyReport::CPrintMonthlyReport(QWidget* mainWnd, QWidget *parent) :
+CPrintMonthlyReport::CPrintMonthlyReport(QWidget* mainWnd, bool bPosition, QWidget *parent) :
     QFrame(parent),
     ui(new Ui::CPrintMonthlyReport)
 {
@@ -11,11 +11,13 @@ CPrintMonthlyReport::CPrintMonthlyReport(QWidget* mainWnd, QWidget *parent) :
     nPlateChannel = 0;
     nPlateIndex = 0;
 
+    if ( bPosition ) {
 #ifdef NewUI
     move( 47, 430 );
 #else
     move( 48, 546 );
 #endif
+    }
 
     InitUI( );
 }

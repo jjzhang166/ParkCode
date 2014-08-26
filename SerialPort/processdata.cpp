@@ -2472,7 +2472,7 @@ int CProcessData::GetMinFee( char cCan )
 bool CProcessData::GateNoCardWork( QByteArray& byData, QString& strPlate,
                                    char cCan, QString& strCardNo,
                                    QString& strType, QString& strChannel,
-                                   int& nFee, bool& bMonth )
+                                   int& nFee, bool& bMonth, int& nDiscount )
 {
     bool bRet = MonthNoCardWorkMode( );
     bool bEnter = ( 0 != ( cCan % 2 ) );
@@ -2603,9 +2603,12 @@ bool CProcessData::GateNoCardWork( QByteArray& byData, QString& strPlate,
 
             bool bGate = PictureContrast( lstInit, nAmount, byData, strTmpID );
             if ( bGate ) {
+                nDiscount = nAmount;
                 pMainWindow->UpdateStatistics( nAmount, 2 );
                 pMainWindow->UpdateStatistics( pFeeDlg->GetAmount( ) - nAmount, 5 );
-
+                nFee = pFeeDlg->GetAmount( );
+                strCardNo = pFeeDlg->GetCardNo( );
+                strPlate = pFeeDlg->GetPlate( );
                 //ControlGate( false, byData, vData, cardKind );
             } else {
                 return false;
@@ -2707,11 +2710,12 @@ bool CProcessData::WriteInOutRecord( QByteArray& byData ) // 地感开闸
     }
 
     int nFee = 0;
+    int nDiscount = 0;
     bool bMonth = false;
 
     if ( !bGarage ) {
         bRet = GateNoCardWork( byData, strPlate, cCan, strCardNumber,
-                               strCardType, strChannel, nFee, bMonth );
+                               strCardType, strChannel, nFee, bMonth, nDiscount );
         if ( !bRet ) {
             return bRet;
         }
@@ -2756,7 +2760,7 @@ bool CProcessData::WriteInOutRecord( QByteArray& byData ) // 地感开闸
                 QStringList lstSqlParams;
                 lstSqlParams << strCardNumber << strDateTime << strChannel << strPlate << "1"
                              << QString::number( bEnter ) << QString::number( nFee )
-                             << QString::number( pFeeDlg->GetDisAmount( ) )
+                             << QString::number( nDiscount )
                              << QString::number( bNocardworkUnknown )
                              << pMainWindow->GetUserName( ) << pFeeDlg->GetDiscountType( ) \
                              << pFeeDlg->GetFeeRateType( ) << strCardType << strHex << QString::number( bMonth );

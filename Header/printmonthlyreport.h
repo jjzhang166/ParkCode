@@ -14,7 +14,7 @@ class CPrintMonthlyReport : public QFrame
     Q_OBJECT
 
 public:
-    explicit CPrintMonthlyReport( QWidget* mainWnd, QWidget *parent = 0);
+    explicit CPrintMonthlyReport( QWidget* mainWnd, bool bPosition = true, QWidget *parent = 0);
     ~CPrintMonthlyReport();
 
     void SetChannelIndex( int& nChannel, int& nIndex );

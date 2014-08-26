@@ -7,6 +7,7 @@
 #include "../Header/printyearlyreport.h"
 #include "../Report/qreportthread.h"
 #include "../SerialPort/processdata.h"
+#include "../Header/printMonthlyReport.h"
 
 namespace Ui {
 class CDlgStaying;
@@ -19,9 +20,13 @@ class CDlgStaying : public QDialog
 public:
     explicit CDlgStaying(QWidget *parent = 0);
     ~CDlgStaying();
+    void DisableControl( );
 
 protected:
     void closeEvent(QCloseEvent *);
+
+signals:
+    void EnterPlate( QStringList lstParams );
 
 private slots:
     void on_tableWidgetMonth_cellClicked(int row, int column);
@@ -53,10 +58,13 @@ private slots:
     void BulkTimeInRecordProcess( );
     void BulkNoCardInRecordProcess( );
     void ManualTimeFeeProcess( );
+    void ManualTimeVerifyPlateProcess( );
     void ManualNoCardFeeProcess( );
+    void ManualNoCardVerifyPlateProcess( );
     void HandleRefreshData( int nType );
     void HandleRefreshUI( QString strRdid );
     void HandleExecuteSQLData( int nType, QStringList lstData, int nRows );
+    void HandleManualRecogonization( int nChannel, QString strPlate );
 
     void on_tableWidgetMonth_customContextMenuRequested(const QPoint &pos);
 
@@ -71,9 +79,11 @@ private slots:
     void on_btnNextPage_clicked();
 
 private:
+    void EmitPlate( QTableWidget* pTabWidget );
     void ConnectDb( );
     void BulkInRecordProcess( QTableWidget* pTabWidget, int nType );
     void ManualFeeProcess( QTableWidget* pTabWidget, int nType );
+    void ManualVerifyPlateProcess( QTableWidget* pTabWidget, int nType );
 
     void GetSpParams( QString& strCardNo, QString& strStoprdid, QTableWidget* pTabWidget );
     void CreateContextMenu( );
@@ -106,6 +116,9 @@ private:
     CProcessData* pProcessData;
     CLogicInterface dbInterface;
     int nPage;
+    QTableWidget* pVerifyPlateTableWindget;
+    int nVerifyPlateType;
+    CPrintMonthlyReport *pPrintMonthlyReport;
 };
 
 #endif // DLGSTAYING_H
