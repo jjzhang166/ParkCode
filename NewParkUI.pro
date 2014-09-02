@@ -216,7 +216,13 @@ SOURCES += mainwindow.cpp \
     Report/qreportthread.cpp \
     Report/qreportevent.cpp \
     AllInOne/qvzallinone.cpp \
-    AllInOne/qdhallinone.cpp
+    AllInOne/qdhallinone.cpp \
+    Dialog/cdlgmodifycardno.cpp \
+    ThirdPartyController/ccontrollercmd.cpp \
+    ThirdPartyController/czjdctrlcmd.cpp \
+    ThirdPartyController/ccmdfactory.cpp \
+    ThirdPartyController/cxwctrlcmd.cpp \
+    ThirdPartyController/cvzctrlcmd.cpp
 
 HEADERS  += Header/valuecard.h \
     Header/tolldiscounttypeset.h \
@@ -395,7 +401,14 @@ HEADERS  += Header/valuecard.h \
     Report/qreportthread.h \
     Report/qreportevent.h \
     AllInOne/qvzallinone.h \
-    AllInOne/qdhallinone.h
+    AllInOne/qdhallinone.h \
+    Dialog/cdlgmodifycardno.h \
+    ThirdPartyController/ccontrollercmd.h \
+    ThirdPartyController/czjdctrlcmd.h \
+    ThirdPartyController/ccmdfactory.h \
+    ThirdPartyController/EnumType.h \
+    ThirdPartyController/cxwctrlcmd.h \
+    ThirdPartyController/cvzctrlcmd.h
 
 FORMS    += UIWnd/newvaluecard.ui \
     UIWnd/tolldiscounttypeset.ui \
@@ -469,7 +482,8 @@ FORMS    += UIWnd/newvaluecard.ui \
     qserialframe.ui \
     Dialog/cdlgmonthquery.ui \
     UIWnd/blacklist.ui \
-    Dialog/cdlgbulkcharge.ui
+    Dialog/cdlgbulkcharge.ui \
+    Dialog/cdlgmodifycardno.ui
 
 OTHER_FILES += \
     Doc/LedProtocol.doc \

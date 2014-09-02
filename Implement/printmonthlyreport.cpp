@@ -63,7 +63,7 @@ void CPrintMonthlyReport::InitUI( )
 {
     nChineseCount = 0;
     strAbbreviation = "╢╗╤У╦й╦с╧С╧П╨з╩╕╪╙╪╫╫Р╫З╬╘аибЁцицЖдЧгЮгМибкумНоФпбсЕт╔татф╡ьуЦ";
-    strAbbreviation += "ABCDEFGHIGKLMNOPQRSTUVWXYZ0123456789 ";
+    strAbbreviation += "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
     strAbbreviation += "╪врр╠Ш╪╨╦ЩпахирЗЁ╫йЫнГн╢иЙоШ╠ъм╗и╜╫П╬╞╣Г";
 
     int nCount = strAbbreviation.count( );

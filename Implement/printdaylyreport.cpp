@@ -152,6 +152,13 @@ void CPrintDaylyReport::on_btnGenerate_clicked()
     //QTime time = ui->dReportEndDate->maximumTime( );
     //dtEnd.setTime( time );
     //reporter.BuildHtmlDoc( dtStart, dtEnd, ( CommonDataType::ReportType ) nReportType, *ui->wvReport );
+
+    if ( CommonDataType::ReportProvince == nReportType ||
+         CommonDataType::ReportInProvince == nReportType ) {
+        QTime time( 23, 59, 59 );
+        dtEnd.setTime( time );
+    }
+
     reporter.BuildHtmlDoc( dtStart, dtEnd, ( CommonDataType::ReportType ) nReportType );
 }
 

@@ -17,6 +17,7 @@
 #include "Dialog/cdlgbulkcharge.h"
 #include "Network/parkintranet.h"
 #include <QFileDialog>
+#include "Dialog/cdlgmodifycardno.h"
 
 CMonthlyCard::CMonthlyCard(QWidget* mainWnd, QWidget *parent) :
     QFrame(parent),
@@ -472,6 +473,7 @@ void CMonthlyCard::CreateContextMenu( QTableWidget *parent )
         pMenu = new QMenu( parent );
         pMenu->addAction( "新增", this, SLOT( AddRecord( ) ) );
         pMenu->addAction( "批量新增", this, SLOT( AddBulkRecord( ) ) );
+        pMenu->addAction( "修改卡号", this, SLOT( ModifyCardNo( ) ) );
         pMenu->addAction( "编辑", this, SLOT( ModifyRecord( ) ) );
         pMenu->addAction( "删除", this, SLOT( DeleteRecord( ) ) );
         pMenu->addAction( "续费", this, SLOT( Recharge( ) ) );
@@ -488,6 +490,37 @@ void CMonthlyCard::CreateContextMenu( QTableWidget *parent )
     }
 
     pMenu->exec( parent->cursor( ).pos( ) );
+}
+
+void CMonthlyCard::ModifyCardNo( )
+{
+    int nRow = ui->tableMonthly->currentRow( );
+
+    if ( -1 == nRow ) {
+        CCommonFunction::MsgBox( NULL, "提示", "请选择记录！", QMessageBox::Information );
+        return;
+    }
+
+    QTableWidgetItem* pItem = ui->tableMonthly->item( nRow, 0 );
+    QString strRawCardNo = pItem->text( );
+    CDlgModifyCardNo dlg( NULL );
+    dlg.SetCardNo( strRawCardNo );
+    pParent->SetCardControl( dlg.GetCardNumCtrl( ) );
+    if ( QDialog::Rejected == dlg.exec( ) ) {
+        return;
+    }
+
+    pParent->SetCardControl( NULL );
+    QString strCardNo = dlg.GetCardNo( );
+    ui->tableMonthly->item( nRow, 0 )->setText( strCardNo );
+    ui->lblCardNo->setText( strCardNo );
+
+    QString strSql = QString( "Update monthcard set cardno = '%1' where cardno = '%2'" ).arg(
+               strCardNo, strRawCardNo );
+    CLogicInterface::GetInterface( )->ExecuteSql( strSql );
+    strSql = QString( "update cardstoprdid set cardno = '%1' where cardno = '%2'" ).arg(
+                strCardNo, strRawCardNo );
+    CLogicInterface::GetInterface( )->ExecuteSql( strSql );
 }
 
 void CMonthlyCard::on_tableMonthly_customContextMenuRequested( QPoint )

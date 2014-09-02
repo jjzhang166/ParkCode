@@ -893,7 +893,7 @@ int CProcessData::MatchNum( QString &strPlate, const QString &strTest )
 
 bool CProcessData::RecognizeFuzzyPlate( CommonDataType::QPlateCardHash &hash,
                                         QString &strCarNo,
-                                        QString& strPlate )
+                                        QString& strPlate, bool bRealPlate )
 {
     // typedef QHash< QString / Plate, QString / CardNo > QPlateCardHash;
     bool bRet = false;
@@ -929,6 +929,9 @@ bool CProcessData::RecognizeFuzzyPlate( CommonDataType::QPlateCardHash &hash,
 
     QString strTmpPlate = matchHash.value( lstKeys.at( lstKeys.count(  ) - 1 )  );
     strCarNo = hash.value( strTmpPlate );
+    if ( bRealPlate ) {
+        strPlate = strTmpPlate;
+    }
     bRet = true;
 
     return bRet;
@@ -986,6 +989,10 @@ void CProcessData::RecognizePlate( QString strPlate, int nChannel, int nConfiden
             //SenseOpenGate( bySerialData );
         }
 
+        return;
+    }
+
+    if ( strPlate.isEmpty( ) || "未知" == strPlate ) {
         return;
     }
 
@@ -2484,8 +2491,15 @@ bool CProcessData::GateNoCardWork( QByteArray& byData, QString& strPlate,
         return true;
     }
 
+    //RecognizeFuzzyPlate( ); 模糊识别
+    CommonDataType::QPlateCardHash& hash = CCommonFunction::GetPlateCardHash( );
+    QString strRawPlate = strPlate;
+    QString strRawCardNo = strCardNo;
+    RecognizeFuzzyPlate( hash, strCardNo, strPlate, true );
+
     QString strSql = QString( "Select NoCardWork( '%1', %2 )" ).arg( strPlate, QString::number( cCan ) );
     QStringList lstRow;
+    strPlate = strRawPlate;
     CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstRow );
     if ( 0 == lstRow.count( ) || lstRow.at( 0 ).isEmpty( ) ) {
         return false;
@@ -2524,6 +2538,7 @@ bool CProcessData::GateNoCardWork( QByteArray& byData, QString& strPlate,
         strType = "月租卡";
         //ProcessPlayDisplayList( nChannel );
     } else if ( "time" == strCardType ) {
+        strCardNo = strRawCardNo;
         bEnter = ( "1" == lstRow.at( 1 ) );
         cardType = CardTime;
 

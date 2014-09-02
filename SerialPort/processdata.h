@@ -51,7 +51,9 @@ public:
     void RecognizePlate( QString strPlate, int nChannel, int nConfidence, bool bNocard, QByteArray bySerialData );
     void CheckBlacklist( QStringList& lstData );
     int MatchNum( QString &strPlate, const QString &strTest );
-    bool RecognizeFuzzyPlate( CommonDataType::QPlateCardHash& hash, QString& strCarNo, QString& strPlate );
+    bool RecognizeFuzzyPlate( CommonDataType::QPlateCardHash& hash,
+                              QString& strCarNo, QString& strPlate,
+                              bool bRealPlate = false );
 
     void ParkspaceFull( bool bFull, QString& strInfo, char cCan );
     void CaptureManualGateImage( char cCan, QString& strWhere );

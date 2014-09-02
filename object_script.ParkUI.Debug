@@ -174,6 +174,7 @@ INPUT(
 ./debug\qreportevent.o
 ./debug\qvzallinone.o
 ./debug\qdhallinone.o
+./debug\cdlgmodifycardno.o
 ./debug\moc_valuecard.o
 ./debug\moc_tolldiscounttypeset.o
 ./debug\moc_timecard.o
@@ -322,4 +323,5 @@ INPUT(
 ./debug\moc_qreportthread.o
 ./debug\moc_qvzallinone.o
 ./debug\moc_qdhallinone.o
+./debug\moc_cdlgmodifycardno.o
 );

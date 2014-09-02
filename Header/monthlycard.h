@@ -58,6 +58,7 @@ private slots:
     void Serach( );
     void ChangeCard( );
     void Refresh( );
+    void ModifyCardNo( );
     void PrintCardInfo( );
     void Download2CC( );
     void CardLossProcess( );

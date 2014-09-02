@@ -216,7 +216,8 @@ SOURCES += mainwindow.cpp \
     Report/qreportthread.cpp \
     Report/qreportevent.cpp \
     AllInOne/qvzallinone.cpp \
-    AllInOne/qdhallinone.cpp
+    AllInOne/qdhallinone.cpp \
+    Dialog/cdlgmodifycardno.cpp
 
 HEADERS  += Header/valuecard.h \
     Header/tolldiscounttypeset.h \
@@ -396,7 +397,8 @@ HEADERS  += Header/valuecard.h \
     Report/qreportthread.h \
     Report/qreportevent.h \
     AllInOne/qvzallinone.h \
-    AllInOne/qdhallinone.h
+    AllInOne/qdhallinone.h \
+    Dialog/cdlgmodifycardno.h
 
 FORMS    += UIWnd/valuecard.ui \
     UIWnd/tolldiscounttypeset.ui \
@@ -469,7 +471,8 @@ FORMS    += UIWnd/valuecard.ui \
     VZPlateDemo/qtransparentframe.ui \
     Dialog/cdlgmonthquery.ui \
     UIWnd/blacklist.ui \
-    Dialog/cdlgbulkcharge.ui
+    Dialog/cdlgbulkcharge.ui \
+    Dialog/cdlgmodifycardno.ui
 
 OTHER_FILES += \
     Doc/LedProtocol.doc \

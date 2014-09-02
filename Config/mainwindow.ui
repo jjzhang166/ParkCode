@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>795</width>
-    <height>588</height>
+    <height>427</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>795</width>
-    <height>588</height>
+    <height>427</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>795</width>
-    <height>588</height>
+    <height>427</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -86,8 +86,8 @@
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>483</y>
+      <x>30</x>
+      <y>320</y>
       <width>231</width>
       <height>75</height>
      </rect>
@@ -164,7 +164,7 @@
       <x>30</x>
       <y>100</y>
       <width>231</width>
-      <height>181</height>
+      <height>145</height>
      </rect>
     </property>
     <property name="title">
@@ -174,7 +174,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>136</y>
+       <y>125</y>
        <width>153</width>
        <height>15</height>
       </rect>
@@ -196,37 +196,11 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>156</y>
-       <width>161</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_13">
-      <item>
-       <widget class="QLabel" name="label_13">
-        <property name="text">
-         <string>车辆图片是否实时保存：</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="chkCarPic">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
     <widget class="QComboBox" name="cbxIPC">
      <property name="geometry">
       <rect>
        <x>90</x>
-       <y>57</y>
+       <y>50</y>
        <width>131</width>
        <height>20</height>
       </rect>
@@ -256,7 +230,7 @@
      <property name="geometry">
       <rect>
        <x>90</x>
-       <y>108</y>
+       <y>101</y>
        <width>131</width>
        <height>20</height>
       </rect>
@@ -276,7 +250,7 @@
      <property name="geometry">
       <rect>
        <x>11</x>
-       <y>57</y>
+       <y>50</y>
        <width>72</width>
        <height>16</height>
       </rect>
@@ -289,7 +263,7 @@
      <property name="geometry">
       <rect>
        <x>11</x>
-       <y>108</y>
+       <y>101</y>
        <width>72</width>
        <height>16</height>
       </rect>
@@ -302,7 +276,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>18</y>
+       <y>15</y>
        <width>211</width>
        <height>31</height>
       </rect>
@@ -341,7 +315,7 @@
      <property name="geometry">
       <rect>
        <x>90</x>
-       <y>81</y>
+       <y>74</y>
        <width>131</width>
        <height>20</height>
       </rect>
@@ -361,7 +335,7 @@
      <property name="geometry">
       <rect>
        <x>11</x>
-       <y>81</y>
+       <y>74</y>
        <width>72</width>
        <height>16</height>
       </rect>
@@ -370,12 +344,64 @@
       <string>码流类型</string>
      </property>
     </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>150</y>
+       <width>141</width>
+       <height>15</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_30">
+      <item>
+       <widget class="QLabel" name="label_38">
+        <property name="text">
+         <string>是否实时显示车牌：  </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkPlateReal">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>161</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_13">
+      <item>
+       <widget class="QLabel" name="label_13">
+        <property name="text">
+         <string>车辆图片是否实时保存：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkCarPic">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>590</x>
-      <y>520</y>
+      <x>626</x>
+      <y>368</y>
       <width>158</width>
       <height>25</height>
      </rect>
@@ -401,7 +427,7 @@
     <property name="geometry">
      <rect>
       <x>550</x>
-      <y>190</y>
+      <y>180</y>
       <width>231</width>
       <height>141</height>
      </rect>
@@ -557,8 +583,8 @@
    <widget class="QGroupBox" name="groupBox_5">
     <property name="geometry">
      <rect>
-      <x>550</x>
-      <y>340</y>
+      <x>10</x>
+      <y>580</y>
       <width>231</width>
       <height>131</height>
      </rect>
@@ -649,8 +675,8 @@
    <widget class="QGroupBox" name="groupBox_6">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>393</y>
+      <x>20</x>
+      <y>490</y>
       <width>231</width>
       <height>80</height>
      </rect>
@@ -711,7 +737,7 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>243</y>
+      <y>180</y>
       <width>231</width>
       <height>141</height>
      </rect>
@@ -858,7 +884,7 @@
       <x>290</x>
       <y>10</y>
       <width>231</width>
-      <height>231</height>
+      <height>161</height>
      </rect>
     </property>
     <property name="title">
@@ -877,7 +903,7 @@
       <string>无车牌识别，需要关闭车牌别选项［车牌自动识别］</string>
      </property>
      <property name="text">
-      <string>压地感开闸</string>
+      <string>纯车牌无卡模式</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="edtLedCan">
@@ -904,14 +930,14 @@
       </rect>
      </property>
      <property name="text">
-      <string>独立显示屏CAN地址：</string>
+      <string>车位显示屏CAN地址：</string>
      </property>
     </widget>
     <widget class="QCheckBox" name="chkCapture">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>85</y>
+       <y>160</y>
        <width>211</width>
        <height>16</height>
       </rect>
@@ -923,8 +949,8 @@
     <widget class="QLabel" name="label_24">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>102</y>
+       <x>199</x>
+       <y>77</y>
        <width>24</width>
        <height>20</height>
       </rect>
@@ -937,20 +963,20 @@
      <property name="geometry">
       <rect>
        <x>12</x>
-       <y>103</y>
-       <width>111</width>
+       <y>78</y>
+       <width>138</width>
        <height>20</height>
       </rect>
      </property>
      <property name="text">
-      <string>远距离卡识别间隔：</string>
+      <string>同一月租卡有效读卡间隔：</string>
      </property>
     </widget>
     <widget class="QSpinBox" name="spRemoteTime">
      <property name="geometry">
       <rect>
-       <x>132</x>
-       <y>103</y>
+       <x>151</x>
+       <y>78</y>
        <width>42</width>
        <height>20</height>
       </rect>
@@ -969,7 +995,7 @@
      <property name="geometry">
       <rect>
        <x>11</x>
-       <y>128</y>
+       <y>103</y>
        <width>54</width>
        <height>12</height>
       </rect>
@@ -982,7 +1008,7 @@
      <property name="geometry">
       <rect>
        <x>76</x>
-       <y>125</y>
+       <y>100</y>
        <width>141</width>
        <height>20</height>
       </rect>
@@ -992,7 +1018,7 @@
      <property name="geometry">
       <rect>
        <x>13</x>
-       <y>146</y>
+       <y>173</y>
        <width>141</width>
        <height>16</height>
       </rect>
@@ -1014,14 +1040,14 @@
       <string>与【压地感开闸】实现无卡收费</string>
      </property>
      <property name="text">
-      <string>无卡工作模式 非月租车收费</string>
+      <string>纯车牌无卡模式临时卡收费</string>
      </property>
     </widget>
     <widget class="QCheckBox" name="chkBlacklist">
      <property name="geometry">
       <rect>
        <x>13</x>
-       <y>163</y>
+       <y>190</y>
        <width>151</width>
        <height>16</height>
       </rect>
@@ -1034,7 +1060,7 @@
      <property name="geometry">
       <rect>
        <x>13</x>
-       <y>183</y>
+       <y>210</y>
        <width>151</width>
        <height>16</height>
       </rect>
@@ -1043,24 +1069,11 @@
       <string>启用车牌跟踪框</string>
      </property>
     </widget>
-    <widget class="QCheckBox" name="chkSerialAnalog">
-     <property name="geometry">
-      <rect>
-       <x>13</x>
-       <y>203</y>
-       <width>151</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>启用窗口模拟程序</string>
-     </property>
-    </widget>
     <widget class="QCheckBox" name="chkNoCardUnknown">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>66</y>
+       <x>30</x>
+       <y>180</y>
        <width>211</width>
        <height>16</height>
       </rect>
@@ -1072,135 +1085,32 @@
       <string>无卡工作模式写未知车牌</string>
      </property>
     </widget>
+    <widget class="QCheckBox" name="chkSerialAnalog">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>63</y>
+       <width>151</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>启用窗口模拟程序</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_9">
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>290</y>
+      <y>250</y>
       <width>230</width>
-      <height>261</height>
+      <height>65</height>
      </rect>
     </property>
     <property name="title">
      <string>车牌识别配置</string>
     </property>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>60</y>
-       <width>177</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_12">
-      <item>
-       <widget class="QLabel" name="label_12">
-        <property name="text">
-         <string>第一路视频流识别实时显示：</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="chkPlateReal1">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="layoutWidget_14">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>80</y>
-       <width>177</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_23">
-      <item>
-       <widget class="QLabel" name="label_26">
-        <property name="text">
-         <string>第二路视频流识别实时显示：</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="chkPlateReal2">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="layoutWidget_15">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>100</y>
-       <width>177</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_24">
-      <item>
-       <widget class="QLabel" name="label_27">
-        <property name="text">
-         <string>第三路视频流识别实时显示：</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="chkPlateReal3">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="layoutWidget_16">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>120</y>
-       <width>177</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_25">
-      <item>
-       <widget class="QLabel" name="label_28">
-        <property name="text">
-         <string>第四路视频流识别实时显示：</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="chkPlateReal4">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
@@ -1231,7 +1141,7 @@
      <property name="geometry">
       <rect>
        <x>90</x>
-       <y>140</y>
+       <y>40</y>
        <width>101</width>
        <height>20</height>
       </rect>
@@ -1251,7 +1161,7 @@
      <property name="geometry">
       <rect>
        <x>11</x>
-       <y>140</y>
+       <y>40</y>
        <width>72</width>
        <height>16</height>
       </rect>
@@ -1273,25 +1183,115 @@
       <string>车牌识别多线程方式</string>
      </property>
     </widget>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QWidget" name="layoutWidget_16">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>40</y>
-       <width>141</width>
-       <height>15</height>
+       <y>140</y>
+       <width>177</width>
+       <height>16</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_30">
+     <layout class="QHBoxLayout" name="horizontalLayout_25">
       <item>
-       <widget class="QLabel" name="label_38">
+       <widget class="QLabel" name="label_28">
         <property name="text">
-         <string>是否实时显示车牌：  </string>
+         <string>第四路视频流识别实时显示：</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="chkPlateReal">
+       <widget class="QCheckBox" name="chkPlateReal4">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_15">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>120</y>
+       <width>177</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_24">
+      <item>
+       <widget class="QLabel" name="label_27">
+        <property name="text">
+         <string>第三路视频流识别实时显示：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkPlateReal3">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>177</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_12">
+      <item>
+       <widget class="QLabel" name="label_12">
+        <property name="text">
+         <string>第一路视频流识别实时显示：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkPlateReal1">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_14">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>177</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_23">
+      <item>
+       <widget class="QLabel" name="label_26">
+        <property name="text">
+         <string>第二路视频流识别实时显示：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chkPlateReal2">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
          <string/>
         </property>
