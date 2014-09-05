@@ -173,7 +173,7 @@ CmdType CXwCtrlCmd::GetEnumType( QByteArray& byCmdData )
     return cmd;
 }
 
-void CXwCtrlCmd::ConvertCmd2Vz( CmdType eSrcCmdType, QByteArray &bXwData, QByteArray &byVzData )
+void CXwCtrlCmd::ConvertCmd2Vz( CmdType eSrcCmdType, QByteArray &byXwData, QByteArray &byVzData )
 {
     if ( CmdReadCardID == eSrcCmdType ) {
 

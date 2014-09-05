@@ -23,6 +23,25 @@
 </Params>
 */
 
+//QPixmap 图片显示优化 QBitmap
+//QImage IO优化
+//QPicture  记录与播放QPainter命令
+
+// SMTP(25) 邮件发送协议  SMTP Client---->SMTP Server
+// 邮件管理协议
+// POP3 IMAP(143)
+
+/*
+  查询月租卡收费明细
+select d.cardno 卡号, d.feetime 收费时间, d.feenumb 收费金额, d.feeoperator 收费员,
+a.starttime 月租起始时间, a.endtime 月租截至时间,
+b.username 月租用户, b.userphone 月租用户电话,
+c.carcp 车牌号码, c.carmodel 车型
+from parkadmin.monthcard a, parkadmin.userinfo b, parkadmin.carinfo c, parkadmin.feerd d
+where a.cardno = b.cardindex and a.cardno = c.cardindex and a.cardno = d.cardno
+and d.feekind = '月租卡续费' and feetime between '2014-08-01 00:00:00' and '2014-09-10 23:59:59';
+  */
+
 
 int main(int argc, char *argv[])
 {

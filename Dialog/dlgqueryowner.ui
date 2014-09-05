@@ -20,7 +20,7 @@
    <property name="geometry">
     <rect>
      <x>51</x>
-     <y>120</y>
+     <y>115</y>
      <width>54</width>
      <height>12</height>
     </rect>
@@ -36,7 +36,7 @@
    <property name="geometry">
     <rect>
      <x>51</x>
-     <y>150</y>
+     <y>142</y>
      <width>61</width>
      <height>16</height>
     </rect>
@@ -52,13 +52,13 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>90</y>
+     <y>87</y>
      <width>271</width>
      <height>20</height>
     </rect>
    </property>
    <property name="statusTip">
-    <string> and c.cardno like '%%1%'</string>
+    <string> and c.cardno  = '%1'</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-image:url(none);</string>
@@ -74,7 +74,7 @@
     </rect>
    </property>
    <property name="statusTip">
-    <string> and c.cardselfno like '%%1%'</string>
+    <string> and c.cardselfno = '%1'</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-image:url(none);</string>
@@ -84,7 +84,7 @@
    <property name="geometry">
     <rect>
      <x>51</x>
-     <y>90</y>
+     <y>87</y>
      <width>54</width>
      <height>12</height>
     </rect>
@@ -100,13 +100,13 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>150</y>
+     <y>142</y>
      <width>271</width>
      <height>20</height>
     </rect>
    </property>
    <property name="statusTip">
-    <string> and a.username like '%%1%'</string>
+    <string> and a.username  = '%1'</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-image:url(none);</string>
@@ -144,11 +144,11 @@
     <string>关闭</string>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="edt5q">
+  <widget class="QPlainTextEdit" name="edt6q">
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>180</y>
+     <y>200</y>
      <width>271</width>
      <height>64</height>
     </rect>
@@ -164,7 +164,7 @@
    <property name="geometry">
     <rect>
      <x>51</x>
-     <y>180</y>
+     <y>200</y>
      <width>54</width>
      <height>12</height>
     </rect>
@@ -219,13 +219,13 @@ color: rgb(85, 0, 0);</string>
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>120</y>
+     <y>115</y>
      <width>271</width>
      <height>20</height>
     </rect>
    </property>
    <property name="statusTip">
-    <string> and b.carcp like '%%1%'</string>
+    <string> and b.carcp  = '%1'</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-image:url(none);</string>
@@ -242,6 +242,41 @@ color: rgb(85, 0, 0);</string>
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="edt5q">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>172</y>
+     <width>271</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="statusTip">
+    <string/>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>51</x>
+     <y>172</y>
+     <width>61</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image:url(none);</string>
+   </property>
+   <property name="text">
+    <string>月卡过期：</string>
    </property>
   </widget>
  </widget>

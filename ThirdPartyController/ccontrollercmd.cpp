@@ -8,7 +8,7 @@ CControllerCmd::CControllerCmd(QObject *parent) :
 
 void CControllerCmd::Convert2Hex( char& cData, int nData )
 {
-    // 28( Decimal )--->28( String )--->40( Hex )
+    // 28( Decimal )--->28( String )--->28( Hex )
     cData = QString::number( nData ).toUInt( 0, 16 );
 }
 

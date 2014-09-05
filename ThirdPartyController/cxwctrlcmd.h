@@ -40,7 +40,7 @@ protected:
     virtual void GetCardID( QByteArray& byCmdData, QByteArray& byCardID );
 
 private:
-    void ConvertCmd2Vz( CmdType eSrcCmdType, QByteArray& bXwData, QByteArray& byVzData );
+    void ConvertCmd2Vz( CmdType eSrcCmdType, QByteArray& byXwData, QByteArray& byVzData );
     
 signals:
     

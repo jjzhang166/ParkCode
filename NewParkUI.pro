@@ -222,7 +222,9 @@ SOURCES += mainwindow.cpp \
     ThirdPartyController/czjdctrlcmd.cpp \
     ThirdPartyController/ccmdfactory.cpp \
     ThirdPartyController/cxwctrlcmd.cpp \
-    ThirdPartyController/cvzctrlcmd.cpp
+    ThirdPartyController/cvzctrlcmd.cpp \
+    Led/ceqled.cpp \
+    Led/cledevent.cpp
 
 HEADERS  += Header/valuecard.h \
     Header/tolldiscounttypeset.h \
@@ -408,7 +410,9 @@ HEADERS  += Header/valuecard.h \
     ThirdPartyController/ccmdfactory.h \
     ThirdPartyController/EnumType.h \
     ThirdPartyController/cxwctrlcmd.h \
-    ThirdPartyController/cvzctrlcmd.h
+    ThirdPartyController/cvzctrlcmd.h \
+    Led/ceqled.h \
+    Led/cledevent.h
 
 FORMS    += UIWnd/newvaluecard.ui \
     UIWnd/tolldiscounttypeset.ui \

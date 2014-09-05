@@ -8,6 +8,7 @@
 #include "qipcthread.h"
 #include "Common/commonfunction.h"
 #include "../HKIPC/qipcevent.h"
+#include <QFile>
 
 class QDHAllInOne : public QIPCThread
 {

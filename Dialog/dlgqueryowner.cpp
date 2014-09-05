@@ -20,10 +20,11 @@ CDlgQueryOwner::~CDlgQueryOwner()
 
 void CDlgQueryOwner::on_btnQuery_clicked()
 {
-    QString strSql = "select cardselfno, cardno, carcp, username, Comments from userinfo a ";
+
+    QString strSql = "select cardselfno, cardno, carcp, username, endtime, Comments from userinfo a ";
             strSql += "inner join carinfo b on a.cardindex = b.cardindex inner join ";
-            strSql += "( select cardno, cardselfno from monthcard union ";
-            strSql += "select cardno, cardselfno from savecard ) c on c.cardno = a.cardindex ";
+            strSql += " monthcard ";
+            strSql += "c on c.cardno = a.cardindex ";
 
     QStringList lstData;
     QString strWhere = "";
@@ -31,7 +32,7 @@ void CDlgQueryOwner::on_btnQuery_clicked()
     QString strTmp = "";
     QLineEdit* pEdit = NULL;
 
-    for ( int nIndex = 1; nIndex <= 4; nIndex++ ) {
+    for ( int nIndex = 1; nIndex <= 5; nIndex++ ) {
         strTmp = strName.arg( nIndex );
         pEdit = findChild< QLineEdit* >( strTmp );
         strTmp = pEdit->text( );
@@ -51,13 +52,13 @@ void CDlgQueryOwner::on_btnQuery_clicked()
         return;
     }
 
-    for ( int nIndex = 1; nIndex <= 4; nIndex++ ) {
+    for ( int nIndex = 1; nIndex <= 5; nIndex++ ) {
         strTmp = strName.arg( nIndex );
         pEdit = findChild< QLineEdit* >( strTmp );
         pEdit->setText( lstData[ nIndex - 1 ] );
     }
 
-    ui->edt5q->setPlainText( lstData[ 4 ] );
+    ui->edt6q->setPlainText( lstData[ 5 ] );
 }
 
 void CDlgQueryOwner::on_btnClose_clicked()

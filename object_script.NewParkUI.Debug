@@ -180,6 +180,8 @@ INPUT(
 ./debug\ccmdfactory.o
 ./debug\cxwctrlcmd.o
 ./debug\cvzctrlcmd.o
+./debug\ceqled.o
+./debug\cledevent.o
 ./debug\moc_valuecard.o
 ./debug\moc_tolldiscounttypeset.o
 ./debug\moc_timecard.o
@@ -334,4 +336,5 @@ INPUT(
 ./debug\moc_ccmdfactory.o
 ./debug\moc_cxwctrlcmd.o
 ./debug\moc_cvzctrlcmd.o
+./debug\moc_ceqled.o
 );

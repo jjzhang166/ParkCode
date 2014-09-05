@@ -14,6 +14,9 @@ public:
 
 private:
     explicit CCmdFactory(QObject *parent = 0);
+
+    static CControllerCmd* pXwCtrl;
+    static CControllerCmd* pVzCtrl;
     
 signals:
     

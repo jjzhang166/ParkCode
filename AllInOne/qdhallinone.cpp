@@ -138,7 +138,6 @@ void QDHAllInOne::CapturePreviewImage( HWND hPlayWnd, QString& strFileName )
 
 void QDHAllInOne::CaptureDeviceImage( QString& strIP, QString& strFileName, HWND hPlayWnd )
 {
-    /*
     NullPointer( MyCLIENT_CapturePicture );
     QByteArray byData = pCodec->fromUnicode( strIP );
     byData.append( char( 0 ) );
@@ -159,18 +158,27 @@ void QDHAllInOne::CaptureDeviceImage( QString& strIP, QString& strFileName, HWND
         return;
     }
 
-    int nRet = MyCLIENT_CapturePicture( hPlayWnd, pFile, 70 );
+    LONG lPlayHandle = GetPlayHandle( hPlayWnd );
+
+    const char* pszBmp = "DHIPC.bmp";
+    int nRet = MyCLIENT_CapturePicture( lPlayHandle, pszBmp );
 
     if ( nRet ) {
-        if ( !QFile::exists( strFileName ) ) {
+        if ( !QFile::exists( pszBmp ) ) {
             QFile file( strFileName );
             if ( file.open( QIODevice::ReadWrite ) ) {
                 file.close( );
             }
+
+            return;
+        } else {
+            QImage image( pszBmp );
+            image.save( strFileName, "JPG" );
         }
+
+        QFile::remove( QString( pszBmp ) );
         return;
     }
-    */
 }
 
 void QDHAllInOne::ProcessIPCStartupEvent( QIPCEvent* pEvent )
@@ -182,11 +190,11 @@ void QDHAllInOne::ProcessIPCStartupEvent( QIPCEvent* pEvent )
     }
 
     bStarted = true;
-/*
-    NullPointer( MyVzLPRClient_Setup );
-    int nRet = MyVzLPRClient_Setup( );
-    QString strFunName = "VzLPRClient_Setup";
-    PrintExceptionCode( nRet, strFunName );*/
+
+    NullPointer( MyCLIENT_Init );
+    int nRet = MyCLIENT_Init( NULL, 0 );
+    QString strFunName = "CLIENT_Init";
+    PrintExceptionCode( nRet, strFunName );
 }
 
 QString QDHAllInOne::GetPlateMoveDirection( int nDirection )
@@ -260,11 +268,15 @@ void QDHAllInOne::EmitPlate( VzLPRClientHandle handle,
 void QDHAllInOne::ProcessIPCSetConnectTimeoutEvent( QIPCEvent* pEvent )
 {
     Q_UNUSED( pEvent )
+    NullPointer( MyCLIENT_SetConnectTime );
+    MyCLIENT_SetConnectTime( 3000, 10 );
 }
 
 void QDHAllInOne::ProcessIPCSetReconnectTimeEvent( QIPCEvent* pEvent )
 {
     Q_UNUSED( pEvent )
+    NullPointer( MyCLIENT_SetAutoReconnect );
+    MyCLIENT_SetConnectTime( NULL, 0 );
 }
 
 void QDHAllInOne::SetUserID( char *pIP, LONG lUserID )
@@ -327,8 +339,7 @@ void QDHAllInOne::RemovePlayHandle( HWND hPlayWnd )
 
 void QDHAllInOne::ProcessIPCLoginEvent( QIPCEvent* pEvent )
 {
-    /*
-    NullPointer( MyVzLPRClient_Open );
+    NullPointer( MyCLIENT_LoginEx );
     QIPCEvent::EventParam& uParam = pEvent->GetEventParam( );
     LONG lUserID = GetUserID( uParam.EventLogin.cIP );
     char* pIP = uParam.EventLogin.cIP;
@@ -341,14 +352,15 @@ void QDHAllInOne::ProcessIPCLoginEvent( QIPCEvent* pEvent )
     char cPwd[ ] = "admin";
 
     // Login once, play multiple
-    lUserID = MyVzLPRClient_Open( pIP, 80, cUser, cPwd );
+    int nError = 0;
+    NET_DEVICEINFO sDevcieInfo;
+    lUserID = MyCLIENT_LoginEx( pIP, 80, cUser, cPwd, 0, NULL, &sDevcieInfo, &nError );
     SetUserID( pIP, lUserID );
 
-    QString strFunName = "VzLPRClient_Open";
+    QString strFunName = "CLIENT_LoginEx";
     PrintExceptionCode( -1 == lUserID, strFunName );
 
-    MyVzLPRClient_SetPlateInfoCallBack( lUserID, MyVZLPRC_PLATE_INFO_CALLBACK, this, 0 );
-    */
+    //MyVzLPRClient_SetPlateInfoCallBack( lUserID, MyVZLPRC_PLATE_INFO_CALLBACK, this, 0 );
 }
 
 void QDHAllInOne::ProcessIPCCaptureJPGEvent( QIPCEvent* pEvent )
@@ -385,8 +397,7 @@ void QDHAllInOne::ProcessIPCCaptureJPGEvent( QIPCEvent* pEvent )
 
 void QDHAllInOne::ProcessIPCStartRealPlayEvent( QIPCEvent* pEvent )
 {
-    /*
-    NullPointer( MyVzLPRClient_StartRealPlay );
+    NullPointer( MyCLIENT_RealPlay );
     QIPCEvent::EventParam& uParam = pEvent->GetEventParam( );
     LONG lUserID = GetUserID( uParam.EventStartRealPlay.cIP );
 
@@ -402,20 +413,18 @@ void QDHAllInOne::ProcessIPCStartRealPlayEvent( QIPCEvent* pEvent )
         return;
     }
 
-    lPlayHandle = MyVzLPRClient_StartRealPlay( lUserID, hPlayWnd );
+    lPlayHandle = MyCLIENT_RealPlay( lUserID, 0, hPlayWnd );
     SetPlayHandle( hPlayWnd, lPlayHandle );
 
     SetUserIDChannel( lUserID, nChannel );
 
-    QString strFunName = "VzLPRClient_StartRealPlay";
+    QString strFunName = "CLIENT_RealPlay";
     PrintExceptionCode( -1 == lPlayHandle, strFunName );
-    */
 }
 
 void QDHAllInOne::ProcessIPCStopRealPlayEvent( QIPCEvent* pEvent )
 {
-    /*
-    NullPointer( MyVzLPRClient_StopRealPlay );
+    NullPointer( MyCLIENT_StopRealPlay );
     QIPCEvent::EventParam& uParam = pEvent->GetEventParam( );
     HWND hPlayWnd = uParam.EventStopRealPlay.hPlayWnd;
     LONG lPlayHandle = GetPlayHandle( hPlayWnd );
@@ -425,16 +434,14 @@ void QDHAllInOne::ProcessIPCStopRealPlayEvent( QIPCEvent* pEvent )
         return;
     }
 
-    int nRet = MyVzLPRClient_StopRealPlay( hPlayWnd );
-    QString strFunName = "VzLPRClient_StopRealPlay";
+    int nRet = MyCLIENT_StopRealPlay( lPlayHandle );
+    QString strFunName = "CLIENT_StopRealPlay";
     PrintExceptionCode( nRet, strFunName );
-    */
 }
 
 void QDHAllInOne::ProcessIPCLogoutEvent( QIPCEvent* pEvent )
 {
-    /*
-    NullPointer( MyVzLPRClient_Close  );
+    NullPointer( MyCLIENT_Logout  );
     QIPCEvent::EventParam& uParam = pEvent->GetEventParam( );
     char* pIP = uParam.EventLogout.cIP;
     LONG lUserID = GetUserID( pIP );
@@ -443,13 +450,12 @@ void QDHAllInOne::ProcessIPCLogoutEvent( QIPCEvent* pEvent )
         return;
     }
 
-    int nRet = MyVzLPRClient_Close( lUserID );
+    int nRet = MyCLIENT_Logout( lUserID );
     RemoveUserID( pIP );
     RemoveUserIDChannel( lUserID );
 
-    QString strFunName = "VzLPRClient_Close";
+    QString strFunName = "CLIENT_Logout";
     PrintExceptionCode( nRet, strFunName );
-    */
 }
 
 void QDHAllInOne::SetUserIDChannel( int nUserID, int nChannel )
@@ -529,15 +535,12 @@ void QDHAllInOne::PrintExceptionCode( int nRet, QString& strFunName )
 void QDHAllInOne::ProcessIPCCleanupEvent( QIPCEvent* pEvent )
 {
     Q_UNUSED( pEvent )
-/*
-    NullPointer( MyVzLPRClient_Cleanup );
-    int nRet = MyVzLPRClient_Cleanup( );
-    QString strFunName = "VzLPRClient_Cleanup";
-    PrintExceptionCode( nRet, strFunName );
+
+    NullPointer( MyCLIENT_Cleanup );
+    MyCLIENT_Cleanup( );
 
     ClearHash( );
     bStarted = false;
-    */
 }
 
 void QDHAllInOne::customEvent( QEvent* event )

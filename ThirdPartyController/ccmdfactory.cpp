@@ -1,5 +1,8 @@
 #include "ccmdfactory.h"
 
+CControllerCmd* CCmdFactory::pXwCtrl = NULL;
+CControllerCmd* CCmdFactory::pVzCtrl = NULL;
+
 CCmdFactory::CCmdFactory(QObject *parent) :
     QObject(parent)
 {
@@ -11,11 +14,19 @@ CControllerCmd* CCmdFactory::CreateCmd( CtrlType eType )
 
     switch ( eType ) {
     case CtrlXw :
-        pCmd = new CXwCtrlCmd( );
+        if ( NULL == pXwCtrl ) {
+            pXwCtrl = new CXwCtrlCmd( );
+        }
+
+        pCmd = pXwCtrl;
         break;
 
     case CtrlVz :
-        pCmd = new CVzCtrlCmd( );
+        if ( NULL == pVzCtrl ) {
+            pVzCtrl = new CVzCtrlCmd( );
+        }
+
+        pCmd = pVzCtrl;
         break;
     }
 
