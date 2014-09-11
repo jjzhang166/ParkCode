@@ -40,6 +40,7 @@ public:
     explicit MainWindow(QWidget *parent = 0, Qt::WindowFlags flags = 0 );//= Qt::FramelessWindowHint );
     ~MainWindow();
 
+    bool AllInOneIPIO( char cCan, bool bOpen );
     void SetFileCount( quint32 nCount );
     void PictureRegconize( QString &strFile, int nChannel, QByteArray& byData );
     void ControlChild( QCloseEvent* event, QWidget* child );

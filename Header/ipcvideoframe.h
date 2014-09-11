@@ -28,6 +28,8 @@ public:
     void CapturePreviewImage( HWND hPlayWnd, QString& strFileName );
     void CaptureDeviceImage( QString& strIP, QString& strFileName, HWND hPlayWnd );
 
+    QIPCThread* GetIpcThread( );
+
 protected:
     void resizeEvent( QResizeEvent * event );
     void closeEvent( QCloseEvent * event );

@@ -22,7 +22,8 @@ public:
         IPCStartRealPlay,
         IPCStopRealPlay,
         IPCLogout,
-        IPCCleanup
+        IPCCleanup,
+        IPCGate
     } IPCEventType;
 
     typedef union __EventParam {
@@ -64,6 +65,12 @@ public:
         struct __EventLogout {
             char cIP[ IPC_IP_LEN + 1 ];
         } EventLogout;
+
+        struct __EventGate {
+            char cIP[ IPC_IP_LEN + 1 ];
+            WORD wChannelID;
+            bool bOpenGate;// true false
+        } EventGate;
 
         __EventParam( )
         {

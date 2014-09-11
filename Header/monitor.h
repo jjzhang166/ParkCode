@@ -44,6 +44,7 @@ public:
     explicit CMonitor( QWidget* mainWnd, QWidget *parent = 0);
     ~CMonitor();
 
+    bool AllInOneIPIO( char cCan, bool bOpen );
     void DisplayRemoteUI( );
 
     void SetFileCount( quint32 nCount );

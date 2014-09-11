@@ -79,6 +79,12 @@ void MainWindow::PictureRegconize( QString &strFile, int nChannel, QByteArray& b
     pMonitor->PictureRegconize( strFile, nChannel, byData );
 }
 
+bool MainWindow::AllInOneIPIO(char cCan, bool bOpen)
+{
+    CMonitor* pMonitor = dynamic_cast< CMonitor* >( CreateChildWnd( CommonDataType::MonitorWnd ) );
+    return pMonitor->AllInOneIPIO( cCan, bOpen);
+}
+
 bool MainWindow::ShiftDlgISVisible( )
 {
     bool bRet = false;

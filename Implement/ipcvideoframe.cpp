@@ -51,6 +51,11 @@ CIPCVideoFrame::CIPCVideoFrame(bool bIPC, QWidget *parent) :
     InitializeIPC( );
 }
 
+QIPCThread* CIPCVideoFrame::GetIpcThread( )
+{
+    return pVideoThread;
+}
+
 void CIPCVideoFrame::HandleUIPlateResult(QString strPlate, int nChannel, bool bSuccess, bool bVideo, int nWidth, int nHeight, int nConfidence, QString strDirection, QByteArray byData, QRect rectPlate, QRect rectVideo)
 {
     emit UIPlateResult( strPlate, nChannel, bSuccess, bVideo, nWidth, nHeight, nConfidence, strDirection, byData, rectPlate, rectVideo);

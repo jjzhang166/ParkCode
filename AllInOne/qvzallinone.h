@@ -29,6 +29,8 @@ public:
     void PostIPCLogoutEvent( QIPCEvent::EventParam& uParam );
     void PostIPCCleanupEvent( );
 
+    void PostIPCGateEvent( QIPCEvent::EventParam& uParam );
+
     void CapturePreviewImage( HWND hPlayWnd, QString& strFileName );
     void CaptureDeviceImage( QString& strIP, QString& strFileName, HWND hPlayWnd = NULL );
 
@@ -63,6 +65,7 @@ private:
     void ProcessIPCStopRealPlayEvent( QIPCEvent* pEvent );
     void ProcessIPCLogoutEvent( QIPCEvent* pEvent );
     void ProcessIPCCleanupEvent( QIPCEvent* pEvent );
+    void ProcessIPCGateEvent( QIPCEvent* pEvent );
 
     inline void SetUserID( char* pIP, LONG lUserID );
     inline LONG GetUserID( char* pIP );
@@ -110,7 +113,7 @@ private:
     typedef int ( WINAPI *VzLPRClient_SetPlateInfoCallBack )( VzLPRClientHandle handle, VZLPRC_PLATE_INFO_CALLBACK func, void *pUserData, int bEnableImage);
     typedef int ( WINAPI *VzLPRClient_GetSnapShootToJpeg )( void *hWnd, const char *pFullPathName, int nQuality );
 
-
+    typedef int ( WINAPI *VzLPRClient_SetIOOutput ) ( VzLPRClientHandle handle, unsigned  uChnId,  int  nOutput );
 
     VzLPRClient_Setup MyVzLPRClient_Setup;
     VzLPRClient_Cleanup MyVzLPRClient_Cleanup;
@@ -123,6 +126,8 @@ private:
 
     VzLPRClient_SetPlateInfoCallBack MyVzLPRClient_SetPlateInfoCallBack;
     VzLPRClient_GetSnapShootToJpeg MyVzLPRClient_GetSnapShootToJpeg;
+
+    VzLPRClient_SetIOOutput MyVzLPRClient_SetIOOutput;
 
 signals:
     void CapturedJPGImage( quint32 nChannel, QString strFileName );

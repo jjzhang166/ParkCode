@@ -1894,7 +1894,9 @@ void CProcessData::ControlGate( bool bOpen, char cCan ) // Manual
     byData.append( char( 0x00 ) ); // Checksum
     byData.append( char( 0x55 ) );
 
-    WriteData( byData );
+    if ( !pMainWindow->AllInOneIPIO( cCan, bOpen ) ) {
+        WriteData( byData );
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     int nChannel = GetChannelByCan( cCan );
@@ -1923,7 +1925,10 @@ void CProcessData::ControlGate( bool bEnter, QByteArray &byData, QByteArray &vDa
     vData.clear( );
     //portCmd.ParseDownCmd( byData, bEnter ? CPortCmd::DownOpenGate : CPortCmd::DownCloseGate, vData );
     portCmd.ParseDownCmd( byData, CPortCmd::DownOpenGate, vData );
-    WriteData( byData );
+
+    if ( !pMainWindow->AllInOneIPIO( byData[ 5 ], true ) ) {
+        WriteData( byData );
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     int nChannel = GetChannelByCan( byData[ 5 ] );

@@ -75,6 +75,11 @@ void QVzAllInOne::PostIPCCleanupEvent( )
     PostIPCEvent( QIPCEvent::IPCCleanup );
 }
 
+void QVzAllInOne::PostIPCGateEvent(QIPCEvent::EventParam &uParam)
+{
+    PostIPCEvent( QIPCEvent::IPCGate, uParam );
+}
+
 QIPCThread* QVzAllInOne::GetInstance( )
 {
     if ( NULL == pThreadInstance ) {
@@ -189,7 +194,7 @@ int QVzAllInOne::MyVZLPRC_PLATE_INFO_CALLBACK(VzLPRClientHandle handle, void *pU
                                                const VZ_LPRC_IMAGE_INFO *pImgFull,
                                                const VZ_LPRC_IMAGE_INFO *pImgPlateClip )
 {
-    return 0;
+    //return 0;
     QVzAllInOne* pThread = ( QVzAllInOne* ) pUserData;
     pThread->EmitPlate( handle,
                         pResult, uNumPlates,
@@ -484,6 +489,7 @@ void QVzAllInOne::GetFunctionPointer( )
     MyVzLPRClient_StopRealPlay = NULL;
     MyVzLPRClient_SetPlateInfoCallBack = NULL;
     MyVzLPRClient_GetSnapShootToJpeg = NULL;
+    MyVzLPRClient_SetIOOutput = NULL;
 
     QString strPath = qApp->applicationDirPath( ) + "/" + VZ_IVS_SDK;
     WCHAR* pPath = ( WCHAR* ) strPath.utf16( );
@@ -499,11 +505,13 @@ void QVzAllInOne::GetFunctionPointer( )
     MyVzLPRClient_Open = ( VzLPRClient_Open ) ::GetProcAddress( hDllMod, "VzLPRClient_Open" );
     MyVzLPRClient_Close = ( VzLPRClient_Close ) ::GetProcAddress( hDllMod, "VzLPRClient_Close" );
 
-    MyVzLPRClient_StartRealPlay = ( VzLPRClient_StartRealPlay ) ::GetProcAddress( hDllMod, "_VzLPRClient_StartRealPlay@8" );
-    MyVzLPRClient_StopRealPlay = ( VzLPRClient_StopRealPlay ) ::GetProcAddress( hDllMod, "_VzLPRClient_StopRealPlay@4" );
+    MyVzLPRClient_StartRealPlay = ( VzLPRClient_StartRealPlay ) ::GetProcAddress( hDllMod, "VzLPRClient_StartRealPlay" );
+    MyVzLPRClient_StopRealPlay = ( VzLPRClient_StopRealPlay ) ::GetProcAddress( hDllMod, "VzLPRClient_StopRealPlay" );
 
     MyVzLPRClient_SetPlateInfoCallBack = ( VzLPRClient_SetPlateInfoCallBack ) ::GetProcAddress( hDllMod, "VzLPRClient_SetPlateInfoCallBack" );
     MyVzLPRClient_GetSnapShootToJpeg = ( VzLPRClient_GetSnapShootToJpeg ) ::GetProcAddress( hDllMod, "VzLPRClient_GetSnapShootToJpeg" );
+
+    MyVzLPRClient_SetIOOutput = ( VzLPRClient_SetIOOutput ) ::GetProcAddress( hDllMod, "VzLPRClient_SetIOOutput" );
 }
 
 void QVzAllInOne::PrintExceptionCode( int nRet, QString& strFunName )
@@ -522,6 +530,23 @@ void QVzAllInOne::ProcessIPCCleanupEvent( QIPCEvent* pEvent )
 
     ClearHash( );
     bStarted = false;
+}
+
+void QVzAllInOne::ProcessIPCGateEvent( QIPCEvent *pEvent )
+{
+    NullPointer( MyVzLPRClient_SetIOOutput  );
+    QIPCEvent::EventParam& uParam = pEvent->GetEventParam( );
+    char* pIP = uParam.EventGate.cIP;
+    LONG lUserID = GetUserID( pIP );
+
+    if ( - 1 == lUserID ) {
+        return;
+    }
+
+    int nRet = MyVzLPRClient_SetIOOutput( lUserID, uParam.EventGate.wChannelID, uParam.EventGate.bOpenGate );
+
+    QString strFunName = "VzLPRClient_SetIOOutput";
+    PrintExceptionCode( nRet, strFunName );
 }
 
 void QVzAllInOne::customEvent( QEvent* event )
@@ -564,6 +589,10 @@ void QVzAllInOne::customEvent( QEvent* event )
 
     case QIPCEvent::IPCCleanup :
         ProcessIPCCleanupEvent( pEvent );
+        break;
+
+    case QIPCEvent::IPCGate :
+        ProcessIPCGateEvent( pEvent );
         break;
 
     default :

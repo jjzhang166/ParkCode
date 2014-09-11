@@ -41,6 +41,11 @@ from parkadmin.monthcard a, parkadmin.userinfo b, parkadmin.carinfo c, parkadmin
 where a.cardno = b.cardindex and a.cardno = c.cardindex and a.cardno = d.cardno
 and d.feekind = '月租卡续费' and feetime between '2014-08-01 00:00:00' and '2014-09-10 23:59:59';
   */
+// Intel AMD ARM PPC(Apple IBM Motorola) Alpha DEC SPARC MIPS
+// Unix Linux Windows 稳定 可靠 安全
+// OpenStack CloudStack CloudPlatform
+// Install DVD UEFI USB(UntraISO)
+// Linux Redhat(RHEL) CentOS Ubuntu
 
 
 int main(int argc, char *argv[])

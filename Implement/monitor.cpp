@@ -506,6 +506,42 @@ void CMonitor::SetAlertMsg( const QString &strText )
     ui->lblAlert->setText( strText );
 }
 
+bool CMonitor::AllInOneIPIO( char cCan, bool bOpen )
+{
+    bool bAllInOne = false;
+    if ( bNetworkCamera ) {
+        QString strType = pSystem->value( "IPC/Type", "HK" ).toString( );
+
+        if ( QString( "VZALLINONE" ) == strType.toUpper( ) ) {
+            bAllInOne = true;
+        }
+    }
+
+    if ( !bAllInOne ) {
+        return bAllInOne;
+    }
+
+    QString strIP;
+    int nChannelID = 0;
+    for ( int nIndex = 0; nIndex < VIDEO_USEDWAY; nIndex++ ) {
+        if ( cCan == nCanAddressWinIndex[ nIndex ] ) {
+            nChannelID = nIndex;
+            strIP = lblVideoWnd[ nIndex ]->toolTip(  );
+            break;
+        }
+    }
+
+    QByteArray byIP = strIP.toAscii( );
+    byIP.append( '\0' );
+    QIPCEvent::EventParam uParam;
+    uParam.EventGate.wChannelID = nChannelID;
+    uParam.EventGate.bOpenGate = bOpen;
+    strcpy( uParam.EventGate.cIP, byIP.data( ) );
+    ipcVideoFrame->GetIpcThread( )->PostIPCGateEvent( uParam );
+
+    return bAllInOne;
+}
+
 void CMonitor::InitVideoPlateUI( )
 {
     nUsedWay = pSysSet->value( "VideoMode/Way", 2 ).toInt( );

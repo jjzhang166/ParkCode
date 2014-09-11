@@ -23,6 +23,8 @@ public:
     virtual void PostIPCLogoutEvent( QIPCEvent::EventParam& uParam ) = 0;
     virtual void PostIPCCleanupEvent( ) = 0;
 
+    virtual void PostIPCGateEvent( QIPCEvent::EventParam& uParam );
+
     virtual void CapturePreviewImage( HWND hPlayWnd, QString& strFileName ) = 0;
     virtual void CaptureDeviceImage( QString& strIP, QString& strFileName, HWND hPlayWnd = NULL ) = 0;
     
