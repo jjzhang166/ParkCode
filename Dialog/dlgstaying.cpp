@@ -3,6 +3,7 @@
 #include "Common/logicinterface.h"
 #include "../Dialog/parkspacelotdialog.h"
 #include "../mainwindow.h"
+extern MainWindow* pMainWindow;
 
 CDlgStaying::CDlgStaying(QWidget *parent) :
     QDialog(parent),
@@ -10,7 +11,15 @@ CDlgStaying::CDlgStaying(QWidget *parent) :
 {
     ui->setupUi(this);
     ConnectDb( );
+    pWgTable[ 0 ] = ui->tableWidgetMonth;
+    pWgTable[ 1 ] = ui->tableWidgetTime;
+    pWgTable[ 2 ] = ui->tableWidgetNoCard;
     CreateContextMenu( );
+    QDateTime dt = QDateTime::currentDateTime( );
+    dt.setTime( QTime( 0, 0, 0 ) );
+    ui->dtStart->setDateTime( dt );
+    dt.setTime( QTime( 23, 59, 59 ));
+    ui->dtEnd->setDateTime( dt );
     pPrintMonthlyReport = new CPrintMonthlyReport( NULL, false );
     QString strImagePath;
     CCommonFunction::GetPath( strImagePath, CommonDataType::PathUIImage );
@@ -55,7 +64,7 @@ CDlgStaying::CDlgStaying(QWidget *parent) :
 
     nPage = 0;
     QString strLimit = " Limit 0, 100";
-    GetData( 0, strLimit );
+    GetData( 0, strLimit, true );
 }
 
 void CDlgStaying::DisableControl( )
@@ -231,6 +240,7 @@ void CDlgStaying::HandleManualRecogonization( int nChannel, QString strPlate )
     QTableWidgetItem* pItem = pVerifyPlateTableWindget->item( nRowIndex, 0 );
     QString strCardNo = pItem->text( );
     pItem = pVerifyPlateTableWindget->item( nRowIndex, 2 );
+    QString strRawPlate = pItem->text( );
     pItem->setText( strPlate );
 
     if ( 2 == nVerifyPlateType ) {
@@ -246,6 +256,10 @@ void CDlgStaying::HandleManualRecogonization( int nChannel, QString strPlate )
     QString strSql = QString( "Call ManualVerifyPlate( '%1', '%2', '%3',%4 )" ).arg( strCardNo, strPlate, strStoprdid,
                                                                                 QString::number( nVerifyPlateType ) );
     dbInterface.ExecuteSql( strSql );
+
+    QString strContent = QString( "%1 修改进入车牌【%2】到【%3】 记录ID【%4】" ).arg( pMainWindow->GetUserName( ), strRawPlate, strPlate, strStoprdid );
+    QDateTime dtDateTime = QDateTime::currentDateTime( );
+    pMainWindow->WriteLog( "手动校正车牌", strContent, CommonDataType::ModifyPlate, dtDateTime );
 }
 
 void CDlgStaying::BulkInRecordProcess( QTableWidget* pTabWidget, int nType )
@@ -382,13 +396,34 @@ void CDlgStaying::HandleExecuteSQLData(int nType, QStringList lstData, int nRows
     }
 }
 
+void CDlgStaying::GetExtraWhere( int nType, QString& strExtra )
+{
+   strExtra = QString( " and Intime between '%1' and '%2' " ).arg(
+               ui->dtStart->text( ), ui->dtEnd->text( ) );
+
+   QString strPlate = ui->edtPlate->text( );
+   if ( strPlate.isEmpty( ) ) {
+       return;
+   }
+
+   if ( 3 == nType ) {
+        strExtra += QString( " and cardno like '%%1%' " ).arg( strPlate );
+   } else if ( 1 == nType ) {
+        strExtra += QString( " and c.carcp like '%%1%' " ).arg( strPlate );
+   } else if ( 2 == nType ) {
+        strExtra += QString( " and a.carcp like '%%1%' " ).arg( strPlate );
+   }
+}
+
 void CDlgStaying::GetMonthData( QString &strOrder, QString& strLimit )
 {
+    QString strExtra = "";
+    GetExtraWhere( 1, strExtra );
     QString strSql = "SELECT d.cardno,d.cardselfno, b.username, b.userphone, c.carcp, a.inshebeiname, a.intime, a.stoprdid \
             FROM stoprd a, userinfo b, carinfo c, monthcard d \
             where a.stoprdid = ( select stoprdid from cardstoprdid c \
                                  where d.cardno = c.cardno and d.Inside = 1 ) and a.outtime is null \
-                and d.cardno = b.cardindex and d.cardno = c.cardindex " + strOrder;
+                and d.cardno = b.cardindex and d.cardno = c.cardindex " + strExtra +  strOrder;
     strSql += strLimit;
 
     QueryData( strSql, QMyReportEvent::StayingMonth );
@@ -404,11 +439,13 @@ void CDlgStaying::GetMonthData( QString &strOrder, QString& strLimit )
 
 void CDlgStaying::GetTimeData( QString &strOrder, QString& strLimit )
 {
+    QString strExtra = "";
+    GetExtraWhere( 2, strExtra );
     QStringList lstRows;
     QString strSql = "SELECT b.cardno,b.cardselfno, a.carcp, a.inshebeiname, a.intime, a.stoprdid\
             FROM stoprd a, tmpcard b \
             where a.stoprdid = ( select stoprdid from cardstoprdid c \
-                                 where b.cardno = c.cardno and b.Inside = 1 ) and a.outtime is null" + strOrder;
+                                 where b.cardno = c.cardno and b.Inside = 1 ) and a.outtime is null" + strExtra +  strOrder;
 
     QueryData( strSql, QMyReportEvent::StayingTime );
     return;
@@ -428,9 +465,11 @@ void CDlgStaying::QueryData( QString& strSql, QMyReportEvent::MyReportEvent eEve
 
 void CDlgStaying::GetNocardData( QString &strOrder, QString& strLimit )
 {
+    QString strExtra = "";
+    GetExtraWhere( 3, strExtra );
     QStringList lstRows;
     QString strSql = "SELECT cardno, '', IF ( 2 = type, '未知', cardno ), inshebeiname, intime, stoprdid\
-            FROM tmpcardintime where type in( 1, 2 ) " + strOrder + strLimit;
+            FROM tmpcardintime where type in( 1, 2 ) " + strExtra + strOrder + strLimit;
 
     QueryData( strSql, QMyReportEvent::StayingNoCard );
     return;
@@ -443,7 +482,7 @@ void CDlgStaying::GetNocardData( QString &strOrder, QString& strLimit )
     }
 }
 
-void CDlgStaying::GetData( int nType /*0 all 1 2 3*/, QString& strLimit  )
+void CDlgStaying::GetData( int nType /*0 all 1 2 3*/, QString& strLimit,  bool bFirst  )
 {
     int nIndex = ui->tableWidgetMonth->columnCount( ) - 1;
     QHeaderView* pView = ui->tableWidgetMonth->horizontalHeader( );
@@ -454,10 +493,13 @@ void CDlgStaying::GetData( int nType /*0 all 1 2 3*/, QString& strLimit  )
     pView->resizeSection( nIndex, pView->sectionSize( nIndex ) * 2 );
 
     QString strOrder = " Order by cardno asc ";
-    int nCb = pSystem->value( "Staying/ASC", 0 ).toInt( );
-    int nChk = pSystem->value( "Staying/Column", 0 ).toInt( );
+    int nCb = bFirst ? pSystem->value( "Staying/ASC", 0 ).toInt( ) : ui->cbSort->currentIndex( );
+    int nChk = bFirst ? pSystem->value( "Staying/Column", 0 ).toInt( ) : GetChkIndex( );
 
-    ui->cbSort->setCurrentIndex( nCb );
+    if ( bFirst ) {
+        ui->cbSort->setCurrentIndex( nCb );
+    }
+
     QRadioButton* pBtn = findChild< QRadioButton* >( QString( "chk%1" ).arg( nChk ) );
     if ( NULL != pBtn ) {
         pBtn->setChecked( true );
@@ -503,16 +545,20 @@ void CDlgStaying::FillTable( QStringList &lstData, QTableWidget *pTable, int nRo
 
 void CDlgStaying::on_tableWidgetMonth_cellClicked(int row, int column)
 {
-    DisplayPic( ( QTableWidget* ) sender( ), row, column );
+    //DisplayPic( ( QTableWidget* ) sender( ), row, column );
 }
 
 void CDlgStaying::on_tableWidgetTime_cellClicked(int row, int column)
 {
-    DisplayPic( ( QTableWidget* ) sender( ), row, column );
+    //DisplayPic( ( QTableWidget* ) sender( ), row, column );
 }
 
 void CDlgStaying::DisplayPic( QTableWidget* pWidget, int nRow, int nCol )
 {
+    if ( -1 == nRow ) {
+        return;
+    }
+
     bool bZeroCol = ( 0 == nCol );
     bool bExist = false;
     bool bNocard = ( ui->tab_3 == pWidget );
@@ -581,7 +627,7 @@ void CDlgStaying::SortData( int nChk, int nCb, bool bCb )
         GetTimeData( strOrder, strLimit );
     }
 
-    if ( 1 != nChk && 2 != nChk && 3 != nChk && 4 != nChk) {
+    if ( 1 != nChk && 2 != nChk && 3 != nChk && 4 != nChk ) {
         GetNocardData( strOrder, strLimit );
     }
 
@@ -744,7 +790,7 @@ void CDlgStaying::on_chk0_toggled(bool checked)
 
 void CDlgStaying::on_tableWidgetNoCard_cellClicked(int row, int column)
 {
-    DisplayPic( ( QTableWidget* ) sender( ), row, column );
+    //DisplayPic( ( QTableWidget* ) sender( ), row, column );
 
     EmitPlate( ui->tableWidgetNoCard );
 }
@@ -795,6 +841,11 @@ void CDlgStaying::on_btnPrePage_clicked()
 
 void CDlgStaying::on_btnNextPage_clicked()
 {
+    QTableWidget* pWG =  pWgTable[ ui->tabWidget->currentIndex( ) ];
+    if ( 0 >= pWG->rowCount( ) ) {
+        return;
+    }
+
     nPage++;
     int nStart = nPage* 100;
     if ( 0 < nStart ) {
@@ -804,4 +855,19 @@ void CDlgStaying::on_btnNextPage_clicked()
     QString strLimit = QString( " Limit %1, %2" ).arg( QString::number( nStart ), QString::number( 100 ) );
 
     GetData( ui->tabWidget->currentIndex( ) + 1, strLimit );
+}
+
+void CDlgStaying::on_tableWidgetNoCard_itemSelectionChanged()
+{
+    DisplayPic( ui->tableWidgetNoCard, ui->tableWidgetNoCard->currentRow( ), 0 );
+}
+
+void CDlgStaying::on_tableWidgetTime_itemSelectionChanged()
+{
+    DisplayPic( ui->tableWidgetTime, ui->tableWidgetTime->currentRow( ), 0 );
+}
+
+void CDlgStaying::on_tableWidgetMonth_itemSelectionChanged()
+{
+    DisplayPic( ui->tableWidgetMonth, ui->tableWidgetMonth->currentRow( ), 0 );
 }

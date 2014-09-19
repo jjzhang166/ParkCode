@@ -18,6 +18,8 @@ public:
       ProvinceReport,
       MonthCardInfo,
       MonthCardTimes,
+      MonthChargeDetail,
+      TimeFeeDetail,
       ExecuteSQL,
       StayingMonth,
       StayingTime,

@@ -78,6 +78,12 @@ private slots:
 
     void on_btnNextPage_clicked();
 
+    void on_tableWidgetNoCard_itemSelectionChanged();
+
+    void on_tableWidgetTime_itemSelectionChanged();
+
+    void on_tableWidgetMonth_itemSelectionChanged();
+
 private:
     void EmitPlate( QTableWidget* pTabWidget );
     void ConnectDb( );
@@ -88,7 +94,7 @@ private:
     void GetSpParams( QString& strCardNo, QString& strStoprdid, QTableWidget* pTabWidget );
     void CreateContextMenu( );
     void DisplayMenu( QTableWidget* pTabWidget, QMenu* pMenu, const QPoint& pos );
-    void GetData( int nType /*0 all 1 2 3*/, QString& strLimit );
+    void GetData( int nType /*0 all 1 2 3*/, QString& strLimit, bool bFirst = false );
     void FillTable( QStringList& lstData, QTableWidget* pTable, int nRows );
     void DisplayPic( QTableWidget* pWidget, int nRow, int nCol );
     void SetFrameVisble( bool bVisible );
@@ -102,6 +108,7 @@ private:
     void GetNocardData( QString& strOrder, QString& strLimit );
     bool GetClicked( int nChk );
     void SetChkClikedArray( bool bInit );
+    void GetExtraWhere( int nType, QString& strExtra );
     
 private:
     Ui::CDlgStaying *ui;
@@ -117,6 +124,7 @@ private:
     CLogicInterface dbInterface;
     int nPage;
     QTableWidget* pVerifyPlateTableWindget;
+    QTableWidget* pWgTable[ 3 ];
     int nVerifyPlateType;
     CPrintMonthlyReport *pPrintMonthlyReport;
 };

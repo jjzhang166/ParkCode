@@ -16,7 +16,9 @@ namespace CommonDataType {
         ReportProvince,
         ReportInProvince,
         ReportMonth,
-        ReportMonthInOut
+        ReportMonthInOut,
+        ReportMonthChargeDetail,
+        ReportTimeFeeDetail
     } ReportType;
 
     typedef enum __UserRequest {
@@ -143,7 +145,8 @@ namespace CommonDataType {
         CardMgmLog,
         DeleteDBLog,
         ManualGateLog,
-        HardwareInfoLog
+        HardwareInfoLog,
+        ModifyPlate
     } SysLogType, *PSysLogType;
 
     typedef enum __ChildWndType {

@@ -127,6 +127,12 @@ void CSysLog::on_tabWidget_currentChanged(int index)
         pTable = ui->tableHardware;
         strWhere += "'硬件信息警告信息'";
         break;
+
+    case 5 :
+        logType = CommonDataType::ModifyPlate;
+        pTable = ui->tableModifyPlate;
+        strWhere += "'手动校正车牌'";
+        break;
     }
 
     QString strEnd;

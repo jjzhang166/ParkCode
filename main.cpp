@@ -23,6 +23,7 @@
 </Params>
 */
 
+// FusionCharts HightCharts JSCharts ---> Web Report
 //QPixmap 图片显示优化 QBitmap
 //QImage IO优化
 //QPicture  记录与播放QPainter命令
@@ -47,9 +48,17 @@ and d.feekind = '月租卡续费' and feetime between '2014-08-01 00:00:00' and '2014
 // Install DVD UEFI USB(UntraISO)
 // Linux Redhat(RHEL) CentOS Ubuntu
 
+// OpenWrt( route OS ) Linksys 类似Android可更改
+
+// 要完善的功能
+//修改车牌日志 报表增加  月租卡按时间续费 按金额续费
+
+MainWindow* pMainWindow;
 
 int main(int argc, char *argv[])
 {
+    //Android 开发建环境变量
+    //ANDROID_TARGET_ARCH=default/armeabi-v7a
     CMySqlDatabase::MySQLLibraryInit( 0, NULL );
 
     QApplication a(argc, argv);
@@ -69,6 +78,7 @@ int main(int argc, char *argv[])
    CCommonFunction::StartupSplash( );
     MainWindow w;
     w.show();
+    pMainWindow = &w;
     CCommonFunction::CleanupSplash( &w );
 
     //CMySqlDatabase::MySQLLibrayEnd( );

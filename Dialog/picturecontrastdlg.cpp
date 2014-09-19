@@ -48,6 +48,14 @@ void CPictureContrastDlg::keyPressEvent( QKeyEvent *event )
     }
 }
 
+void CPictureContrastDlg::DisableButton( bool bEnable )
+{
+    ui->btnPass1->setEnabled( bEnable );
+    ui->btnPass2->setEnabled( bEnable );
+    ui->btnPass3->setEnabled( bEnable );
+    ui->btnPass4->setEnabled( bEnable );
+}
+
 QString CPictureContrastDlg::GetCardNo( )
 {
     return ui->edtCardID->text( );
@@ -114,7 +122,7 @@ CPictureContrastDlg::CPictureContrastDlg( QWidget *parent ) :
     ui->setupUi(this);
     ConnectRadioBtn( );
     FillDiscount( );
-
+    DisableButton( false );
     nAmount = 0;
     nFeeNum = 0;
     nStandardFee = 0;

@@ -23,6 +23,11 @@ void CReporter::SetWebView( QWebView *pView )
     pReportView = pView;
 }
 
+void CReporter::SetReportTitle( QRadioButton **ppTitle )
+{
+    ppReportTitle = ppTitle;
+}
+
 void CReporter::HandleReportData( int nType, QStringList lstData )
 {
     CommonDataType::ReportType rType = ( CommonDataType::ReportType ) ( nType - QEvent::User );
@@ -50,14 +55,15 @@ void CReporter::HandleReportData( int nType, QStringList lstData )
 
     QString strHtml = QString( "<HTML>\
                                 <BODY>\
-                                    <H3 ALIGN = \"CENTER\">报表日期：%1</H1>\
+                                    <H3 ALIGN = \"CENTER\">报表类别：%1</H1>\
+                                    <H3 ALIGN = \"CENTER\">报表日期：%2</H1>\
                                     <br><br>\
                                     <TABLE ALIGN = \"CENTER\" BORDER = \"1\" frame=\"box\" rules=\"all\"CELLPADDING = \"2\">\
-                                        %2\
                                         %3\
+                                        %4\
                                     </TABLE>\
                                 </BODY>\
-                                </HTML>" ).arg( strTitleDate, strTitle, strTableBody );
+            </HTML>" ).arg( ppReportTitle[ rType ]->text( ), strTitleDate, strTitle, strTableBody );
 
     pReportView->setHtml( strHtml );
 }
@@ -147,6 +153,16 @@ void CReporter::BuildHtmlDoc( QDateTime& dtStart, QDateTime& dtEnd, CommonDataTy
     case CommonDataType::ReportMonthInOut :
         strXml = QString( "<Data><StartDate>%1</StartDate><EndDate>%2</EndDate><QueryFlag>%3</QueryFlag><CardNo>%4</CardNo><Plate>%5</Plate></Data>" ).arg(
                     dtStart.toString( strDateTimeFormat ), dtEnd.toString( strDateTimeFormat ), lstWheres.at( 0 ), lstWheres.at( 1 ), lstWheres.at( 2 ) );
+        break;
+
+    case CommonDataType::ReportMonthChargeDetail :
+        strXml = QString( "<Data><StartDate>%1</StartDate><EndDate>%2</EndDate></Data>" ).arg(
+                    dtStart.toString( strDateTimeFormat ), dtEnd.toString( strDateTimeFormat ) );
+        break;
+
+    case CommonDataType::ReportTimeFeeDetail :
+        strXml = QString( "<Data><StartDate>%1</StartDate><EndDate>%2</EndDate></Data>" ).arg(
+                    dtStart.toString( strDateTimeFormat ), dtEnd.toString( strDateTimeFormat ) );
         break;
     }
 
@@ -794,7 +810,9 @@ void CReporter::GetTitle( CommonDataType::ReportType rType, QDateTime &dtStart, 
             strTitle = strStart + "日 至 " + strEnd + "日";
         }
         break;
+    case CommonDataType::ReportMonthChargeDetail :
     case CommonDataType::ReportTimeCardDetail :
+    case CommonDataType::ReportTimeFeeDetail :
     {
         QString strStart;
         CCommonFunction::DateTime2String( dtStart, strStart );
@@ -981,6 +999,38 @@ void CReporter::GetHtml( CommonDataType::ReportType rType, QString& strTitle, QS
                         <th>进出次数</th></tr>";
         strFooter = "";
         nCols = 6;
+        break;
+
+   case CommonDataType::ReportMonthChargeDetail :
+        strTitle = "<tr><th>收费员</th><th>卡号</th>\
+                        <th>时间</th>\
+                        <th>金额</th>\
+                        <th>月租卡起始时间</th>\
+                        <th>月租卡截止时间</th>\
+                        <th>业主</th>\
+                        <th>电话</th>\
+                        <th>车牌号</th>\
+                        <th>车型</th></tr>";
+        strFooter = "";
+        nCols = 10;
+        break;
+
+   case CommonDataType::ReportTimeFeeDetail :
+        strTitle = "<tr><th>收费员</th><th>卡号</th>\
+                        <th>收费时间</th>\
+                        <th>卡类型</th> \
+                        <th>费率类型</th>\
+                        <th>折扣类别</th>\
+                        <th>应收金额</th>\
+                        <th>实收金额</th>\
+                        <th>进入时间</th>\
+                        <th>离开时间</th>\
+                        <th>进入通道</th>\
+                        <th>进入车牌</th>\
+                        <th>离开通道</th>\
+                        <th>离开车牌</th></tr>";
+        strFooter = "";
+        nCols = 14;
         break;
    }
 

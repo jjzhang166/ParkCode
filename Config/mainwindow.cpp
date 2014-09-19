@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->cbxIPC->setItemData( 3, "DHAllInOne" );
 
     ui->cbxCapture->setItemData( 0, "HK" );
-    ui->cbxCapture->setItemData( 1, "TM" );
+    //ui->cbxCapture->setItemData( 1, "TM" ); // ÃÏ√ÙVC4000
 
     ReadFile( );
     //QRegExp exp( "\\d+\\.\\d+\\.\\d+\\.\\d+" );

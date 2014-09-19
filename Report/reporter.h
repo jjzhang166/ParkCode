@@ -8,6 +8,7 @@
 #include <QDateTime>
 #include <QProcess>
 #include "qreportthread.h"
+#include <QRadioButton>
 
 class CReporter : public QObject
 {
@@ -25,6 +26,7 @@ public:
     void SetWhere( QStringList& lstWhere );
     void SetPersonTime( bool bPerson );
     void SetWebView( QWebView* pView );
+    void SetReportTitle( QRadioButton** ppTitle );
 
 private:
     void PostReportEvent( const QString& strXml, QMyReportEvent::MyReportEvent eEvent );
@@ -52,6 +54,7 @@ private:
     QString strPronvice;
     QDateTime dtStartTime;
     QDateTime dtEndTime;
+    QRadioButton** ppReportTitle;
 signals:
 
 public slots:

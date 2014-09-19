@@ -52,6 +52,7 @@ signals:
     void SendTimeCardInfo( QByteArray &byData, QByteArray &vData, int nMin, int nHour, int nAmount, bool bEnter );
 
 private:
+    void DisableButton( bool bEnable );
     void ShowVerifyPlate( int nChannel );
     void ConnectRadioBtn( );
     void Calculate( QRadioButton& rbtn );

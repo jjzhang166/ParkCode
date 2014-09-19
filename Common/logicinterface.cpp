@@ -876,6 +876,10 @@ int CLogicInterface::OperateSysLogInfo( QStringList &lstRows, CommonDataType::Sy
             strLogType = "卡片管理";
             break;
 
+        case CommonDataType::ModifyPlate :
+            strLogType = "手动校正车牌";
+            break;
+
         case ( CommonDataType::SysLogType ) -1 :
             strLogType = "导入授权数据";
             break;

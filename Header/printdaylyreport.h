@@ -5,6 +5,7 @@
 #include <QCloseEvent>
 #include "mainwindow.h"
 #include "Report/reporter.h"
+#include <QRadioButton>
 
 namespace Ui {
     class CPrintDaylyReport;
@@ -38,6 +39,7 @@ private:
     QTime tTimeCardStartTime;
     QTime tTimeCardEndTime;
     QStringList lstMonthQuery;
+    QRadioButton* pReportTitle[ 12 ];
 
 private slots:
     void on_lblClose_linkActivated(QString);

@@ -240,11 +240,6 @@
        <string>海康DS-4004HC</string>
       </property>
      </item>
-     <item>
-      <property name="text">
-       <string>天敏VC4000</string>
-      </property>
-     </item>
     </widget>
     <widget class="QLabel" name="label_34">
      <property name="geometry">

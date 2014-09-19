@@ -267,6 +267,46 @@
        </column>
       </widget>
      </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>手动修改车牌</string>
+      </attribute>
+      <widget class="QTableWidget" name="tableModifyPlate">
+       <property name="geometry">
+        <rect>
+         <x>9</x>
+         <y>10</y>
+         <width>1178</width>
+         <height>251</height>
+        </rect>
+       </property>
+       <row>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>2</string>
+        </property>
+       </row>
+       <column>
+        <property name="text">
+         <string>操作者</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>内容</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>记录时间</string>
+        </property>
+       </column>
+      </widget>
+     </widget>
     </widget>
     <widget class="QGroupBox" name="groupBox_3">
      <property name="geometry">

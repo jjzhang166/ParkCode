@@ -22,11 +22,13 @@ CPrintDaylyReport::CPrintDaylyReport(QWidget* mainWnd, QWidget *parent) :
     for ( int nIndex = 1; nIndex <= ui->gbType->children().size( ); nIndex++ ) {
         QString strTmp = strName.arg( nIndex, 2, 10, cFill );
         QRadioButton* pRd = ui->gbType->findChild< QRadioButton* >( strTmp );
+        pReportTitle[ nIndex - 1 ] = pRd;
         if ( NULL != pRd ) {
             connect( pRd, SIGNAL( clicked( ) ), this, SLOT( OnRdChkClicked( ) ) );
         }
     }
 
+    reporter.SetReportTitle( pReportTitle );
     QDateTime date = QDateTime::currentDateTime( );
     SetDateTime( date, date );
 
@@ -154,7 +156,9 @@ void CPrintDaylyReport::on_btnGenerate_clicked()
     //reporter.BuildHtmlDoc( dtStart, dtEnd, ( CommonDataType::ReportType ) nReportType, *ui->wvReport );
 
     if ( CommonDataType::ReportProvince == nReportType ||
-         CommonDataType::ReportInProvince == nReportType ) {
+         CommonDataType::ReportInProvince == nReportType ||
+         CommonDataType::ReportMonthChargeDetail == nReportType ||
+         CommonDataType::ReportTimeFeeDetail == nReportType ) {
         QTime time( 23, 59, 59 );
         dtEnd.setTime( time );
     }
