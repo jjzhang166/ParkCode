@@ -47,6 +47,9 @@ void MainWindow::InitCtrl( bool bEnabled )
     ui->cbxCapture->setEnabled( !bEnabled );
     ui->cbxIPC->setEnabled( bEnabled );
     ui->cbxStream->setEnabled( bEnabled );
+    ui->edtIpcUser->setEnabled( bEnabled );
+    ui->edtIpcPwd->setEnabled( bEnabled );
+    ui->sbIpcPort->setEnabled( bEnabled );
 }
 
 void MainWindow::ReadFile( )
@@ -120,6 +123,9 @@ void MainWindow::ReadFile( )
 
     bool bMainStream = pSystemCfg->value( "IPC/MainStream", true ).toBool( );
     ui->cbxStream->setCurrentIndex( bMainStream ? 0 : 1 );
+    ui->edtIpcUser->setText( pSystemCfg->value( "IPC/User", "admin" ).toString( ) );
+    ui->edtIpcPwd->setText( pSystemCfg->value( "IPC/Pwd", "12345" ).toString( ) );
+    ui->sbIpcPort->setValue( pSystemCfg->value( "IPC/Port", 8000 ).toInt( ) );
 
     bool bNetIPC = pSystemCfg->value( "CommonCfg/NetworkCamera", true ).toBool( );
     InitCtrl( bNetIPC );
@@ -222,6 +228,9 @@ void MainWindow::WriteFile( )
         pSystemCfg->setValue( "IPC/Type",
                               ui->cbxIPC->itemData( ui->cbxIPC->currentIndex( ) ) );
         pSystemCfg->setValue( "IPC/MainStream", 0 == ui->cbxStream->currentIndex( ) );
+        pSystemCfg->setValue( "IPC/User", ui->edtIpcUser->text( ) );
+        pSystemCfg->setValue( "IPC/Pwd", ui->edtIpcPwd->text( ) );
+        pSystemCfg->setValue( "IPC/Port", ui->sbIpcPort->text( ) );
     } else if ( ui->rdbAnlog->isChecked( ) ) {
         pSystemCfg->setValue( "CommonCfg/NetworkCamera", false );
         pSystemCfg->setValue( "CommonCfg/CaptureCard",

@@ -53,6 +53,23 @@ and d.feekind = '月租卡续费' and feetime between '2014-08-01 00:00:00' and '2014
 // 要完善的功能
 //修改车牌日志 报表增加  月租卡按时间续费 按金额续费
 
+// Qt for android
+// Necessitas(Qt与Android结合平台) Ministro(动态安装QT环境在安卓)
+// 1 QT环境与APK一起 2 最小APK 通过Ministro动态安装QT环境
+// QT App-->Qt Runtime--->Necessitas--->Android
+
+// Intranet(LAN VLAN ) / Firewall  外部不能直接访问
+// Extranet对Intranet的扩展 外部可以受限的访问 VPN就是基于Extranet的WAN网 / VPS
+
+// VPN利用公网来有限的访问私网(Extranet) 一般采用拨号( VPN Client----VPN Server/软硬实现方式 )
+// 在IP网络上模拟传统专网的技术 虚拟 专用 把物理网络进行逻辑上的隔离(逻辑上形成了多个独立网络) VLAN
+// 这样可以实现各地分公司 各地部门互连
+// MPLS(Multiprotocol Label Switching)VPN 最看好的VPN技术
+// 开源实现 OpenVPN
+
+// LAN/WLAN/VLAN(Local Area Network) WAN(Wide) MAN(Metropolitan) 地理区域范围的区别
+// ISP ICP NSP(Network Service Provider)
+
 MainWindow* pMainWindow;
 
 int main(int argc, char *argv[])

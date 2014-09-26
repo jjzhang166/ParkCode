@@ -8,6 +8,7 @@ CDlgSmsPhone::CDlgSmsPhone(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->tableWidget->horizontalHeader( )->hideSection( 3 );
     CCommonFunction::ControlSysMenu( *this );
     FillData( );
 }

@@ -348,13 +348,14 @@ void QDHAllInOne::ProcessIPCLoginEvent( QIPCEvent* pEvent )
         return;
     }
 
-    char cUser[ ] = "admin";
-    char cPwd[ ] = "admin";
+    //char cUser[ ] = "admin";
+    //char cPwd[ ] = "admin";
+    // port 80
 
     // Login once, play multiple
     int nError = 0;
     NET_DEVICEINFO sDevcieInfo;
-    lUserID = MyCLIENT_LoginEx( pIP, 80, cUser, cPwd, 0, NULL, &sDevcieInfo, &nError );
+    lUserID = MyCLIENT_LoginEx( pIP, uParam.EventLogin.wPort, uParam.EventLogin.cUser, uParam.EventLogin.cPwd, 0, NULL, &sDevcieInfo, &nError );
     SetUserID( pIP, lUserID );
 
     QString strFunName = "CLIENT_LoginEx";

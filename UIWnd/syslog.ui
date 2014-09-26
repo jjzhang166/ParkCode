@@ -49,7 +49,7 @@
     <property name="title">
      <string>操作种类</string>
     </property>
-    <widget class="QTabWidget" name="tabModifyPlate">
+    <widget class="QTabWidget" name="tabWidget">
      <property name="geometry">
       <rect>
        <x>10</x>

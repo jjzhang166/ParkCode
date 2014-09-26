@@ -357,9 +357,20 @@ void CIPCVideoFrame::LoginIPC( const QString &strIP )
      const char* pIP = byData.data( );
 
      strcpy( uParam.EventLogin.cIP, pIP );
-     uParam.EventLogin.wPort = 8000;
-     strcpy( uParam.EventLogin.cUser, "admin" );
-     strcpy( uParam.EventLogin.cPwd, "12345" );
+     int nPort = pSettings->value( "IPC/Port", 8000 ).toInt( );
+     uParam.EventLogin.wPort = nPort;
+
+     QString strName = pSettings->value( "IPC/User", "admin" ).toString( );
+     QString strPwd = pSettings->value( "IPC/Pwd", "12345" ).toString( );
+
+     QByteArray byName = CCommonFunction::GetTextCodec( )->fromUnicode( strName );
+     byName.append( '\0' );
+
+     QByteArray byPwd = CCommonFunction::GetTextCodec( )->fromUnicode( strPwd );
+     byPwd.append( '\0' );
+
+     strcpy( uParam.EventLogin.cUser, byName.data( ) );
+     strcpy( uParam.EventLogin.cPwd, byPwd.data( ) );
 
      pVideoThread->PostIPCLoginEvent( uParam );
 }

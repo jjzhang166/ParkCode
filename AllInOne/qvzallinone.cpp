@@ -349,11 +349,12 @@ void QVzAllInOne::ProcessIPCLoginEvent( QIPCEvent* pEvent )
         return;
     }
 
-    char cUser[ ] = "admin";
-    char cPwd[ ] = "admin";
+    //char cUser[ ] = "admin";
+    //char cPwd[ ] = "admin";
+    // port 80
 
     // Login once, play multiple
-    lUserID = MyVzLPRClient_Open( pIP, 80, cUser, cPwd );
+    lUserID = MyVzLPRClient_Open( pIP, uParam.EventLogin.wPort, uParam.EventLogin.cUser, uParam.EventLogin.cPwd );
     SetUserID( pIP, lUserID );
 
     QString strFunName = "VzLPRClient_Open";

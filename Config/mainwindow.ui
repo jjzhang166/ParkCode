@@ -30,9 +30,9 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>10</y>
+      <y>0</y>
       <width>231</width>
-      <height>80</height>
+      <height>61</height>
      </rect>
     </property>
     <property name="title">
@@ -42,7 +42,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>20</y>
+       <y>12</y>
        <width>211</width>
        <height>22</height>
       </rect>
@@ -64,7 +64,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>50</y>
+       <y>36</y>
        <width>213</width>
        <height>22</height>
       </rect>
@@ -86,7 +86,7 @@
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>290</x>
       <y>320</y>
       <width>231</width>
       <height>75</height>
@@ -162,9 +162,9 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>100</y>
+      <y>60</y>
       <width>231</width>
-      <height>145</height>
+      <height>261</height>
      </rect>
     </property>
     <property name="title">
@@ -174,7 +174,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>125</y>
+       <y>200</y>
        <width>153</width>
        <height>15</height>
       </rect>
@@ -204,6 +204,11 @@
        <width>131</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="toolTip">
+      <string>海康默认用户admin 密码12345 端口8000
+捷威斯默认用户system 密码system 端口6002
+臻识默认用户admin 密码admin 端口80</string>
      </property>
      <item>
       <property name="text">
@@ -343,7 +348,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>150</y>
+       <y>220</y>
        <width>141</width>
        <height>15</height>
       </rect>
@@ -369,7 +374,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>170</y>
+       <y>240</y>
        <width>161</width>
        <height>16</height>
       </rect>
@@ -390,6 +395,87 @@
        </widget>
       </item>
      </layout>
+    </widget>
+    <widget class="QLabel" name="label_39">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>126</y>
+       <width>36</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>用户名</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_40">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>149</y>
+       <width>24</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>密码</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_41">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>171</y>
+       <width>24</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>端口</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="edtIpcUser">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>126</y>
+       <width>133</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="edtIpcPwd">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>149</y>
+       <width>133</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="sbIpcPort">
+     <property name="geometry">
+      <rect>
+       <x>92</x>
+       <y>171</y>
+       <width>131</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>65535</number>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="layoutWidget">
@@ -1098,7 +1184,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>250</y>
+      <y>330</y>
       <width>230</width>
       <height>65</height>
      </rect>
