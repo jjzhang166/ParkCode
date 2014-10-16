@@ -59,6 +59,7 @@ private slots:
     void on_btnAllTime_clicked( );
     void on_btnForbidden_clicked( );
     void on_btnSerach_clicked();
+    void ColHeaderSectionClicked(int logicalIndex);
 };
 
 #endif // BATCHSETCARDACCESS_H

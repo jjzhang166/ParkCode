@@ -40,6 +40,7 @@ private:
     void FillPlateCtrl( );
     void ClearText( int nStart );
     void SaveCarInfo( );
+    void SwitchItem(int row, int column);
 
 private slots:
     void on_lblClose_linkActivated(QString);
@@ -58,6 +59,7 @@ private slots:
     void PrintCardInfo( );
     void Download2CC( );
     void CardLossProcess( );
+    void ColHeaderSectionClicked(int logicalIndex);
 
 private:
 #if defined( NewUI )
@@ -80,6 +82,7 @@ private slots:
     void textChanged( QString text );
     void PositionRow( QString strCardID );
     void on_btnSaveRight_clicked();
+    void on_tableValue_itemSelectionChanged();
 };
 
 #endif // VALUECARD_H

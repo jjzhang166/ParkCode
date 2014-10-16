@@ -31,6 +31,17 @@ CBlacklist::CBlacklist(QWidget* mainWnd, QWidget *parent) :
     nOperate = -1;
     ui->tableBlacklist->hideColumn( 3 );
     ui->lblID->setVisible( false );
+
+    QHeaderView* pHeader = ui->tableBlacklist->horizontalHeader( );
+    connect( pHeader, SIGNAL(sectionClicked(int)),
+             this, SLOT(ColHeaderSectionClicked(int)));
+}
+
+void CBlacklist::ColHeaderSectionClicked(int logicalIndex)
+{
+    static bool bAsc = true;
+    ui->tableBlacklist->sortByColumn( logicalIndex, bAsc ? Qt::AscendingOrder : Qt::DescendingOrder );
+    bAsc = !bAsc;
 }
 
 void CBlacklist::FillTable( )

@@ -35,6 +35,7 @@ private:
     void OpenDialog( bool bNew );
     void GetDataFromDb( );
     void ControlDataGrid( );
+    void SwitchItem(int row, int column);
 
 signals:
 
@@ -56,6 +57,9 @@ private slots:
     void PositionRow( QString strCardID );
 
     void on_pushButton_8_clicked();
+
+    void on_tableTime_itemSelectionChanged();
+    void ColHeaderSectionClicked ( int logicalIndex );
 
 private:
 #if defined( NewUI )

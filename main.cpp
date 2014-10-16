@@ -53,6 +53,8 @@ and d.feekind = '月租卡续费' and feetime between '2014-08-01 00:00:00' and '2014
 // 要完善的功能
 //修改车牌日志 报表增加  月租卡按时间续费 按金额续费
 
+// 界面要适应不同大小的屏幕，可以采用Layout方式，来动态布局
+// 比如手机，可以把主窗口的Size设置为QDeskpWindget的屏幕尺寸
 // Qt for android
 // Necessitas(Qt与Android结合平台) Ministro(动态安装QT环境在安卓)
 // 1 QT环境与APK一起 2 最小APK 通过Ministro动态安装QT环境
@@ -69,6 +71,48 @@ and d.feekind = '月租卡续费' and feetime between '2014-08-01 00:00:00' and '2014
 
 // LAN/WLAN/VLAN(Local Area Network) WAN(Wide) MAN(Metropolitan) 地理区域范围的区别
 // ISP ICP NSP(Network Service Provider)
+
+// Android ADT(Java) QT(C/C++ QML) Xamarin(C# Mono .Net) HTML5
+// AVD调试 物理手机调试(USB连接 安装驱动 开启调试模式)
+
+// ANDROID_TARGET_ARCH=
+// ABI Application Binary Interface二进制兼容性 APP--OS APP--APP APP--LIB
+// EBAI Embedded
+// OABI Old
+
+// Necessitas/KDE
+// Ministro is a system wide libraries installer/provider for Android.
+
+// Desktop
+// Mobile
+// Embeded
+
+// APK( ZIP Format )
+
+// extjs.org.cn
+
+// Lan 物理技术Ethernet 光网 物理技术 PDH/SONET/SDH/OTN
+// PTN (Packet Transport Network)
+// 光 微波 卫星
+
+// FTTH(Fiber To The Home)/ PON(Passive Optical Network) APON BPON EPON GPON
+
+// MS(Mobile Station )--BTS(Base Transceiver Station)--BTC(Base Station Controller)
+//--MSC(Mobile Switch Center)(HLR VLR EIR) MSC BTC BTS MS
+
+// 无线网络
+// SSID Service Set ID 无线网络标识符 BSSID/Basic(AP的MAC地址) ESSID/Extended(无线网络)
+// WDS Wireless Distribution System 无线桥接
+// AP Access Point 接入点
+
+// OpenStack CloudStack 两大开源平台 OpenAPI /Restful WebService
+// 云服务器(HPC HAC LBC) / VPS(虚拟机)
+// ECS(Elastic Computing Service) 虚拟云服务器
+// OSS(Open Storage Service) 海量云存储
+// SLB(Server Load Balancer) 云负载均衡
+// RDS(Relational Database Service) 云数据库
+
+// Brickstream ShopperTrak
 
 MainWindow* pMainWindow;
 

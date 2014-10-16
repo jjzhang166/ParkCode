@@ -42,6 +42,39 @@ CSysLog::CSysLog(QWidget* mainWnd, QWidget *parent) :
     ControlDataGrid( );
     ui->tabWidget->setCurrentIndex( 1 );
     ui->tabWidget->setCurrentIndex( 0 );
+
+    QHeaderView* pView = ui->tablDeleteData->horizontalHeader( );
+    connect( pView, SIGNAL(sectionClicked(int)),
+             this, SLOT(ColHeaderSectionClicked(int)));
+
+    pView = ui->tableCardMgm->horizontalHeader( );
+        connect( pView, SIGNAL(sectionClicked(int)),
+                 this, SLOT(ColHeaderSectionClicked(int)));
+
+    pView = ui->tableHardware->horizontalHeader( );
+        connect( pView, SIGNAL(sectionClicked(int)),
+                 this, SLOT(ColHeaderSectionClicked(int)));
+
+    pView = ui->tableManualGate->horizontalHeader( );
+        connect( pView, SIGNAL(sectionClicked(int)),
+                 this, SLOT(ColHeaderSectionClicked(int)));
+
+    pView = ui->tableModifyPlate->horizontalHeader( );
+        connect( pView, SIGNAL(sectionClicked(int)),
+                 this, SLOT(ColHeaderSectionClicked(int)));
+
+    pView = ui->tableShift->horizontalHeader( );
+        connect( pView, SIGNAL(sectionClicked(int)),
+                 this, SLOT(ColHeaderSectionClicked(int)));
+}
+
+void CSysLog::ColHeaderSectionClicked(int logicalIndex)
+{
+    static bool bAsc = true;
+    QHeaderView* pView = ( QHeaderView* ) sender( );
+    QTableWidget* pWidget = ( QTableWidget* ) pView->parent( );
+    pWidget->sortByColumn( logicalIndex, bAsc ? Qt::AscendingOrder : Qt::DescendingOrder );
+    bAsc = !bAsc;
 }
 
 CSysLog::~CSysLog()

@@ -42,6 +42,7 @@ private:
     void MonthBulkProcess( bool bState );
     void GetFilePath( QString& strFile );
     void UpdateImage( QString& strFile, bool bUser );
+    void SwitchItem(int row, int column);
 
 private slots:
     void on_lblClose_linkActivated(QString);
@@ -64,6 +65,7 @@ private slots:
     void CardLossProcess( );
     void PositionRow( QString strCardID );
     void BroadcastMonthcardData( QStringList& lstWhere );
+    void ColHeaderSectionClicked ( int logicalIndex );
 
 private:
 #if defined( NewUI )
@@ -87,6 +89,7 @@ private slots:
     void on_btnSaveRight_clicked();
     void on_btnLoadUserImg_clicked();
     void on_btnLoadCarImg_clicked();
+    void on_tableMonthly_itemSelectionChanged();
 };
 
 #endif // MONTHLYCARD_H

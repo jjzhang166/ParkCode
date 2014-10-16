@@ -2520,15 +2520,27 @@ bool CProcessData::GateNoCardWork( QByteArray& byData, QString& strPlate,
     int nChannel = GetChannelByCan( byData[ 5 ] );
 
     if ( "month" == strCardType ) {
-        if ( "1" == lstRow.at( 1 ) ) {
+        bEnter = ( "1" == lstRow.at( 3 ) );
+        if ( "1" == lstRow.at( 1 ) ) { //过期
             PlayAudioDisplayInfo( byData, vData, CPortCmd::LedMonthlyExceed, CPortCmd::AudioMonthlyExceed );
             return false;
+        } else if ( "2" == lstRow.at( 1 ) ) { //未开多进多出
+            Sleep( 400 ); //延迟才能不丢数据
+            if ( bEnter ) {
+                PlayAudioDisplayInfo( byData, vData, CPortCmd::LedCarInside, CPortCmd::AudioCarInside );
+            } else {
+                PlayAudioDisplayInfo( byData, vData, CPortCmd::LedCarOutside, CPortCmd::AudioCarOutside );
+            }
+
+            //Sleep( 1000 );
+            return false;
         }
+
         bMonth = true;
         strCardNo = lstRow.at( 4 );
         cardType = CardMonthly;
         ClearListContent( nChannel );
-        bEnter = ( "1" == lstRow.at( 3 ) );
+        //bEnter = ( "1" == lstRow.at( 3 ) );
         QString strDays = lstRow.at( 2 );
         int nDay = strDays.toInt( );
         if ( nMonthWakeup >= nDay ) {

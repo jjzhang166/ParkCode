@@ -1,0 +1,5 @@
+2014-09-28
+1、计时卡容错
+实现FuzzyMatchPlate函数，并在NoCardWork中加入FuzzyMatchPlate
+2、修改NoCardWork实现无卡模式月租卡多进多出
+3、修改Stoprd触发器【InsertStoprd】【UpateStoprd】实现一位容错，删除在场记录

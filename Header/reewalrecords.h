@@ -47,6 +47,7 @@ private:
 private slots:
     void on_lblClose_linkActivated(QString);
     void on_btnMinimalize_clicked();
+    void ColHeaderSectionClicked(int logicalIndex);
 };
 
 #endif // REEWALRECORDS_H

@@ -37,6 +37,17 @@ CTimeCard::CTimeCard(QWidget* mainWnd, QWidget *parent) :
 
     QHeaderView* pHeader = ui->tableAccess->horizontalHeader( );
     pHeader->hideSection( ui->tableAccess->columnCount( ) - 1 );
+
+    pHeader = ui->tableTime->horizontalHeader( );
+    connect( pHeader, SIGNAL(sectionClicked(int)),
+             this, SLOT(ColHeaderSectionClicked(int)));
+}
+
+void CTimeCard::ColHeaderSectionClicked(int logicalIndex)
+{
+    static bool bAsc = true;
+    ui->tableTime->sortByColumn( logicalIndex, bAsc ? Qt::AscendingOrder : Qt::DescendingOrder );
+    bAsc = !bAsc;
 }
 
 CTimeCard::~CTimeCard()
@@ -175,7 +186,8 @@ void CTimeCard::PositionRow( QString strCardID )
     QTableWidgetItem* pItem = lstItem.at( 0 );
     int nRow = ui->tableTime->row( pItem );
     //ui->tableTime->setCurrentItem( pItem, QItemSelectionModel::ToggleCurrent );
-    on_tableTime_cellClicked( nRow, 0 );
+    //on_tableTime_cellClicked( nRow, 0 );
+    SwitchItem( nRow, 0 );
     ui->tableTime->selectRow( nRow );
 }
 
@@ -238,8 +250,42 @@ void CTimeCard::on_tableTime_customContextMenuRequested( QPoint )
     CreateContextMenu( ui->tableTime );
 }
 
+void CTimeCard::SwitchItem(int row, int column)
+{
+    if ( -1 == row ) {
+        return;
+    }
+
+    QTableWidgetItem* pItem = ui->tableTime->item( row, 0 );
+    QString strCardNo = pItem->text( );
+    QStringList lstRows;
+
+    CCommonFunction::FreeAllRows( ui->tableAccess );
+    CCommonFunction::FreeAllRows( ui->tableEntranceRight );
+
+    ///////////////////////////////
+    QString strWhere = QString( " Where cardno = '%1'" ).arg( strCardNo );
+    QString strSql = QString ( "Select inshebeiname, intime, outshebeiname, outtime, stoprdid From stoprd %1" ).arg( strWhere );
+    int nRows;//nRows = CLogicInterface::GetInterface( )->OperateInOutRecord( lstRows,
+            //                                           CommonDataType::SelectData, strWhere );
+    nRows = CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstRows, CCommonFunction::GetHistoryDb( ) );
+    CCommonFunction::FillTable( ui->tableAccess, nRows, lstRows );
+
+    ///////////////////////////////////////////////////////////////////
+    nRows = CLogicInterface::GetInterface( )->OperateInOutRight( lstRows,
+                                                       CommonDataType::SelectData, strWhere );
+    CCommonFunction::FillCardRightTable( ui->tableEntranceRight, nRows, lstRows );
+
+    ui->lblCardNo->setText( strCardNo );
+}
+
 void CTimeCard::on_tableTime_cellClicked(int row, int column)
 {
+    return;
+    if ( -1 == row ) {
+        return;
+    }
+
     QTableWidgetItem* pItem = ui->tableTime->item( row, 0 );
     QString strCardNo = pItem->text( );
     QStringList lstRows;
@@ -298,4 +344,9 @@ void CTimeCard::on_pushButton_8_clicked()
     CCommonFunction::UpateCardRight( lstRows, ui->tableEntranceRight );
     CLogicInterface::GetInterface( )->OperateInOutRight( lstRows, CommonDataType::UpdateData, strWhere );
     CCommonFunction::OperationSuccess( );
+}
+
+void CTimeCard::on_tableTime_itemSelectionChanged()
+{
+    SwitchItem( ui->tableTime->currentRow( ), 0 );
 }

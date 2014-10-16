@@ -263,6 +263,9 @@
         <property name="styleSheet">
          <string notr="true">background-image:url(none);</string>
         </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
        </widget>
       </item>
      </layout>

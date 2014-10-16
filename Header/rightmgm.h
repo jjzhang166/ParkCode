@@ -54,6 +54,7 @@ private slots:
     void on_btnExit_clicked( );
     void on_btnEdit_clicked( );
     void on_tableRight_cellDoubleClicked( int, int );
+    void ColHeaderSectionClicked(int logicalIndex);
 };
 
 #endif // RIGHTMGM_H

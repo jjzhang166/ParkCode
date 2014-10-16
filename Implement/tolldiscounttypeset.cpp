@@ -19,6 +19,17 @@ CTollDiscountTypeSet::CTollDiscountTypeSet(QWidget* mainWnd, QWidget *parent) :
     nOperate = -1;
     ui->tableTollDiscount->hideColumn( 4 );
     ui->lblID->setVisible( false );
+
+    QHeaderView* pHeader = ui->tableTollDiscount->horizontalHeader( );
+    connect( pHeader, SIGNAL(sectionClicked(int)),
+             this, SLOT(ColHeaderSectionClicked(int)));
+}
+
+void CTollDiscountTypeSet::ColHeaderSectionClicked(int logicalIndex)
+{
+    static bool bAsc = true;
+    ui->tableTollDiscount->sortByColumn( logicalIndex, bAsc ? Qt::AscendingOrder : Qt::DescendingOrder );
+    bAsc = !bAsc;
 }
 
 void CTollDiscountTypeSet::FillTable( )

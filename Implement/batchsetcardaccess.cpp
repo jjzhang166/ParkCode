@@ -25,6 +25,27 @@ CBatchSetCardAccess::CBatchSetCardAccess(QWidget* mainWnd, QWidget *parent) :
     ui->lblTitle->setText( windowTitle( ) );
     ui->tableBatchChannel->hideColumn( 1 );
     CCommonFunction::ConnectCloseButton( ui->lblClose );
+
+    QHeaderView* pHeader = ui->tableBatchMonth->horizontalHeader( );
+    connect( pHeader, SIGNAL(sectionClicked(int)),
+             this, SLOT(ColHeaderSectionClicked(int)));
+
+    pHeader = ui->tableBatchValue->horizontalHeader( );
+        connect( pHeader, SIGNAL(sectionClicked(int)),
+                 this, SLOT(ColHeaderSectionClicked(int)));
+
+    pHeader = ui->tableBatchTime->horizontalHeader( );
+        connect( pHeader, SIGNAL(sectionClicked(int)),
+                 this, SLOT(ColHeaderSectionClicked(int)));
+}
+
+void CBatchSetCardAccess::ColHeaderSectionClicked(int logicalIndex)
+{
+    static bool bAsc = true;
+    QHeaderView* pView = ( QHeaderView* ) sender( );
+    QTableWidget* pWidget = ( QTableWidget* ) pView->parent( );
+    pWidget->sortByColumn( logicalIndex, bAsc ? Qt::AscendingOrder : Qt::DescendingOrder );
+    bAsc = !bAsc;
 }
 
 CBatchSetCardAccess::~CBatchSetCardAccess()

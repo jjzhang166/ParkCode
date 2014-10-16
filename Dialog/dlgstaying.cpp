@@ -44,12 +44,21 @@ CDlgStaying::CDlgStaying(QWidget *parent) :
 
     QHeaderView* pView = ui->tableWidgetMonth->horizontalHeader( );
     pView->hideSection( ui->tableWidgetMonth->columnCount( ) - 1 );
+    pView = ui->tableWidgetMonth->horizontalHeader( );
+        connect( pView, SIGNAL(sectionClicked(int)),
+                 this, SLOT(ColHeaderSectionClicked(int)));
 
     pView = ui->tableWidgetTime->horizontalHeader( );
     pView->hideSection( ui->tableWidgetTime->columnCount( ) - 1 );
+    pView = ui->tableWidgetTime->horizontalHeader( );
+        connect( pView, SIGNAL(sectionClicked(int)),
+                 this, SLOT(ColHeaderSectionClicked(int)));
 
     pView = ui->tableWidgetNoCard->horizontalHeader( );
     pView->hideSection( ui->tableWidgetNoCard->columnCount( ) - 1 );
+    pView = ui->tableWidgetNoCard->horizontalHeader( );
+        connect( pView, SIGNAL(sectionClicked(int)),
+                 this, SLOT(ColHeaderSectionClicked(int)));
 
     bool bNocard = pSystem->value( "CommonCfg/NoCardWork", false ).toBool( );
     ui->tab_3->setVisible( bNocard );
@@ -65,6 +74,15 @@ CDlgStaying::CDlgStaying(QWidget *parent) :
     nPage = 0;
     QString strLimit = " Limit 0, 100";
     GetData( 0, strLimit, true );
+}
+
+void CDlgStaying::ColHeaderSectionClicked(int logicalIndex)
+{
+    static bool bAsc = true;
+    QHeaderView* pView = ( QHeaderView* ) sender( );
+    QTableWidget* pWidget = ( QTableWidget* ) pView->parent( );
+    pWidget->sortByColumn( logicalIndex, bAsc ? Qt::AscendingOrder : Qt::DescendingOrder );
+    bAsc = !bAsc;
 }
 
 void CDlgStaying::DisableControl( )

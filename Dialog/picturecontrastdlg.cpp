@@ -540,7 +540,7 @@ int CPictureContrastDlg::GetDiscount( int nPrevValue )
 
     switch ( nDisMethod ) {
         case 1 : // °Ù·Ö±È
-            nValue *= nDisValue;
+            nValue *= ( 100 - nDisValue );
             nValue /= 100;
         break;
 

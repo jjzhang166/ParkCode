@@ -55,6 +55,17 @@ CMonthlyCard::CMonthlyCard(QWidget* mainWnd, QWidget *parent) :
 
     QHeaderView* pHeader = ui->tableAccess->horizontalHeader( );
     pHeader->hideSection( ui->tableAccess->columnCount( ) - 1 );
+
+    pHeader = ui->tableMonthly->horizontalHeader( );
+    connect( pHeader, SIGNAL(sectionClicked(int)),
+             this, SLOT(ColHeaderSectionClicked(int)));
+}
+
+void CMonthlyCard::ColHeaderSectionClicked(int logicalIndex)
+{
+    static bool bAsc = true;
+    ui->tableMonthly->sortByColumn( logicalIndex, bAsc ? Qt::AscendingOrder : Qt::DescendingOrder );
+    bAsc = !bAsc;
 }
 
 void CMonthlyCard::ControlDataGrid( )
@@ -203,7 +214,8 @@ void CMonthlyCard::SaveCarInfo( )
        CLogicInterface::GetInterface( )->ExecuteSql( strTmp, lstRows );
    }
 
-   on_tableMonthly_cellClicked( ui->tableMonthly->currentRow( ), 0 );
+   //on_tableMonthly_cellClicked( ui->tableMonthly->currentRow( ), 0 );
+   SwitchItem( ui->tableMonthly->currentRow( ), 0 );
 }
 
 void CMonthlyCard::on_btnMonthSave_clicked( )
@@ -402,7 +414,8 @@ void CMonthlyCard::PositionRow( QString strCardID )
     QTableWidgetItem* pItem = lstItem.at( 0 );
     int nRow = ui->tableMonthly->row( pItem );
     //ui->tableMonthly->setCurrentItem( pItem, QItemSelectionModel::ToggleCurrent );
-    on_tableMonthly_cellClicked( nRow, 0 );
+    //on_tableMonthly_cellClicked( nRow, 0 );
+    SwitchItem( nRow, 0 );
     ui->tableMonthly->selectRow( nRow );
 }
 
@@ -528,8 +541,109 @@ void CMonthlyCard::on_tableMonthly_customContextMenuRequested( QPoint )
     CreateContextMenu( ui->tableMonthly );
 }
 
+void CMonthlyCard::SwitchItem(int row, int column)
+{
+    if ( -1 == row ) {
+        return;
+    }
+
+    QTableWidgetItem* pItem = ui->tableMonthly->item( row, 0 );
+    ui->lblCardNo->setText( pItem->text( ) );
+    ui->lblUserID->setText( "" );
+    ui->edtVechileID0->clear( );
+    ui->edtVechileID0->setStatusTip( "" );
+    ClearText( 1 );
+
+    //////////////////////////////////////////////////////////////////////
+    QString strWhere = QString( " Where cardindex = '%1'" ).arg( pItem->text( ) );
+    QStringList lstRows;
+    int nRows = CLogicInterface::GetInterface( )->OperateOwnerInfo( lstRows,
+                                                         CommonDataType::SelectData, strWhere );
+
+    if ( 0 < nRows ) {
+        ui->edtName->setText( lstRows[ 0 ] );
+        int nIndex = CCommonFunction::FindComboBoxItem( ui->cbxSex, lstRows[ 1 ] );
+        if ( -1 == nIndex ) {
+            nIndex = 0;
+        }
+        ui->cbxSex->setCurrentIndex( nIndex );
+        ui->edtAddr->setText( lstRows[ 2 ] );
+        ui->edtUnit->setText( lstRows[ 3 ] );
+        ui->edtTel->setText( lstRows[ 4 ] );
+        ui->edtID->setText( lstRows[ 5 ] );
+        ui->lblUserID->setText( lstRows[ 6 ] );
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    nRows = CLogicInterface::GetInterface( )->OperateCarInfo( lstRows,
+                                                             CommonDataType::SelectData, strWhere );
+
+    lstCarID.clear( );
+    if ( 0 < nRows ) {
+        //carcp, carmodel, carhaoma, carid
+        QString strCarPlate = "edtVechileID%1";
+        QLineEdit* pEdit = NULL;
+        QString strTmp;
+        int nField = 0;
+        for ( int nIndex = 0; nIndex < nRows; nIndex++ ) {
+            nField = nIndex * 4;
+            strTmp = strCarPlate.arg( nIndex );
+            pEdit = ui->gbOwner->findChild< QLineEdit* >( strTmp );
+            pEdit->setText( lstRows[ nField ] );
+
+            if ( 0 == nIndex ) {
+                //int nCarTypeIdx = CCommonFunction::FindComboBoxItem( ui->cbxCarType, lstRows[ 1 ] );
+                //if ( -1 == nCarTypeIdx ) {
+                //    nCarTypeIdx = 2;
+                //}
+                //ui->cbxCarType->setCurrentIndex( nCarTypeIdx );
+                ui->edtCarModel->setText( lstRows[ 1 ] );
+                ui->edtDriveID->setText( lstRows[ 2 ] );
+            }
+
+            lstCarID.append( lstRows[ nField + 3 ] );
+            pEdit->setStatusTip( lstRows[ nField + 3 ] );
+        }
+
+        for ( int nIndex = nRows; nIndex < 10; nIndex++ ) {
+            strTmp = strCarPlate.arg( nIndex );
+            pEdit = ui->gbOwner->findChild< QLineEdit* >( strTmp );
+            pEdit->setStatusTip( "" );
+        }
+    }
+
+    CCommonFunction::FreeAllRows( ui->tableAccess );
+    CCommonFunction::FreeAllRows( ui->tableRecharge );
+    CCommonFunction::FreeAllRows( ui->tableEntranceRight );
+
+    /////////////////////////////////////////////////////////////////
+    strWhere = QString( " Where cardno = '%1'" ).arg( pItem->text( ) );
+    nRows = CLogicInterface::GetInterface( )->OperateChargeRecord( lstRows,
+                                                       CommonDataType::SelectData, strWhere );
+    CCommonFunction::FillTable( ui->tableRecharge, nRows, lstRows );
+
+    ///////////////////////////////////////////////////////////////////
+    QString strSql = QString ( "Select inshebeiname, intime, outshebeiname, outtime, stoprdid From stoprd %1" ).arg( strWhere );
+    //nRows = CLogicInterface::GetInterface( )->OperateInOutRecord( lstRows,
+    //                                                   CommonDataType::SelectData, strWhere );
+    nRows = CLogicInterface::GetInterface( )->ExecuteSql( strSql, lstRows, CCommonFunction::GetHistoryDb( ) );
+    CCommonFunction::FillTable( ui->tableAccess, nRows, lstRows );
+
+    ///////////////////////////////////////////////////////////////////
+    nRows = CLogicInterface::GetInterface( )->OperateInOutRight( lstRows,
+                                                       CommonDataType::SelectData, strWhere );
+    CCommonFunction::FillCardRightTable( ui->tableEntranceRight, nRows, lstRows );
+
+    QString strCarID = ( 0 == lstCarID.count( ) ) ? "" : lstCarID[ 0 ];
+    strWhere = QString( " where carid = %1" ).arg( strCarID );
+    CCommonFunction::LoadFourImages( CommonDataType::BlobVehicle, strWhere, *ui->lblCar );
+    strWhere = QString( " where userid = %1" ).arg( ui->lblUserID->text( ) );
+    CCommonFunction::LoadFourImages( CommonDataType::BlobOwner, strWhere, *ui->lblOwner );
+}
+
 void CMonthlyCard::on_tableMonthly_cellClicked(int row, int column)
 {
+    return;
     if ( -1 == row ) {
         return;
     }
@@ -759,4 +873,9 @@ void CMonthlyCard::on_btnLoadCarImg_clicked()
     QString strFile = "";
     GetFilePath( strFile );
     UpdateImage( strFile, false );
+}
+
+void CMonthlyCard::on_tableMonthly_itemSelectionChanged()
+{
+    SwitchItem( ui->tableMonthly->currentRow( ), 0 );
 }

@@ -26,6 +26,17 @@ CRenewalRecords::CRenewalRecords(QWidget* mainWnd, QWidget *parent) :
     //pParent->OperateTableWidget( ui->tableRenewalRecord, CommonDataType::RenewalRecordTable, CommonDataType::InitializeType );
     ui->lblTitle->setText( windowTitle( ) );
     ControlDataGrid( );
+
+    QHeaderView* pHeader = ui->tableRenewalRecord->horizontalHeader( );
+    connect( pHeader, SIGNAL(sectionClicked(int)),
+             this, SLOT(ColHeaderSectionClicked(int)));
+}
+
+void CRenewalRecords::ColHeaderSectionClicked(int logicalIndex)
+{
+    static bool bAsc = true;
+    ui->tableRenewalRecord->sortByColumn( logicalIndex, bAsc ? Qt::AscendingOrder : Qt::DescendingOrder );
+    bAsc = !bAsc;
 }
 
 CRenewalRecords::~CRenewalRecords()

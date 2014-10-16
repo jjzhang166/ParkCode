@@ -83,6 +83,7 @@ private slots:
     void on_tableWidgetTime_itemSelectionChanged();
 
     void on_tableWidgetMonth_itemSelectionChanged();
+    void ColHeaderSectionClicked ( int logicalIndex );
 
 private:
     void EmitPlate( QTableWidget* pTabWidget );

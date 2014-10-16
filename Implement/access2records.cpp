@@ -72,6 +72,17 @@ CAccess2Records::CAccess2Records(QWidget* mainWnd, QWidget *parent) :
     pReportThread = QReportThread::CreateReportThread( );
     connect( pReportThread, SIGNAL( ExecuteSQLData( int,QStringList, int ) ),
              this, SLOT( HandleExecuteSQLData( int, QStringList, int ) ) );
+
+    QHeaderView* pHeader = ui->tableAccessRecord->horizontalHeader( );
+    connect( pHeader, SIGNAL(sectionClicked(int)),
+             this, SLOT(ColHeaderSectionClicked(int)));
+}
+
+void CAccess2Records::ColHeaderSectionClicked(int logicalIndex)
+{
+    static bool bAsc = true;
+    ui->tableAccessRecord->sortByColumn( logicalIndex, bAsc ? Qt::AscendingOrder : Qt::DescendingOrder );
+    bAsc = !bAsc;
 }
 
 void CAccess2Records::HandleExecuteSQLData( int nType, QStringList lstData, int )

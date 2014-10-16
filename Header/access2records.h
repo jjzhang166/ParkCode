@@ -68,6 +68,7 @@ private slots:
     void HandleExecuteSQLData( int nType, QStringList lstData, int );
     void on_chkStart_toggled(bool checked);
     void on_chkEnd_toggled(bool checked);
+    void ColHeaderSectionClicked(int logicalIndex);
 };
 
 #endif // ACCESS2RECORDS_H

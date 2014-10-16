@@ -59,6 +59,7 @@ private slots:
     void on_tableBlacklist_cellClicked ( int row, int column );
     void on_btnLocation_clicked();
     void on_btnRefresh_clicked();
+    void ColHeaderSectionClicked(int logicalIndex);
 };
 
 #endif // BLACKLIST_H

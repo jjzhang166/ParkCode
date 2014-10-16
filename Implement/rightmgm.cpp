@@ -34,6 +34,16 @@ CRightMgm::CRightMgm(QWidget* mainWnd, QWidget *parent) :
     ui->tableRight->horizontalHeader( )->hideSection( 29 );
 
     ui->lblTitle->setText( windowTitle( ) );
+    QHeaderView* pHeader = ui->tableRight->horizontalHeader( );
+        connect( pHeader, SIGNAL(sectionClicked(int)),
+                 this, SLOT(ColHeaderSectionClicked(int)));
+}
+
+void CRightMgm::ColHeaderSectionClicked(int logicalIndex)
+{
+    static bool bAsc = true;
+    ui->tableRight->sortByColumn( logicalIndex, bAsc ? Qt::AscendingOrder : Qt::DescendingOrder );
+    bAsc = !bAsc;
 }
 
 void CRightMgm::FillTable( QTableWidget* pTableWidget, QString& strWhere )
